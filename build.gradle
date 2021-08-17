@@ -1,9 +1,21 @@
+// for gRPC 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.5")
+    }
+}
+
 plugins {
-	id 'org.springframework.boot' version '2.5.3'
+	id "com.google.protobuf" version "0.8.16" // for gRPC
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
+archivesBaseName = 'common-prototype-api'
 group = 'kyobobook'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -14,7 +26,77 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0'
+	//implementation group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.3.0.RELEASE'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+	
+	// for gRPC
+    implementation 'net.devh:grpc-client-spring-boot-starter:2.11.0.RELEASE'
+	
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'io.swagger:swagger-annotations:1.5.21'
+    implementation 'io.swagger:swagger-models:1.5.21'
+  	
+	
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor('org.projectlombok:lombok:1.18.20')
+	runtimeOnly 'org.postgresql:postgresql'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+// for gRPC
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if ("io.grpc".equalsIgnoreCase(details.requested.group)) {
+            details.useVersion '1.37.0'
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/protoGen'
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.5.1'
+    }
+
+    clean {
+        delete "$generatedFilesBaseDir/main/protoGen"
+    }
+
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.37.0"
+        }
+    }
+
+    generateProtoTasks {
+        ofSourceSet('main').each { task ->
+            task.builtins {
+                java {
+                    outputSubDir = 'protoGen'
+                }
+            }
+            task.plugins {
+                grpc {
+                    outputSubDir = 'protoGen'
+                }
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/"
 }
 
 test {
