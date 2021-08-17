@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import kyobobook.application.biz.sample.port.in.SamplePort;
 import kyobobook.application.biz.sample.port.out.SampleGrpcPort;
@@ -28,6 +29,7 @@ import kyobobook.application.domain.sample.Sample;
  * @description : Sample로 작성된 Service class 이다.
  *                Master와 Slave 데이터 베이스에 데이터 처리를 한다.
  */
+@Service
 public class SampleService implements SamplePort {
     
     @Autowired
@@ -39,7 +41,7 @@ public class SampleService implements SamplePort {
     SamplePersistencePort sampleSlavePort;
     
     @Autowired
-    @Qualifier("sampleSlaveRepository")
+    @Qualifier("grpcSampleService")
     SampleGrpcPort sampleGrpcPort;
     
     @Override
@@ -94,32 +96,27 @@ public class SampleService implements SamplePort {
 
     @Override
     public List<Sample> selectSubSample() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Sample> sampleList = sampleGrpcPort.selectGrpcSample();
+        return sampleList;
     }
 
     @Override
     public Sample getSubSample(int seq) {
-        // TODO Auto-generated method stub
-        return null;
+        return sampleGrpcPort.getGprcSample(seq);
     }
 
     @Override
     public void insertSubSample(Sample sample) throws Exception {
-        // TODO Auto-generated method stub
-        
+        sampleGrpcPort.insertGrpSample(sample);
     }
 
     @Override
     public void updateSubSample(Sample sample) {
-        // TODO Auto-generated method stub
-        
+        sampleGrpcPort.updateGrpSample(sample);
     }
 
     @Override
     public void deleteSubSample(int seq) {
-        // TODO Auto-generated method stub
-        
+        sampleGrpcPort.deleteGrpSample(seq);
     }
-
 }
