@@ -1,29 +1,18 @@
-# README #
+## common-prototype-api
+---
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### 1. Overview
 
-### What is this repository for? ###
+이 프로젝트는 Common API Prototype 입니다.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### 2. 개발 환경
+- Spring Boot 2.3.0
+- Gradle 6.8
+- OpenJDK 11
+- Mybatis 3.5.2
+- SpringFox Swagger2 2.9.2
+- Protocol Buffers 3.5.1
+- Protoc Gen GRPC Java 1.37.0
+- Lombok 1.18.20
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### 3. [Release Notes](./ReleaseNotes.md)
