@@ -41,4 +41,13 @@ public interface SampleRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTxtBytes();
+
+  /**
+   * <code>.SampleRequest.ReqType reqType = 5;</code>
+   */
+  int getReqTypeValue();
+  /**
+   * <code>.SampleRequest.ReqType reqType = 5;</code>
+   */
+  kyobobook.grpc.sample.SampleRequest.ReqType getReqType();
 }

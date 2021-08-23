@@ -31,11 +31,13 @@ spring:
       
 gpring:
   application:
-    name: local-grpc-client
+    name: common-prototype-api
     
 grpc:
+  server:
+    port: 8075
   client:
-    local-grpc-server:
+    common-prototype-sub-api:
       address: 'static://localhost:8065'
       enableKeepAlive: true
       keepAliveWithoutCalls: true

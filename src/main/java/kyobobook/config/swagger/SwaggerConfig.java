@@ -58,5 +58,5 @@ public class SwaggerConfig {
         Set<String> produces = new HashSet<>();
         produces.add("application/json;charset=UTF-8");
         return produces;
-    } 
+    }
 }

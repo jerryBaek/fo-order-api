@@ -33,6 +33,7 @@ dependencies {
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 	
 	// for gRPC
+	implementation 'net.devh:grpc-server-spring-boot-starter:2.11.0.RELEASE'
     implementation 'net.devh:grpc-client-spring-boot-starter:2.11.0.RELEASE'
 	
 	implementation 'io.springfox:springfox-swagger2:2.9.2'

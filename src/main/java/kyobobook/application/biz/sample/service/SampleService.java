@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import kyobobook.application.biz.sample.port.in.SamplePort;
-import kyobobook.application.biz.sample.port.out.SampleGrpcPort;
+import kyobobook.application.biz.sample.port.out.SampleGrpcOutPort;
 import kyobobook.application.biz.sample.port.out.SamplePersistencePort;
 import kyobobook.application.domain.sample.Sample;
 
@@ -41,8 +41,8 @@ public class SampleService implements SamplePort {
     SamplePersistencePort sampleSlavePort;
     
     @Autowired
-    @Qualifier("grpcSampleService")
-    SampleGrpcPort sampleGrpcPort;
+    @Qualifier("grpcSampleAdapter")
+    SampleGrpcOutPort sampleGrpcOutPort;
     
     @Override
     public List<Sample> selectMasterSample() {
@@ -96,27 +96,27 @@ public class SampleService implements SamplePort {
 
     @Override
     public List<Sample> selectSubSample() {
-        List<Sample> sampleList = sampleGrpcPort.selectGrpcSample();
+        List<Sample> sampleList = sampleGrpcOutPort.selectGrpcSample();
         return sampleList;
     }
 
     @Override
     public Sample getSubSample(int seq) {
-        return sampleGrpcPort.getGprcSample(seq);
+        return sampleGrpcOutPort.getGprcSample(seq);
     }
 
     @Override
     public void insertSubSample(Sample sample) throws Exception {
-        sampleGrpcPort.insertGrpSample(sample);
+        sampleGrpcOutPort.insertGrpSample(sample);
     }
 
     @Override
     public void updateSubSample(Sample sample) {
-        sampleGrpcPort.updateGrpSample(sample);
+        sampleGrpcOutPort.updateGrpSample(sample);
     }
 
     @Override
     public void deleteSubSample(int seq) {
-        sampleGrpcPort.deleteGrpSample(seq);
+        sampleGrpcOutPort.deleteGrpSample(seq);
     }
 }

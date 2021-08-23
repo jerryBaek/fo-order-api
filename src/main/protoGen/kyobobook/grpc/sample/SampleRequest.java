@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     title_ = "";
     contents_ = "";
     txt_ = "";
+    reqType_ = 0;
   }
 
   @java.lang.Override
@@ -76,6 +77,12 @@ private static final long serialVersionUID = 0L;
             txt_ = s;
             break;
           }
+          case 40: {
+            int rawValue = input.readEnum();
+
+            reqType_ = rawValue;
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -98,6 +105,113 @@ private static final long serialVersionUID = 0L;
     return kyobobook.grpc.sample.SampleProto.internal_static_SampleRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             kyobobook.grpc.sample.SampleRequest.class, kyobobook.grpc.sample.SampleRequest.Builder.class);
+  }
+
+  /**
+   * Protobuf enum {@code SampleRequest.ReqType}
+   */
+  public enum ReqType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>MASTER = 0;</code>
+     */
+    MASTER(0),
+    /**
+     * <code>SLAVE = 1;</code>
+     */
+    SLAVE(1),
+    /**
+     * <code>SUB = 2;</code>
+     */
+    SUB(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>MASTER = 0;</code>
+     */
+    public static final int MASTER_VALUE = 0;
+    /**
+     * <code>SLAVE = 1;</code>
+     */
+    public static final int SLAVE_VALUE = 1;
+    /**
+     * <code>SUB = 2;</code>
+     */
+    public static final int SUB_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ReqType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static ReqType forNumber(int value) {
+      switch (value) {
+        case 0: return MASTER;
+        case 1: return SLAVE;
+        case 2: return SUB;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ReqType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ReqType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ReqType>() {
+            public ReqType findValueByNumber(int number) {
+              return ReqType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return kyobobook.grpc.sample.SampleRequest.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ReqType[] VALUES = values();
+
+    public static ReqType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ReqType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:SampleRequest.ReqType)
   }
 
   public static final int SEQ_FIELD_NUMBER = 1;
@@ -211,6 +325,22 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int REQTYPE_FIELD_NUMBER = 5;
+  private int reqType_;
+  /**
+   * <code>.SampleRequest.ReqType reqType = 5;</code>
+   */
+  public int getReqTypeValue() {
+    return reqType_;
+  }
+  /**
+   * <code>.SampleRequest.ReqType reqType = 5;</code>
+   */
+  public kyobobook.grpc.sample.SampleRequest.ReqType getReqType() {
+    kyobobook.grpc.sample.SampleRequest.ReqType result = kyobobook.grpc.sample.SampleRequest.ReqType.valueOf(reqType_);
+    return result == null ? kyobobook.grpc.sample.SampleRequest.ReqType.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -235,6 +365,9 @@ private static final long serialVersionUID = 0L;
     if (!getTxtBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, txt_);
     }
+    if (reqType_ != kyobobook.grpc.sample.SampleRequest.ReqType.MASTER.getNumber()) {
+      output.writeEnum(5, reqType_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -255,6 +388,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!getTxtBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, txt_);
+    }
+    if (reqType_ != kyobobook.grpc.sample.SampleRequest.ReqType.MASTER.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(5, reqType_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -280,6 +417,7 @@ private static final long serialVersionUID = 0L;
         .equals(other.getContents());
     result = result && getTxt()
         .equals(other.getTxt());
+    result = result && reqType_ == other.reqType_;
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -299,6 +437,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getContents().hashCode();
     hash = (37 * hash) + TXT_FIELD_NUMBER;
     hash = (53 * hash) + getTxt().hashCode();
+    hash = (37 * hash) + REQTYPE_FIELD_NUMBER;
+    hash = (53 * hash) + reqType_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -436,6 +576,8 @@ private static final long serialVersionUID = 0L;
 
       txt_ = "";
 
+      reqType_ = 0;
+
       return this;
     }
 
@@ -462,6 +604,7 @@ private static final long serialVersionUID = 0L;
       result.title_ = title_;
       result.contents_ = contents_;
       result.txt_ = txt_;
+      result.reqType_ = reqType_;
       onBuilt();
       return result;
     }
@@ -517,6 +660,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getTxt().isEmpty()) {
         txt_ = other.txt_;
         onChanged();
+      }
+      if (other.reqType_ != 0) {
+        setReqTypeValue(other.getReqTypeValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -774,6 +920,50 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       txt_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int reqType_ = 0;
+    /**
+     * <code>.SampleRequest.ReqType reqType = 5;</code>
+     */
+    public int getReqTypeValue() {
+      return reqType_;
+    }
+    /**
+     * <code>.SampleRequest.ReqType reqType = 5;</code>
+     */
+    public Builder setReqTypeValue(int value) {
+      reqType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.SampleRequest.ReqType reqType = 5;</code>
+     */
+    public kyobobook.grpc.sample.SampleRequest.ReqType getReqType() {
+      kyobobook.grpc.sample.SampleRequest.ReqType result = kyobobook.grpc.sample.SampleRequest.ReqType.valueOf(reqType_);
+      return result == null ? kyobobook.grpc.sample.SampleRequest.ReqType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.SampleRequest.ReqType reqType = 5;</code>
+     */
+    public Builder setReqType(kyobobook.grpc.sample.SampleRequest.ReqType value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      reqType_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.SampleRequest.ReqType reqType = 5;</code>
+     */
+    public Builder clearReqType() {
+      
+      reqType_ = 0;
       onChanged();
       return this;
     }

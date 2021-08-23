@@ -19,6 +19,14 @@ message SampleRequest {
   string title = 2;
   string contents = 3;
   string txt = 4;
+  
+  enum ReqType {
+    MASTER = 0;
+    SLAVE = 1;
+    SUB = 2;
+  }
+  
+  ReqType reqType = 5;
 }
 
 message SampleFieldEntry {

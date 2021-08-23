@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.config.security;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author      : smlee1@kyobobook.com
  * @description : WebMvc 관련 설정 파일
  */
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     private final long MAX_AGE = 3600;

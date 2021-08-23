@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import kyobobook.application.biz.sample.port.out.SampleGrpcPort;
+import kyobobook.application.biz.sample.port.out.SampleGrpcOutPort;
 import kyobobook.application.domain.sample.Sample;
 import kyobobook.grpc.sample.SampleFieldEntry;
 import kyobobook.grpc.sample.SampleGrpc;
@@ -31,10 +31,10 @@ import net.devh.boot.grpc.client.inject.GrpcClient;
  * @author      : smlee1@kyobobook.com
  * @description :
  */
-@Service("grpcSampleService")
-public class GrpcSampleAdapter implements SampleGrpcPort{
+@Service("grpcSampleAdapter")
+public class GrpcSampleOutAdapter implements SampleGrpcOutPort{
     
-    @GrpcClient("local-grpc-server")
+    @GrpcClient("common-prototype-sub-api")
     private SampleGrpc.SampleBlockingStub sampleStub;
 
     @Override

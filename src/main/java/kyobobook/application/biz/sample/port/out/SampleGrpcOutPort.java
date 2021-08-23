@@ -21,7 +21,7 @@ import kyobobook.application.domain.sample.Sample;
  * @author      : smlee1@kyobobook.com
  * @description : Service 에서 gRPC 통해 타 Api 와 통신하기 위한 Port
  */
-public interface SampleGrpcPort {
+public interface SampleGrpcOutPort {
 
     /**
      * @Method      : selectGrpcSample
