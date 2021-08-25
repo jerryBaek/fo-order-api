@@ -20,9 +20,11 @@ gpring:
     name: local-grpc-client
     
 grpc:
+  server:
+    port: 8075
   client:
     local-grpc-server:
-      address: 'dns:///kyobobook-grpc.prototype.svc.cluster.local:9898'
+      address: 'dns:///common-prototype-sub-api.prototype.svc.cluster.local:8065'
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext

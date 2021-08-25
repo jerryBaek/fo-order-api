@@ -4,30 +4,16 @@ server:
 spring:
   master:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://127.0.0.1:5432/master
-      username: kyobo
-      password: kyobo!@#
+      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:3000/master
+      username: postgres
+      password: postgres12345
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   slave:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://127.0.0.1:5432/slave
-      username: kyobo
-      password: kyobo!@#
+      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:3000/slave
+      username: postgres
+      password: postgres12345
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      
-#spring:
-#  master:
-#    datasource:
-#      jdbc-url: jdbc:log4jdbc:postgresql://129.100.253.37:5444/master
-#      username: admin
-#      password: pass
-#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-#  slave:
-#    datasource:
-#      jdbc-url: jdbc:log4jdbc:postgresql://129.100.253.37:5444/slave
-#      username: admin
-#      password: pass
-#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       
 gpring:
   application:
