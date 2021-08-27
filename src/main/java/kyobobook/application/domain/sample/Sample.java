@@ -11,7 +11,7 @@
 package kyobobook.application.domain.sample;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,15 +31,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Sample {
     
-    @ApiParam(value="데이터 시퀀스", required=false, example="")
+    @ApiModelProperty(value="데이터 시퀀스", required=false, example="")
     private int seq;
     
-    @ApiParam(value="제목", required=false, example="제목 입력")
+    @ApiModelProperty(value="제목", required=false, example="제목 입력")
     private String title;
     
-    @ApiParam(value="내용", required=false, example="내용 입력")
+    @ApiModelProperty(value="내용", required=false, example="내용 입력")
     private String contents;
     
-    @ApiParam(value="txt", required=false, example="임시 구분 field")
+    @ApiModelProperty(value="txt", required=false, example="임시 구분 field")
     private String txt;
 }

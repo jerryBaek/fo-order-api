@@ -38,7 +38,7 @@ import kyobobook.application.domain.sample.Sample;
  * @author      : smlee1@kyobobook.com
  * @description : 샘플 Rest Api Controller
  */
-@Api(tags = "{RestSampleController}")
+@Api(tags = "RestSampleController")
 @RestController
 @RequestMapping("/rest-sample")
 public class RestSampleController {
