@@ -13,17 +13,17 @@ package kyobobook.application.adapter.out.persistence.sample;
 import java.util.List;
 
 import kyobobook.application.adapter.out.persistence.sample.entity.SampleEntity;
-import kyobobook.config.annotation.SlaveInterface;
+import kyobobook.config.annotation.WriterInterface;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : SampleSlaveMapper.java
+ * @FileName    : SampleWriterMapper.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
- * @description : Slave Databsase 의 Sample 데이터 처리용 Mapper
+ * @description : Writer Databsase 의 Sample 데이터 처리용 Mapper
  */
-@SlaveInterface
-public interface SampleSlaveMapper {
+@WriterInterface
+public interface SampleWriterMapper {
 
     /**
      * @Method      : selectSample

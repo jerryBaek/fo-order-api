@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kyobobook.application.adapter.out.persistence.sample.SampleMasterMapper">
+<mapper namespace="kyobobook.application.adapter.out.persistence.sample.SampleWriterMapper">
 	
     <!--
         설명     : 샘플의 목록을 조회.
@@ -8,7 +8,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<select id="selectSample" resultType="SampleEntity">
-		SELECT /* SampleMasterMapper.selectSample */
+		SELECT /* SampleWriterMapper.selectSample */
 		       SEQ AS seq
 		       , TITLE as title
 		       , CONTENTS as contents
@@ -23,7 +23,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<select id="getSample" parameterType="int" resultType="SampleEntity">
-		SELECT /* SampleMasterMapper.getSample */
+		SELECT /* SampleWriterMapper.getSample */
 		       SEQ
 		       , TITLE
 		       , CONTENTS
@@ -37,7 +37,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<insert id="insertSample" parameterType="SampleEntity">
-		INSERT INTO /* SampleMasterMapper.insertSample */ 
+		INSERT INTO /* SampleWriterMapper.insertSample */ 
 		MASTER_SAMPLE (
 		    TITLE
 		    , CONTENTS
@@ -53,7 +53,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<update id="updateSample" parameterType="SampleEntity">
-		UPDATE /* SampleMasterMapper.updateSample */
+		UPDATE /* SampleWriterMapper.updateSample */
 		       MASTER_SAMPLE
 		   SET TITLE = #{title}
 		       , CONTENTS = #{contents}
@@ -66,7 +66,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<delete id="deleteSample" parameterType="int">
-		DELETE /* SampleMasterMapper.deleteSample */ FROM MASTER_SAMPLE
+		DELETE /* SampleWriterMapper.deleteSample */ FROM MASTER_SAMPLE
 		 WHERE SEQ = #{seq}
 	</delete>
 	

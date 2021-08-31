@@ -2,15 +2,15 @@ server:
   port: 8070
   
 spring:
-  master:
+  writer:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/master
+      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/prototype
       username: postgres
       password: postgres12345
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-  slave:
+  reader:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/slave
+      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-ro-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/prototype
       username: postgres
       password: postgres12345
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy

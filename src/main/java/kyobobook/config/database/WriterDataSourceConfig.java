@@ -30,38 +30,38 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import kyobobook.config.annotation.MasterInterface;
+import kyobobook.config.annotation.WriterInterface;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : MasterDataSourceConfig.java
+ * @FileName    : WriterDataSourceConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
- * @description : Master DataSource 및 mybatis 설정
+ * @description : Writer DataSource 및 mybatis 설정
  */
 @Configuration
 @MapperScan(value="kyobobook.application.adapter.out.persistence"
-            , annotationClass = MasterInterface.class
-            , sqlSessionFactoryRef="masterSqlSessionFactory")
+            , annotationClass = WriterInterface.class
+            , sqlSessionFactoryRef="writerSqlSessionFactory")
 @EnableTransactionManagement
-public class MasterDataSourceConfig {
+public class WriterDataSourceConfig {
     
     @Primary
-    @Bean(name="masterDataSource")
-    @ConfigurationProperties(prefix = "spring.master.datasource")
-    public DataSource masterDataSource() {
+    @Bean(name="writerDataSource")
+    @ConfigurationProperties(prefix = "spring.writer.datasource")
+    public DataSource writerDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Primary
-    @Bean(name="masterSqlSessionFactory") 
-    public SqlSessionFactory masterSqlSessionFactory(@Qualifier("masterDataSource") DataSource masterDataSource
+    @Bean(name="writerSqlSessionFactory") 
+    public SqlSessionFactory writerSqlSessionFactory(@Qualifier("writerDataSource") DataSource writerDataSource
             , ApplicationContext applicationContext) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         
         sqlSessionFactoryBean.setVfs(SpringBootVFS.class);
-        sqlSessionFactoryBean.setDataSource(masterDataSource);
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/master/**/*Mapper.xml"));
+        sqlSessionFactoryBean.setDataSource(writerDataSource);
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/writer/**/*Mapper.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("kyobobook.application.adapter.out.persistence.*.entity");
         
         Properties myBatisProperties = new Properties();
@@ -72,15 +72,15 @@ public class MasterDataSourceConfig {
     }
     
     @Primary
-    @Bean(name="masterSqlSessionTemplate")
-    public SqlSessionTemplate masterSqlSessionTemplate(SqlSessionFactory masterSqlSessionFactory) throws Exception {
-        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(masterSqlSessionFactory);
+    @Bean(name="writerSqlSessionTemplate")
+    public SqlSessionTemplate writerSqlSessionTemplate(SqlSessionFactory writerSqlSessionFactory) throws Exception {
+        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(writerSqlSessionFactory);
         return sqlSessionTemplate;
     }
     
     @Bean
-    public PlatformTransactionManager transactionManager(DataSource masterDataSource) {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(masterDataSource);
+    public PlatformTransactionManager transactionManager(DataSource writerDataSource) {
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(writerDataSource);
         transactionManager.setGlobalRollbackOnParticipationFailure(false);
         return transactionManager;
     }

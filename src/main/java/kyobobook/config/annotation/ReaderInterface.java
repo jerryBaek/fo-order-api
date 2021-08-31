@@ -5,7 +5,7 @@
  * Revision History
  * Author                         Date          Description
  * --------------------------     ----------    ----------------------------------------
- * smlee1@kyobobook.com           2021. 8. 12.  First Draft
+ * smlee1@kyobobook.com           2021. 8. 12.  First Draft.
  *
  ****************************************************/
 package kyobobook.config.annotation;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : MasterInterface.java
+ * @FileName    : ReaderInterface.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
  * @description : 어노테이션이 사용된 Mapper Interface 를 Scan 해서 해당하는 DataSource를 사용하도록 한다.
@@ -29,6 +29,6 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface MasterInterface {
+public @interface ReaderInterface {
 
 }

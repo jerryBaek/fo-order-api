@@ -43,12 +43,12 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class GrpcSampleInAdapter extends SampleImplBase {
 
     @Autowired
-    @Qualifier("sampleMasterRepository")
-    SamplePersistencePort sampleMasterPort;
+    @Qualifier("sampleWriterRepository")
+    SamplePersistencePort sampleWriterPort;
     
     @Autowired
-    @Qualifier("sampleSlaveRepository")
-    SamplePersistencePort sampleSlavePort;
+    @Qualifier("sampleReaderRepository")
+    SamplePersistencePort sampleReaderPort;
     
     @Autowired
     @Qualifier("grpcSampleAdapter")
@@ -56,9 +56,9 @@ public class GrpcSampleInAdapter extends SampleImplBase {
     
     private SamplePersistencePort getRepository(SampleRequest request) {
         if(request.getReqType() == SampleRequest.ReqType.MASTER) {
-            return sampleMasterPort;
+            return sampleWriterPort;
         } else if(request.getReqType() == SampleRequest.ReqType.SLAVE) {
-            return sampleSlavePort;
+            return sampleReaderPort;
         } else if(request.getReqType() == SampleRequest.ReqType.SUB) {
             return null;
         }

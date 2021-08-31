@@ -26,35 +26,35 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import kyobobook.config.annotation.SlaveInterface;
+import kyobobook.config.annotation.ReaderInterface;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : SlaveDataSourceConfig.java
+ * @FileName    : ReaderDataSourceConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
- * @description : Slave DataSource 및 mybatis 설정
+ * @description : Reader DataSource 및 mybatis 설정
  */
 @Configuration
 @MapperScan(value="kyobobook.application.adapter.out.persistence"
-            , annotationClass = SlaveInterface.class
-            , sqlSessionFactoryRef="slaveSqlSessionFactory")
-public class SlaveDataSourceConfig {
+            , annotationClass = ReaderInterface.class
+            , sqlSessionFactoryRef="readerSqlSessionFactory")
+public class ReaderDataSourceConfig {
 
-    @Bean(name="slaveDataSource")
-    @ConfigurationProperties(prefix = "spring.slave.datasource")
-    public DataSource slaveDataSource() {
+    @Bean(name="readerDataSource")
+    @ConfigurationProperties(prefix = "spring.reader.datasource")
+    public DataSource readerDataSource() {
         return DataSourceBuilder.create().build();
     }
     
-    @Bean(name="slaveSqlSessionFactory")
-    public SqlSessionFactory slaveSqlSessionFactory(@Qualifier("slaveDataSource") DataSource slaveDataSource
+    @Bean(name="readerSqlSessionFactory")
+    public SqlSessionFactory readerSqlSessionFactory(@Qualifier("readerDataSource") DataSource readerDataSource
             , ApplicationContext applicationContext) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         
         sqlSessionFactoryBean.setVfs(SpringBootVFS.class);
-        sqlSessionFactoryBean.setDataSource(slaveDataSource);
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/slave/**/*Mapper.xml"));
+        sqlSessionFactoryBean.setDataSource(readerDataSource);
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/reader/**/*Mapper.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("kyobobook.application.adapter.out.persistence.*.entity");
         sqlSessionFactoryBean.setTransactionFactory(null);
         
@@ -65,8 +65,8 @@ public class SlaveDataSourceConfig {
         return sqlSessionFactoryBean.getObject();
     }
     
-    @Bean(name="slaveSqlSessionTemplate")
-    public SqlSessionTemplate slaveSqlSessionTemplate(SqlSessionFactory slaveSqlSessionFactory) throws Exception {
-        return new SqlSessionTemplate(slaveSqlSessionFactory);
+    @Bean(name="readerSqlSessionTemplate")
+    public SqlSessionTemplate readerSqlSessionTemplate(SqlSessionFactory readerSqlSessionFactory) throws Exception {
+        return new SqlSessionTemplate(readerSqlSessionFactory);
     }
 }

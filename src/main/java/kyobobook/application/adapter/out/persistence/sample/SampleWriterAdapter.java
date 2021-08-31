@@ -22,16 +22,16 @@ import kyobobook.application.domain.sample.Sample;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : SampleMasterAdapter.java
+ * @FileName    : SampleWriterAdapter.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
  * @description : Service 에서 Database 를 접근하기위한 Adapter
  */
-@Repository("sampleMasterRepository")
-public class SampleMasterAdapter implements SamplePersistencePort {
+@Repository("sampleWriterRepository")
+public class SampleWriterAdapter implements SamplePersistencePort {
     
     @Autowired
-    SampleMasterMapper sampleMapper;
+    SampleWriterMapper sampleMapper;
 
     @Override
     public List<Sample> selectSample() {

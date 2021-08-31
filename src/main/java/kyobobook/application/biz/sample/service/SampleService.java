@@ -27,18 +27,18 @@ import kyobobook.application.domain.sample.Sample;
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
  * @description : Sample로 작성된 Service class 이다.
- *                Master와 Slave 데이터 베이스에 데이터 처리를 한다.
+ *                Writer와 Reader 데이터 베이스에 데이터 처리를 한다.
  */
 @Service
 public class SampleService implements SamplePort {
     
     @Autowired
-    @Qualifier("sampleMasterRepository")
-    SamplePersistencePort sampleMasterPort;
+    @Qualifier("sampleWriterRepository")
+    SamplePersistencePort sampleWriterPort;
     
     @Autowired
-    @Qualifier("sampleSlaveRepository")
-    SamplePersistencePort sampleSlavePort;
+    @Qualifier("sampleReaderRepository")
+    SamplePersistencePort sampleReaderPort;
     
     @Autowired
     @Qualifier("grpcSampleAdapter")
@@ -46,52 +46,52 @@ public class SampleService implements SamplePort {
     
     @Override
     public List<Sample> selectMasterSample() {
-        return sampleMasterPort.selectSample();
+        return sampleWriterPort.selectSample();
     }
 
     @Override
     public Sample getMasterSample(int seq) {
-        return sampleMasterPort.getSample(seq);
+        return sampleWriterPort.getSample(seq);
     }
 
     @Override
     public int insertMasterSample(Sample sample) {
-        return sampleMasterPort.insertSample(sample);
+        return sampleWriterPort.insertSample(sample);
     }
 
     @Override
     public int updateMasterSample(Sample sample) {
-        return sampleMasterPort.updateSample(sample);
+        return sampleWriterPort.updateSample(sample);
     }
 
     @Override
     public int deleteMasterSample(int seq) {
-        return sampleMasterPort.deleteSample(seq);
+        return sampleWriterPort.deleteSample(seq);
     }
 
     @Override
     public List<Sample> selectSlaveSample() {
-        return sampleSlavePort.selectSample();
+        return sampleReaderPort.selectSample();
     }
 
     @Override
     public Sample getSlaveSample(int seq) {
-        return sampleSlavePort.getSample(seq);
+        return sampleReaderPort.getSample(seq);
     }
 
     @Override
     public void insertSlaveSample(Sample sample) throws Exception {
-        sampleSlavePort.insertSample(sample);
+        sampleReaderPort.insertSample(sample);
     }
 
     @Override
     public void updateSlaveSample(Sample sample) {
-        sampleSlavePort.updateSample(sample);
+        sampleReaderPort.updateSample(sample);
     }
 
     @Override
     public void deleteSlaveSample(int seq) {
-        sampleSlavePort.deleteSample(seq);
+        sampleReaderPort.deleteSample(seq);
     }
 
     @Override

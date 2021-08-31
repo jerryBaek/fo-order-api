@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kyobobook.application.adapter.out.persistence.sample.SampleSlaveMapper">
+<mapper namespace="kyobobook.application.adapter.out.persistence.sample.SampleReaderMapper">
 	
 	<!--
         설명     : 샘플의 목록을 조회.
@@ -8,7 +8,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<select id="selectSample" resultType="SampleEntity">
-		SELECT /* SampleSlaveMapper.selectSample */
+		SELECT /* SampleReaderMapper.selectSample */
 		       SEQ AS seq
 		       , TITLE as title
 		       , CONTENTS as contents
@@ -23,7 +23,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<select id="getSample" parameterType="int" resultType="SampleEntity">
-		SELECT /* SampleSlaveMapper.getSample */
+		SELECT /* SampleReaderMapper.getSample */
 		       SEQ
 		       , TITLE
 		       , CONTENTS
@@ -37,7 +37,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<insert id="insertSample" parameterType="SampleEntity">
-		INSERT INTO /* SampleSlaveMapper.insertSample */
+		INSERT INTO /* SampleReaderMapper.insertSample */
 		SLAVE_SAMPLE (
 		    TITLE
 		    , CONTENTS
@@ -53,7 +53,7 @@
         작성자  : smlee1@kyobobook.com
     -->
 	<update id="updateSample" parameterType="SampleEntity">
-		UPDATE /* SampleSlaveMapper.updateSample */ 
+		UPDATE /* SampleReaderMapper.updateSample */ 
 		       SLAVE_SAMPLE
 		   SET TITLE = #{title}
 		       , CONTENTS = #{contents}
@@ -66,7 +66,7 @@
         작성자   : smlee1@kyobobook.com
     -->
 	<delete id="deleteSample" parameterType="int">
-		DELETE /* SampleSlaveMapper.deleteSample */ FROM SLAVE_SAMPLE
+		DELETE /* SampleReaderMapper.deleteSample */ FROM SLAVE_SAMPLE
 		 WHERE SEQ = #{seq}
 	</delete>
 </mapper>

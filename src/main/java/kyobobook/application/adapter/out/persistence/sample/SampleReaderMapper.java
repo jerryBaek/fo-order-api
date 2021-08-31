@@ -13,17 +13,17 @@ package kyobobook.application.adapter.out.persistence.sample;
 import java.util.List;
 
 import kyobobook.application.adapter.out.persistence.sample.entity.SampleEntity;
-import kyobobook.config.annotation.MasterInterface;
+import kyobobook.config.annotation.ReaderInterface;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : SampleMasterMapper.java
+ * @FileName    : SampleReaderMapper.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com
- * @description : Master Databsase 의 Sample 데이터 처리용 Mapper
+ * @description : Reader Databsase 의 Sample 데이터 처리용 Mapper
  */
-@MasterInterface
-public interface SampleMasterMapper {
+@ReaderInterface
+public interface SampleReaderMapper {
 
     /**
      * @Method      : selectSample
