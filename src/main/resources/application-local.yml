@@ -2,13 +2,13 @@ server:
   port: 8070
 
 spring:
-  master:
+  writer:
     datasource:
       jdbc-url: jdbc:log4jdbc:postgresql://129.100.253.37:3000/DEVDB_TMP
       username: dbadmin
       password: password
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-  slave:
+  reader:
     datasource:
       jdbc-url: jdbc:log4jdbc:postgresql://129.100.253.37:3000/DEVDB_TMP
       username: dbadmin
