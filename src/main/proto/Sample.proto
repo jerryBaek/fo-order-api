@@ -9,9 +9,9 @@ option java_outer_classname = "SampleProto";
 service Sample {
   rpc SelectGrpcSample ( SampleRequest ) returns ( stream SampleResponse ) {}
   rpc GetGrpcSample ( SampleRequest ) returns ( SampleResponse ) {}
-  rpc InsertGrpcSample ( SampleRequest ) returns ( google.protobuf.Empty ) {}
-  rpc UpdateGrpcSample ( SampleRequest ) returns ( google.protobuf.Empty ) {}
-  rpc DeleteGrpcSample ( SampleRequest ) returns ( google.protobuf.Empty ) {}
+  rpc InsertGrpcSample ( SampleRequest ) returns ( ResponseResult ) {}
+  rpc UpdateGrpcSample ( SampleRequest ) returns ( ResponseResult ) {}
+  rpc DeleteGrpcSample ( SampleRequest ) returns ( ResponseResult) {}
 }
 
 message SampleRequest {
@@ -37,7 +37,14 @@ message SampleFieldEntry {
   bool result = 5;
 }
 
+message ResponseResult {
+  int32 result_code = 1;
+  string result_message = 2;
+  string detail_message = 3;
+}
 
 message SampleResponse {
   SampleFieldEntry result = 1;
+  ResponseResult responseResult = 2;
 }
+

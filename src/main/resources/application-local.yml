@@ -15,6 +15,12 @@ spring:
       password: password
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       
+# rest api 사용시 호출될 서비스 정보
+resource:
+  common-prototype-sub-api:
+    url: http://localhost:8060
+    
+      
 gpring:
   application:
     name: common-prototype-api
@@ -22,6 +28,7 @@ gpring:
 grpc:
   server:
     port: 8075
+    maxInboundMessageSize: 15MB
   client:
     common-prototype-sub-api:
       address: 'static://localhost:8065'

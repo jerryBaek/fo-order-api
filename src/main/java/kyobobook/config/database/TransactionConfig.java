@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
@@ -33,6 +36,9 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  * @author      : smlee1@kyobobook.com
  * @description : DataBase 의 트랜잭션 설정
  */
+@Aspect
+@Configuration
+@EnableAspectJAutoProxy
 public class TransactionConfig {
     
     private static final String AOP_POINTCUT_EXPRESSION = "execution(* kyobobook..service..*(..))";

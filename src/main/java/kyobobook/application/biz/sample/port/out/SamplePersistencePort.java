@@ -31,7 +31,7 @@ public interface SamplePersistencePort {
      * @description : Sample 테이블 데이터 목록을 조회한다.
      * @return
      */
-    List<Sample> selectSample();
+    List<Sample> selectSample() throws Exception;
     
     /**
      * @Method      : getSample
@@ -41,7 +41,7 @@ public interface SamplePersistencePort {
      * @param seq
      * @return
      */
-    Sample getSample(int seq);
+    Sample getSample(int seq) throws Exception;
     
     /**
      * @Method      : insertSample
@@ -51,7 +51,7 @@ public interface SamplePersistencePort {
      * @param sample - {@link Sample}
      * @return
      */
-    int insertSample(Sample sample);
+    int insertSample(Sample sample) throws Exception;
     
     /**
      * @Method      : updateSample
@@ -61,7 +61,7 @@ public interface SamplePersistencePort {
      * @param sample - {@link Sample}
      * @return
      */
-    int updateSample(Sample sample);
+    int updateSample(Sample sample) throws Exception;
     
     /**
      * @Method      : deleteSample
@@ -71,5 +71,5 @@ public interface SamplePersistencePort {
      * @param seq
      * @return
      */
-    int deleteSample(int seq);
+    int deleteSample(int seq) throws Exception;
 }

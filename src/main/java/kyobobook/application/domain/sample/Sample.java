@@ -12,10 +12,12 @@ package kyobobook.application.domain.sample;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kyobobook.application.domain.common.ResponseMessage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @Project     : common-prototype-api
@@ -26,10 +28,10 @@ import lombok.NoArgsConstructor;
  */
 @ApiModel(value = "샘플 Domain 클래스", description = "샘플 테스트용으로 작성된 클래스 입니다.")
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Sample {
+public class Sample extends ResponseMessage{
     
     @ApiModelProperty(value="데이터 시퀀스", required=false, example="")
     private int seq;
@@ -42,4 +44,7 @@ public class Sample {
     
     @ApiModelProperty(value="txt", required=false, example="임시 구분 field")
     private String txt;
+    
+    @ApiModelProperty(value="데이터 요청 타입", required=false, example="데이터 요청을 위한 타입구분, 샘플용.")
+    private int reqType;
 }

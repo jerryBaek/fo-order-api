@@ -62,6 +62,19 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          case 18: {
+            kyobobook.grpc.sample.ResponseResult.Builder subBuilder = null;
+            if (responseResult_ != null) {
+              subBuilder = responseResult_.toBuilder();
+            }
+            responseResult_ = input.readMessage(kyobobook.grpc.sample.ResponseResult.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(responseResult_);
+              responseResult_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -107,6 +120,27 @@ private static final long serialVersionUID = 0L;
     return getResult();
   }
 
+  public static final int RESPONSERESULT_FIELD_NUMBER = 2;
+  private kyobobook.grpc.sample.ResponseResult responseResult_;
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  public boolean hasResponseResult() {
+    return responseResult_ != null;
+  }
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  public kyobobook.grpc.sample.ResponseResult getResponseResult() {
+    return responseResult_ == null ? kyobobook.grpc.sample.ResponseResult.getDefaultInstance() : responseResult_;
+  }
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  public kyobobook.grpc.sample.ResponseResultOrBuilder getResponseResultOrBuilder() {
+    return getResponseResult();
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -122,6 +156,9 @@ private static final long serialVersionUID = 0L;
     if (result_ != null) {
       output.writeMessage(1, getResult());
     }
+    if (responseResult_ != null) {
+      output.writeMessage(2, getResponseResult());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -133,6 +170,10 @@ private static final long serialVersionUID = 0L;
     if (result_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getResult());
+    }
+    if (responseResult_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getResponseResult());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -155,6 +196,11 @@ private static final long serialVersionUID = 0L;
       result = result && getResult()
           .equals(other.getResult());
     }
+    result = result && (hasResponseResult() == other.hasResponseResult());
+    if (hasResponseResult()) {
+      result = result && getResponseResult()
+          .equals(other.getResponseResult());
+    }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -169,6 +215,10 @@ private static final long serialVersionUID = 0L;
     if (hasResult()) {
       hash = (37 * hash) + RESULT_FIELD_NUMBER;
       hash = (53 * hash) + getResult().hashCode();
+    }
+    if (hasResponseResult()) {
+      hash = (37 * hash) + RESPONSERESULT_FIELD_NUMBER;
+      hash = (53 * hash) + getResponseResult().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -305,6 +355,12 @@ private static final long serialVersionUID = 0L;
         result_ = null;
         resultBuilder_ = null;
       }
+      if (responseResultBuilder_ == null) {
+        responseResult_ = null;
+      } else {
+        responseResult_ = null;
+        responseResultBuilder_ = null;
+      }
       return this;
     }
 
@@ -331,6 +387,11 @@ private static final long serialVersionUID = 0L;
         result.result_ = result_;
       } else {
         result.result_ = resultBuilder_.build();
+      }
+      if (responseResultBuilder_ == null) {
+        result.responseResult_ = responseResult_;
+      } else {
+        result.responseResult_ = responseResultBuilder_.build();
       }
       onBuilt();
       return result;
@@ -375,6 +436,9 @@ private static final long serialVersionUID = 0L;
       if (other == kyobobook.grpc.sample.SampleResponse.getDefaultInstance()) return this;
       if (other.hasResult()) {
         mergeResult(other.getResult());
+      }
+      if (other.hasResponseResult()) {
+        mergeResponseResult(other.getResponseResult());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -518,6 +582,123 @@ private static final long serialVersionUID = 0L;
         result_ = null;
       }
       return resultBuilder_;
+    }
+
+    private kyobobook.grpc.sample.ResponseResult responseResult_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        kyobobook.grpc.sample.ResponseResult, kyobobook.grpc.sample.ResponseResult.Builder, kyobobook.grpc.sample.ResponseResultOrBuilder> responseResultBuilder_;
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public boolean hasResponseResult() {
+      return responseResultBuilder_ != null || responseResult_ != null;
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public kyobobook.grpc.sample.ResponseResult getResponseResult() {
+      if (responseResultBuilder_ == null) {
+        return responseResult_ == null ? kyobobook.grpc.sample.ResponseResult.getDefaultInstance() : responseResult_;
+      } else {
+        return responseResultBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public Builder setResponseResult(kyobobook.grpc.sample.ResponseResult value) {
+      if (responseResultBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        responseResult_ = value;
+        onChanged();
+      } else {
+        responseResultBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public Builder setResponseResult(
+        kyobobook.grpc.sample.ResponseResult.Builder builderForValue) {
+      if (responseResultBuilder_ == null) {
+        responseResult_ = builderForValue.build();
+        onChanged();
+      } else {
+        responseResultBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public Builder mergeResponseResult(kyobobook.grpc.sample.ResponseResult value) {
+      if (responseResultBuilder_ == null) {
+        if (responseResult_ != null) {
+          responseResult_ =
+            kyobobook.grpc.sample.ResponseResult.newBuilder(responseResult_).mergeFrom(value).buildPartial();
+        } else {
+          responseResult_ = value;
+        }
+        onChanged();
+      } else {
+        responseResultBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public Builder clearResponseResult() {
+      if (responseResultBuilder_ == null) {
+        responseResult_ = null;
+        onChanged();
+      } else {
+        responseResult_ = null;
+        responseResultBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public kyobobook.grpc.sample.ResponseResult.Builder getResponseResultBuilder() {
+      
+      onChanged();
+      return getResponseResultFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    public kyobobook.grpc.sample.ResponseResultOrBuilder getResponseResultOrBuilder() {
+      if (responseResultBuilder_ != null) {
+        return responseResultBuilder_.getMessageOrBuilder();
+      } else {
+        return responseResult_ == null ?
+            kyobobook.grpc.sample.ResponseResult.getDefaultInstance() : responseResult_;
+      }
+    }
+    /**
+     * <code>.ResponseResult responseResult = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        kyobobook.grpc.sample.ResponseResult, kyobobook.grpc.sample.ResponseResult.Builder, kyobobook.grpc.sample.ResponseResultOrBuilder> 
+        getResponseResultFieldBuilder() {
+      if (responseResultBuilder_ == null) {
+        responseResultBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            kyobobook.grpc.sample.ResponseResult, kyobobook.grpc.sample.ResponseResult.Builder, kyobobook.grpc.sample.ResponseResultOrBuilder>(
+                getResponseResult(),
+                getParentForChildren(),
+                isClean());
+        responseResult_ = null;
+      }
+      return responseResultBuilder_;
     }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {

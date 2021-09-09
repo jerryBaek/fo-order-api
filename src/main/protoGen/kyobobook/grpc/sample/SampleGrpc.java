@@ -77,28 +77,28 @@ public final class SampleGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getInsertGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getInsertGrpcSampleMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "InsertGrpcSample",
       requestType = kyobobook.grpc.sample.SampleRequest.class,
-      responseType = com.google.protobuf.Empty.class,
+      responseType = kyobobook.grpc.sample.ResponseResult.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getInsertGrpcSampleMethod() {
-    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty> getInsertGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getInsertGrpcSampleMethod() {
+    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult> getInsertGrpcSampleMethod;
     if ((getInsertGrpcSampleMethod = SampleGrpc.getInsertGrpcSampleMethod) == null) {
       synchronized (SampleGrpc.class) {
         if ((getInsertGrpcSampleMethod = SampleGrpc.getInsertGrpcSampleMethod) == null) {
           SampleGrpc.getInsertGrpcSampleMethod = getInsertGrpcSampleMethod =
-              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty>newBuilder()
+              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "InsertGrpcSample"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   kyobobook.grpc.sample.SampleRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.google.protobuf.Empty.getDefaultInstance()))
+                  kyobobook.grpc.sample.ResponseResult.getDefaultInstance()))
               .setSchemaDescriptor(new SampleMethodDescriptorSupplier("InsertGrpcSample"))
               .build();
         }
@@ -108,28 +108,28 @@ public final class SampleGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getUpdateGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getUpdateGrpcSampleMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "UpdateGrpcSample",
       requestType = kyobobook.grpc.sample.SampleRequest.class,
-      responseType = com.google.protobuf.Empty.class,
+      responseType = kyobobook.grpc.sample.ResponseResult.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getUpdateGrpcSampleMethod() {
-    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty> getUpdateGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getUpdateGrpcSampleMethod() {
+    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult> getUpdateGrpcSampleMethod;
     if ((getUpdateGrpcSampleMethod = SampleGrpc.getUpdateGrpcSampleMethod) == null) {
       synchronized (SampleGrpc.class) {
         if ((getUpdateGrpcSampleMethod = SampleGrpc.getUpdateGrpcSampleMethod) == null) {
           SampleGrpc.getUpdateGrpcSampleMethod = getUpdateGrpcSampleMethod =
-              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty>newBuilder()
+              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateGrpcSample"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   kyobobook.grpc.sample.SampleRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.google.protobuf.Empty.getDefaultInstance()))
+                  kyobobook.grpc.sample.ResponseResult.getDefaultInstance()))
               .setSchemaDescriptor(new SampleMethodDescriptorSupplier("UpdateGrpcSample"))
               .build();
         }
@@ -139,28 +139,28 @@ public final class SampleGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getDeleteGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getDeleteGrpcSampleMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "DeleteGrpcSample",
       requestType = kyobobook.grpc.sample.SampleRequest.class,
-      responseType = com.google.protobuf.Empty.class,
+      responseType = kyobobook.grpc.sample.ResponseResult.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest,
-      com.google.protobuf.Empty> getDeleteGrpcSampleMethod() {
-    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty> getDeleteGrpcSampleMethod;
+      kyobobook.grpc.sample.ResponseResult> getDeleteGrpcSampleMethod() {
+    io.grpc.MethodDescriptor<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult> getDeleteGrpcSampleMethod;
     if ((getDeleteGrpcSampleMethod = SampleGrpc.getDeleteGrpcSampleMethod) == null) {
       synchronized (SampleGrpc.class) {
         if ((getDeleteGrpcSampleMethod = SampleGrpc.getDeleteGrpcSampleMethod) == null) {
           SampleGrpc.getDeleteGrpcSampleMethod = getDeleteGrpcSampleMethod =
-              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, com.google.protobuf.Empty>newBuilder()
+              io.grpc.MethodDescriptor.<kyobobook.grpc.sample.SampleRequest, kyobobook.grpc.sample.ResponseResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteGrpcSample"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   kyobobook.grpc.sample.SampleRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.google.protobuf.Empty.getDefaultInstance()))
+                  kyobobook.grpc.sample.ResponseResult.getDefaultInstance()))
               .setSchemaDescriptor(new SampleMethodDescriptorSupplier("DeleteGrpcSample"))
               .build();
         }
@@ -234,21 +234,21 @@ public final class SampleGrpc {
     /**
      */
     public void insertGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getInsertGrpcSampleMethod(), responseObserver);
     }
 
     /**
      */
     public void updateGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateGrpcSampleMethod(), responseObserver);
     }
 
     /**
      */
     public void deleteGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteGrpcSampleMethod(), responseObserver);
     }
 
@@ -273,21 +273,21 @@ public final class SampleGrpc {
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 kyobobook.grpc.sample.SampleRequest,
-                com.google.protobuf.Empty>(
+                kyobobook.grpc.sample.ResponseResult>(
                   this, METHODID_INSERT_GRPC_SAMPLE)))
           .addMethod(
             getUpdateGrpcSampleMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 kyobobook.grpc.sample.SampleRequest,
-                com.google.protobuf.Empty>(
+                kyobobook.grpc.sample.ResponseResult>(
                   this, METHODID_UPDATE_GRPC_SAMPLE)))
           .addMethod(
             getDeleteGrpcSampleMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 kyobobook.grpc.sample.SampleRequest,
-                com.google.protobuf.Empty>(
+                kyobobook.grpc.sample.ResponseResult>(
                   this, METHODID_DELETE_GRPC_SAMPLE)))
           .build();
     }
@@ -326,7 +326,7 @@ public final class SampleGrpc {
     /**
      */
     public void insertGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getInsertGrpcSampleMethod(), getCallOptions()), request, responseObserver);
     }
@@ -334,7 +334,7 @@ public final class SampleGrpc {
     /**
      */
     public void updateGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUpdateGrpcSampleMethod(), getCallOptions()), request, responseObserver);
     }
@@ -342,7 +342,7 @@ public final class SampleGrpc {
     /**
      */
     public void deleteGrpcSample(kyobobook.grpc.sample.SampleRequest request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteGrpcSampleMethod(), getCallOptions()), request, responseObserver);
     }
@@ -379,21 +379,21 @@ public final class SampleGrpc {
 
     /**
      */
-    public com.google.protobuf.Empty insertGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
+    public kyobobook.grpc.sample.ResponseResult insertGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getInsertGrpcSampleMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.google.protobuf.Empty updateGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
+    public kyobobook.grpc.sample.ResponseResult updateGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUpdateGrpcSampleMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.google.protobuf.Empty deleteGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
+    public kyobobook.grpc.sample.ResponseResult deleteGrpcSample(kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteGrpcSampleMethod(), getCallOptions(), request);
     }
@@ -423,7 +423,7 @@ public final class SampleGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> insertGrpcSample(
+    public com.google.common.util.concurrent.ListenableFuture<kyobobook.grpc.sample.ResponseResult> insertGrpcSample(
         kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getInsertGrpcSampleMethod(), getCallOptions()), request);
@@ -431,7 +431,7 @@ public final class SampleGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> updateGrpcSample(
+    public com.google.common.util.concurrent.ListenableFuture<kyobobook.grpc.sample.ResponseResult> updateGrpcSample(
         kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getUpdateGrpcSampleMethod(), getCallOptions()), request);
@@ -439,7 +439,7 @@ public final class SampleGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> deleteGrpcSample(
+    public com.google.common.util.concurrent.ListenableFuture<kyobobook.grpc.sample.ResponseResult> deleteGrpcSample(
         kyobobook.grpc.sample.SampleRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteGrpcSampleMethod(), getCallOptions()), request);
@@ -479,15 +479,15 @@ public final class SampleGrpc {
           break;
         case METHODID_INSERT_GRPC_SAMPLE:
           serviceImpl.insertGrpcSample((kyobobook.grpc.sample.SampleRequest) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+              (io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult>) responseObserver);
           break;
         case METHODID_UPDATE_GRPC_SAMPLE:
           serviceImpl.updateGrpcSample((kyobobook.grpc.sample.SampleRequest) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+              (io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult>) responseObserver);
           break;
         case METHODID_DELETE_GRPC_SAMPLE:
           serviceImpl.deleteGrpcSample((kyobobook.grpc.sample.SampleRequest) request,
-              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+              (io.grpc.stub.StreamObserver<kyobobook.grpc.sample.ResponseResult>) responseObserver);
           break;
         default:
           throw new AssertionError();

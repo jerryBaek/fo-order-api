@@ -12,17 +12,17 @@ package kyobobook.application.adapter.in.grpc;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import com.google.protobuf.Empty;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.http.HttpStatus;
 
 import io.grpc.stub.StreamObserver;
-import kyobobook.application.biz.sample.port.out.SampleGrpcOutPort;
-import kyobobook.application.biz.sample.port.out.SamplePersistencePort;
+import kyobobook.application.biz.sample.port.in.SamplePort;
+import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
-import kyobobook.grpc.sample.SampleGrpc.SampleImplBase;
+import kyobobook.config.interceptor.ExceptionGrpcInterceptor;
+import kyobobook.grpc.sample.ResponseResult;
 import kyobobook.grpc.sample.SampleFieldEntry;
+import kyobobook.grpc.sample.SampleGrpc.SampleImplBase;
 import kyobobook.grpc.sample.SampleRequest;
 import kyobobook.grpc.sample.SampleResponse;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -39,43 +39,26 @@ import net.devh.boot.grpc.server.service.GrpcService;
  *                request.getReqType() 이 SampleRequest.ReqType.SUB 일 경우는 common-prototype-sub-api 와 gRPC 통신을 통해 처리한다.
  *                
  */
-@GrpcService
+@GrpcService(interceptors = ExceptionGrpcInterceptor.class)
 public class GrpcSampleInAdapter extends SampleImplBase {
 
-    @Autowired
-    @Qualifier("sampleWriterRepository")
-    SamplePersistencePort sampleWriterPort;
+    private final SamplePort samplePort;
     
-    @Autowired
-    @Qualifier("sampleReaderRepository")
-    SamplePersistencePort sampleReaderPort;
+    private final MessageSourceAccessor messageSource;
     
-    @Autowired
-    @Qualifier("grpcSampleAdapter")
-    SampleGrpcOutPort sampleGrpcOutPort;
-    
-    private SamplePersistencePort getRepository(SampleRequest request) {
-        if(request.getReqType() == SampleRequest.ReqType.MASTER) {
-            return sampleWriterPort;
-        } else if(request.getReqType() == SampleRequest.ReqType.SLAVE) {
-            return sampleReaderPort;
-        } else if(request.getReqType() == SampleRequest.ReqType.SUB) {
-            return null;
-        }
-        
-        return null;
+    public GrpcSampleInAdapter(
+            SamplePort samplePort
+            , MessageSourceAccessor messageSource) {
+        this.samplePort = samplePort;
+        this.messageSource = messageSource;
     }
-
+    
     @Override
     public void selectGrpcSample(SampleRequest request, StreamObserver<SampleResponse> responseObserver) {
-        SamplePersistencePort persistencePort = this.getRepository(request);
-        List<Sample> sampleList = null;
-        if(persistencePort == null) {
-            sampleList = sampleGrpcOutPort.selectGrpcSample();
-        } else {
-            sampleList = persistencePort.selectSample();
-        }
-
+        
+        ResponseMessage responseMessage = samplePort.selectSample(request.getReqTypeValue());
+        List<Sample> sampleList = (List<Sample>) responseMessage.getData();
+        
         sampleList.stream().forEach(sample -> {
             
             SampleFieldEntry fieldEntry = SampleFieldEntry.newBuilder()
@@ -85,6 +68,7 @@ public class GrpcSampleInAdapter extends SampleImplBase {
                     .setTxt(sample.getTxt())
                     .setResult(true)
                     .build();
+            
             SampleResponse.Builder responseBuilder = SampleResponse.newBuilder().setResult(fieldEntry);
             responseObserver.onNext(responseBuilder.build());
         });
@@ -94,13 +78,10 @@ public class GrpcSampleInAdapter extends SampleImplBase {
 
     @Override
     public void getGrpcSample(SampleRequest request, StreamObserver<SampleResponse> responseObserver) {
-        SamplePersistencePort persistencePort = this.getRepository(request);
-        Sample sample = null;
-        if(persistencePort == null) {
-            sample = sampleGrpcOutPort.getGprcSample(request.getSeq());
-        } else {
-            sample = persistencePort.getSample(request.getSeq());
-        }
+        SampleResponse.Builder responseBuilder = null;
+        
+        ResponseMessage responseMessage = samplePort.getSample(request.getReqTypeValue(), request.getSeq());
+        Sample sample = (Sample) responseMessage.getData();
         
         SampleFieldEntry fieldEntry = SampleFieldEntry.newBuilder()
                 .setSeq(sample.getSeq())
@@ -109,52 +90,66 @@ public class GrpcSampleInAdapter extends SampleImplBase {
                 .setResult(true)
                 .build();
         
-        SampleResponse.Builder responseBuilder = SampleResponse.newBuilder().setResult(fieldEntry);
+        responseBuilder = SampleResponse.newBuilder()
+                .setResult(fieldEntry)
+                .setResponseResult(ResponseResult.newBuilder()
+                        .setResultCode(HttpStatus.OK.value())
+                        .setResultMessage(messageSource.getMessage("common.process.complete")));
         
         responseObserver.onNext(responseBuilder.build());
         responseObserver.onCompleted();
     }
 
     @Override
-    public void insertGrpcSample(SampleRequest request, StreamObserver<Empty> responseObserver) {
-        SamplePersistencePort persistencePort = this.getRepository(request);
+    public void insertGrpcSample(SampleRequest request, StreamObserver<ResponseResult> responseObserver) {
+        ResponseResult.Builder responseBuilder = null;
+        
         Sample sample = Sample.builder()
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .build();
         
-        if(persistencePort == null) {
-            sampleGrpcOutPort.insertGrpSample(sample);
-        } else {
-            persistencePort.insertSample(sample);
-        }
+        ResponseMessage responseMessage = samplePort.insertSample(request.getReqTypeValue(), sample);
+
+        responseBuilder = ResponseResult.newBuilder()
+                .setResultCode(HttpStatus.OK.value())
+                .setResultMessage(responseMessage.getResultMessage());
+        
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void updateGrpcSample(SampleRequest request, StreamObserver<Empty> responseObserver) {
-        SamplePersistencePort persistencePort = this.getRepository(request);
+    public void updateGrpcSample(SampleRequest request, StreamObserver<ResponseResult> responseObserver) {
+        ResponseResult.Builder responseBuilder = null;
+        
         Sample sample = Sample.builder()
                 .seq(request.getSeq())
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .build();
         
-        if(persistencePort == null) {
-            sampleGrpcOutPort.updateGrpSample(sample);
-        } else {
-            persistencePort.updateSample(sample);
-        }
+        ResponseMessage responseMessage = samplePort.updateSample(request.getReqTypeValue(), sample);
+        
+        responseBuilder = ResponseResult.newBuilder()
+                .setResultCode(HttpStatus.OK.value())
+                .setResultMessage(responseMessage.getResultMessage());
+        
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void deleteGrpcSample(SampleRequest request, StreamObserver<Empty> responseObserver) {
-        SamplePersistencePort persistencePort = this.getRepository(request);
-        if(persistencePort == null) {
-            sampleGrpcOutPort.deleteGrpSample(request.getSeq());
-        } else {
-            persistencePort.deleteSample(request.getSeq());
-        }
+    public void deleteGrpcSample(SampleRequest request, StreamObserver<ResponseResult> responseObserver) {
+        ResponseResult.Builder responseBuilder = null;
+        
+        ResponseMessage responseMessage = samplePort.deleteSample(request.getReqTypeValue(), request.getSeq());
+        
+        responseBuilder = ResponseResult.newBuilder()
+                .setResultCode(HttpStatus.OK.value())
+                .setResultMessage(responseMessage.getResultMessage());
+        
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
     }
-    
-    
 }

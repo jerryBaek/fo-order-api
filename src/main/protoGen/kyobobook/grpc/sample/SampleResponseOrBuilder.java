@@ -19,4 +19,17 @@ public interface SampleResponseOrBuilder extends
    * <code>.SampleFieldEntry result = 1;</code>
    */
   kyobobook.grpc.sample.SampleFieldEntryOrBuilder getResultOrBuilder();
+
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  boolean hasResponseResult();
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  kyobobook.grpc.sample.ResponseResult getResponseResult();
+  /**
+   * <code>.ResponseResult responseResult = 2;</code>
+   */
+  kyobobook.grpc.sample.ResponseResultOrBuilder getResponseResultOrBuilder();
 }

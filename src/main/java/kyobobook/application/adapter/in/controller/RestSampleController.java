@@ -10,12 +10,8 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +25,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.sample.port.in.SamplePort;
 import kyobobook.application.biz.sample.service.SampleService;
+import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
 
 /**
@@ -59,10 +56,9 @@ public class RestSampleController {
      */
     @ApiOperation(value="마스터 샘플 목록 조회"
             , notes="<b style='color: red;'>Master DataBase</b>의 샘풀테이블 전체 목록을 조회 합니다.")
-    @GetMapping(value = "/sample-master-list")
-    public ResponseEntity<?> selectMasterSample() {
-        List<Sample> sampleList = sampleService.selectMasterSample();
-        return new ResponseEntity<>(sampleList, HttpStatus.OK);
+    @GetMapping(value = "/master/samples")
+    public ResponseMessage selectMasterSample() {
+        return sampleService.selectMasterSample();
     }
     
     
@@ -75,11 +71,10 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("마스터 샘플 상세 조회")
-    @GetMapping(value = "/get-master-sample/{seq}")
-    public ResponseEntity<?> getMasterSample(
+    @GetMapping(value = "/master/sample/{seq}")
+    public ResponseMessage getMasterSample(
             @PathVariable int seq) {
-        Sample sampleMaster = sampleService.getMasterSample(seq);
-        return new ResponseEntity<>(sampleMaster, HttpStatus.OK);
+        return sampleService.getMasterSample(seq);
     }
     
     /**
@@ -91,14 +86,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("마스터 샘플 신규 등록")
-    @PostMapping(value = "/insert-master-sample")
-    public ResponseEntity<?> insertMasterSample(
+    @PostMapping(value = "/master/sample")
+    public ResponseMessage insertMasterSample(
             @RequestBody Sample sample) {
         
         logger.debug("// INSERT MASTER SAMPLE => " + sample.toString());
         
-        sampleService.insertMasterSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.insertMasterSample(sample);
     }
     
     /**
@@ -110,14 +104,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("마스터 샘플 수정")
-    @PutMapping(value = "/update-master-sample")
-    public ResponseEntity<?> updateMasterSample(
+    @PutMapping(value = "/master/sample")
+    public ResponseMessage updateMasterSample(
             @RequestBody Sample sample) {
         
         logger.debug("// UPDATE MASTER SAMPLE => " + sample.toString());
         
-        sampleService.updateMasterSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.updateMasterSample(sample);
     }
     
     /**
@@ -129,14 +122,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("마스터 샘플 삭제")
-    @DeleteMapping(value = "/delete-master-sample/{seq}")
-    public ResponseEntity<?> deleteMasterSample(
+    @DeleteMapping(value = "/master/sample/{seq}")
+    public ResponseMessage deleteMasterSample(
             @PathVariable int seq) {
         
         logger.debug("/// DELETE MASTER SAMPLE => " + seq);
         
-        sampleService.deleteMasterSample(seq);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.deleteMasterSample(seq);
     }
     
     /**
@@ -147,10 +139,9 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 목록 조회")
-    @GetMapping(value = "/sample-slave-list")
-    public ResponseEntity<?> selectSlaveSample() {
-        List<Sample> sampleList = sampleService.selectSlaveSample();
-        return new ResponseEntity<>(sampleList, HttpStatus.OK);
+    @GetMapping(value = "/slave/samples")
+    public ResponseMessage selectSlaveSample() {
+        return sampleService.selectSlaveSample();
     }
     
     /**
@@ -162,11 +153,10 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 상세 조회")
-    @GetMapping(value = "/get-slave-sample/{seq}")
-    public ResponseEntity<?> getSlaveSample(
+    @GetMapping(value = "/slave/sample/{seq}")
+    public ResponseMessage getSlaveSample(
             @PathVariable int seq) {
-        Sample sampleSlave = sampleService.getSlaveSample(seq);
-        return new ResponseEntity<>(sampleSlave, HttpStatus.OK);
+        return sampleService.getSlaveSample(seq);
     }
 
     /**
@@ -179,14 +169,13 @@ public class RestSampleController {
      * @throws Exception
      */
     @ApiOperation("슬레이브 샘플 신규 등록")
-    @PostMapping(value = "/insert-slave-sample")
-    public ResponseEntity<?> insertSlaveSample(
+    @PostMapping(value = "/slave/sample")
+    public ResponseMessage insertSlaveSample(
             @RequestBody Sample sample) throws Exception {
         
         logger.debug("// INSERT SLAVE SAMPLE => " + sample.toString());
         
-        sampleService.insertSlaveSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.insertSlaveSample(sample);
     }
     
     /**
@@ -198,14 +187,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 수정")
-    @PutMapping(value = "/update-slave-sample")
-    public ResponseEntity<?> updateSlaveSample(
+    @PutMapping(value = "/slave/sample")
+    public ResponseMessage updateSlaveSample(
             @RequestBody Sample sample) {
         
         logger.debug("// UPDATE SLAVE SAMPLE => " + sample.toString());
         
-        sampleService.updateSlaveSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.updateSlaveSample(sample);
     }
     
     /**
@@ -217,14 +205,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 삭제")
-    @DeleteMapping(value = "/delete-slave-sample/{seq}")
-    public ResponseEntity<?> deleteSlaveSample(
+    @DeleteMapping(value = "/slave/sample/{seq}")
+    public ResponseMessage deleteSlaveSample(
             @PathVariable int seq) {
         
         logger.debug("/// DELETE SLAVE SAMPLE => " + seq);
         
-        sampleService.deleteSlaveSample(seq);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.deleteSlaveSample(seq);
     }
     
     /**
@@ -235,13 +222,12 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("gRPC 슬레이브 샘플 목록 조회")
-    @GetMapping(value = "/sample-grpc-list")
-    public ResponseEntity<?> selectGprcSample() {
+    @GetMapping(value = "/grpc/samples")
+    public ResponseMessage selectGprcSample() {
         
         logger.debug("// SELECT gRPC SLAVE SAMPLE LIST");
         
-        List<Sample> sampleList = sampleService.selectSubSample();
-        return new ResponseEntity<>(sampleList, HttpStatus.OK);
+        return sampleService.selectSubSample();
     }
     
     /**
@@ -253,14 +239,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("gRPC 슬레이브 샘플 상세 조회")
-    @GetMapping(value = "/get-grpc-sample/{seq}")
-    public ResponseEntity<?> getGprcSample(
+    @GetMapping(value = "/grpc/sample/{seq}")
+    public ResponseMessage getGprcSample(
             @PathVariable int seq) {
         
         logger.debug("// GET DETAIL gRPC SLAVE SAMPLE => " + seq);
         
-        Sample sample = sampleService.getSubSample(seq);
-        return new ResponseEntity<>(sample, HttpStatus.OK);
+        return sampleService.getSubSample(seq);
     }
     
     /**
@@ -273,14 +258,13 @@ public class RestSampleController {
      * @throws Exception
      */
     @ApiOperation("슬레이브 샘플 신규 등록")
-    @PostMapping(value = "/insert-grpc-sample")
-    public ResponseEntity<?> insertGrpcSample(
+    @PostMapping(value = "/grpc/sample")
+    public ResponseMessage insertGrpcSample(
             @RequestBody Sample sample) throws Exception {
         
         logger.debug("// INSERT gRPC SLAVE SAMPLE => " + sample.toString());
         
-        sampleService.insertSubSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.insertSubSample(sample);
     }
     
     /**
@@ -292,14 +276,13 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 수정")
-    @PutMapping(value = "/update-grpc-sample")
-    public ResponseEntity<?> updateGrpcSample(
+    @PutMapping(value = "/grpc/sample")
+    public ResponseMessage updateGrpcSample(
             @RequestBody Sample sample) {
         
         logger.debug("// UPDATE gRPC SLAVE SAMPLE => " + sample.toString());
 
-        sampleService.updateSubSample(sample);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.updateSubSample(sample);
     }
     
     /**
@@ -311,13 +294,12 @@ public class RestSampleController {
      * @return
      */
     @ApiOperation("슬레이브 샘플 삭제")
-    @DeleteMapping(value = "/delete-grpc-sample/{seq}")
-    public ResponseEntity<?> deleteGrpcSample(
+    @DeleteMapping(value = "/grpc/sample/{seq}")
+    public ResponseMessage deleteGrpcSample(
             @PathVariable int seq) {
         
         logger.debug("/// DELETE gRPC SLAVE SAMPLE => " + seq);
         
-        sampleService.deleteSubSample(seq);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return sampleService.deleteSubSample(seq);
     }
 }

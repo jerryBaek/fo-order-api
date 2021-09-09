@@ -12,6 +12,7 @@ package kyobobook.application.biz.sample.port.in;
 
 import java.util.List;
 
+import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
 
 /**
@@ -24,13 +25,72 @@ import kyobobook.application.domain.sample.Sample;
 public interface SamplePort {
 
     /**
+     * @Method      : selectSample
+     * @Date        : 2021. 9. 4.
+     * @author      : smlee1@kyobobook.com
+     * @description : reqType 구분에 따라 sample 데이터 목록 조회
+     *                writer, reader, grpc 통신으로 sub-api의 reader 데이터 목록 조회
+     * @param reqType
+     * @return
+     */
+    ResponseMessage selectSample(int reqType);
+    
+    /**
+     * @Method      : getSample
+     * @Date        : 2021. 9. 4.
+     * @author      : smlee1@kyobobook.com
+     * @description : reqType 구분에 따라 sample 데이터 상세 조회
+     *                writer, reader, grpc 통신으로 sub-api의 reader 데이터 상세 조회
+     * @param reqType
+     * @param seq
+     * @return
+     */
+    ResponseMessage getSample(int reqType, int seq);
+    
+    /**
+     * @Method      : insertSample
+     * @Date        : 2021. 9. 4.
+     * @author      : smlee1@kyobobook.com
+     * @description : reqType 구분에 따라 sample 데이터 등록
+     *                writer, reader, grpc 통신으로 sub-api의 reader 데이터 등록
+     * @param reqType
+     * @param sample
+     * @return
+     */
+    ResponseMessage insertSample(int reqType, Sample sample);
+    
+    /**
+     * @Method      : updateSample
+     * @Date        : 2021. 9. 4.
+     * @author      : smlee1@kyobobook.com
+     * @description : reqType 구분에 따라 sample 데이터 수정
+     *                writer, reader, grpc 통신으로 sub-api의 reader 데이터 수정
+     * @param reqType
+     * @param sample
+     * @return
+     */
+    ResponseMessage updateSample(int reqType, Sample sample);
+    
+    /**
+     * @Method      : deleteSample
+     * @Date        : 2021. 9. 4.
+     * @author      : smlee1@kyobobook.com
+     * @description : reqType 구분에 따라 sample 데이터 삭제
+     *                writer, reader, grpc 통신으로 sub-api의 reader 데이터 삭제
+     * @param reqType
+     * @param seq
+     * @return
+     */
+    ResponseMessage deleteSample(int reqType, int seq);
+    
+    /**
      * @Method      : selectMasterSample
      * @Date        : 2021. 8. 12.
      * @author      : smlee1@kyobobook.com
      * @description : Master 데이터 베이스의 Sample 목록을 조회한다. 
      * @return 
      */
-    List<Sample> selectMasterSample();
+    ResponseMessage selectMasterSample();
     
     /**
      * @Method      : getMasterSample
@@ -40,7 +100,7 @@ public interface SamplePort {
      * @param seq
      * @return
      */
-    Sample getMasterSample(int seq);
+    ResponseMessage getMasterSample(int seq);
     
     /**
      * @Method      : insertMasterSample
@@ -50,7 +110,7 @@ public interface SamplePort {
      * @param sample - {@link Sample}
      * @return
      */
-    int insertMasterSample(Sample sample);
+    ResponseMessage insertMasterSample(Sample sample);
     
     /**
      * @Method      : updateMasterSample
@@ -60,7 +120,7 @@ public interface SamplePort {
      * @param sample - {@link Sample}
      * @return
      */
-    int updateMasterSample(Sample sample);
+    ResponseMessage updateMasterSample(Sample sample);
     
     /**
      * @Method      : deleteMasterSample
@@ -70,7 +130,7 @@ public interface SamplePort {
      * @param seq
      * @return
      */
-    int deleteMasterSample(int seq);
+    ResponseMessage deleteMasterSample(int seq);
     
     
     /**
@@ -80,7 +140,7 @@ public interface SamplePort {
      * @description : Slave 데이터 베이스의 Sample 목록을 조회한다.
      * @return
      */
-    List<Sample> selectSlaveSample();
+    ResponseMessage selectSlaveSample();
     
     /**
      * @Method      : getSlaveSample
@@ -90,7 +150,7 @@ public interface SamplePort {
      * @param seq
      * @return
      */
-    Sample getSlaveSample(int seq);
+    ResponseMessage getSlaveSample(int seq);
     
     /**
      * @Method      : insertSlaveSample
@@ -98,9 +158,8 @@ public interface SamplePort {
      * @author      : smlee1@kyobobook.com
      * @description : Slave 데이터 베이스의 Sample 신규 데이터를 생성한다.
      * @param sample - {@link Sample}
-     * @throws Exception
      */
-    void insertSlaveSample(Sample sample) throws Exception;
+    ResponseMessage insertSlaveSample(Sample sample);
     
     /**
      * @Method      : updateSlaveSample
@@ -109,7 +168,7 @@ public interface SamplePort {
      * @description : Slave 데이터 베이스의 Sample 데이터를 업데이트 한다.
      * @param sample - {@link Sample}
      */
-    void updateSlaveSample(Sample sample);
+    ResponseMessage updateSlaveSample(Sample sample);
     
     /**
      * @Method      : deleteSlaveSample
@@ -118,7 +177,7 @@ public interface SamplePort {
      * @description : Slave 데이터 베이스의 Sample 데이터를 삭제 한다.
      * @param seq
      */
-    void deleteSlaveSample(int seq);
+    ResponseMessage deleteSlaveSample(int seq);
     
     /**
      * @Method      : selectSlaveSample
@@ -127,7 +186,7 @@ public interface SamplePort {
      * @description : Sub Api를 통해 Sample 목록을 조회한다.
      * @return
      */
-    List<Sample> selectSubSample();
+    ResponseMessage selectSubSample();
     
     /**
      * @Method      : getSlaveSample
@@ -137,7 +196,7 @@ public interface SamplePort {
      * @param seq
      * @return
      */
-    Sample getSubSample(int seq);
+    ResponseMessage getSubSample(int seq);
     
     /**
      * @Method      : insertSlaveSample
@@ -145,9 +204,8 @@ public interface SamplePort {
      * @author      : smlee1@kyobobook.com
      * @description : Sub Api를 통해 베이스의 Sample 신규 데이터를 생성한다.
      * @param sample - {@link Sample}
-     * @throws Exception
      */
-    void insertSubSample(Sample sample) throws Exception;
+    ResponseMessage insertSubSample(Sample sample);
     
     /**
      * @Method      : updateSlaveSample
@@ -156,7 +214,7 @@ public interface SamplePort {
      * @description : Sub Api를 통해 Sample 데이터를 업데이트 한다.
      * @param sample - {@link Sample}
      */
-    void updateSubSample(Sample sample);
+    ResponseMessage updateSubSample(Sample sample);
     
     /**
      * @Method      : deleteSlaveSample
@@ -165,5 +223,5 @@ public interface SamplePort {
      * @description : Sub Api를 통해 Sample 데이터를 삭제 한다.
      * @param seq
      */
-    void deleteSubSample(int seq);
+    ResponseMessage deleteSubSample(int seq);
 }

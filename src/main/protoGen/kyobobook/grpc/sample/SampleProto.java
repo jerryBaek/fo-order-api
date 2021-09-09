@@ -25,6 +25,11 @@ public final class SampleProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_SampleFieldEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ResponseResult_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ResponseResult_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_SampleResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -45,17 +50,20 @@ public final class SampleProto {
       "e\")\n\007ReqType\022\n\n\006MASTER\020\000\022\t\n\005SLAVE\020\001\022\007\n\003S" +
       "UB\020\002\"]\n\020SampleFieldEntry\022\013\n\003seq\030\001 \001(\005\022\r\n" +
       "\005title\030\002 \001(\t\022\020\n\010contents\030\003 \001(\t\022\013\n\003txt\030\004 " +
-      "\001(\t\022\016\n\006result\030\005 \001(\010\"3\n\016SampleResponse\022!\n" +
-      "\006result\030\001 \001(\0132\021.SampleFieldEntry2\257\002\n\006Sam" +
-      "ple\0227\n\020SelectGrpcSample\022\016.SampleRequest\032" +
-      "\017.SampleResponse\"\0000\001\0222\n\rGetGrpcSample\022\016." +
-      "SampleRequest\032\017.SampleResponse\"\000\022<\n\020Inse" +
-      "rtGrpcSample\022\016.SampleRequest\032\026.google.pr" +
-      "otobuf.Empty\"\000\022<\n\020UpdateGrpcSample\022\016.Sam" +
-      "pleRequest\032\026.google.protobuf.Empty\"\000\022<\n\020" +
-      "DeleteGrpcSample\022\016.SampleRequest\032\026.googl" +
-      "e.protobuf.Empty\"\000B&\n\025kyobobook.grpc.sam" +
-      "pleB\013SampleProtoP\001b\006proto3"
+      "\001(\t\022\016\n\006result\030\005 \001(\010\"U\n\016ResponseResult\022\023\n" +
+      "\013result_code\030\001 \001(\005\022\026\n\016result_message\030\002 \001" +
+      "(\t\022\026\n\016detail_message\030\003 \001(\t\"\\\n\016SampleResp" +
+      "onse\022!\n\006result\030\001 \001(\0132\021.SampleFieldEntry\022" +
+      "\'\n\016responseResult\030\002 \001(\0132\017.ResponseResult" +
+      "2\232\002\n\006Sample\0227\n\020SelectGrpcSample\022\016.Sample" +
+      "Request\032\017.SampleResponse\"\0000\001\0222\n\rGetGrpcS" +
+      "ample\022\016.SampleRequest\032\017.SampleResponse\"\000" +
+      "\0225\n\020InsertGrpcSample\022\016.SampleRequest\032\017.R" +
+      "esponseResult\"\000\0225\n\020UpdateGrpcSample\022\016.Sa" +
+      "mpleRequest\032\017.ResponseResult\"\000\0225\n\020Delete" +
+      "GrpcSample\022\016.SampleRequest\032\017.ResponseRes" +
+      "ult\"\000B&\n\025kyobobook.grpc.sampleB\013SamplePr" +
+      "otoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -82,12 +90,18 @@ public final class SampleProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SampleFieldEntry_descriptor,
         new java.lang.String[] { "Seq", "Title", "Contents", "Txt", "Result", });
-    internal_static_SampleResponse_descriptor =
+    internal_static_ResponseResult_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_ResponseResult_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ResponseResult_descriptor,
+        new java.lang.String[] { "ResultCode", "ResultMessage", "DetailMessage", });
+    internal_static_SampleResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_SampleResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SampleResponse_descriptor,
-        new java.lang.String[] { "Result", });
+        new java.lang.String[] { "Result", "ResponseResult", });
     com.google.protobuf.EmptyProto.getDescriptor();
   }
 

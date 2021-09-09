@@ -12,7 +12,9 @@ package kyobobook.application.biz.sample.port.out;
 
 import java.util.List;
 
+import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
+import kyobobook.exception.BizRuntimeException;
 
 /**
  * @Project     : common-prototype-api
@@ -21,16 +23,16 @@ import kyobobook.application.domain.sample.Sample;
  * @author      : smlee1@kyobobook.com
  * @description : Service 에서 gRPC 통해 타 Api 와 통신하기 위한 Port
  */
-public interface SampleGrpcOutPort {
+public interface SampleOutPort {
 
     /**
      * @Method      : selectGrpcSample
      * @Date        : 2021. 8. 17.
      * @author      : smlee1@kyobobook.com
      * @description : Sample 데이터 목록을 조회 한다.
-     * @return
+     * @return - {@link List} 목록 조회 결과
      */
-    List<Sample> selectGrpcSample();
+    List<?> selectGrpcSample() throws BizRuntimeException;
     
     /**
      * @Method      : getGprcSample
@@ -38,9 +40,9 @@ public interface SampleGrpcOutPort {
      * @author      : smlee1@kyobobook.com
      * @description : Sample 데이터 상세 내역을 조회 한다.
      * @param seq
-     * @return
+     * @return - {@link Sample} 상세 조회 결과
      */
-    Sample getGprcSample(int seq);
+    Sample getGprcSample(int seq) throws BizRuntimeException;
     
     /**
      * @Method      : insertGrpSample
@@ -48,8 +50,9 @@ public interface SampleGrpcOutPort {
      * @author      : smlee1@kyobobook.com
      * @description : Sample 데이터를 신규 등록 한다.
      * @param sample
+     * @return - 처리 결과 메세지
      */
-    void insertGrpSample(Sample sample);
+    String insertGrpSample(Sample sample) throws BizRuntimeException;
     
     /**
      * @Method      : updateGrpSample
@@ -57,8 +60,9 @@ public interface SampleGrpcOutPort {
      * @author      : smlee1@kyobobook.com
      * @description : Sample 데이터를 수정 한다.
      * @param sample
+     * @return - 처리 결과 메세지
      */
-    void updateGrpSample(Sample sample);
+    String updateGrpSample(Sample sample) throws BizRuntimeException;
     
     /**
      * @Method      : deleteGrpSample
@@ -66,6 +70,7 @@ public interface SampleGrpcOutPort {
      * @author      : smlee1@kyobobook.com
      * @description : Sample 데이터를 삭제 한다.
      * @param seq
+     * @return - 처리 결과 메세지
      */
-    void deleteGrpSample(int seq);
+    String deleteGrpSample(int seq) throws BizRuntimeException;
 }
