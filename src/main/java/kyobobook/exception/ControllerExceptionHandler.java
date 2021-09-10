@@ -13,7 +13,6 @@ package kyobobook.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -45,9 +44,12 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public ResponseMessage handleException(BizRuntimeException e) {
         logger.error(e.getMessage());
+        logger.error(e.getCause().getMessage());
+        
         return ResponseMessage.builder()
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .detailMessage(e.getMessage())
+                .resultMessage(e.getMessage())
+                .detailMessage(e.getCause() != null ? e.getCause().getMessage() : "")
                 .build();
     }
     
@@ -58,7 +60,8 @@ public class ControllerExceptionHandler {
         logger.error(e.getMessage());
         return ResponseMessage.builder()
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .detailMessage(e.getMessage())
+                .resultMessage(e.getMessage())
+                .detailMessage(e.getCause() != null ? e.getCause().getMessage() : "")
                 .build();
     }
 
