@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kyobobook.application.adapter.out.persistence.product.ProductWriterMapper">
+    
+    
+    <!--
+        설명     : 상품 마스터 (TM_CMDT) 등록
+        작성일자  : 2021. 08. 30.
+        작성자   : sykim@kyobobook.com
+    -->
+    <insert id="insertProductCmdt" parameterType="ProductEntity">
+    
+	    <selectKey keyProperty="cmdt_id,cmdt_code" resultType="ProductEntity" order="BEFORE">
+	        SELECT cast((cast(max(cmdt_id) AS bigint)+1) AS varchar) cmdt_id, 
+	               cast((cast(max(cmdt_code) AS bigint)+1) AS varchar) cmdt_code 
+	        FROM tm_cmdt
+	    </selectKey>
+    
+        INSERT INTO /* ProductWriterMapper.insertProductCmdt */
+        TM_CMDT (
+            cmdt_id
+            , cmdt_name
+            , sbtt_name1
+            , rlse_date
+            , cmdt_code
+            , cret_dttm
+            , amnd_dttm
+        ) VALUES (
+            #{cmdt_id}
+            , #{cmdt_name}
+            , #{sbtt_name1}
+            , #{rlse_date}
+            , #{cmdt_code}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--
+        설명     : 상품 저자 (TD_CMDT_AUTR) 등록
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <insert id="insertProductAutr" parameterType="ProductEntity">
+        INSERT INTO /* ProductWriterMapper.insertProductAutr */
+        TD_CMDT_AUTR (
+            cmdt_id
+            , autr_code1
+            , autr_name1
+            , autr_code2
+            , autr_name2
+            , autr_code3
+            , autr_name3
+            , cret_dttm
+            , amnd_dttm
+        ) VALUES (
+            #{cmdt_id}
+            , COALESCE(#{autr_code1}, '')
+            , COALESCE(#{autr_name1}, '')
+            , COALESCE(#{autr_code2}, '')
+            , COALESCE(#{autr_name2}, '')
+            , COALESCE(#{autr_code3}, '')
+            , COALESCE(#{autr_name3}, '')
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--
+        설명     : 상품 정가 (TD_CMDT_PRCE) 등록
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <insert id="insertProductPrce" parameterType="ProductEntity">
+        INSERT INTO /* ProductWriterMapper.insertProductPrce */ 
+        TD_CMDT_PRCE (
+            cmdt_id
+            , wncr_prce
+            , apl_end_dttm
+            , cret_dttm
+            , amnd_dttm
+        ) VALUES (
+            #{cmdt_id}
+            , #{wncr_prce}
+            , '99991231235959'
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--
+        설명     : 상품 마스터 (TM_CMDT) 수정
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <update id="updateProductCmdt" parameterType="ProductEntity">
+        UPDATE /* ProductWriterMapper.updateProductCmdt */
+               TM_CMDT
+           SET cmdt_name = #{cmdt_name}
+               , sbtt_name1 = #{sbtt_name1}
+               , rlse_date = #{rlse_date}
+               , cmdt_code = #{cmdt_code}
+               , amnd_dttm = now()
+         WHERE cmdt_id = #{cmdt_id}
+
+    </update>
+
+    <!--
+        설명     : 상품 저자 (TD_CMDT_AUTR) 수정
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <update id="updateProductAutr" parameterType="ProductEntity">
+        UPDATE /* ProductWriterMapper.updateProductAutr */
+               TD_CMDT_AUTR
+           SET autr_code1 = COALESCE(#{autr_code1}, '')
+               , autr_name1 = COALESCE(#{autr_name1}, '')
+               , autr_code2 = COALESCE(#{autr_code2}, '')               
+               , autr_name2 = COALESCE(#{autr_name2}, '')
+               , autr_code3 = COALESCE(#{autr_code3}, '')
+               , autr_name3 = COALESCE(#{autr_name3}, '')
+               , amnd_dttm = now()       
+         WHERE cmdt_id = #{cmdt_id}
+    </update>
+
+    <!--
+        설명     : 상품 정가 (TD_CMDT_PRCE) 수정
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <update id="updateProductPrce" parameterType="ProductEntity">
+        UPDATE /* ProductWriterMapper.updateProductPrce */
+               TD_CMDT_PRCE
+           SET wncr_prce = #{wncr_prce}
+               , apl_end_dttm = '99991231235959'
+               , amnd_dttm =now()
+         WHERE cmdt_id = #{cmdt_id}
+    </update>
+
+    <!--
+        설명     : 상품 마스터 (TM_CMDT) 삭제
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <delete id="deleteProductCmdt" parameterType="ProductEntity">
+        DELETE /* ProductWriterMapper.deleteProductCmdt */
+        FROM TM_CMDT
+        WHERE cmdt_id = #{cmdt_id}
+    </delete>
+    
+    <!--
+        설명     : 상품 저자 (TD_CMDT_AUTR) 삭제
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <delete id="deleteProductAutr" parameterType="ProductEntity">
+        DELETE /* ProductWriterMapper.deleteProductAutr */
+        FROM TD_CMDT_AUTR
+        WHERE cmdt_id = #{cmdt_id}
+    </delete>
+    
+    <!--
+        설명     : 상품 정가 (TD_CMDT_PRCE) 삭제
+        작성일자  : 2021. 08. 31.
+        작성자   : sykim@kyobobook.com
+    -->
+    <delete id="deleteProductPrce" parameterType="ProductEntity">
+        DELETE /* ProductWriterMapper.deleteProductPrce */
+        FROM TD_CMDT_PRCE
+        WHERE cmdt_id = #{cmdt_id}
+    </delete>
+</mapper>
+

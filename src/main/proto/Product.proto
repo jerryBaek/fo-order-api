@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "Sample.proto";
+
+option java_multiple_files = true;
+option java_package = "kyobobook.grpc.product";
+option java_outer_classname = "ProductProto";
+
+service Product {
+  rpc GetProductDetail ( ProductRequest ) returns ( ProductResponse ) {}
+  rpc InsertProductBkrv ( ProductRequest ) returns ( ResponseResult ) {}
+  rpc InsertProductCtnt ( ProductRequest ) returns ( ResponseResult ) {}
+  rpc UpdateProductDetail ( ProductRequest ) returns ( ResponseResult ) {}
+  rpc DeleteProductDetail ( ProductRequest ) returns ( ResponseResult ) {}
+}
+
+message ProductRequest {
+  string cmdt_id = 1;
+  string bkrv_cntt = 2;
+  string ctnt_cntt = 3;
+}
+
+message ProductFieldEntry {
+  string cmdt_id = 1;
+  string bkrv_cntt = 2;
+  string ctnt_cntt = 3;
+}
+
+message ProductResponse {
+  ProductFieldEntry result = 1;
+  ResponseResult responseResult = 2;
+}

@@ -2,6 +2,8 @@ server:
   port: 8070
   
 spring:
+  application:
+    name: common-prototype-api
   writer:
     datasource:
       jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/prototype
@@ -14,6 +16,29 @@ spring:
       username: postgres
       password: postgres12345
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      use-key-prefix: true
+      key-prefix: prototype
+  redis:
+    host: 129.100.253.38
+    port: 6379
+    password: password
+    timeout: 10000
+  data:
+    mongodb:
+      uri: mongodb://129.100.253.41:27017/admin
+      database: admin
+      username: dbadmin
+      password: password
+      authentication-database: admin
+
+# rest api 사용시 호출될 서비스 정보
+resource:
+  common-prototype-sub-api:
+    url: http://common-prototype-sub-api.prototype.svc.cluster.local:8060
 
 gpring:
   application:
@@ -22,6 +47,7 @@ gpring:
 grpc:
   server:
     port: 8075
+    maxInboundMessageSize: 15MB
   client:
     common-prototype-sub-api:
       address: 'dns:///common-prototype-sub-api.prototype.svc.cluster.local:8065'
