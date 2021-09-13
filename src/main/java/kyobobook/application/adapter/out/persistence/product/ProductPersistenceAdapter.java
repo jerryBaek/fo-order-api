@@ -21,7 +21,6 @@ import org.springframework.stereotype.Repository;
 import kyobobook.application.adapter.out.persistence.product.entity.ProductEntity;
 import kyobobook.application.biz.common.port.out.CustomEventLogOutPort;
 import kyobobook.application.biz.product.port.out.ProductPersistencePort;
-import kyobobook.application.domain.product.Author;
 import kyobobook.application.domain.product.Product;
 
 /**
@@ -58,9 +57,6 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
                         .sbtt_name1(entity.getSbtt_name1())
                         .rlse_date(entity.getRlse_date())
                         .cmdt_code(entity.getCmdt_code())
-                        .autr_name1(entity.getAutr_name1())
-                        .autr_name2(entity.getAutr_name2())
-                        .autr_name3(entity.getAutr_name3())
                         .wncr_prce(entity.getWncr_prce())
                         .build();
                 products.add(product);
@@ -91,12 +87,6 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
                     .sbtt_name1(entity.getSbtt_name1())
                     .rlse_date(entity.getRlse_date())
                     .cmdt_code(entity.getCmdt_code())
-                    .autr_code1(entity.getAutr_code1())
-                    .autr_name1(entity.getAutr_name1())
-                    .autr_code2(entity.getAutr_code2())
-                    .autr_name2(entity.getAutr_name2())
-                    .autr_code3(entity.getAutr_code3())
-                    .autr_name3(entity.getAutr_name3())
                     .wncr_prce(entity.getWncr_prce())
                     .build();            
             customEventLogOtuPort.insertEventLog("### READER DB :: 상품 상세 조회 :: cmdt_id :: "+ cmdt_id);
@@ -119,19 +109,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
                 .sbtt_name1(product.getSbtt_name1())
                 .rlse_date(product.getRlse_date())
                 .cmdt_code(product.getCmdt_code())
-                .autr_code1(product.getAutr_code1())
-                .autr_name1(product.getAutr_name1())
-                .autr_code2(product.getAutr_code2())
-                .autr_name2(product.getAutr_name2())
-                .autr_code3(product.getAutr_code3())
-                .autr_name3(product.getAutr_name3())
                 .wncr_prce(product.getWncr_prce())
                 .build();
         
         try {
             
             productWriterMapper.insertProductCmdt(entity);
-            productWriterMapper.insertProductAutr(entity);
             productWriterMapper.insertProductPrce(entity);
             
             product.setCmdt_id(entity.getCmdt_id());
@@ -146,6 +129,46 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
         
         return product;
     }
+
+    @Override
+    public void updateProduct(Product product) throws Exception {
+        
+        ProductEntity entity = ProductEntity.builder()
+                .cmdt_id(product.getCmdt_id())
+                .cmdt_name(product.getCmdt_name())
+                .sbtt_name1(product.getSbtt_name1())
+                .rlse_date(product.getRlse_date())
+                .cmdt_code(product.getCmdt_code())
+                .wncr_prce(product.getWncr_prce())
+                .build();
+        
+        try {
+            
+            productWriterMapper.updateProductCmdt(entity);
+            productWriterMapper.updateProductPrce(entity);
+            
+            customEventLogOtuPort.insertEventLog("### WRITER DB :: 상품 변경 :: product :: " + product.toString());
+            
+        } catch(Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+        
+    }
+
+    @Override
+    public void deleteProduct(String cmdt_id) throws Exception {
+        
+        try {
+            productWriterMapper.deleteProductCmdt(cmdt_id);
+            productWriterMapper.deleteProductPrce(cmdt_id);
+            
+            customEventLogOtuPort.insertEventLog("### WRITER DB :: 상품 삭제 :: cmdt_id :: " + cmdt_id);
+        } catch(Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }    
     
     @Override
     public Product insertReaderDBProduct(Product product) throws Exception {
@@ -156,12 +179,6 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
                 .sbtt_name1(product.getSbtt_name1())
                 .rlse_date(product.getRlse_date())
                 .cmdt_code(product.getCmdt_code())
-                .autr_code1(product.getAutr_code1())
-                .autr_name1(product.getAutr_name1())
-                .autr_code2(product.getAutr_code2())
-                .autr_name2(product.getAutr_name2())
-                .autr_code3(product.getAutr_code3())
-                .autr_name3(product.getAutr_name3())
                 .wncr_prce(product.getWncr_prce())
                 .build();
         
@@ -183,76 +200,5 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
         return product;
     }
 
-    @Override
-    public void updateProduct(Product product) throws Exception {
-        
-        ProductEntity entity = ProductEntity.builder()
-                .cmdt_id(product.getCmdt_id())
-                .cmdt_name(product.getCmdt_name())
-                .sbtt_name1(product.getSbtt_name1())
-                .rlse_date(product.getRlse_date())
-                .cmdt_code(product.getCmdt_code())
-                .autr_code1(product.getAutr_code1())
-                .autr_name1(product.getAutr_name1())
-                .autr_code2(product.getAutr_code2())
-                .autr_name2(product.getAutr_name2())
-                .autr_code3(product.getAutr_code3())
-                .autr_name3(product.getAutr_name3())
-                .wncr_prce(product.getWncr_prce())
-                .build();
-        
-        try {
-            
-            productWriterMapper.updateProductCmdt(entity);
-            productWriterMapper.updateProductAutr(entity);
-            productWriterMapper.updateProductPrce(entity);
-            
-            customEventLogOtuPort.insertEventLog("### WRITER DB :: 상품 변경 :: product :: " + product.toString());
-            
-        } catch(Exception e) {
-            logger.error(e.getMessage());
-            throw e;
-        }
-        
-    }
-
-    @Override
-    public void deleteProduct(String cmdt_id) throws Exception {
-        
-        try {
-            productWriterMapper.deleteProductCmdt(cmdt_id);
-            productWriterMapper.deleteProductAutr(cmdt_id);
-            productWriterMapper.deleteProductPrce(cmdt_id);
-            
-            customEventLogOtuPort.insertEventLog("### WRITER DB :: 상품 삭제 :: cmdt_id :: " + cmdt_id);
-        } catch(Exception e) {
-            logger.error(e.getMessage());
-            throw e;
-        }
-    }
-
-    @Override
-    public List<Author> selectAuthors() throws Exception {
-        
-        List<Author> authors = new ArrayList<Author>();
-        
-        try {
-            
-            productReaderMapper.selectAuthors().stream().forEach(entity -> {
-                Author author = Author.builder()
-                        .autr_code(entity.getAutr_code())
-                        .autr_name(entity.getAutr_name())
-                        .build();
-                authors.add(author);
-            });
-            
-//            customEventLogPort.insertEventLog("READER DB :: 작가 조회 :: count :: " + authors.size());
-            
-        } catch(Exception e) {
-            logger.error(e.getMessage());
-            throw e;
-        }        
-        return authors;
-    }
 
 }

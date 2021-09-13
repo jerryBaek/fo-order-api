@@ -34,12 +34,5 @@ public class ProductEntity {
     private String rlse_date;
     private String cmdt_code;
     
-    private String autr_code1;
-    private String autr_name1;
-    private String autr_code2;
-    private String autr_name2;
-    private String autr_code3;
-    private String autr_name3;
-    
     private int wncr_prce;
 }

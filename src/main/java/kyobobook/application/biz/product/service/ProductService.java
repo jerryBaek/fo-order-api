@@ -12,17 +12,24 @@ package kyobobook.application.biz.product.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kyobobook.application.biz.product.port.in.ProductPort;
 import kyobobook.application.biz.product.port.out.ProductGrpcPort;
+import kyobobook.application.biz.product.port.out.ProductOutPort;
 import kyobobook.application.biz.product.port.out.ProductPersistencePort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.product.Product;
+import kyobobook.application.domain.product.ProductAuthor;
 import kyobobook.exception.BizRuntimeException;
 
 /**
@@ -34,6 +41,8 @@ import kyobobook.exception.BizRuntimeException;
  */
 @Service
 public class ProductService implements ProductPort {
+    
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     
     @Autowired
     @Qualifier("productPersistenceRepository")
@@ -48,6 +57,10 @@ public class ProductService implements ProductPort {
     ProductGrpcPort productGrpcPort;
     
     @Autowired
+    @Qualifier("restProductAdapter")
+    ProductOutPort productOutPort;
+    
+    @Autowired
     MessageSourceAccessor messageSource;
     
     @Override
@@ -58,11 +71,34 @@ public class ProductService implements ProductPort {
         try {
             
             List<Product> products = null;
+            
             if (cacheOption) {
                 products = productCachePersistencePort.selectProducts();
             } else {
                 products = productPersistencePort.selectProducts();
             }
+            
+            logger.debug("### selectProducts :: product-before :: {}", products.toString());
+            
+            String json = new ObjectMapper().writeValueAsString(productOutPort.selectProductAuthors().getData());
+            
+            ObjectMapper mapper = new ObjectMapper();
+            
+            List<ProductAuthor> productAuthors = mapper.readValue(json, new TypeReference<List<ProductAuthor>>() {});
+            
+            products.forEach(product -> {
+                
+                ProductAuthor productAuthor = productAuthors.stream()
+                        .filter(p -> p.getCmdt_id().equalsIgnoreCase(product.getCmdt_id())).findFirst().get();
+                product.setAutr_code1(productAuthor.getAutr_code1());
+                product.setAutr_name1(productAuthor.getAutr_name1());
+                product.setAutr_code2(productAuthor.getAutr_code2());
+                product.setAutr_name2(productAuthor.getAutr_name2());
+                product.setAutr_code3(productAuthor.getAutr_code3());
+                product.setAutr_name3(productAuthor.getAutr_name3());
+            });
+            
+            logger.debug("### selectProducts :: product-after :: {}", products.toString());
             
             responseMessage = ResponseMessage.builder()
                     .data(products)
@@ -92,6 +128,19 @@ public class ProductService implements ProductPort {
             } else {
                 product = productPersistencePort.getProduct(cmdt_id);
             }
+            
+            String json = new ObjectMapper().writeValueAsString(productOutPort.getProductAuthor(cmdt_id).getData());
+            
+            ObjectMapper mapper = new ObjectMapper();
+            
+            ProductAuthor productAuthor = mapper.readValue(json, ProductAuthor.class);
+            
+            product.setAutr_code1(productAuthor.getAutr_code1());
+            product.setAutr_name1(productAuthor.getAutr_name1());
+            product.setAutr_code2(productAuthor.getAutr_code2());
+            product.setAutr_name2(productAuthor.getAutr_name2());
+            product.setAutr_code3(productAuthor.getAutr_code3());
+            product.setAutr_name3(productAuthor.getAutr_name3());
             
             Product detail = productGrpcPort.getProductDetail(cmdt_id);
             
@@ -129,6 +178,18 @@ public class ProductService implements ProductPort {
                 }
             }
             
+            ProductAuthor productAuthor = ProductAuthor.builder()
+                    .cmdt_id(product.getCmdt_id())
+                    .autr_code1(product.getAutr_code1())
+                    .autr_name1(product.getAutr_name1())
+                    .autr_code2(product.getAutr_code2())
+                    .autr_name2(product.getAutr_name2())
+                    .autr_code3(product.getAutr_code3())
+                    .autr_name3(product.getAutr_name3())
+                    .build();
+            
+            productOutPort.insertProductAuthor(productAuthor);
+            
             productGrpcPort.insertProductDetail(product);
             
             responseMessage = ResponseMessage.builder()
@@ -156,6 +217,19 @@ public class ProductService implements ProductPort {
             } else {
                 productPersistencePort.updateProduct(product);
             }
+            
+            ProductAuthor productAuthor = ProductAuthor.builder()
+                    .cmdt_id(product.getCmdt_id())
+                    .autr_code1(product.getAutr_code1())
+                    .autr_name1(product.getAutr_name1())
+                    .autr_code2(product.getAutr_code2())
+                    .autr_name2(product.getAutr_name2())
+                    .autr_code3(product.getAutr_code3())
+                    .autr_name3(product.getAutr_name3())
+                    .build();
+            
+            productOutPort.updateProductAuthor(productAuthor);
+            
             productGrpcPort.updateProductDetail(product);
             
             responseMessage = ResponseMessage.builder()
@@ -184,6 +258,8 @@ public class ProductService implements ProductPort {
                 productPersistencePort.deleteProduct(cmdt_id);
             }
             
+            productOutPort.deleteProductAuthor(cmdt_id);
+            
             productGrpcPort.deleteProductDetail(cmdt_id);
             
             responseMessage = ResponseMessage.builder()
@@ -200,22 +276,9 @@ public class ProductService implements ProductPort {
     }
 
     @Override
-    public ResponseMessage selectAuthors() throws BizRuntimeException {
+    public ResponseMessage selectAuthors() {
         
-        ResponseMessage responseMessage = null;
-        
-        try {
-            responseMessage = ResponseMessage.builder()
-                    .data(productPersistencePort.selectAuthors())
-                    .statusCode(HttpStatus.OK.value())
-                    .resultMessage(messageSource.getMessage("common.process.complete"))
-                    .build();
-            
-        } catch(Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
-        }
-        
-        return responseMessage;
+        return productOutPort.selectAuthors();
         
     }
 }

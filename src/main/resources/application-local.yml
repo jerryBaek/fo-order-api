@@ -39,6 +39,8 @@ spring:
 resource:
   common-prototype-sub-api:
     url: http://localhost:8060
+  common-prototype-sub-author-api:
+    url: http://localhost:8090
     
 gpring:
   application:

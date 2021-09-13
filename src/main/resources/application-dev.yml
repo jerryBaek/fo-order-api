@@ -23,22 +23,24 @@ spring:
       use-key-prefix: true
       key-prefix: prototype
   redis:
-    host: 129.100.253.38
+    host: redis.prototype.svc.cluster.local
     port: 6379
-    password: password
+    password: 
     timeout: 10000
   data:
     mongodb:
-      uri: mongodb://129.100.253.41:27017/admin
+      uri: mongodb://mongo.prototype.svc.cluster.local/admin
       database: admin
-      username: dbadmin
-      password: password
+      username: aylee
+      password: dldkdud
       authentication-database: admin
 
 # rest api 사용시 호출될 서비스 정보
 resource:
   common-prototype-sub-api:
     url: http://common-prototype-sub-api.prototype.svc.cluster.local:8060
+  common-prototype-sub-author-api:
+    url: http://common-prototype-sub-author-api.prototype.svc.cluster.local:8090
 
 gpring:
   application:

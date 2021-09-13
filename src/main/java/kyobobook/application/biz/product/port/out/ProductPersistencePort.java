@@ -12,7 +12,6 @@ package kyobobook.application.biz.product.port.out;
 
 import java.util.List;
 
-import kyobobook.application.domain.product.Author;
 import kyobobook.application.domain.product.Product;
 
 /**
@@ -75,16 +74,6 @@ public interface ProductPersistencePort {
      * @throws Exception
      */
     void deleteProduct(String cmdt_id) throws Exception;
-
-    /**
-     * @Method      : selectAuthors
-     * @Date        : 2021. 8. 31.
-     * @author      : sykim@kyobobook.com
-     * @description : 저자 목록을 조회한다.
-     * @return
-     * @throws Exception
-     */
-    List<Author> selectAuthors() throws Exception;
     
     /**
      * @Method      : insertReaderDBProduct
