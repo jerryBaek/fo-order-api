@@ -23,9 +23,9 @@ spring:
       use-key-prefix: true
       key-prefix: prototype
   redis:
-    host: redis-auth.prototype.svc.cluster.local
+    host: aws-tst-rosa-redis-proto.agxotv.ng.0001.apn2.cache.amazonaws.com
     port: 6379
-    password: password
+    password: 
     timeout: 10000
   data:
     mongodb:
