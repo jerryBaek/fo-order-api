@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kyobobook.application.adapter.out.persistence.product.entity.ProductEntity;
@@ -35,14 +34,20 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     
     private static final Logger logger = LoggerFactory.getLogger(ProductPersistenceAdapter.class);
     
-    @Autowired
-    ProductWriterMapper productWriterMapper;
+    private final ProductWriterMapper productWriterMapper;
     
-    @Autowired
-    ProductReaderMapper productReaderMapper;
+    private final ProductReaderMapper productReaderMapper;
     
-    @Autowired
-    CustomEventLogOutPort customEventLogOtuPort;
+    private final CustomEventLogOutPort customEventLogOtuPort;
+    
+    public ProductPersistenceAdapter(ProductWriterMapper productWriterMapper
+            , ProductReaderMapper productReaderMapper
+            , CustomEventLogOutPort customEventLogOtuPort) {
+        
+        this.productWriterMapper = productWriterMapper;
+        this.productReaderMapper = productReaderMapper;
+        this.customEventLogOtuPort = customEventLogOtuPort;
+    }
 
     @Override
     public List<Product> selectProducts() throws Exception {

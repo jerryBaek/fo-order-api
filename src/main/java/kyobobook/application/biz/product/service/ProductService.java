@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -44,24 +43,28 @@ public class ProductService implements ProductPort {
     
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     
-    @Autowired
-    @Qualifier("productPersistenceRepository")
-    ProductPersistencePort productPersistencePort;
+    private final ProductPersistencePort productPersistencePort;
     
-    @Autowired
-    @Qualifier("productCachePersistenceRepository")
-    ProductPersistencePort productCachePersistencePort;
+    private final ProductPersistencePort productCachePersistencePort;
     
-    @Autowired
-    @Qualifier("grpcProductAdapter")
-    ProductGrpcPort productGrpcPort;
+    private final ProductGrpcPort productGrpcPort;
     
-    @Autowired
-    @Qualifier("restProductAdapter")
-    ProductOutPort productOutPort;
+    private final ProductOutPort productOutPort;
     
-    @Autowired
-    MessageSourceAccessor messageSource;
+    private final MessageSourceAccessor messageSource;
+    
+    public ProductService(@Qualifier("productPersistenceRepository") ProductPersistencePort productPersistencePort
+            , @Qualifier("productCachePersistenceRepository") ProductPersistencePort productCachePersistencePort
+            , @Qualifier("grpcProductAdapter") ProductGrpcPort productGrpcPort
+            , @Qualifier("restProductAdapter") ProductOutPort productOutPort
+            , MessageSourceAccessor messageSource) {
+        
+        this.productPersistencePort = productPersistencePort;
+        this.productCachePersistencePort = productCachePersistencePort;
+        this.productGrpcPort = productGrpcPort;
+        this.productOutPort = productOutPort;
+        this.messageSource = messageSource;
+    }
     
     @Override
     public ResponseMessage selectProducts(boolean cacheOption) throws BizRuntimeException {

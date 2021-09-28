@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -38,14 +37,21 @@ public class ProductCachePersistenceAdapter implements ProductPersistencePort {
     
     private static final Logger logger = LoggerFactory.getLogger(ProductCachePersistenceAdapter.class);
     
-    @Autowired
-    ProductWriterMapper productWriterMapper;
+    private final ProductWriterMapper productWriterMapper;
     
-    @Autowired
-    ProductReaderMapper productReaderMapper;
+    private final ProductReaderMapper productReaderMapper;
     
-    @Autowired
-    CustomEventLogOutPort customEventLogOtuPort;
+    private final CustomEventLogOutPort customEventLogOtuPort;
+    
+    public ProductCachePersistenceAdapter(ProductWriterMapper productWriterMapper
+            , ProductReaderMapper productReaderMapper
+            , CustomEventLogOutPort customEventLogOtuPort) {
+        
+        this.productWriterMapper = productWriterMapper;
+        this.productReaderMapper = productReaderMapper;
+        this.customEventLogOtuPort = customEventLogOtuPort;
+    }
+    
 
     @Override
     @Cacheable(value="products", key="#root.methodName")

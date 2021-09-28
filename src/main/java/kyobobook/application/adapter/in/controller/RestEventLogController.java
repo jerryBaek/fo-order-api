@@ -10,7 +10,6 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +35,12 @@ import kyobobook.application.domain.eventlog.EventLog;
 @RequestMapping("/log")
 public class RestEventLogController {
     
-    @Autowired
-    CustomEventLogPort customEventLogPort;
+    private final CustomEventLogPort customEventLogPort;
+    
+    public RestEventLogController(CustomEventLogPort customEventLogPort) {
+        
+        this.customEventLogPort = customEventLogPort;
+    }
 
     /**
      * @Method      : selectLogs

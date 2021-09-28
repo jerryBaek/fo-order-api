@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Sort;
@@ -51,11 +50,16 @@ public class CustomEventLogAdapter implements CustomEventLogOutPort {
     @Value("${spring.application.name}")
     public String applicationName;
     
-    @Autowired
-    MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
     
-    @Autowired
-    MessageSourceAccessor messageSource;
+    private final MessageSourceAccessor messageSource;
+    
+    public CustomEventLogAdapter(MongoTemplate mongoTemplate
+            , MessageSourceAccessor messageSource) {
+        
+        this.mongoTemplate = mongoTemplate;
+        this.messageSource = messageSource;
+    }
     
     @Override
     public ResponseMessage selectEventLogs() throws BizRuntimeException {
