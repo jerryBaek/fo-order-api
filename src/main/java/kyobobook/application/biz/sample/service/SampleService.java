@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import kyobobook.application.biz.sample.port.in.SamplePort;
-import kyobobook.application.biz.sample.port.out.SampleOutPort;
+import kyobobook.application.biz.sample.port.out.SampleRestOutPort;
 import kyobobook.application.biz.sample.port.out.SamplePersistencePort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
@@ -43,14 +43,14 @@ public class SampleService implements SamplePort {
     
     private final SamplePersistencePort sampleReaderPort;
     
-    private final SampleOutPort sampleOutPort;
+    private final SampleRestOutPort sampleOutPort;
     
     private final MessageSourceAccessor messageSource;
     
     public SampleService(@Qualifier("sampleWriterRepository") SamplePersistencePort sampleWriterPort
             , @Qualifier("sampleReaderRepository") SamplePersistencePort sampleReaderPort
 //            , @Qualifier("restSampleAdapter") SampleOutPort sampleOutPort
-          , @Qualifier("grpcSampleAdapter") SampleOutPort sampleOutPort
+          , @Qualifier("grpcSampleAdapter") SampleRestOutPort sampleOutPort
             , MessageSourceAccessor messageSource) {
         
         this.sampleWriterPort = sampleWriterPort;

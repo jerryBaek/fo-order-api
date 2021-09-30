@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import kyobobook.application.biz.sample.port.out.SampleOutPort;
+import kyobobook.application.biz.sample.port.out.SampleRestOutPort;
 import kyobobook.application.domain.sample.Sample;
 import kyobobook.exception.BizRuntimeException;
 import kyobobook.grpc.sample.ResponseResult;
@@ -35,7 +35,7 @@ import net.devh.boot.grpc.client.inject.GrpcClient;
  * @description :
  */
 @Service("grpcSampleAdapter")
-public class GrpcSampleOutAdapter implements SampleOutPort{
+public class GrpcSampleOutAdapter implements SampleRestOutPort{
     
     @GrpcClient("common-prototype-sub-api")
     private SampleGrpc.SampleBlockingStub sampleStub;

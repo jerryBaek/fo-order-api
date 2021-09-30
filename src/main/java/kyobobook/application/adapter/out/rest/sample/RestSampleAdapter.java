@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import kyobobook.application.biz.sample.port.out.SampleOutPort;
+import kyobobook.application.biz.sample.port.out.SampleRestOutPort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.sample.Sample;
 import kyobobook.exception.BizRuntimeException;
@@ -34,7 +34,7 @@ import kyobobook.utils.RestTemplateUtil;
  *                gRPC 대용으로 활용하기 위한 샘픔, port 는 동일한 포트를 사용한다.
  */
 @Service("restSampleAdapter")
-public class RestSampleAdapter implements SampleOutPort{
+public class RestSampleAdapter implements SampleRestOutPort{
     
     /**
      * common-prototype-sub-api 호출 url

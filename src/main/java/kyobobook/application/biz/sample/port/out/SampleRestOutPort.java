@@ -23,7 +23,7 @@ import kyobobook.exception.BizRuntimeException;
  * @author      : smlee1@kyobobook.com
  * @description : Service 에서 gRPC 통해 타 Api 와 통신하기 위한 Port
  */
-public interface SampleOutPort {
+public interface SampleRestOutPort {
 
     /**
      * @Method      : selectGrpcSample

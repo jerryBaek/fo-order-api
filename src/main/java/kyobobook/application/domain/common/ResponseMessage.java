@@ -10,8 +10,6 @@
  ****************************************************/
 package kyobobook.application.domain.common;
 
-import java.lang.reflect.Field;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;

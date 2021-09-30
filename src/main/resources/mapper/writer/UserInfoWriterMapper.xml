@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kyobobook.application.adapter.out.persistence.user.UserInfoWriterMapper">
+	
+    <!--
+        설명     : 회원 정보를 신규 등록한다
+        작성일자  : 2021. 09. 15.
+        작성자   : smlee1@kyobobook.com
+    -->
+	<insert id="insertUserInfo" parameterType="UserInfoEntity">
+		INSERT INTO /* UserInfoWriterMapper.insertUserInfo */
+		TB_USER_INFO (
+		    ID
+		    , NAME
+		    , EMAIL
+		    , PASSWORD
+		) VALUES (
+		    #{id}
+		    , #{name}
+		    , #{email}
+		    , #{password}
+		)
+	</insert>
+	
+	<!--
+        설명     : 회원 권한 정보를 신규 등록한다
+        작성일자  : 2021. 09. 15.
+        작성자   : smlee1@kyobobook.com
+    -->
+	<insert id="insertUserRole" parameterType="UserRoleEntity">
+	    INSERT INTO TB_USER_ROLE (
+	        ID
+	        , NAME
+	    ) VALUES(
+            #{id}
+            , #{name}	    
+	    )
+	</insert>
+</mapper>
+

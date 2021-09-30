@@ -10,7 +10,6 @@
  ****************************************************/
 package kyobobook.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,9 +27,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RestTemplateUtil {
 
-private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     
-    @Autowired
     public RestTemplateUtil(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
