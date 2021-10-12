@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kyobobook.application.adapter.out.persistence.batch.BatchWriterMapper">
+    
+    
+    <!--
+        설명     : TD_CMDT_ANNT 수정
+        작성일자  : 2021. 10. 07.
+        작성자   : sykim@kyobobook.com
+    -->
+    <update id="updateCmdtAnnt">
+        UPDATE /* BatchWriterMapper.updateCmdtAnnt */
+               TD_CMDT_ANNT
+           SET flag = 'N'
+         WHERE annt_dvsn_code in ('001','002')
+           AND flag = 'Y'
+    </update>
+
+    <!--
+        설명     : EST_KOR_ABSTRACT 삭제
+        작성일자  : 2021. 10. 07.
+        작성자   : sykim@kyobobook.com
+    -->
+    <delete id="deleteKorAbstract">
+        DELETE /* BatchWriterMapper.deleteKorAbstract */
+        FROM EST_KOR_ABSTRACT
+        WHERE 1=1
+    </delete>
+    
+    <!--
+        설명     : EST_ENG_ABSTRACT 삭제
+        작성일자  : 2021. 10. 07.
+        작성자   : sykim@kyobobook.com
+    -->
+    <delete id="deleteEngAbstract">
+        DELETE /* BatchWriterMapper.deleteEngAbstract */
+        FROM EST_ENG_ABSTRACT
+        WHERE 1=1
+    </delete>
+</mapper>
+

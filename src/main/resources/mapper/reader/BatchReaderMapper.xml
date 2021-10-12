@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kyobobook.application.adapter.out.persistence.batch.BatchReaderMapper">
+
+    <!--
+        설명     : 배치 건수 현황 조회
+        작성일자  : 2021. 10. 07.
+        작성자   : sykim@kyobobook.com
+    -->
+    <select id="selectBatchCount" resultType="BatchEntity">
+        SELECT /* BatchReaderMapper.selectBatchCount */
+            COUNT(barcode) as java_total_count
+            , COUNT(barcode) filter (where flag = 'Y') as completed_count
+            , COUNT(barcode) filter (where flag = 'N') as incomplete_count
+            , (select count(barcode) from EST_KOR_ABSTRACT) as kor_abstract_count
+            , (select count(barcode) from EST_ENG_ABSTRACT) as eng_abstract_count
+            , (select count(goodid) from bib_test) as python_total_count
+        FROM TD_CMDT_ANNT
+        WHERE annt_dvsn_code in ('001','002') 
+          AND amnd_dttm >= '2011-07-19 00:00:01'
+    </select>
+</mapper>
