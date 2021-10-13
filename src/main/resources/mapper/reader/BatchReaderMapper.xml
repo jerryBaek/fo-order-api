@@ -9,9 +9,9 @@
     -->
     <select id="selectBatchCount" resultType="BatchEntity">
         SELECT /* BatchReaderMapper.selectBatchCount */
-            COUNT(barcode) as java_total_count
-            , COUNT(barcode) filter (where flag = 'Y') as completed_count
-            , COUNT(barcode) filter (where flag = 'N') as incomplete_count
+            COUNT(distinct barcode) as java_total_count
+            , COUNT(distinct barcode) filter (where flag = 'Y') as completed_count
+            , COUNT(distinct barcode) filter (where flag = 'N') as incomplete_count
             , (select count(barcode) from EST_KOR_ABSTRACT) as kor_abstract_count
             , (select count(barcode) from EST_ENG_ABSTRACT) as eng_abstract_count
             , (select count(goodid) from bib_test) as python_total_count
