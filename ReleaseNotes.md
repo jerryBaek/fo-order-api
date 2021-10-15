@@ -1,5 +1,8 @@
 ## Release Notes
 ---
+### [ v1.2.0 ]
+##### Notices
+- TEC01-38 :: Redis 활용 SSO/SLO 프로토 타입 추가
 
 ### [ v1.1.0 ]
 ##### Notices
