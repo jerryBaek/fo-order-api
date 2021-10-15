@@ -34,6 +34,11 @@ public class BatchPersistenceAdapter implements BatchPersistencePort {
     
     private final BatchWriterMapper batchWriterMapper;
     
+    /**
+     * Constructor
+     * @param batchReaderMapper
+     * @param batchWriterMapper
+     */
     public BatchPersistenceAdapter(BatchReaderMapper batchReaderMapper
             , BatchWriterMapper batchWriterMapper) {
         this.batchReaderMapper = batchReaderMapper;

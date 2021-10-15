@@ -37,6 +37,10 @@ public class RestEventLogController {
     
     private final CustomEventLogPort customEventLogPort;
     
+    /**
+     * Constructor
+     * @param customEventLogPort
+     */
     public RestEventLogController(CustomEventLogPort customEventLogPort) {
         
         this.customEventLogPort = customEventLogPort;

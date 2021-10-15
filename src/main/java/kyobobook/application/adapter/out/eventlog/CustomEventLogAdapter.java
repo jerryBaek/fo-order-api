@@ -54,6 +54,11 @@ public class CustomEventLogAdapter implements CustomEventLogOutPort {
     
     private final MessageSourceAccessor messageSource;
     
+    /**
+     * Constructor
+     * @param mongoTemplate
+     * @param messageSource
+     */
     public CustomEventLogAdapter(MongoTemplate mongoTemplate
             , MessageSourceAccessor messageSource) {
         

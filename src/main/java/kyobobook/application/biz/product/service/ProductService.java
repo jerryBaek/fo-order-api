@@ -53,6 +53,14 @@ public class ProductService implements ProductPort {
     
     private final MessageSourceAccessor messageSource;
     
+    /**
+     * Constructor
+     * @param productPersistencePort
+     * @param productCachePersistencePort
+     * @param productGrpcPort
+     * @param productOutPort
+     * @param messageSource
+     */
     public ProductService(@Qualifier("productPersistenceRepository") ProductPersistencePort productPersistencePort
             , @Qualifier("productCachePersistenceRepository") ProductPersistencePort productCachePersistencePort
             , @Qualifier("grpcProductAdapter") ProductGrpcPort productGrpcPort

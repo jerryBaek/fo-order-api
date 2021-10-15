@@ -38,6 +38,11 @@ public class BatchService implements BatchInPort {
     
     private final MessageSourceAccessor messageSource;
     
+    /**
+     * Constructor
+     * @param batchPersistencePort
+     * @param messageSource
+     */
     public BatchService(@Qualifier("batchPersistenceRepository") BatchPersistencePort batchPersistencePort
             , MessageSourceAccessor messageSource) {
         this.batchPersistencePort = batchPersistencePort;

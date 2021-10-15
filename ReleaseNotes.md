@@ -1,5 +1,9 @@
 ## Release Notes
 ---
+### [ v1.3.0 ]
+##### Notices
+- TEC01-36 :: Knative 기반 배치 구축 프로토타입 추가
+
 ### [ v1.2.0 ]
 ##### Notices
 - TEC01-38 :: Redis 활용 SSO/SLO 프로토 타입 추가

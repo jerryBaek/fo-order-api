@@ -38,6 +38,10 @@ public class RestSampleBatchController {
     
     private final BatchInPort batchInPort;
     
+    /**
+     * Constructor
+     * @param batchInPort
+     */
     public RestSampleBatchController(BatchInPort batchInPort) {
         
         this.batchInPort = batchInPort;

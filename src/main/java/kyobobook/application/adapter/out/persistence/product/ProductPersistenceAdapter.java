@@ -40,6 +40,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     
     private final CustomEventLogOutPort customEventLogOtuPort;
     
+    /**
+     * Constructor
+     * @param productWriterMapper
+     * @param productReaderMapper
+     * @param customEventLogOtuPort
+     */
     public ProductPersistenceAdapter(ProductWriterMapper productWriterMapper
             , ProductReaderMapper productReaderMapper
             , CustomEventLogOutPort customEventLogOtuPort) {

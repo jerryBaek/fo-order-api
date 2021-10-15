@@ -48,6 +48,11 @@ public class RestSampleProductController {
     
     private final CustomEventLogPort customEventLogPort;
     
+    /**
+     * Constructor
+     * @param productPort
+     * @param customEventLogPort
+     */
     public RestSampleProductController(ProductPort productPort
             , CustomEventLogPort customEventLogPort) {
         

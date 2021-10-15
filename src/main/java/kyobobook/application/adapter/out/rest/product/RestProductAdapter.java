@@ -40,6 +40,10 @@ public class RestProductAdapter implements ProductOutPort {
     
     private final RestTemplateUtil restTemplateUtil;
     
+    /**
+     * Constructor
+     * @param restTemplateUtil
+     */
     public RestProductAdapter(RestTemplateUtil restTemplateUtil) {
         
         this.restTemplateUtil = restTemplateUtil;
