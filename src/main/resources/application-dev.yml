@@ -29,12 +29,16 @@ spring:
     timeout: 10000
   data:
     mongodb:
-      uri: mongodb://mongo.prototype.svc.cluster.local/admin
-      database: admin
-      username: aylee
-      password: dldkdud
+      uri: mongodb://aws-tst-rosa-docdb1-proto.cluster-cnfj3o94pok7.ap-northeast-2.docdb.amazonaws.com:27017
+      username: docdbuser
+      password: docdbuser12345
+      database: prototype
       authentication-database: admin
 
+documentdb:
+  ssl:
+    invalidHostNameAllowed: false
+    
 # rest api 사용시 호출될 서비스 정보
 resource:
   common-prototype-sub-api:

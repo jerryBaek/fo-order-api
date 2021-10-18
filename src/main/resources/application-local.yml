@@ -29,12 +29,16 @@ spring:
     timeout: 10000
   data:
     mongodb:
-      uri: mongodb://129.100.253.41:27017/admin
-      database: admin
-      username: dbadmin
-      password: password
+      uri: mongodb://localhost:27017
+      username: docdbuser
+      password: docdbuser12345
+      database: prototype
       authentication-database: admin
-      
+
+documentdb:
+  ssl:
+    invalidHostNameAllowed: true
+
 # rest api 사용시 호출될 서비스 정보
 resource:
   common-prototype-sub-api:

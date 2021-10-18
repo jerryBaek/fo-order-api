@@ -5,11 +5,13 @@
  * Revision History
  * Author                         Date          Description
  * --------------------------     ----------    ----------------------------------------
- * sykim@kyobobook.com      2021. 9. 2.
+ * sykim@kyobobook.com      2021. 9. 23.
  *
  ****************************************************/
 package kyobobook.config.eventlog;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -21,18 +23,21 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
+import com.mongodb.ReadPreference;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
 /**
  * @Project     : common-prototype-api
- * @FileName    : MongoDBConfig.java
- * @Date        : 2021. 9. 2.
+ * @FileName    : DocumentDBConfig.java
+ * @Date        : 2021. 9. 23.
  * @author      : sykim@kyobobook.com
  * @description : Document DB 설정
  */
 @Configuration
-public class MongoDBConfig extends AbstractMongoClientConfiguration  {
+public class DocumentDBConfig extends AbstractMongoClientConfiguration {
+    
+    private static final Logger logger = LoggerFactory.getLogger(DocumentDBConfig.class);
     
     @Value("${spring.data.mongodb.uri}")
     public String uri;
@@ -45,10 +50,14 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration  {
     
     @Value("${spring.data.mongodb.password}")
     public String password;
-
+    
+    @Value("${documentdb.ssl.invalidHostNameAllowed}")
+    public boolean invalidHostNameAllowed;
     
     @Override
     public MongoClient mongoClient() {
+        
+        logger.debug("DocumentDB :: configuration");
         
         ConnectionString connectionString = new ConnectionString(uri);
         MongoCredential credential = MongoCredential.createCredential(username, database, password.toCharArray());
@@ -56,14 +65,18 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration  {
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .credential(credential)
                 .applyConnectionString(connectionString)
+                .readPreference(ReadPreference.secondaryPreferred())
+                .retryWrites(false)
+                .applyToSslSettings(ssl -> {
+                    ssl.enabled(true).invalidHostNameAllowed(invalidHostNameAllowed);
+                })
                 .build();
-        
+                
         return MongoClients.create(mongoClientSettings);
     }
-
+    
     @Override
     protected String getDatabaseName() {
-        
         return database;
     }
     
@@ -73,7 +86,5 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration  {
         converter.setTypeMapper(new DefaultMongoTypeMapper(null));
         return super.mongoTemplate(databaseFactory, converter);
     }
-    
-    
 
 }
