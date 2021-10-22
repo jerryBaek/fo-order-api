@@ -3,18 +3,18 @@ server:
   
 spring:
   application:
-    name: common-prototype-api
+    name: fo-common-prototype-api
   writer:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/prototype
-      username: postgres
-      password: postgres12345
+      jdbc-url: ${WRITER_DATASOURCE_JDBC_URL}
+      username: ${WRITER_DATASOURCE_USERNAME}
+      password: ${WRITER_DATASOURCE_PASSWORD}
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   reader:
     datasource:
-      jdbc-url: jdbc:log4jdbc:postgresql://aws-tst-rosa-db1-proto.cluster-ro-cnfj3o94pok7.ap-northeast-2.rds.amazonaws.com:5432/prototype
-      username: postgres
-      password: postgres12345
+      jdbc-url: ${READER_DATASOURCE_JDBC_URL}
+      username: ${READER_DATASOURCE_USERNAME}
+      password: ${READER_DATASOURCE_PASSWORD}
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
   cache:
     type: redis
@@ -23,32 +23,32 @@ spring:
       use-key-prefix: true
       key-prefix: prototype
   redis:
-    host: redis-auth.prototype.svc.cluster.local
-    port: 6379
-    password: password
+    host: ${REDIS_CACHE_HOST}
+    port: ${REDIS_CACHE_PORT}
+    password: ${REDIS_CACHE_PASSWORD}
     timeout: 10000
   data:
     mongodb:
-      uri: mongodb://aws-tst-rosa-docdb1-proto.cluster-cnfj3o94pok7.ap-northeast-2.docdb.amazonaws.com:27017
-      username: docdbuser
-      password: docdbuser12345
-      database: prototype
-      authentication-database: admin
+      uri: ${DATA_MONGODB_URI}
+      username: ${DATA_MONGODB_USERNAME}
+      password: ${DATA_MONGODB_PASSWORD}
+      database: ${DATA_MONGODB_DATABASE}
+      authentication-database: ${DATA_MONGODB_AUTHENTICATION_DATABASE}
 
 documentdb:
   ssl:
-    invalidHostNameAllowed: false
+    invalidHostNameAllowed: ${DOCUMENTDB_SSL_INVALIDHOSTNAMEALLOWED}
 
 # rest api 사용시 호출될 서비스 정보
 resource:
   common-prototype-sub-api:
-    url: http://common-prototype-sub-api.prototype.svc.cluster.local:8060
+    url: ${COMMON_SUB_API_URL}
   common-prototype-sub-author-api:
-    url: http://common-prototype-sub-author-api.prototype.svc.cluster.local:8090
+    url: ${COMMON_SUB_AUTHOR_API_URL}
 
 gpring:
   application:
-    name: common-prototype-api
+    name: fo-common-prototype-api
     
 grpc:
   server:
@@ -56,7 +56,7 @@ grpc:
     maxInboundMessageSize: 15MB
   client:
     common-prototype-sub-api:
-      address: 'dns:///common-prototype-sub-api.prototype.svc.cluster.local:8065'
+      address: ${GRPC_CLIENT_COMMON_SUB_API_ADDRESS}
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
