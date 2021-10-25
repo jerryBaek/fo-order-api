@@ -54,10 +54,20 @@ public class DocumentDBConfig extends AbstractMongoClientConfiguration {
     @Value("${documentdb.ssl.invalidHostNameAllowed}")
     public boolean invalidHostNameAllowed;
     
+    @Value("${documentdb.ssl.trustStore}")
+    public String truststore;
+    
+    @Value("${documentdb.ssl.truststorePassword}")
+    public String truststorePassword;
+    
+    
     @Override
     public MongoClient mongoClient() {
         
         logger.debug("DocumentDB :: configuration");
+        
+        System.setProperty("javax.net.ssl.trustStore", truststore);
+        System.setProperty("javax.net.ssl.trustStorePassword", truststorePassword);
         
         ConnectionString connectionString = new ConnectionString(uri);
         MongoCredential credential = MongoCredential.createCredential(username, database, password.toCharArray());

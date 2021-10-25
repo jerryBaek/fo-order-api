@@ -38,6 +38,8 @@ spring:
 documentdb:
   ssl:
     invalidHostNameAllowed: ${DOCUMENTDB_SSL_INVALIDHOSTNAMEALLOWED}
+    trustStore: ${DOCUMENTDB_SSL_TRUSTSTORE}
+    truststorePassword: ${DOCUMENTDB_SSL_TRUSTSTOREPASSWORD}
 
 # rest api 사용시 호출될 서비스 정보
 resource:
