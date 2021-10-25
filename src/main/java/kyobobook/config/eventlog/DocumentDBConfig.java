@@ -72,7 +72,7 @@ public class DocumentDBConfig extends AbstractMongoClientConfiguration {
         
         logger.debug("DocumentDB :: configuration");
         
-        ClassPathResource pathResource = new ClassPathResource("certs/rds-truststore.jks");
+        ClassPathResource pathResource = new ClassPathResource(truststore);
         
         try {
             System.setProperty("javax.net.ssl.trustStore", pathResource.getFile().getAbsolutePath());
