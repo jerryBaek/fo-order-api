@@ -10,14 +10,10 @@
  ****************************************************/
 package kyobobook.config.eventlog;
 
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -64,23 +60,13 @@ public class DocumentDBConfig extends AbstractMongoClientConfiguration {
     @Value("${documentdb.ssl.truststorePassword}")
     public String truststorePassword;
     
-    @Autowired
-    ApplicationContext applicationContext;
     
     @Override
     public MongoClient mongoClient() {
         
         logger.debug("DocumentDB :: configuration");
         
-        ClassPathResource pathResource = new ClassPathResource(truststore);
-        
-        try {
-            System.setProperty("javax.net.ssl.trustStore", pathResource.getFile().getAbsolutePath());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-//        System.setProperty("javax.net.ssl.trustStore", truststore);
+        System.setProperty("javax.net.ssl.trustStore", truststore);
         System.setProperty("javax.net.ssl.trustStorePassword", truststorePassword);
         
         ConnectionString connectionString = new ConnectionString(uri);
