@@ -1,5 +1,5 @@
 server:
-  port: 8070
+  port: 8080
   
 spring:
   application:
@@ -54,7 +54,7 @@ gpring:
     
 grpc:
   server:
-    port: 8075
+    port: 8085
     maxInboundMessageSize: 15MB
   client:
     common-prototype-sub-api:
