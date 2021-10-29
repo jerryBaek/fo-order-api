@@ -1,7 +1,9 @@
 // for gRPC 
 buildscript {
     repositories {
-        mavenCentral()
+        maven{
+            url "$nexusURL"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.5")
@@ -21,7 +23,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    maven{
+        url "$nexusURL"
+    }
 }
 
 dependencies {
