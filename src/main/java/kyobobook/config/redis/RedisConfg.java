@@ -11,6 +11,7 @@
 package kyobobook.config.redis;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -24,6 +25,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
  * @author      : sykim@kyobobook.com
  * @description : Redis 접속 설정
  */
+@EnableCaching
 @Configuration
 public class RedisConfg {
     

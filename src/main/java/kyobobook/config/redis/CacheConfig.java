@@ -13,6 +13,7 @@ package kyobobook.config.redis;
 import java.time.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +34,18 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class CacheConfig {
     
-    @Autowired
-    RedisConnectionFactory redisConnectionFactory;
+    private final RedisConnectionFactory redisConnectionFactory;
+
+    @Value("${spring.cache.redis.time-to-live}")
+    public long ttl;
+    
+    /**
+     * Constructor
+     * @param redisConnectionFactory
+     */
+    public CacheConfig(RedisConnectionFactory redisConnectionFactory) {
+        this.redisConnectionFactory = redisConnectionFactory;
+    }
     
     @Bean
     public CacheManager redisCacheManager() {
@@ -42,7 +53,7 @@ public class CacheConfig {
                 .defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
-                .entryTtl(Duration.ofSeconds(60));
+                .entryTtl(Duration.ofSeconds(ttl));
         
         RedisCacheManager redisCacheManager = RedisCacheManager
                 .RedisCacheManagerBuilder

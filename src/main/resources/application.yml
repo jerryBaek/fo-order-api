@@ -19,9 +19,8 @@ spring:
   cache:
     type: redis
     redis:
-      cache-null-values: false
-      use-key-prefix: true
-      key-prefix: prototype
+      time-to-live: ${REDIS_CACHE_TTL}
+
   redis:
     host: ${REDIS_CACHE_HOST}
     port: ${REDIS_CACHE_PORT}
