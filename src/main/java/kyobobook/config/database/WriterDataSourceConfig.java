@@ -63,10 +63,7 @@ public class WriterDataSourceConfig {
         sqlSessionFactoryBean.setDataSource(writerDataSource);
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/writer/**/*Mapper.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("kyobobook.application.adapter.out.persistence.*.entity");
-        
-        Properties myBatisProperties = new Properties();
-        myBatisProperties.setProperty("mapUnderscoreToCamelCase", "true");
-        sqlSessionFactoryBean.setConfigurationProperties(myBatisProperties);
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
         
         return sqlSessionFactoryBean.getObject();
     }

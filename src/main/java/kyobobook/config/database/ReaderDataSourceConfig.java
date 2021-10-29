@@ -57,10 +57,7 @@ public class ReaderDataSourceConfig {
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/reader/**/*Mapper.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("kyobobook.application.adapter.out.persistence.*.entity");
         sqlSessionFactoryBean.setTransactionFactory(null);
-        
-        Properties myBatisProperties = new Properties();
-        myBatisProperties.setProperty("mapUnderscoreToCamelCase", "true");
-        sqlSessionFactoryBean.setConfigurationProperties(myBatisProperties);
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
         
         return sqlSessionFactoryBean.getObject();
     }
