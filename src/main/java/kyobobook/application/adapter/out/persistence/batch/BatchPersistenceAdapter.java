@@ -54,12 +54,12 @@ public class BatchPersistenceAdapter implements BatchPersistencePort {
             BatchEntity entity = batchReaderMapper.selectBatchCount();
             
             batch = Batch.builder()
-                    .java_total_count(entity.getJava_total_count())
-                    .completed_count(entity.getCompleted_count())
-                    .incomplete_count(entity.getIncomplete_count())
-                    .kor_abstract_count(entity.getKor_abstract_count())
-                    .eng_abstract_count(entity.getEng_abstract_count())
-                    .python_total_count(entity.getPython_total_count())
+                    .java_total_count(entity.getJavaTotalCount())
+                    .completed_count(entity.getCompletedCount())
+                    .incomplete_count(entity.getIncompleteCount())
+                    .kor_abstract_count(entity.getKorAbstractCount())
+                    .eng_abstract_count(entity.getEngAbstractCount())
+                    .python_total_count(entity.getPythonTotalCount())
                     .build();
             
         } catch(Exception e) {

@@ -28,11 +28,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductEntity {
     
-    private String cmdt_id;
-    private String cmdt_name;
-    private String sbtt_name1;
-    private String rlse_date;
-    private String cmdt_code;
+    private String cmdtId;
+    private String cmdtName;
+    private String sbttName1;
+    private String rlseDate;
+    private String cmdtCode;
     
-    private int wncr_prce;
+    private int wncrPrce;
 }

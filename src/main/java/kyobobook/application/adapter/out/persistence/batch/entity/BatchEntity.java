@@ -28,12 +28,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BatchEntity {
     
-    private String java_total_count;
-    private String completed_count;
-    private String incomplete_count;
-    private String kor_abstract_count;
-    private String eng_abstract_count;
+    private String javaTotalCount;
+    private String completedCount;
+    private String incompleteCount;
+    private String korAbstractCount;
+    private String engAbstractCount;
     
-    private String python_total_count;    
+    private String pythonTotalCount;    
 
 }

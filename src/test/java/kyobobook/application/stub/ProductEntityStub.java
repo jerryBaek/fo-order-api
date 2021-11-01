@@ -32,7 +32,7 @@ public class ProductEntityStub {
         
         String cmdt_id = StringUtils.hasText(id) ? id : "1111111100001";
         
-        ProductEntity productEntity = productEntities.stream().filter(p -> p.getCmdt_id().equalsIgnoreCase(cmdt_id)).findFirst().get();    
+        ProductEntity productEntity = productEntities.stream().filter(p -> p.getCmdtId().equalsIgnoreCase(cmdt_id)).findFirst().get();    
         
         return productEntity;
         
@@ -45,11 +45,11 @@ public class ProductEntityStub {
         for(int i = 1; i < 5 ; i++) {
             
             ProductEntity productEntity = ProductEntity.builder()
-                    .cmdt_id("111111110000" + i)
-                    .cmdt_name("ITEM-000" + i)
-                    .sbtt_name1("ITEM-SUB-000" + i)
-                    .rlse_date("20211001")
-                    .cmdt_code("222222220000" + i)
+                    .cmdtId("111111110000" + i)
+                    .cmdtName("ITEM-000" + i)
+                    .sbttName1("ITEM-SUB-000" + i)
+                    .rlseDate("20211001")
+                    .cmdtCode("222222220000" + i)
                     .build(); 
             
             productEntities.add(productEntity);

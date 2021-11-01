@@ -63,12 +63,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
         try {
             productReaderMapper.selectProducts().stream().forEach(entity -> {
                 Product product = Product.builder()
-                        .cmdt_id(entity.getCmdt_id())
-                        .cmdt_name(entity.getCmdt_name())
-                        .sbtt_name1(entity.getSbtt_name1())
-                        .rlse_date(entity.getRlse_date())
-                        .cmdt_code(entity.getCmdt_code())
-                        .wncr_prce(entity.getWncr_prce())
+                        .cmdt_id(entity.getCmdtId())
+                        .cmdt_name(entity.getCmdtName())
+                        .sbtt_name1(entity.getSbttName1())
+                        .rlse_date(entity.getRlseDate())
+                        .cmdt_code(entity.getCmdtCode())
+                        .wncr_prce(entity.getWncrPrce())
                         .build();
                 products.add(product);
             });
@@ -93,12 +93,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
             ProductEntity entity = productReaderMapper.getProduct(cmdt_id);
             
             product = Product.builder()
-                    .cmdt_id(entity.getCmdt_id())
-                    .cmdt_name(entity.getCmdt_name())
-                    .sbtt_name1(entity.getSbtt_name1())
-                    .rlse_date(entity.getRlse_date())
-                    .cmdt_code(entity.getCmdt_code())
-                    .wncr_prce(entity.getWncr_prce())
+                    .cmdt_id(entity.getCmdtId())
+                    .cmdt_name(entity.getCmdtName())
+                    .sbtt_name1(entity.getSbttName1())
+                    .rlse_date(entity.getRlseDate())
+                    .cmdt_code(entity.getCmdtCode())
+                    .wncr_prce(entity.getWncrPrce())
                     .build();            
             customEventLogOtuPort.insertEventLog("### READER DB :: 상품 상세 조회 :: cmdt_id :: "+ cmdt_id);
             
@@ -115,12 +115,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     public Product insertProduct(Product product) throws Exception {
         
         ProductEntity entity = ProductEntity.builder()
-                .cmdt_id(product.getCmdt_id())
-                .cmdt_name(product.getCmdt_name())
-                .sbtt_name1(product.getSbtt_name1())
-                .rlse_date(product.getRlse_date())
-                .cmdt_code(product.getCmdt_code())
-                .wncr_prce(product.getWncr_prce())
+                .cmdtId(product.getCmdt_id())
+                .cmdtName(product.getCmdt_name())
+                .sbttName1(product.getSbtt_name1())
+                .rlseDate(product.getRlse_date())
+                .cmdtCode(product.getCmdt_code())
+                .wncrPrce(product.getWncr_prce())
                 .build();
         
         try {
@@ -128,8 +128,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
             productWriterMapper.insertProductCmdt(entity);
             productWriterMapper.insertProductPrce(entity);
             
-            product.setCmdt_id(entity.getCmdt_id());
-            product.setCmdt_code(entity.getCmdt_code());
+            product.setCmdt_id(entity.getCmdtId());
+            product.setCmdt_code(entity.getCmdtCode());
             
             customEventLogOtuPort.insertEventLog("### WRITER DB :: 상품 등록 :: product :: " + product.toString());
             
@@ -145,12 +145,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     public void updateProduct(Product product) throws Exception {
         
         ProductEntity entity = ProductEntity.builder()
-                .cmdt_id(product.getCmdt_id())
-                .cmdt_name(product.getCmdt_name())
-                .sbtt_name1(product.getSbtt_name1())
-                .rlse_date(product.getRlse_date())
-                .cmdt_code(product.getCmdt_code())
-                .wncr_prce(product.getWncr_prce())
+                .cmdtId(product.getCmdt_id())
+                .cmdtName(product.getCmdt_name())
+                .sbttName1(product.getSbtt_name1())
+                .rlseDate(product.getRlse_date())
+                .cmdtCode(product.getCmdt_code())
+                .wncrPrce(product.getWncr_prce())
                 .build();
         
         try {
@@ -185,12 +185,12 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     public Product insertReaderDBProduct(Product product) throws Exception {
         
         ProductEntity entity = ProductEntity.builder()
-                .cmdt_id(product.getCmdt_id())
-                .cmdt_name(product.getCmdt_name())
-                .sbtt_name1(product.getSbtt_name1())
-                .rlse_date(product.getRlse_date())
-                .cmdt_code(product.getCmdt_code())
-                .wncr_prce(product.getWncr_prce())
+                .cmdtId(product.getCmdt_id())
+                .cmdtName(product.getCmdt_name())
+                .sbttName1(product.getSbtt_name1())
+                .rlseDate(product.getRlse_date())
+                .cmdtCode(product.getCmdt_code())
+                .wncrPrce(product.getWncr_prce())
                 .build();
         
         try {
@@ -199,8 +199,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
             productReaderMapper.insertProductAutr(entity);
             productReaderMapper.insertProductPrce(entity);
             
-            product.setCmdt_id(entity.getCmdt_id());
-            product.setCmdt_code(entity.getCmdt_code());
+            product.setCmdt_id(entity.getCmdtId());
+            product.setCmdt_code(entity.getCmdtCode());
             
         } catch(Exception e) {
             logger.error(e.getMessage());

@@ -28,6 +28,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthorEntity {
     
-    private String autr_code;
-    private String autr_name;
+    private String autrCode;
+    private String autrName;
 }

@@ -75,12 +75,12 @@ public class ProductStub {
         ProductEntityStub.getProductEntities().stream().forEach(entity -> {
             
             Product product = Product.builder()
-                    .cmdt_id(entity.getCmdt_id())
-                    .cmdt_name(entity.getCmdt_name())
-                    .sbtt_name1(entity.getSbtt_name1())
-                    .rlse_date(entity.getRlse_date())
-                    .cmdt_code(entity.getCmdt_code())
-                    .wncr_prce(entity.getWncr_prce())
+                    .cmdt_id(entity.getCmdtId())
+                    .cmdt_name(entity.getCmdtName())
+                    .sbtt_name1(entity.getSbttName1())
+                    .rlse_date(entity.getRlseDate())
+                    .cmdt_code(entity.getCmdtCode())
+                    .wncr_prce(entity.getWncrPrce())
                     .build();
             
             products.add(product);
