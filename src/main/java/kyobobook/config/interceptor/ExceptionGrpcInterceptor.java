@@ -19,7 +19,7 @@ import io.grpc.ServerInterceptor;
 import io.grpc.Status;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : ExceptionGrpcInterceptor.java
  * @Date        : 2021. 9. 8.
  * @author      : smlee1@kyobobook.com

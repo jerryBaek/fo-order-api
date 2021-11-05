@@ -11,7 +11,7 @@
 package kyobobook.exception;
 
 /**
- * @Project     : common-prototype-sub-api
+ * @Project     : fo-order-api
  * @FileName    : BizRuntimeException.java
  * @Date        : 2021. 9. 6.
  * @author      : smlee1@kyobobook.com

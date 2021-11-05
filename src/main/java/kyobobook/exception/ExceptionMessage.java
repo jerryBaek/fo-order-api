@@ -16,7 +16,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Project     : bo-prototype-ui
+ * @Project     : fo-order-api
  * @FileName    : ExceptionMessage.java
  * @Date        : 2021. 8. 24.
  * @author      : smlee1@kyobobook.com

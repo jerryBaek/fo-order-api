@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @Project     : common-prototype-sub-api
+ * @Project     : fo-order-api
  * @FileName    : ResponseResult.java
  * @Date        : 2021. 9. 6.
  * @author      : smlee1@kyobobook.com

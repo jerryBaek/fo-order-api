@@ -17,7 +17,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : MessageConfig.java
  * @Date        : 2021. 8. 17.
  * @author      : smlee1@kyobobook.com

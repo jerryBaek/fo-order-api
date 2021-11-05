@@ -30,7 +30,7 @@ import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : TransactionConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

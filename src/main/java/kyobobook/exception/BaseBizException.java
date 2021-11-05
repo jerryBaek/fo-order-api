@@ -11,7 +11,7 @@
 package kyobobook.exception;
 
 /**
- * @Project     : bo-prototype-ui
+ * @Project     : fo-order-api
  * @FileName    : BaseBizException.java
  * @Date        : 2021. 8. 24.
  * @author      : smlee1@kyobobook.com

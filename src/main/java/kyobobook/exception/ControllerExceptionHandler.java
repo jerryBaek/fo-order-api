@@ -21,7 +21,7 @@ import io.grpc.StatusRuntimeException;
 import kyobobook.application.domain.common.ResponseMessage;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : ControllerExceptionHandler.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

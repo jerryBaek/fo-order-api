@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : WriterDataSourceConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

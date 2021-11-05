@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import kyobobook.config.annotation.ReaderInterface;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : ReaderDataSourceConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

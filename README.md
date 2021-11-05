@@ -1,9 +1,9 @@
-## fo-common-prototype-api
+## fo-order-api
 ---
 
 ### 1. Overview
 
-이 프로젝트는 FO Common API Prototype 입니다.
+이 프로젝트는 FO 주문 API 입니다.
 
 ### 2. 개발 환경
 - Spring Boot 2.3.0

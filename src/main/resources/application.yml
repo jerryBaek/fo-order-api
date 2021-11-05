@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8070
   
 spring:
   application:
-    name: fo-common-prototype-api
+    name: fo-order-api
   writer:
     datasource:
       jdbc-url: ${WRITER_DATASOURCE_JDBC_URL}
@@ -42,21 +42,19 @@ documentdb:
 
 # rest api 사용시 호출될 서비스 정보
 resource:
-  common-prototype-sub-api:
+  common-order-api:
     url: ${COMMON_SUB_API_URL}
-  common-prototype-sub-author-api:
-    url: ${COMMON_SUB_AUTHOR_API_URL}
 
 gpring:
   application:
-    name: fo-common-prototype-api
+    name: fo-order-api
     
 grpc:
   server:
     port: 8085
     maxInboundMessageSize: 15MB
   client:
-    common-prototype-sub-api:
+    common-order-api:
       address: ${GRPC_CLIENT_COMMON_SUB_API_ADDRESS}
       enableKeepAlive: true
       keepAliveWithoutCalls: true

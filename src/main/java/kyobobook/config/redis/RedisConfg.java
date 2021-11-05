@@ -19,7 +19,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : RedisConfg.java
  * @Date        : 2021. 9. 2.
  * @author      : sykim@kyobobook.com

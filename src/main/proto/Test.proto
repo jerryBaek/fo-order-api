@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "kyobobook.grpc.test";
+option java_outer_classname = "TestProto";
+
+service Test {
+  rpc SelectData ( google.protobuf.Empty ) returns ( stream TestResponse ) {}
+  rpc GetData ( TestRequest ) returns ( TestResponse ) {}
+}
+
+message TestRequest {
+    string ordrId = 1;
+}
+
+message TestResponse {
+    string ordrId = 1;
+    string ordrDate = 2;
+    string ordrHms = 3;
+    string mmbrLgnId = 4;
+    string aordName = 5;
+    string aordPrtbTlnm = 6;
+    string aordIpAdrs = 7;
+    string adrs = 8;
+}

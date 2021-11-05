@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 import org.springframework.stereotype.Component;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : WriterInterface.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

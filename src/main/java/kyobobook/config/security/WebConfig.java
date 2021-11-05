@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : WebConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

@@ -28,7 +28,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : DocumentDBConfig.java
  * @Date        : 2021. 9. 23.
  * @author      : sykim@kyobobook.com

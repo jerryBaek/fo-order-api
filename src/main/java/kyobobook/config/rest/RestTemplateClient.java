@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : RestTemplateClient.java
  * @Date        : 2021. 8. 17.
  * @author      : smlee1@kyobobook.com

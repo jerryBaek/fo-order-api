@@ -22,7 +22,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : SwaggerConfig.java
  * @Date        : 2021. 8. 12.
  * @author      : smlee1@kyobobook.com

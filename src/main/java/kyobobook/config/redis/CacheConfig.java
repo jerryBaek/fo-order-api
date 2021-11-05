@@ -25,7 +25,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : CacheConfig.java
  * @Date        : 2021. 9. 2.
  * @author      : sykim@kyobobook.com

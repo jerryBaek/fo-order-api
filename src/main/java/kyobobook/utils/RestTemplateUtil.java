@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @Project     : common-prototype-api
+ * @Project     : fo-order-api
  * @FileName    : RestTemplateUtil.java
  * @Date        : 2021. 9. 6.
  * @author      : smlee1@kyobobook.com
