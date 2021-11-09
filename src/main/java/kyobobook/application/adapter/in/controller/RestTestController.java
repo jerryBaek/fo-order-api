@@ -32,10 +32,10 @@ import kyobobook.application.domain.common.ResponseMessage;
  */
 @Api(tags = "RestSampleController")
 @RestController
-@RequestMapping("/order/cart")
 public class RestTestController {
+    
     private static final Logger logger = LoggerFactory.getLogger(RestTestController.class);
-
+    
     @Autowired
     private TestPort testService;
 
@@ -47,7 +47,7 @@ public class RestTestController {
      * @return
      */
     @ApiOperation(value = "마스터 샘플 목록 조회", notes = "<b style='color: red;'>Master DataBase</b>의 샘풀테이블 전체 목록을 조회 합니다.")
-    @GetMapping(value = "/test/data/multiple")
+    @GetMapping(value = "/api/v1/order/cart/test/data/multiple")
     public ResponseMessage selectMultipleData() {
 
         logger.debug("================멀티 데이터 선택");
@@ -55,7 +55,7 @@ public class RestTestController {
         return testService.selectMultipleData();
     }
 
-    @GetMapping(value = "/test/data/non-multiple/{ordrId}")
+    @GetMapping(value = "/api/v1/order/cart/test/data/non-multiple/{ordrId}")
     public ResponseMessage selectMultipleData(@PathVariable String ordrId) {
 
         logger.debug("================단건 데이터 선택");
@@ -64,7 +64,7 @@ public class RestTestController {
     }
 
     @ApiOperation(value = "마스터 샘플 목록 조회", notes = "<b style='color: red;'>Master DataBase</b>의 샘풀테이블 전체 목록을 조회 합니다.")
-    @GetMapping(value = "/test/rpc/data/multiple")
+    @GetMapping(value = "/api/v1/order/cart/test/rpc/data/multiple")
     public ResponseMessage selectMultipleDataUsingRpc() {
 
         logger.debug("================GRPC 멀티 데이터 선택");
@@ -72,7 +72,7 @@ public class RestTestController {
         return testService.selectMultipleDataUsingRpc();
     }
 
-    @GetMapping(value = "/test/rpc/data/non-multiple/{ordrId}")
+    @GetMapping(value = "/api/v1/order/cart/test/rpc/data/non-multiple/{ordrId}")
     public ResponseMessage selectMultipleDataUsingRpc(@PathVariable String ordrId) {
 
         logger.debug("================GRPC 단건 데이터 선택");
