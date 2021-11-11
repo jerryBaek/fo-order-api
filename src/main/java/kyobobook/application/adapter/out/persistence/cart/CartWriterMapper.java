@@ -10,10 +10,7 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.cart;
 
-import java.util.List;
-
-import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
-import kyobobook.config.annotation.ReaderInterface;
+import kyobobook.config.annotation.WriterInterface;
 
 /**
  * @Project     : fo-order-api
@@ -22,7 +19,7 @@ import kyobobook.config.annotation.ReaderInterface;
  * @author      : kimsehoon@kyobobook.com
  * @description : 장바구니 읽기
  */
-@ReaderInterface
+@WriterInterface
 public interface CartWriterMapper {
     
 }
