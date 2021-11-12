@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.cart;
 
+import java.util.HashMap;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -21,5 +22,23 @@ import kyobobook.config.annotation.WriterInterface;
  */
 @WriterInterface
 public interface CartWriterMapper {
+
+    /**
+     * @Method      : updateCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 
+     * @param unfyCmdtId
+     */
+    int updateCartCheck(String unfyCmdtId);
+
+    /**
+     * @Method      : deleteCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 
+     * @param check
+     */
+    int deleteCartCheck(HashMap<String, Object> map);
     
 }

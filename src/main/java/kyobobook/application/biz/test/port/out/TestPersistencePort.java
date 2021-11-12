@@ -11,7 +11,7 @@
 package kyobobook.application.biz.test.port.out;
 
 import java.util.List;
-
+import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 
 /**
@@ -27,5 +27,9 @@ public interface TestPersistencePort {
     List<TestEntity> selectData() throws Exception;
 
     TestEntity getData(String seq) throws Exception;
+    
+    List<TestCart> selectCartList() throws Exception;
+    
+    TestCart updateCartCheck(String unfyCmdtId)throws Exception;
 
 }

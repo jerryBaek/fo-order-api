@@ -11,7 +11,7 @@
 package kyobobook.application.adapter.out.persistence.cart;
 
 import java.util.List;
-
+import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.config.annotation.ReaderInterface;
 
@@ -25,4 +25,12 @@ import kyobobook.config.annotation.ReaderInterface;
 @ReaderInterface
 public interface CartReaderMapper {
     
+    /**
+     * @Method      : selectCartList
+     * @Date        : 2021. 11. 9.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 
+     * @return
+     */
+    List<TestCart> selectCartList();
 }

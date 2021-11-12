@@ -10,6 +10,9 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.out;
 
+import java.util.List;
+import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
+
 /**
  * @Project     : fo-order-api
  * @FileName    : CartPersistencePort.java
@@ -19,4 +22,18 @@ package kyobobook.application.biz.cart.port.out;
  */
 public interface CartPersistencePort {
 
+    List<TestCart> selectCartList() throws Exception;
+    
+    TestCart updateCartCheck(String unfyCmdtId)throws Exception;
+
+    /**
+     * @Method      : deleteCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 상품삭제(상태변경)
+     * @param checkList
+     * @return
+     * @throws Exception 
+     */
+    TestCart deleteCartCheck(String checkList) throws Exception;
 }

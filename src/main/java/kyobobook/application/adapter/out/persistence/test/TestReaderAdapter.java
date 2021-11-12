@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.application.biz.test.port.out.TestPersistencePort;
 
@@ -34,6 +34,9 @@ public class TestReaderAdapter implements TestPersistencePort {
 
     @Autowired
     TestReaderMapper cartMapper;
+    
+    @Autowired
+    TestWriterMapper writerMapper;
 
     @Override
     public List<TestEntity> selectData() throws Exception {
@@ -59,6 +62,25 @@ public class TestReaderAdapter implements TestPersistencePort {
     @Override
     public TestEntity getData(String ordrId) throws Exception {
         return this.cartMapper.getData(ordrId);
+    }
+    
+    @Override
+    public List<TestCart> selectCartList() throws Exception {
+        
+        logger.debug("셀렉 데이라..");
+        logger.debug("캍으 매파 객첸 있능가? " + this.cartMapper);
+        List<TestCart> data = this.cartMapper.selectCartList();
+        logger.debug("다녀옴..몇갠가??" + data.size());
+        
+        return data;
+    }
+
+    @Override
+    public TestCart updateCartCheck(String unfyCmdtId) throws Exception {
+        this.writerMapper.updateCartCheck(unfyCmdtId);
+        TestCart cart = new TestCart();
+        cart.setResultMessage("업데이트 >>");
+        return cart;
     }
 
 }

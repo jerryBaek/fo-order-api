@@ -10,10 +10,7 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.test;
 
-import java.util.List;
-import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
-import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
-import kyobobook.config.annotation.ReaderInterface;
+import kyobobook.config.annotation.WriterInterface;
 
 /**
  * @Project : fo-order-api
@@ -22,22 +19,9 @@ import kyobobook.config.annotation.ReaderInterface;
  * @author : kimsehoon@kyobobook.com
  * @description :
  */
-@ReaderInterface
-public interface TestReaderMapper {
+@WriterInterface
+public interface TestWriterMapper {
     
-    List<TestEntity> selectData();
-    
-    TestEntity getData(String ordrId);
-
-    /**
-     * @Method      : selectCartList
-     * @Date        : 2021. 11. 9.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 
-     * @return
-     */
-    List<TestCart> selectCartList();
-
     /**
      * @Method      : updateCartCheck
      * @Date        : 2021. 11. 10.
@@ -46,6 +30,6 @@ public interface TestReaderMapper {
      * @param unfyCmdtId
      * @return
      */
-    //int updateCartCheck(String unfyCmdtId);
+    int updateCartCheck(String unfyCmdtId);
 
 }

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
+import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.application.biz.test.port.in.TestPort;
 import kyobobook.application.biz.test.port.out.TestOutPort;
@@ -123,6 +123,41 @@ public class TestService implements TestPort {
         }
         return responseMessage;
 
+    }
+
+    @Override
+    public ResponseMessage selectCartList() {
+        
+        ResponseMessage responseMessage = null;
+        
+        try {
+            logger.debug("reader port >> " + this.testReaderPort);
+            List<TestCart> returnData = this.testReaderPort.selectCartList();
+            logger.debug("data size >> " + returnData.size());
+            responseMessage = ResponseMessage.builder().data(returnData) // 조회
+                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+
+        } catch (Exception e) {
+            throw new BizRuntimeException("오류끄..");
+//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+        }
+        return responseMessage;
+    }
+
+    @Override
+    public ResponseMessage updateCartCheck(String unfyCmdtId) {
+        
+        ResponseMessage responseMessage = null;
+        
+        try {
+            responseMessage = ResponseMessage.builder().data(this.testReaderPort.updateCartCheck(unfyCmdtId)) 
+                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+
+        } catch (Exception e) {
+            throw new BizRuntimeException("오류끄..");
+//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+        }
+        return responseMessage;
     }
 
 }

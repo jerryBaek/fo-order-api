@@ -3,53 +3,31 @@
 <mapper namespace="kyobobook.application.adapter.out.persistence.cart.CartWriterMapper">
 	
 	<!--
-        설명     : 다건 조회
-        작성일자  : 2021. 10. 27.
-        작성자   : kimsehoon@kyobobook.com
+        설명     : 장바구니 체크박스 업데이트
+        작성일자  : 2021. 11. 11.
+        작성자   : seohee.ko@kyobobook.com
     -->
-	<select id="selectData" resultType="TestEntity">
-		SELECT /* CartReaderMapper.selectData */
-            ordr_id,            /* 주문아이디 */
-            ordr_date,
-            ordr_hms,
-            mmbr_lgn_id,
-            aord_name,
-            aord_prtb_tlnm,
-            aord_ip_adrs,
-            adrs,
-            crtr_id,
-            cret_dttm,
-            amnr_id,
-            amnd_dttm
-        FROM
-            DEV.TM_ORDR
-        LIMIT 10 OFFSET 0
-	</select>
-	
-	<!--
-        설명     : 단건 조회
-        작성일자  : 2021. 10. 27.
-        작성자   : kimsehoon@kyobobook.com
-    -->
-	<select id="getData" parameterType="java.lang.String" resultType="TestEntity">
-        SELECT /* CartReaderMapper.getData */
-            ordr_id,            /* 주문아이디 */
-		    ordr_date,
-		    ordr_hms,
-		    mmbr_lgn_id,
-		    aord_name,
-		    aord_prtb_tlnm,
-		    aord_ip_adrs,
-		    adrs,
-		    crtr_id,
-		    cret_dttm,
-		    amnr_id,
-		    amnd_dttm
-        FROM
-            DEV.TM_ORDR
-        WHERE
-            ORDR_ID = #{ordrId}
-	</select>
+	<update id="updateCartCheck" parameterType="java.lang.String">
+     UPDATE /* CartWriterMapper.updateCartStus */
+            DEV.TM_SPBK
+        SET CHEK_YS = DECODE(CHEK_YS,'Y','N','N','Y')
+      WHERE UNFY_CMDT_ID = #{unfyCmdtId}
+    </update>
 
+    <!--
+        설명     : 장바구니 상품삭제(상태변경)
+        작성일자  : 2021. 11. 11.
+        작성자   : seohee.ko@kyobobook.com
+    -->
+    
+    
+    <delete id="deleteCartCheck" parameterType="hashmap">
+     DELETE /* CartWriterMapper.deleteCartCheck */ 
+       FROM DEV.TM_SPBK 
+      WHERE UNFY_CMDT_ID IN 
+      <foreach collection="checkArr" item="check" open="(" close=")" separator=",">
+            #{check}
+      </foreach>
+    </delete>
 </mapper>
 

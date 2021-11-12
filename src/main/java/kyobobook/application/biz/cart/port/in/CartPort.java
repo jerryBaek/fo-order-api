@@ -10,6 +10,8 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.in;
 
+import kyobobook.application.domain.common.ResponseMessage;
+
 /**
  * @Project     : fo-order-api
  * @FileName    : CartPort.java
@@ -18,5 +20,34 @@ package kyobobook.application.biz.cart.port.in;
  * @description : 장바구니 포트
  */
 public interface CartPort {
+
+    /**
+     * @Method      : selectCartList
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 목록 조회
+     * @return
+     */
+    ResponseMessage selectCartList();
+
+    /**
+     * @Method      : updateCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 체크박스 업데이트
+     * @param unfyCmdtId
+     * @return
+     */
+    ResponseMessage updateCartCheck(String unfyCmdtId);
+
+    /**
+     * @Method      : deleteCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 상품삭제(상태변경)
+     * @param checkList
+     * @return
+     */
+    ResponseMessage deleteCartCheck(String checkList);
 
 }
