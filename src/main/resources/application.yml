@@ -46,7 +46,7 @@ gpring:
     
 grpc:
   server:
-    port: 8085
+    port: ${GRPC_SERVER_PORT}
     maxInboundMessageSize: 15MB
   client:
     common-order-api:

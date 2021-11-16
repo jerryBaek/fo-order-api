@@ -31,6 +31,7 @@ import kyobobook.application.domain.common.ResponseMessage;
  * @description : 샘플 Rest Api Controller
  */
 @Api(tags = "RestSampleController")
+@RequestMapping("/ord")
 @RestController
 public class RestTestController {
     
