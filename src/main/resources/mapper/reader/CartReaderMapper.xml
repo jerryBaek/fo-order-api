@@ -1,87 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.cart.CartReaderMapper">
-	
-	<!--
-        설명     : 다건 조회
-        작성일자  : 2021. 10. 27.
-        작성자   : kimsehoon@kyobobook.com
+
+    <!--
+        설명     : 장바구니 목록 조회(임시용)
+        작성일자  : 2021. 11. 11.
+        작성자   : seohee.ko@kyobobook.com
     -->
-	<select id="selectData" resultType="TestEntity">
-		SELECT /* CartReaderMapper.selectData */
-            ordr_id,            /* 주문아이디 */
-            ordr_date,
-            ordr_hms,
-            mmbr_lgn_id,
-            aord_name,
-            aord_prtb_tlnm,
-            aord_ip_adrs,
-            adrs,
-            crtr_id,
-            cret_dttm,
-            amnr_id,
-            amnd_dttm
+	<select id="selectCartList" resultType="TmSpbkEntity">
+        SELECT  /* CartWriterMapper-selectCartList,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
+        SPBK_ID,      SPBK_DVSN_CODE,     SPBK_KIND_CODE,   UNFY_CMDT_ID,   UNT_ITM_SRMB
+		,MEMNO,       TMPR_MMBR_NUM,      REQU_QNTT,        END_DTTM,       MMBR_YS
+		,FRBE_YS,     ORGL_UNFY_CMDT_ID,  CYCL_CODE,        DLVR_DW_CODE,   TTL_DLVR_NMTM
+		,CNRC_NMTM,   BRDR_BRAN_CODE,     LINK_DVSN_CODE,   JO_CODE,        SCTN_CODE
+		,CHEK_YS,     ADDT_ORDR_CNTT,     PRIN_CNTT,        CRTR_ID,        CRET_DTTM
+		,AMNR_ID,     AMND_DTTM
         FROM
-            DEV.TM_ORDR
-        LIMIT 10 OFFSET 0
-	</select>
-	
-	<!--
-        설명     : 단건 조회
-        작성일자  : 2021. 10. 27.
-        작성자   : kimsehoon@kyobobook.com
-    -->
-	<select id="getData" parameterType="java.lang.String" resultType="TestEntity">
-        SELECT /* CartReaderMapper.getData */
-            ordr_id,            /* 주문아이디 */
-		    ordr_date,
-		    ordr_hms,
-		    mmbr_lgn_id,
-		    aord_name,
-		    aord_prtb_tlnm,
-		    aord_ip_adrs,
-		    adrs,
-		    crtr_id,
-		    cret_dttm,
-		    amnr_id,
-		    amnd_dttm
-        FROM
-            DEV.TM_ORDR
-        WHERE
-            ORDR_ID = #{ordrId}
-	</select>
-	
-	<select id="selectCartList" resultType="TestCart">
-       SELECT /* CartReaderMapper.getCartList */
-              spbk_id
-            , spbk_dvsn_code
-            , spbk_kind_code
-            , unfy_cmdt_id
-            , unt_itm_srmb
-            , memno
-            , tmpr_mmbr_num
-            , requ_qntt
-            , end_dttm
-            , mmbr_ys
-            , frbe_ys
-            , orgl_unfy_cmdt_id
-            , cycl_code
-            , dlvr_dw_code
-            , ttl_dlvr_nmtm
-            , cnrc_nmtm
-            , brdr_bran_code
-            , link_dvsn_code
-            , jo_code
-            , sctn_code
-            , chek_ys
-            , addt_ordr_cntt
-            , prin_cntt
-            , crtr_id
-            , cret_dttm
-            , amnr_id
-            , amnd_dttm
-        FROM
-            DEV.TM_SPBK
+        DEV.TM_SPBK
         LIMIT 10 OFFSET 0
     </select>
 

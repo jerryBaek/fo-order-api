@@ -1,5 +1,5 @@
 server:
-  port: 8070
+  port: ${SERVER_PORT}
   
 spring:
   application:
@@ -39,11 +39,6 @@ documentdb:
     invalidHostNameAllowed: ${DOCUMENTDB_SSL_INVALIDHOSTNAMEALLOWED}
     trustStore: ${DOCUMENTDB_SSL_TRUSTSTORE}
     truststorePassword: ${DOCUMENTDB_SSL_TRUSTSTOREPASSWORD}
-
-# rest api 사용시 호출될 서비스 정보
-resource:
-  common-order-api:
-    url: ${COMMON_SUB_API_URL}
 
 gpring:
   application:

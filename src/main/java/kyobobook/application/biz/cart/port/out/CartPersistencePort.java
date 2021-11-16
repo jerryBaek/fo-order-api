@@ -11,7 +11,7 @@
 package kyobobook.application.biz.cart.port.out;
 
 import java.util.List;
-import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
+import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 
 /**
  * @Project     : fo-order-api
@@ -22,9 +22,10 @@ import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
  */
 public interface CartPersistencePort {
 
-    List<TestCart> selectCartList() throws Exception;
+    @Deprecated
+    List<TmSpbkEntity> selectCartList() throws Exception;
     
-    TestCart updateCartCheck(String unfyCmdtId)throws Exception;
+    Integer updateCartCheck(String unfyCmdtId)throws Exception;
 
     /**
      * @Method      : deleteCartCheck
@@ -35,5 +36,5 @@ public interface CartPersistencePort {
      * @return
      * @throws Exception 
      */
-    TestCart deleteCartCheck(String checkList) throws Exception;
+    Integer deleteCartCheck(String checkList) throws Exception;
 }

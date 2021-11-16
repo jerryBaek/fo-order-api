@@ -29,16 +29,16 @@ public interface TestPort {
 
     ResponseMessage selectNonMultipleDataUsingRpc(String ordrId);
     
-    ResponseMessage selectCartList();
-
-    /**
-     * @Method      : updateCartCheck
-     * @Date        : 2021. 11. 10.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 
-     * @param unfyCmdtId
-     * @return
-     */
-    ResponseMessage updateCartCheck(String unfyCmdtId);
+//    ResponseMessage selectCartList();
+//
+//    /**
+//     * @Method      : updateCartCheck
+//     * @Date        : 2021. 11. 10.
+//     * @author      : seohee.ko@kyobobook.com
+//     * @description : 
+//     * @param unfyCmdtId
+//     * @return
+//     */
+//    ResponseMessage updateCartCheck(String unfyCmdtId);
 
 }

@@ -11,7 +11,7 @@
 package kyobobook.application.adapter.out.persistence.test;
 
 import java.util.List;
-import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
+import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.config.annotation.ReaderInterface;
 
@@ -36,7 +36,7 @@ public interface TestReaderMapper {
      * @description : 
      * @return
      */
-    List<TestCart> selectCartList();
+    List<TmSpbkEntity> selectCartList();
 
     /**
      * @Method      : updateCartCheck

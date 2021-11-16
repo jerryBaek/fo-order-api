@@ -28,6 +28,7 @@ public interface CartPort {
      * @description : 장바구니 목록 조회
      * @return
      */
+    @Deprecated
     ResponseMessage selectCartList();
 
     /**

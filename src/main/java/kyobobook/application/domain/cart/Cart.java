@@ -8,7 +8,7 @@
  * seohee.ko@kyobobook.com      2021. 11. 9.
  *
  ****************************************************/
-package kyobobook.application.adapter.out.persistence.test.entity;
+package kyobobook.application.domain.cart;
 
 import java.time.LocalDateTime;
 import kyobobook.application.domain.common.ResponseMessage;
@@ -22,13 +22,13 @@ import lombok.experimental.SuperBuilder;
  * @FileName    : TestCart.java
  * @Date        : 2021. 11. 9.
  * @author      : seohee.ko@kyobobook.com
- * @description :
+ * @description : 장바구니 객체
  */
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestCart extends ResponseMessage {
+public class Cart {
     
     private String spbkId;
     private String spbkDvsnCode;
@@ -57,4 +57,5 @@ public class TestCart extends ResponseMessage {
     private LocalDateTime cretDttm;
     private String amnrId;
     private LocalDateTime amndDttm;
+    
 }

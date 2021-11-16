@@ -8,10 +8,10 @@
         작성자   : seohee.ko@kyobobook.com
     -->
 	<update id="updateCartCheck" parameterType="java.lang.String">
-     UPDATE /* CartWriterMapper.updateCartStus */
-            DEV.TM_SPBK
-        SET CHEK_YS = DECODE(CHEK_YS,'Y','N','N','Y')
-      WHERE UNFY_CMDT_ID = #{unfyCmdtId}
+        UPDATE  /* CartWriterMapper-updateCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
+        DEV.TM_SPBK
+           SET  CHEK_YS      = DECODE(CHEK_YS,'Y','N','N','Y')
+         WHERE  UNFY_CMDT_ID = #{unfyCmdtId}
     </update>
 
     <!--
@@ -19,15 +19,11 @@
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
-    
-    
     <delete id="deleteCartCheck" parameterType="hashmap">
-     DELETE /* CartWriterMapper.deleteCartCheck */ 
-       FROM DEV.TM_SPBK 
-      WHERE UNFY_CMDT_ID IN 
-      <foreach collection="checkArr" item="check" open="(" close=")" separator=",">
-            #{check}
-      </foreach>
+        DELETE  /* CartWriterMapper-deleteCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */ 
+          FROM  DEV.TM_SPBK
+         WHERE  UNFY_CMDT_ID IN <foreach collection="checkArr" item="check" open="(" close=")" separator=",">#{check}</foreach>
     </delete>
+    
 </mapper>
 

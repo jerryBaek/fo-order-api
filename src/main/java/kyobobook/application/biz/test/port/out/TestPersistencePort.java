@@ -11,7 +11,7 @@
 package kyobobook.application.biz.test.port.out;
 
 import java.util.List;
-import kyobobook.application.adapter.out.persistence.test.entity.TestCart;
+import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 
 /**
@@ -24,12 +24,25 @@ import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
  */
 public interface TestPersistencePort {
 
+    /**
+     * @Method      : selectData
+     * @Date        : 2021. 11. 15.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 테스트 목록 조회
+     * @return
+     * @throws Exception
+     */
     List<TestEntity> selectData() throws Exception;
 
+    /**
+     * @Method      : getData
+     * @Date        : 2021. 11. 15.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 테스트 단건 조회
+     * @param seq
+     * @return
+     * @throws Exception
+     */
     TestEntity getData(String seq) throws Exception;
     
-    List<TestCart> selectCartList() throws Exception;
-    
-    TestCart updateCartCheck(String unfyCmdtId)throws Exception;
-
 }

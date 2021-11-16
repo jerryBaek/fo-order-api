@@ -30,7 +30,7 @@ public interface CartWriterMapper {
      * @description : 
      * @param unfyCmdtId
      */
-    int updateCartCheck(String unfyCmdtId);
+    Integer updateCartCheck(String unfyCmdtId);
 
     /**
      * @Method      : deleteCartCheck
@@ -39,6 +39,6 @@ public interface CartWriterMapper {
      * @description : 
      * @param check
      */
-    int deleteCartCheck(HashMap<String, Object> map);
+    Integer deleteCartCheck(HashMap<String, Object> map);
     
 }
