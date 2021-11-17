@@ -35,11 +35,10 @@
             ordr_id,            /* 주문아이디 */
 		    ordr_date,
 		    ordr_hms,
-		    mmbr_lgn_id,
+		    memno,
 		    aord_name,
 		    aord_prtb_tlnm,
 		    aord_ip_adrs,
-		    adrs,
 		    crtr_id,
 		    cret_dttm,
 		    amnr_id,
