@@ -19,7 +19,7 @@
 		                SELECT
 		                A.ORDR_DATE, A.ORDR_ID, A.ORDR_SRMB, A.MEMNO
 		                FROM
-		                DEV.TM_ORDR A
+		                EOS.TM_ORDR A
 		                WHERE  A.MEMNO = '62210667167'
 		                  AND  A.ORDR_DATE >= TO_CHAR(NOW() + '-1 year', 'YYYYMMDD')
 		                  AND  A.ORDR_DVSN_CODE IN ('100','210')                /* 100:주문, 210:반품취소 */
@@ -27,16 +27,16 @@
 		                ORDER BY A.ORDR_DATE DESC
 		                LIMIT 1000
 		            ) A
-		            INNER JOIN DEV.TD_ORDR_CMDT B ON
+		            INNER JOIN EOS.TD_ORDR_CMDT B ON
 		            A.ORDR_ID = B.ORDR_ID AND A.ORDR_SRMB = B.ORDR_SRMB
-		            INNER JOIN DEV.TM_SPBK C ON
+		            INNER JOIN EOS.TM_SPBK C ON
 		            A.MEMNO = C.MEMNO AND B.UNFY_CMDT_ID = C.UNFY_CMDT_ID       /* exists로 되어있던 것을 join으로 변경 */
 		        WHERE
 		            NOT EXISTS (
 		              SELECT
 		                  1
 		              FROM
-		                  DEV.TD_ORDR_CMDT Z
+		                  EOS.TD_ORDR_CMDT Z
 		              WHERE  Z.ORDR_ID = B.ORDR_ID
 		                AND Z.ORDR_SRMB > 1
 		                AND Z.ORDR_CMDT_SRMB = B.ORDR_CMDT_SRMB
@@ -48,12 +48,12 @@
 		        SELECT
 		        A.SALEYMD, COALESCE(D.UNFY_CMDT_ID, '') AS UNFY_CMDT_ID, COALESCE(D.ONLN_CMDT_DVSN_CODE, B.BOOKGB, '') AS ONLN_CMDT_DVSN_CODE, /* null일 리가 없을텐디 */ B.CNT - COALESCE(C.CNT, 0) AS ORDER_QTY
 		        FROM
-		        DEV.CTI_SL00 A
-		        INNER JOIN DEV.CTI_SL01 B ON
+		        EOS.CTI_SL00 A
+		        INNER JOIN EOS.CTI_SL01 B ON
 		        A.SALEYMD = B.SALEYMD AND A.ORDERNO = B.ORDERNO AND A.SENDSEQ = B.SENDSEQ AND A.GB = B.GB AND A.SALEYMD >= TO_CHAR(NOW() + '-1 year', 'YYYYMMDD') AND A.SALEYMD &lt;= TO_CHAR(NOW(), 'YYYYMMDD') AND A.MEMNO = '62210667167' AND A.GB IN ('101', '102')   /* 101:인터넷구매, 102:매장구매 */
-		        LEFT OUTER JOIN DEV.CTI_SL01 C ON
+		        LEFT OUTER JOIN EOS.CTI_SL01 C ON
 		        B.SALEYMD = C.SALEYMD AND B.ORDERNO = C.ORDERNO AND B.SENDSEQ = C.SENDSEQ AND B.BARCODE = C.BARCODE AND B.BOOKGB = C.BOOKGB AND C.GB IN ('103','104') /* gb코드 확인안됨 */
-		        LEFT OUTER JOIN DEV.TM_UNFY_CMDT D ON
+		        LEFT OUTER JOIN EOS.TM_UNFY_CMDT D ON
 		        B.BARCODE = D.CMDT_CODE AND B.BOOKGB = D.ONLN_CMDT_DVSN_CODE
 		    )
 	</select>

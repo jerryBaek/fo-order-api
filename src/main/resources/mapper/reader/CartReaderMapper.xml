@@ -16,7 +16,7 @@
 		,CHEK_YS,     ADDT_ORDR_CNTT,     PRIN_CNTT,        CRTR_ID,        CRET_DTTM
 		,AMNR_ID,     AMND_DTTM
         FROM
-        DEV.TM_SPBK
+        EOS.TM_SPBK
         LIMIT 10 OFFSET 0
     </select>
 

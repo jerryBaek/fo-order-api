@@ -21,7 +21,7 @@
             amnr_id,
             amnd_dttm
         FROM
-            DEV.TM_ORDR
+            EOS.TM_ORDR
         LIMIT 10 OFFSET 0
 	</select>
 	
