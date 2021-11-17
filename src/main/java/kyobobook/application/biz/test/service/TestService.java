@@ -46,7 +46,7 @@ public class TestService implements TestPort {
     private TestPersistencePort testReaderPort;
 
     @Autowired
-    @Qualifier("grpcTestAdapter")
+    @Qualifier("grpcTestOutAdapter")
     private TestOutPort testOutPort;
 
 //    private final MessageSourceAccessor messageSource;

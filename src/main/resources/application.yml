@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT}
+  port: 8080
   
 spring:
   application:
@@ -46,11 +46,11 @@ gpring:
     
 grpc:
   server:
-    port: ${GRPC_SERVER_PORT}
+    port: 8085
     maxInboundMessageSize: 15MB
   client:
     common-order-api:
-      address: ${GRPC_CLIENT_COMMON_SUB_API_ADDRESS}
+      address: ${GRPC_CLIENT_COMMON_ORDER_API_ADDRESS}
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext

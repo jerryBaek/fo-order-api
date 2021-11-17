@@ -29,7 +29,7 @@ import net.devh.boot.grpc.client.inject.GrpcClient;
  * @author      : kimsehoon@kyobobook.com
  * @description :
  */
-@Service("grpcTestAdapter")
+@Service("grpcTestOutAdapter")
 public class GrpcTestOutAdapter implements TestOutPort {
 
     @GrpcClient("common-order-api")
