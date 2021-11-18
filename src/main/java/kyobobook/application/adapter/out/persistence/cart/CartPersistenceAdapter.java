@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.biz.cart.port.out.CartPersistencePort;
+import kyobobook.application.domain.cart.Cart;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -44,21 +45,28 @@ public class CartPersistenceAdapter implements CartPersistencePort {
         List<TmSpbkEntity> data = this.reader.selectCartList();
         
         return data;
+        
     }
 
     @Override
     public Integer updateCartCheck(String unfyCmdtId) throws Exception {
+        
         return this.writer.updateCartCheck(unfyCmdtId);
+        
     }
 
     @Override
-    public Integer deleteCartCheck(String checkList) throws Exception{
-        String[] checkArr = checkList.split(",");
+    public Integer deleteProduct(String unfyCmdtId) throws Exception {
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("checkArr",checkArr);
+        return this.writer.deleteProduct(unfyCmdtId);
         
-        return this.writer.deleteCartCheck(map);
+    }
+    
+    @Override
+    public Integer deleteProducts(String memno) throws Exception {
+
+        return this.writer.deleteProducts(memno);
+        
     }
 
 }

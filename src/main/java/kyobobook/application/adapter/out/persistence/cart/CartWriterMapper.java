@@ -10,7 +10,8 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.cart;
 
-import java.util.HashMap;
+import java.util.List;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -33,12 +34,21 @@ public interface CartWriterMapper {
     Integer updateCartCheck(String unfyCmdtId);
 
     /**
-     * @Method      : deleteCartCheck
+     * @Method      : deleteProduct
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 
-     * @param check
+     * @description : 장바구니 내 상품을 삭제
+     * @param unfyCmdtId
      */
-    Integer deleteCartCheck(HashMap<String, Object> map);
+    Integer deleteProduct(String unfyCmdtId);
+    
+    /**
+     * @Method      : deleteProducts
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 내 상품을 삭제
+     * @param unfyCmdtId
+     */
+    Integer deleteProducts(String memno);
     
 }

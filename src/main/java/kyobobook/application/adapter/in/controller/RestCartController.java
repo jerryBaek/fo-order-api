@@ -10,16 +10,20 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.cart.port.in.CartPort;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,25 +76,40 @@ public class RestCartController {
         
         log.debug("================체크박스 업데이트");
         
-        return  cartService.updateCartCheck(unfyCmdtId);
+        return this.cartService.updateCartCheck(unfyCmdtId);
     }
     
     /**
-     * @Method      : deleteCartCheck
+     * @Method      : removeProduct
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
      * @param checkList
      * @return
      */
-    @ApiOperation(value = "장바구니 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
-    @ApiImplicitParam(name = "checkList", value = "통합상품번호목록", required = true, dataType = "string", paramType = "path", defaultValue = "C20000000B54B,C300000038753")
-    @GetMapping(value = "/api/v1/order/cart/data/deleteCartCheck/{checkList}")
-    public ResponseMessage deleteCartCheck(@PathVariable String checkList) {
+    @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
+    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string", paramType = "path", defaultValue = "111111")
+    @DeleteMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
+    public ResponseMessage removeProduct(@PathVariable String unfyCmdtId) {
         
-        log.debug("================체크리스트 삭제");
-       
-        return  cartService.deleteCartCheck(checkList);
+        return this.cartService.removeProduct(unfyCmdtId);
+        
+    }
+    
+    /**
+     * @Method      : removeProducts
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 상품삭제(상태변경)
+     * @param checkList
+     * @return
+     */
+    @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
+    @DeleteMapping(value = "/api/v1/order/cart/products")
+    public ResponseMessage removeProducts() {
+        
+        return this.cartService.removeProducts();
+        
     }
     
 }

@@ -19,10 +19,21 @@
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <delete id="deleteCartCheck" parameterType="hashmap">
+    <delete id="deleteProduct" parameterType="java.lang.String">
         DELETE  /* CartWriterMapper-deleteCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */ 
-          FROM  DEV.TM_SPBK
-         WHERE  UNFY_CMDT_ID IN <foreach collection="checkArr" item="check" open="(" close=")" separator=",">#{check}</foreach>
+          FROM  dev.tm_spbk
+         WHERE  unfy_cmdt_id = #{ unfyCmdtId, jdbcType=VARCHAR }
+    </delete>
+    
+    <!--
+        설명     : 장바구니 상품 전체 삭제(상태변경)
+        작성일자  : 2021. 11. 11.
+        작성자   : seohee.ko@kyobobook.com
+    -->
+    <delete id="deleteProducts" parameterType="java.lang.String">
+        DELETE  /* CartWriterMapper-deleteCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */ 
+          FROM  dev.tm_spbk
+         WHERE  memno = #{ memno, jdbcType=VARCHAR }
     </delete>
     
 </mapper>

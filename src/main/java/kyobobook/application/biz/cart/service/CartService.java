@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.biz.cart.port.in.CartPort;
 import kyobobook.application.biz.cart.port.out.CartPersistencePort;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
@@ -82,20 +83,52 @@ public class CartService implements CartPort {
     }
 
     @Override
-    public ResponseMessage deleteCartCheck(String checkList) {
+    public ResponseMessage removeProduct(String unfyCmdtId) {
+        
         ResponseMessage responseMessage = null;
         
         try {
+            
             responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.deleteCartCheck(checkList)) 
+                    .data(this.cartRepository.deleteProduct(unfyCmdtId)) 
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage("common.process.complete"))
                     .build();
 
         } catch (Exception e) {
+            
             throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            
         }
+        
         return responseMessage;
+        
+    }
+    
+    @Override
+    public ResponseMessage removeProducts() {
+        
+        ResponseMessage responseMessage = null;
+        
+        // TODO 회원세션에서 정보 얻어와야 함
+        String memno = "asdfasdfasd";
+        
+        try {
+            
+            responseMessage = ResponseMessage.builder()
+                    .data(this.cartRepository.deleteProduct(memno)) 
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
+                    .build();
+            
+        } catch (Exception e) {
+            
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            
+        }
+        
+        return responseMessage;
+        
     }
 
 }

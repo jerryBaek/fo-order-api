@@ -42,13 +42,22 @@ public interface CartPort {
     ResponseMessage updateCartCheck(String unfyCmdtId);
 
     /**
-     * @Method      : deleteCartCheck
+     * @Method      : removeProduct
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
-     * @param checkList
+     * @param unfyCmdtId
      * @return
      */
-    ResponseMessage deleteCartCheck(String checkList);
+    ResponseMessage removeProduct(String unfyCmdtId);
+    
+    /**
+     * @Method      : removeProducts
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 상품삭제(상태변경)
+     * @return
+     */
+    ResponseMessage removeProducts();
 
 }

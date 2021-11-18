@@ -12,6 +12,7 @@ package kyobobook.application.biz.cart.port.out;
 
 import java.util.List;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
+import kyobobook.application.domain.cart.Cart;
 
 /**
  * @Project     : fo-order-api
@@ -32,9 +33,21 @@ public interface CartPersistencePort {
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
-     * @param checkList
+     * @param unfyCmdtId
      * @return
      * @throws Exception 
      */
-    Integer deleteCartCheck(String checkList) throws Exception;
+    Integer deleteProduct(String unfyCmdtId) throws Exception;
+    
+    /**
+     * @Method      : deleteProducts
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 상품삭제(상태변경)
+     * @param memno
+     * @return
+     * @throws Exception 
+     */
+    Integer deleteProducts(String memno) throws Exception;
+    
 }
