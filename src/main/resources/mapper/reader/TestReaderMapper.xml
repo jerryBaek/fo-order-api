@@ -21,7 +21,7 @@
             amnr_id,
             amnd_dttm
         FROM
-            DEV.TM_ORDR
+            dev.tm_ordr
         LIMIT 10 OFFSET 0
 	</select>
 	
@@ -44,9 +44,9 @@
 		    amnr_id,
 		    amnd_dttm
         FROM
-            DEV.TM_ORDR
+            dev.tm_ordr
         WHERE
-            ORDR_ID = #{ordrId, jdbcType=VARCHAR}
+            ordr_id = #{ordrId, jdbcType=VARCHAR}
 	</select>
     
 </mapper>

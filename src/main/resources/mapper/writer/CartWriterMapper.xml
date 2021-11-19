@@ -20,9 +20,11 @@
         작성자   : seohee.ko@kyobobook.com
     -->
     <delete id="deleteProduct" parameterType="java.lang.String">
-        DELETE  /* CartWriterMapper-deleteCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */ 
-          FROM  dev.tm_spbk
-         WHERE  unfy_cmdt_id = #{ unfyCmdtId, jdbcType=VARCHAR }
+        DELETE /* CartWriterMapper.deleteProduct */ 
+        FROM
+            dev.tm_spbk
+        WHERE
+            unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
     </delete>
     
     <!--
@@ -31,9 +33,11 @@
         작성자   : seohee.ko@kyobobook.com
     -->
     <delete id="deleteProducts" parameterType="java.lang.String">
-        DELETE  /* CartWriterMapper-deleteCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */ 
-          FROM  dev.tm_spbk
-         WHERE  memno = #{ memno, jdbcType=VARCHAR }
+        DELETE /* CartWriterMapper.deleteProducts */ 
+        FROM
+            dev.tm_spbk
+        WHERE
+            memno = #{memno, jdbcType=VARCHAR}
     </delete>
     
 </mapper>

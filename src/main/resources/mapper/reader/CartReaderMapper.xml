@@ -8,15 +8,15 @@
         작성자   : seohee.ko@kyobobook.com
     -->
 	<select id="selectCartList" resultType="TmSpbkEntity">
-        SELECT  /* CartWriterMapper-selectCartList,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
-        SPBK_ID,      SPBK_DVSN_CODE,     SPBK_KIND_CODE,   UNFY_CMDT_ID,   UNT_ITM_SRMB
-		,MEMNO,       TMPR_MMBR_NUM,      REQU_QNTT,        END_DTTM,       MMBR_YS
-		,FRBE_YS,     ORGL_UNFY_CMDT_ID,  CYCL_CODE,        DLVR_DW_CODE,   TTL_DLVR_NMTM
-		,CNRC_NMTM,   BRDR_BRAN_CODE,     LINK_DVSN_CODE,   JO_CODE,        SCTN_CODE
-		,CHEK_YS,     ADDT_ORDR_CNTT,     PRIN_CNTT,        CRTR_ID,        CRET_DTTM
-		,AMNR_ID,     AMND_DTTM
+        SELECT /* CartWriterMapper.selectCartList */
+		    spbk_id,      spbk_dvsn_code,     spbk_kind_code,   unfy_cmdt_id,  unt_itm_srmb,
+		    memno,       tmpr_mmbr_num,      requ_qntt,        end_dttm,       mmbr_ys,
+		    frbe_ys,     orgl_unfy_cmdt_id,  cycl_code,        dlvr_dw_code,   ttl_dlvr_nmtm,
+		    cnrc_nmtm,   brdr_bran_code,     link_dvsn_code,   jo_code,        sctn_code,
+		    chek_ys,     addt_ordr_cntt,     prin_cntt,        crtr_id,        cret_dttm,
+		    amnr_id,     amnd_dttm
         FROM
-        DEV.TM_SPBK
+            dev.tm_spbk
         LIMIT 10 OFFSET 0
     </select>
 

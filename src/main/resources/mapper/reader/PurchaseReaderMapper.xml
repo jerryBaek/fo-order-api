@@ -8,54 +8,62 @@
         작성자   : kimsehoon@kyobobook.com
     -->
 	<select id="selectPurchaseProducts" resultType="PurchaseProductEntity">
-		SELECT  /* PurchaseReaderMapper-selectPurchaseProducts,작성일자 2021.11.12 by 김세훈, 수정일자 YYYY.MM.DD by OOO */
-		  ORDR_DATE, UNFY_CMDT_ID, ONLN_CMDT_DVSN_CODE, ORDER_QTY
+        SELECT /* PurchaseReaderMapper.selectPurchaseProducts */
+            ordr_date,
+            unfy_cmdt_id,
+            onln_cmdt_dvsn_code,
+            order_qty
 		FROM
-		    (
-		        SELECT
-		            A.ORDR_DATE, B.UNFY_CMDT_ID, '' AS ONLN_CMDT_DVSN_CODE, B.REQU_QNTT AS ORDER_QTY
+            (   SELECT
+		            a.ordr_date,
+		            b.unfy_cmdt_id,
+		            ''                AS onln_cmdt_dvsn_code,
+		            b.requ_qntt       AS order_qty
 		        FROM
-		            (
-		                SELECT
-		                A.ORDR_DATE, A.ORDR_ID, A.ORDR_SRMB, A.MEMNO
-		                FROM
-		                DEV.TM_ORDR A
-		                WHERE  A.MEMNO = '62210667167'
-		                  AND  A.ORDR_DATE >= TO_CHAR(NOW() + '-1 year', 'YYYYMMDD')
-		                  AND  A.ORDR_DVSN_CODE IN ('100','210')                /* 100:주문, 210:반품취소 */
-		                  AND  A.PROS_RSLT_CODE = '100'                         /* 100:정상처리완료 */
-		                ORDER BY A.ORDR_DATE DESC
+                    (   SELECT
+                            a.ordr_date, a.ordr_id, a.ordr_srmb, a.memno
+                        FROM
+                            dev.tm_ordr AS a
+                        WHERE
+                            a.memno = '62210667167'
+                            AND a.ordr_date >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
+                            AND a.ordr_dvsn_code in ('100','210')                /* 100:주문, 210:반품취소 */
+                            AND a.pros_rslt_code = '100'                         /* 100:정상처리완료 */
+                        ORDER BY
+                            a.ordr_date DESC
 		                LIMIT 1000
-		            ) A
-		            INNER JOIN DEV.TD_ORDR_CMDT B ON
-		            A.ORDR_ID = B.ORDR_ID AND A.ORDR_SRMB = B.ORDR_SRMB
-		            INNER JOIN DEV.TM_SPBK C ON
-		            A.MEMNO = C.MEMNO AND B.UNFY_CMDT_ID = C.UNFY_CMDT_ID       /* exists로 되어있던 것을 join으로 변경 */
+		            )                             AS a
+		            INNER JOIN dev.td_ordr_cmdt   AS b ON a.ordr_id = b.ordr_id AND a.ordr_srmb = b.ordr_srmb
+		            INNER JOIN dev.tm_spbk        AS c ON a.memno = c.memno AND b.unfy_cmdt_id = c.unfy_cmdt_id       /* exists로 되어있던 것을 join으로 변경 */
 		        WHERE
-		            NOT EXISTS (
-		              SELECT
-		                  1
-		              FROM
-		                  DEV.TD_ORDR_CMDT Z
-		              WHERE  Z.ORDR_ID = B.ORDR_ID
-		                AND Z.ORDR_SRMB > 1
-		                AND Z.ORDR_CMDT_SRMB = B.ORDR_CMDT_SRMB
-		                AND Z.ORDR_DTL_DVSN_CODE IN ('110', '200')
-		                AND Z.REQU_QNTT = B.REQU_QNTT)                          /* 110:주문취소, 200:반품 */
-		    ) ONLINE
+		            NOT EXISTS (  SELECT
+					                  1
+					              FROM
+					                  dev.td_ordr_cmdt z
+					              WHERE
+					                  z.ordr_id = b.ordr_id
+			                          AND z.ordr_srmb > 1
+			                          AND z.ordr_cmdt_srmb = b.ordr_cmdt_srmb
+			                          AND z.ordr_dtl_dvsn_code IN ('110', '200')
+			                          AND z.requ_qntt = b.requ_qntt )                          /* 110:주문취소, 200:반품 */
+		    ) online
 		    UNION ALL
 		    (
 		        SELECT
-		        A.SALEYMD, COALESCE(D.UNFY_CMDT_ID, '') AS UNFY_CMDT_ID, COALESCE(D.ONLN_CMDT_DVSN_CODE, B.BOOKGB, '') AS ONLN_CMDT_DVSN_CODE, /* null일 리가 없을텐디 */ B.CNT - COALESCE(C.CNT, 0) AS ORDER_QTY
+                    a.saleymd,
+                    COALESCE(d.unfy_cmdt_id, '') AS unfy_cmdt_id,
+                    COALESCE(d.onln_cmdt_dvsn_code, b.bookgb, '') AS onln_cmdt_dvsn_code,   /* null일 리가 없을텐디 */
+                    b.cnt - COALESCE(c.cnt, 0) AS order_qty
 		        FROM
-		        DEV.CTI_SL00 A
-		        INNER JOIN DEV.CTI_SL01 B ON
-		        A.SALEYMD = B.SALEYMD AND A.ORDERNO = B.ORDERNO AND A.SENDSEQ = B.SENDSEQ AND A.GB = B.GB AND A.SALEYMD >= TO_CHAR(NOW() + '-1 year', 'YYYYMMDD') AND A.SALEYMD &lt;= TO_CHAR(NOW(), 'YYYYMMDD') AND A.MEMNO = '62210667167' AND A.GB IN ('101', '102')   /* 101:인터넷구매, 102:매장구매 */
-		        LEFT OUTER JOIN DEV.CTI_SL01 C ON
-		        B.SALEYMD = C.SALEYMD AND B.ORDERNO = C.ORDERNO AND B.SENDSEQ = C.SENDSEQ AND B.BARCODE = C.BARCODE AND B.BOOKGB = C.BOOKGB AND C.GB IN ('103','104') /* gb코드 확인안됨 */
-		        LEFT OUTER JOIN DEV.TM_UNFY_CMDT D ON
-		        B.BARCODE = D.CMDT_CODE AND B.BOOKGB = D.ONLN_CMDT_DVSN_CODE
-		    )
+                    dev.cti_sl00                      AS a
+		        INNER JOIN        dev.cti_sl01        AS b ON a.saleymd = b.saleymd AND a.orderno = b.orderno AND a.sendseq = b.sendseq
+                                                                AND a.gb = b.gb AND a.saleymd >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
+                                                                AND a.saleymd &lt;= TO_CHAR(NOW(), 'yyyymmdd') AND a.memno = '62210667167'
+                                                                AND a.gb IN ('101', '102')   /* 101:인터넷구매, 102:매장구매 */
+		        LEFT OUTER JOIN   dev.cti_sl01        AS c ON b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
+                                                                AND b.barcode = c.barcode AND b.bookgb = c.bookgb AND c.gb IN ('103','104') /* gb코드 확인안됨 */
+		        LEFT OUTER JOIN   dev.tm_unfy_cmdt    AS d ON b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
+		    ) onoffline
 	</select>
 	
 </mapper>
