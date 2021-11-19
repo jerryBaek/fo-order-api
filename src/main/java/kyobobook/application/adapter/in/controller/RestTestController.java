@@ -10,8 +10,6 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.test.port.in.TestPort;
 import kyobobook.application.domain.common.ResponseMessage;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Project : fo-order-api
@@ -30,13 +29,13 @@ import kyobobook.application.domain.common.ResponseMessage;
  * @author : smlee1@kyobobook.com
  * @description : 샘플 Rest Api Controller
  */
-@Api(tags = "RestSampleController")
+@Slf4j
+@Api(tags = "RestTestController")
 @RequestMapping("/ord")
 @RestController
 public class RestTestController {
-    
-    private static final Logger logger = LoggerFactory.getLogger(RestTestController.class);
-    
+
+    /** 테스트 서비스 */
     @Autowired
     private TestPort testService;
 
@@ -48,39 +47,37 @@ public class RestTestController {
      * @return
      */
     @ApiOperation(value = "마스터 샘플 목록 조회", notes = "<b style='color: red;'>Master DataBase</b>의 샘풀테이블 전체 목록을 조회 합니다.")
-    @GetMapping(value = "/api/v1/order/cart/test/data/multiple")
+    @GetMapping(value = "/api/v1/test/carts")
     public ResponseMessage selectMultipleData() {
 
-        logger.debug("================멀티 데이터 선택");
+        log.debug("================멀티 데이터 선택");
 
         return testService.selectMultipleData();
     }
 
-    @GetMapping(value = "/api/v1/order/cart/test/data/non-multiple/{ordrId}")
+    @GetMapping(value = "/api/v1/test/cart/{ordrId}")
     public ResponseMessage selectMultipleData(@PathVariable String ordrId) {
 
-        logger.debug("================단건 데이터 선택");
+        log.debug("================단건 데이터 선택");
 
         return testService.selectNonMultipleData(ordrId);
     }
 
     @ApiOperation(value = "마스터 샘플 목록 조회", notes = "<b style='color: red;'>Master DataBase</b>의 샘풀테이블 전체 목록을 조회 합니다.")
-    @GetMapping(value = "/api/v1/order/cart/test/rpc/data/multiple")
+    @GetMapping(value = "/api/v1/test/carts/rpc")
     public ResponseMessage selectMultipleDataUsingRpc() {
 
-        logger.debug("================GRPC 멀티 데이터 선택");
+        log.debug("================GRPC 멀티 데이터 선택");
 
         return testService.selectMultipleDataUsingRpc();
     }
 
-    @GetMapping(value = "/api/v1/order/cart/test/rpc/data/non-multiple/{ordrId}")
+    @GetMapping(value = "/api/v1/test/cart/rpc/{ordrId}")
     public ResponseMessage selectMultipleDataUsingRpc(@PathVariable String ordrId) {
 
-        logger.debug("================GRPC 단건 데이터 선택");
+        log.debug("================GRPC 단건 데이터 선택");
 
         return testService.selectNonMultipleDataUsingRpc(ordrId);
     }
-    
-    
 
 }
