@@ -32,12 +32,12 @@ public class TestReaderAdapter implements TestPersistencePort {
     
     /** 테스트 읽기 */
     @Autowired
-    TestReaderMapper cartMapper;
+    TestReaderMapper testMapper;
     
     @Override
     public List<TestEntity> selectData() throws Exception {
         
-        List<TestEntity> data = this.cartMapper.selectData();
+        List<TestEntity> data = this.testMapper.selectData();
         
         return data;
         
@@ -46,7 +46,7 @@ public class TestReaderAdapter implements TestPersistencePort {
     @Override
     public TestEntity getData(String ordrId) throws Exception {
         
-        return this.cartMapper.getData(ordrId);
+        return this.testMapper.getData(ordrId);
         
     }
 

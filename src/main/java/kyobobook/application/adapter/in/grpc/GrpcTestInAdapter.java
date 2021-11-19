@@ -63,7 +63,6 @@ public class GrpcTestInAdapter extends TestImplBase {
 
         ResponseMessage responseMessage = this.testService.selectNonMultipleData(request.getOrdrId());
 
-        // 목록 조회로 data 는 List<Sample> 타입만 들어와야 한다.
         TestEntity data = (TestEntity) responseMessage.getData();
         responseObserver.onNext(kyobobook.grpc.test.TestResponse.newBuilder().setOrdrId(data.getOrdrId()).build());
 

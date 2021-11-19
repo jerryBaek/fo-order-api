@@ -11,20 +11,20 @@
 package kyobobook.application.biz.test.service;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.application.biz.test.port.in.TestPort;
 import kyobobook.application.biz.test.port.out.TestOutPort;
 import kyobobook.application.biz.test.port.out.TestPersistencePort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.exception.BizRuntimeException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Project : fo-order-api
@@ -33,13 +33,9 @@ import kyobobook.exception.BizRuntimeException;
  * @author : kimsehoon@kyobobook.com
  * @description :
  */
+@Slf4j
 @Service
 public class TestService implements TestPort {
-
-    private static final Logger logger = LoggerFactory.getLogger(TestService.class);
-
-//    @Qualifier("cartWriterRepository")
-//    private CartPersistencePort cartWriterPort;
 
     @Autowired
     @Qualifier("testReaderRepository")
@@ -49,7 +45,8 @@ public class TestService implements TestPort {
     @Qualifier("grpcTestOutAdapter")
     private TestOutPort testOutPort;
 
-//    private final MessageSourceAccessor messageSource;
+    @Autowired
+    private MessageSourceAccessor messageSource;
 
     @Override
     public ResponseMessage selectMultipleData() throws BizRuntimeException {
@@ -57,17 +54,12 @@ public class TestService implements TestPort {
         ResponseMessage responseMessage = null;
 
         try {
-            logger.debug("데이라베잍 접근 직전..");
-            logger.debug("리다퐅으는 있능가? " + this.testReaderPort);
             List<TestEntity> returnData = this.testReaderPort.selectData();
-            logger.debug("데이라베잍 다녀옴..");
-            logger.debug("데이타 몇갠가??" + returnData.size());
             responseMessage = ResponseMessage.builder().data(returnData) // 조회
-                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException("오류끄..");
-//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
         }
         return responseMessage;
     }
@@ -78,11 +70,10 @@ public class TestService implements TestPort {
 
         try {
             responseMessage = ResponseMessage.builder().data(this.testReaderPort.getData(ordrId)) // 조회
-                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException("오류끄..");
-//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
         }
         return responseMessage;
     }
@@ -93,16 +84,12 @@ public class TestService implements TestPort {
         ResponseMessage responseMessage = null;
 
         try {
-            logger.debug("데이라베잍 접근 직전..");
             List<TestEntity> returnData = this.testOutPort.selectData();
-            logger.debug("데이라베잍 다녀옴..");
-            logger.debug("데이타 몇갠가??" + returnData.size());
             responseMessage = ResponseMessage.builder().data(returnData) // 조회
-                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException("오류끄..");
-//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
         }
         return responseMessage;
 
@@ -115,49 +102,13 @@ public class TestService implements TestPort {
 
         try {
             responseMessage = ResponseMessage.builder().data(this.testOutPort.getData(ordrId)) // 조회
-                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
+                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException("오류끄..");
-//            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
         }
         return responseMessage;
 
     }
-
-//    @Override
-//    public ResponseMessage selectCartList() {
-//        
-//        ResponseMessage responseMessage = null;
-//        
-//        try {
-//            logger.debug("reader port >> " + this.testReaderPort);
-//            List<TmSpbk> returnData = this.testReaderPort.selectCartList();
-//            logger.debug("data size >> " + returnData.size());
-//            responseMessage = ResponseMessage.builder().data(returnData) // 조회
-//                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
-//
-//        } catch (Exception e) {
-//            throw new BizRuntimeException("오류끄..");
-////            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
-//        }
-//        return responseMessage;
-//    }
-//
-//    @Override
-//    public ResponseMessage updateCartCheck(String unfyCmdtId) {
-//        
-//        ResponseMessage responseMessage = null;
-//        
-//        try {
-//            responseMessage = ResponseMessage.builder().data(this.testReaderPort.updateCartCheck(unfyCmdtId)) 
-//                    .statusCode(HttpStatus.OK.value()).resultMessage("완료끄..").build();
-//
-//        } catch (Exception e) {
-//            throw new BizRuntimeException("오류끄..");
-////            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
-//        }
-//        return responseMessage;
-//    }
 
 }
