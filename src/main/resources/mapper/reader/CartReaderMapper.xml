@@ -9,14 +9,9 @@
     -->
 	<select id="selectCartList" resultType="TmSpbkEntity">
         SELECT /* CartWriterMapper.selectCartList */
-		    spbk_id,      spbk_dvsn_code,     spbk_kind_code,   unfy_cmdt_id,  unt_itm_srmb,
-		    memno,       tmpr_mmbr_num,      requ_qntt,        end_dttm,       mmbr_ys,
-		    frbe_ys,     orgl_unfy_cmdt_id,  cycl_code,        dlvr_dw_code,   ttl_dlvr_nmtm,
-		    cnrc_nmtm,   brdr_bran_code,     link_dvsn_code,   jo_code,        sctn_code,
-		    chek_ys,     addt_ordr_cntt,     prin_cntt,        crtr_id,        cret_dttm,
-		    amnr_id,     amnd_dttm
+		    *
         FROM
-            dev.tm_spbk
+            eos.tm_spbk
         LIMIT 10 OFFSET 0
     </select>
 

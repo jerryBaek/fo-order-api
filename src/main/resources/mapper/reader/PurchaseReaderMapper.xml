@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.purchase.PurchaseReaderMapper">
-	
+
 	<!--
         설명     : 구매 상품 목록 조회
         작성일자  : 2021. 11. 12.
@@ -21,11 +21,11 @@
 		            b.requ_qntt       AS order_qty
 		        FROM
                     (   SELECT
-                            a.ordr_date, a.ordr_id, a.ordr_srmb, a.memno
+                            a.ordr_date, a.ordr_id, a.ordr_srmb, a.mmbr_num
                         FROM
-                            dev.tm_ordr AS a
+                            eos.tm_ordr AS a
                         WHERE
-                            a.memno = '62210667167'
+                            a.mmbr_num = '62210667167'
                             AND a.ordr_date >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
                             AND a.ordr_dvsn_code in ('100','210')                /* 100:주문, 210:반품취소 */
                             AND a.pros_rslt_code = '100'                         /* 100:정상처리완료 */
@@ -33,13 +33,13 @@
                             a.ordr_date DESC
 		                LIMIT 1000
 		            )                             AS a
-		            INNER JOIN dev.td_ordr_cmdt   AS b ON a.ordr_id = b.ordr_id AND a.ordr_srmb = b.ordr_srmb
-		            INNER JOIN dev.tm_spbk        AS c ON a.memno = c.memno AND b.unfy_cmdt_id = c.unfy_cmdt_id       /* exists로 되어있던 것을 join으로 변경 */
+		            INNER JOIN eos.td_ordr_cmdt   AS b ON a.ordr_id = b.ordr_id AND a.ordr_srmb = b.ordr_srmb
+		            INNER JOIN eos.tm_spbk        AS c ON a.mmbr_num = c.mmbr_num AND b.unfy_cmdt_id = c.unfy_cmdt_id       /* exists로 되어있던 것을 join으로 변경 */
 		        WHERE
 		            NOT EXISTS (  SELECT
 					                  1
 					              FROM
-					                  dev.td_ordr_cmdt z
+					                  eos.td_ordr_cmdt z
 					              WHERE
 					                  z.ordr_id = b.ordr_id
 			                          AND z.ordr_srmb > 1
@@ -55,16 +55,16 @@
                     COALESCE(d.onln_cmdt_dvsn_code, b.bookgb, '') AS onln_cmdt_dvsn_code,   /* null일 리가 없을텐디 */
                     b.cnt - COALESCE(c.cnt, 0) AS order_qty
 		        FROM
-                    dev.cti_sl00                      AS a
-		        INNER JOIN        dev.cti_sl01        AS b ON a.saleymd = b.saleymd AND a.orderno = b.orderno AND a.sendseq = b.sendseq
+                    eos.cti_sl00                      AS a
+		        INNER JOIN        eos.cti_sl01        AS b ON a.saleymd = b.saleymd AND a.orderno = b.orderno AND a.sendseq = b.sendseq
                                                                 AND a.gb = b.gb AND a.saleymd >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
-                                                                AND a.saleymd &lt;= TO_CHAR(NOW(), 'yyyymmdd') AND a.memno = '62210667167'
+                                                                AND a.saleymd &lt;= TO_CHAR(NOW(), 'yyyymmdd') AND a.mmbr_num = '62210667167'
                                                                 AND a.gb IN ('101', '102')   /* 101:인터넷구매, 102:매장구매 */
-		        LEFT OUTER JOIN   dev.cti_sl01        AS c ON b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
+		        LEFT OUTER JOIN   eos.cti_sl01        AS c ON b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
                                                                 AND b.barcode = c.barcode AND b.bookgb = c.bookgb AND c.gb IN ('103','104') /* gb코드 확인안됨 */
-		        LEFT OUTER JOIN   dev.tm_unfy_cmdt    AS d ON b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
+		        LEFT OUTER JOIN   eos.tm_unfy_cmdt    AS d ON b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
 		    ) onoffline
 	</select>
-	
+
 </mapper>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.test.TestReaderMapper">
-	
+
 	<!--
         설명     : 다건 조회
         작성일자  : 2021. 10. 27.
@@ -9,22 +9,12 @@
     -->
 	<select id="selectData" resultType="TestEntity">
 		SELECT /* TestReaderMapper.selectData */
-            ordr_id,            /* 주문아이디 */
-            ordr_date,
-            ordr_hms,
-            memno,
-            aord_name,
-            aord_prtb_tlnm,
-            aord_ip_adrs,
-            crtr_id,
-            cret_dttm,
-            amnr_id,
-            amnd_dttm
+            *
         FROM
-            dev.tm_ordr
+            eos.tm_ordr
         LIMIT 10 OFFSET 0
 	</select>
-	
+
 	<!--
         설명     : 단건 조회
         작성일자  : 2021. 10. 27.
@@ -32,22 +22,12 @@
     -->
 	<select id="getData" parameterType="java.lang.String" resultType="TestEntity">
         SELECT /* TestReaderMapper.getData */
-            ordr_id,            /* 주문아이디 */
-		    ordr_date,
-		    ordr_hms,
-		    memno,
-		    aord_name,
-		    aord_prtb_tlnm,
-		    aord_ip_adrs,
-		    crtr_id,
-		    cret_dttm,
-		    amnr_id,
-		    amnd_dttm
+            *
         FROM
-            dev.tm_ordr
+            eos.tm_ordr
         WHERE
             ordr_id = #{ordrId, jdbcType=VARCHAR}
 	</select>
-    
+
 </mapper>
 

@@ -11,6 +11,7 @@
 package kyobobook.application.adapter.out.persistence.test.entity;
 
 import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

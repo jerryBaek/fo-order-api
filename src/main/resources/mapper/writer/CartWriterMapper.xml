@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.cart.CartWriterMapper">
-	
+
 	<!--
         설명     : 장바구니 체크박스 업데이트
         작성일자  : 2021. 11. 11.
@@ -9,7 +9,7 @@
     -->
 	<update id="updateCartCheck" parameterType="java.lang.String">
         UPDATE  /* CartWriterMapper-updateCartCheck,작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
-        DEV.TM_SPBK
+        eos.TM_SPBK
            SET  CHEK_YS      = DECODE(CHEK_YS,'Y','N','N','Y')
          WHERE  UNFY_CMDT_ID = #{unfyCmdtId}
     </update>
@@ -20,25 +20,25 @@
         작성자   : seohee.ko@kyobobook.com
     -->
     <delete id="deleteProduct" parameterType="java.lang.String">
-        DELETE /* CartWriterMapper.deleteProduct */ 
+        DELETE /* CartWriterMapper.deleteProduct */
         FROM
-            dev.tm_spbk
+            eos.tm_spbk
         WHERE
             unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
     </delete>
-    
+
     <!--
         설명     : 장바구니 상품 전체 삭제(상태변경)
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
     <delete id="deleteProducts" parameterType="java.lang.String">
-        DELETE /* CartWriterMapper.deleteProducts */ 
+        DELETE /* CartWriterMapper.deleteProducts */
         FROM
-            dev.tm_spbk
+            eos.tm_spbk
         WHERE
-            memno = #{memno, jdbcType=VARCHAR}
+            mmbr_num = #{memno, jdbcType=VARCHAR}
     </delete>
-    
+
 </mapper>
 
