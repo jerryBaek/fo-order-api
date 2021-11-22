@@ -20,70 +20,34 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * @Project : fo-order-api
- * @FileName : TmSpbkEntity.java
+ * @FileName : TmUnfyCmdtEntity.java
  * @Date : 2021. 11. 19.
  * @author : kimsehoon@kyobobook.com
- * @description : [1단계표준]SO_장바구니
+ * @description : [1단계표준]SO_통합상품
  */
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TmSpbkEntity {
-
-    /** 장바구니ID */
-    private String spbkId;
-
-    /** 장바구니구분코드 */
-    private String spbkDvsnCode;
-
-    /** 장바구니종류코드 */
-    private String spbkKindCode;
+public class TmUnfyCmdtEntity {
 
     /** 통합상품ID */
     private String unfyCmdtId;
 
-    /** 회원번호 */
-    private String mmbrNum;
+    /** 업체ID */
+    private String entsId;
 
-    /** 임시회원번호 */
-    private String tmprMmbrNum;
+    /** 온라인상품구분코드 */
+    private String onlnCmdtDvsnCode;
 
-    /** 요청수량 */
-    private BigInteger requQntt;
-
-    /** 종료일시 */
-    private LocalDateTime endDttm;
-
-    /** 회원여부 */
-    private String mmbrYsno;
-
-    /** 사은품여부 */
-    private String frbeYsno;
-
-    /** 본통합상품ID */
-    private String orglUnfyCmdtId;
-
-    /** 바로드림지점코드 */
-    private String brdrBranCode;
-
-    /** 링크구분코드 */
-    private String linkDvsnCode;
+    /** 상품코드 */
+    private String cmdtCode;
 
     /** 조코드 */
     private String joCode;
 
-    /** 섹션코드 */
-    private String sctnCode;
-
-    /** 체크여부 */
-    private String chekYsno;
-
-    /** 부가주문내용 */
-    private String addtOrdrCntt;
-
-    /** 인쇄내용 */
-    private String prinCntt;
+    /** ISBN */
+    private String isbn;
 
     /** 생성자ID */
     private String crtrId;
@@ -100,7 +64,49 @@ public class TmSpbkEntity {
     /** 삭제여부 */
     private String dltYsno;
 
-    /** 단위품목순번 */
-    private BigInteger untItmSrmb;
+    /** 상품명 */
+    private String cmdtName;
+
+    /** 상품상태코드 */
+    private String cmdtCdtnCode;
+
+    /** 소득공제대상여부 */
+    private String incmDdctTrgtYsno;
+
+    /** 도서정가제여부 */
+    private String fbpYsno;
+
+    /** 할인쿠폰적용여부 */
+    private String dscnCpnAplYsno;
+
+    /** 무료배송여부 */
+    private String freeDlvrYsno;
+
+    /** 판매제한여부 */
+    private String saleLmttYsno;
+
+    /** 판매금지여부 */
+    private String salePrhbYsno;
+
+    /** 과세구분코드 */
+    private String txtnDvsnCode;
+
+    /** 화폐단위코드 */
+    private String curnUntCode;
+
+    /** 정가 */
+    private BigInteger prce;
+
+    /** 할인율 */
+    private BigInteger dscnRate;
+
+    /** 할인금액 */
+    private BigInteger dscnAmnt;
+
+    /** 적립율 */
+    private BigInteger acmlRate;
+
+    /** 적립금액 */
+    private BigInteger acmlAmnt;
 
 }
