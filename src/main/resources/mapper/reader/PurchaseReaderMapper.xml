@@ -28,7 +28,7 @@
                             a.mmbr_num = '62210667167'
                             AND a.ordr_date >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
                             AND a.ordr_dvsn_code in ('100','210')                /* 100:주문, 210:반품취소 */
-                            AND a.pros_rslt_code = '100'                         /* 100:정상처리완료 */
+                            AND a.ordr_pros_rslt_code = '100'                    /* 100:정상처리완료 */
                         ORDER BY
                             a.ordr_date DESC
 		                LIMIT 1000
@@ -46,7 +46,7 @@
 			                          AND z.ordr_cmdt_srmb = b.ordr_cmdt_srmb
 			                          AND z.ordr_dtl_dvsn_code IN ('110', '200')
 			                          AND z.requ_qntt = b.requ_qntt )                          /* 110:주문취소, 200:반품 */
-		    ) online
+		    )
 		    UNION ALL
 		    (
 		        SELECT
@@ -63,7 +63,7 @@
 		        LEFT OUTER JOIN   eos.cti_sl01        AS c ON b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
                                                                 AND b.barcode = c.barcode AND b.bookgb = c.bookgb AND c.gb IN ('103','104') /* gb코드 확인안됨 */
 		        LEFT OUTER JOIN   eos.tm_unfy_cmdt    AS d ON b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
-		    ) onoffline
+		    )
 	</select>
 
 </mapper>
