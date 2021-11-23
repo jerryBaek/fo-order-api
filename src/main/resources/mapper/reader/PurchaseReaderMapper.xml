@@ -7,7 +7,7 @@
         작성일자  : 2021. 11. 12.
         작성자   : kimsehoon@kyobobook.com
     -->
-	<select id="selectPurchaseProducts" resultType="PurchaseProductEntity">
+	<select id="selectPurchaseProducts" parameterType="java.lang.String" resultType="PurchaseProductEntity">
         SELECT /* PurchaseReaderMapper.selectPurchaseProducts */
             ordr_date,
             unfy_cmdt_id,
@@ -15,8 +15,8 @@
             order_qty
 		FROM
             (   SELECT
-		            a.ordr_date,
-		            b.unfy_cmdt_id,
+		            a.ordr_date       AS ordr_date,
+		            b.unfy_cmdt_id    AS unfy_cmdt_id,
 		            ''                AS onln_cmdt_dvsn_code,
 		            b.requ_qntt       AS order_qty
 		        FROM
@@ -25,44 +25,49 @@
                         FROM
                             eos.tm_ordr AS a
                         WHERE
-                            a.mmbr_num = '62210667167'
+                            a.mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
                             AND a.ordr_date >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
-                            AND a.ordr_dvsn_code in ('100','210')                /* 100:주문, 210:반품취소 */
+                            AND a.ordr_dvsn_code IN ('100','210')                /* 100:주문, 210:반품취소 */
                             AND a.ordr_pros_rslt_code = '100'                    /* 100:정상처리완료 */
                         ORDER BY
                             a.ordr_date DESC
 		                LIMIT 1000
 		            )                             AS a
-		            INNER JOIN eos.td_ordr_cmdt   AS b ON a.ordr_id = b.ordr_id AND a.ordr_srmb = b.ordr_srmb
-		            INNER JOIN eos.tm_spbk        AS c ON a.mmbr_num = c.mmbr_num AND b.unfy_cmdt_id = c.unfy_cmdt_id       /* exists로 되어있던 것을 join으로 변경 */
+		            INNER JOIN eos.td_ordr_cmdt   AS b ON
+                                                            a.ordr_id = b.ordr_id AND a.ordr_srmb = b.ordr_srmb
+		            INNER JOIN eos.tm_spbk        AS c ON
+                                                            a.mmbr_num = c.mmbr_num AND b.unfy_cmdt_id = c.unfy_cmdt_id       /* exists로 되어있던 것을 join으로 변경 */
 		        WHERE
 		            NOT EXISTS (  SELECT
 					                  1
 					              FROM
-					                  eos.td_ordr_cmdt z
+					                  eos.td_ordr_cmdt AS z
 					              WHERE
 					                  z.ordr_id = b.ordr_id
-			                          AND z.ordr_srmb > 1
+			                          AND z.ordr_srmb &gt; 1
 			                          AND z.ordr_cmdt_srmb = b.ordr_cmdt_srmb
-			                          AND z.ordr_dtl_dvsn_code IN ('110', '200')
-			                          AND z.requ_qntt = b.requ_qntt )                          /* 110:주문취소, 200:반품 */
+			                          AND z.ordr_dtl_dvsn_code IN ('110', '200') /* 110:주문취소, 200:반품 */
+			                          AND z.requ_qntt = b.requ_qntt
+                                )
 		    )
 		    UNION ALL
-		    (
-		        SELECT
-                    a.saleymd,
-                    COALESCE(d.unfy_cmdt_id, '') AS unfy_cmdt_id,
-                    COALESCE(d.onln_cmdt_dvsn_code, b.bookgb, '') AS onln_cmdt_dvsn_code,   /* null일 리가 없을텐디 */
-                    b.cnt - COALESCE(c.cnt, 0) AS order_qty
+            (   SELECT
+                    a.saleymd                                       AS saleymd,
+                    COALESCE(d.unfy_cmdt_id, '')                    AS unfy_cmdt_id,
+                    COALESCE(d.onln_cmdt_dvsn_code, b.bookgb, '')   AS onln_cmdt_dvsn_code,   /* null일 리가 없을텐디 */
+                    b.cnt - COALESCE(c.cnt, 0)                      AS order_qty
 		        FROM
                     eos.cti_sl00                      AS a
-		        INNER JOIN        eos.cti_sl01        AS b ON a.saleymd = b.saleymd AND a.orderno = b.orderno AND a.sendseq = b.sendseq
+		        INNER JOIN        eos.cti_sl01        AS b ON
+                                                                a.saleymd = b.saleymd AND a.orderno = b.orderno AND a.sendseq = b.sendseq
                                                                 AND a.gb = b.gb AND a.saleymd >= TO_CHAR(NOW() + '-1 year', 'yyyymmdd')
-                                                                AND a.saleymd &lt;= TO_CHAR(NOW(), 'yyyymmdd') AND a.mmbr_num = '62210667167'
+                                                                AND a.saleymd &lt;= TO_CHAR(NOW(), 'yyyymmdd') AND a.mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
                                                                 AND a.gb IN ('101', '102')   /* 101:인터넷구매, 102:매장구매 */
-		        LEFT OUTER JOIN   eos.cti_sl01        AS c ON b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
+		        LEFT OUTER JOIN   eos.cti_sl01        AS c ON
+                                                                b.saleymd = c.saleymd AND b.orderno = c.orderno AND b.sendseq = c.sendseq
                                                                 AND b.barcode = c.barcode AND b.bookgb = c.bookgb AND c.gb IN ('103','104') /* gb코드 확인안됨 */
-		        LEFT OUTER JOIN   eos.tm_unfy_cmdt    AS d ON b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
+		        LEFT OUTER JOIN   eos.tm_unfy_cmdt    AS d ON
+                                                                b.barcode = d.cmdt_code AND b.bookgb = d.onln_cmdt_dvsn_code
 		    )
 	</select>
 

@@ -13,22 +13,21 @@ package kyobobook.application.biz.purchase.port.in;
 import kyobobook.application.domain.common.ResponseMessage;
 
 /**
- * @Project     : fo-order-api
- * @FileName    : PurchasePort.java
- * @Date        : 2021. 11. 12.
- * @author      : kimsehoon@kyobobook.com
+ * @Project : fo-order-api
+ * @FileName : PurchasePort.java
+ * @Date : 2021. 11. 12.
+ * @author : kimsehoon@kyobobook.com
  * @description : 구매 포트
  */
 public interface PurchasePort {
 
     /**
-     * @Method      : getPurchasedInCart
-     * @Date        : 2021. 11. 12.
-     * @author      : kimsehoon@kyobobook.com
+     * @Method : getPurchasedInCart
+     * @Date : 2021. 11. 12.
+     * @author : kimsehoon@kyobobook.com
      * @description : 구매 상품 조회
-     * @param limitYear
      * @return
      */
-    ResponseMessage getPurchasedInCart(Integer limitYear);
+    ResponseMessage getPurchasedInCart();
 
 }
