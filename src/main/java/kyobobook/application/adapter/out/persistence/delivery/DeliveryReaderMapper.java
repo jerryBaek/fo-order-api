@@ -10,6 +10,8 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.delivery;
 
+import java.util.List;
+import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
 import kyobobook.config.annotation.ReaderInterface;
 
 /**
@@ -22,4 +24,12 @@ import kyobobook.config.annotation.ReaderInterface;
 @ReaderInterface
 public interface DeliveryReaderMapper {
 
+    /**
+     * @Method      : selectDeliveryList
+     * @Date        : 2021. 11. 9.
+     * @author      : opoiper@kyobobook.com
+     * @description : 
+     * @return
+     */
+    List<TSoDlvrAddrMEntity> selectDeliveryList();
 }

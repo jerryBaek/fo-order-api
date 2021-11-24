@@ -2,7 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.delivery.DeliveryReaderMapper">
 
-
+    <!--
+        설명     : 사용자 배송지 조회
+        작성일자  : 2021. 11. 24.
+        작성자   : opoiper@kyobobook.com
+    -->
+    <select id="selectDeliveryList" resultType="TSoDlvrAddrMEntity">
+		SELECT
+		    mmbr_num,       -- 회원번호 
+		    dlpn_srmb,      -- 배송지순번
+		    dlpn_name,      -- 배송지명
+		    tlnm,           -- 전화번호
+		    cphn_tlnm,      -- 휴대전화전화번호
+		    bsc_dlpn_ysno,  -- 기본배송지여부
+		    pssr_num,       -- 우편번호
+		    bsc_adrs,       -- 기본주소
+		    dtl_adrs,       -- 상세주소
+		    dlpn_atnm_name, -- 배송지별칭명
+		    crtr_id,        -- 생성자아이디
+		    cret_dttm,      -- 생성일시
+		    amnr_id,        -- 수정자ID
+		    amnd_dttm,      -- 수정일시
+		    dlt_ysno        -- 삭제여부
+		FROM
+		    eos.t_so_dlvr_addr_m
+		ORDER BY DLPN_SRMB 
+    </select>
 
 </mapper>
 

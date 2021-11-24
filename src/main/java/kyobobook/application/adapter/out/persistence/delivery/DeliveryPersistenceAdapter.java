@@ -10,9 +10,10 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.delivery;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
 import kyobobook.application.biz.cart.port.out.DeliveryPersistencePort;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,4 +35,15 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     /** 배송 쓰기 매퍼 */
     @Autowired
     private DeliveryWriterMapper writer;
+    
+    @Override
+    public List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception {
+        
+        log.debug("########### 배송지 목록조회 Adapter :: ");
+        
+        List<TSoDlvrAddrMEntity> data = this.reader.selectDeliveryList();
+        
+        return data;
+        
+    }
 }

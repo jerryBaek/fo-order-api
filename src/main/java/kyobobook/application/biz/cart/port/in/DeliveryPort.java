@@ -10,6 +10,8 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.in;
 
+import kyobobook.application.domain.common.ResponseMessage;
+
 /**
  * @Project : fo-order-api
  * @FileName : DeliveryPort.java
@@ -18,5 +20,12 @@ package kyobobook.application.biz.cart.port.in;
  * @description : 배송 포트
  */
 public interface DeliveryPort {
-
+    /**
+     * @Method      : selectDeliveryList
+     * @Date        : 2021. 11. 24.
+     * @author      : opoiper@kyobobook.com
+     * @description : 배송지 목록 조회
+     * @return
+     */
+    ResponseMessage selectDeliveryList();
 }

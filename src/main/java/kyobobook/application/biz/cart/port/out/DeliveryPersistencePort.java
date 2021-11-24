@@ -10,6 +10,9 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.out;
 
+import java.util.List;
+import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
+
 /**
  * @Project : fo-order-api
  * @FileName : DeliveryPersistencePort.java
@@ -18,5 +21,5 @@ package kyobobook.application.biz.cart.port.out;
  * @description : 배송 데이터베이스 포트
  */
 public interface DeliveryPersistencePort {
-
+    List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception;
 }
