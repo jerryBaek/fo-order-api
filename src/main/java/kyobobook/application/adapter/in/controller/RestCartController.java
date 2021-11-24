@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.cart.port.in.CartPort;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,21 +61,20 @@ public class RestCartController {
     }
 
     /**
-     * @Method : updateCartCheck
-     * @Date : 2021. 11. 19.
-     * @author : kimsehoon@kyobobook.com
-     * @description :
+     * @Method      : updateCartCheck
+     * @Date        : 2021. 11. 10.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 체크박스 업데이트
      * @param unfyCmdtId
      * @return
      */
     @ApiOperation(value = "장바구니 상품 선택여부 갱신", notes = "장바구니 상품 선택여부 정보를 갱신한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string", paramType = "path", defaultValue = "C20000000B54B")
-    @PutMapping(value = "/api/v1/order/cart/data/updateCartCheck/{unfyCmdtId}")
-    public ResponseMessage updateCartCheck(@PathVariable String unfyCmdtId) {
-
+    @PutMapping(value = "/api/v1/order/cart/updateCartCheck")
+    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {    // @PathVariable String unfyCmdtId
+        
         log.debug("================체크박스 업데이트");
-
-        return this.cartService.updateCartCheck(unfyCmdtId);
+        return this.cartService.updateCartCheck(cart);
     }
 
     /**

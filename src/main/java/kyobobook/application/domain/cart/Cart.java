@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.domain.cart;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import kyobobook.application.domain.common.ResponseMessage;
 import lombok.AllArgsConstructor;
@@ -30,32 +31,78 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Cart {
     
+    /** 장바구니ID */
     private String spbkId;
+
+    /** 장바구니구분코드 */
     private String spbkDvsnCode;
+
+    /** 장바구니종류코드 */
     private String spbkKindCode;
+
+    /** 통합상품ID */
     private String unfyCmdtId;
-    private String untItmSrmb;
-    private String memno;
+
+    /** 회원번호 */
+    private String mmbrNum;
+
+    /** 임시회원번호 */
     private String tmprMmbrNum;
-    private String requQntt;
+
+    /** 요청수량 */
+    private BigInteger requQntt;
+
+    /** 종료일시 */
     private LocalDateTime endDttm;
-    private String mmbrYs;
-    private String frbeYs;
+
+    /** 회원여부 */
+    private String mmbrYsno;
+
+    /** 사은품여부 */
+    private String frbeYsno;
+
+    /** 본통합상품ID */
     private String orglUnfyCmdtId;
-    private String cyclCode;
-    private String dlvrDwCode;
-    private String ttlDlvrNmtm;
-    private String cnrcNmtm;
+
+    /** 바로드림지점코드 */
     private String brdrBranCode;
+
+    /** 링크구분코드 */
     private String linkDvsnCode;
+
+    /** 조코드 */
     private String joCode;
+
+    /** 섹션코드 */
     private String sctnCode;
-    private String chekYs;
+
+    /** 체크여부 */
+    private String chekYsno;
+
+    /** 부가주문내용 */
     private String addtOrdrCntt;
+
+    /** 인쇄내용 */
     private String prinCntt;
+
+    /** 생성자ID */
     private String crtrId;
+
+    /** 생성일시 */
     private LocalDateTime cretDttm;
+
+    /** 수정자ID */
     private String amnrId;
+
+    /** 수정일시 */
     private LocalDateTime amndDttm;
+
+    /** 삭제여부 */
+    private String dltYsno;
+
+    /** 단위품목순번 */
+    private BigInteger untItmSrmb;
     
+    private String chkVal;
+    private String[] unfyCmdtIdList;
 }

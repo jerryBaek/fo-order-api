@@ -102,5 +102,8 @@ public class TmSpbkEntity {
 
     /** 단위품목순번 */
     private BigInteger untItmSrmb;
+    
+    private String chkVal;
+    private String[] unfyCmdtIdList;
 
 }

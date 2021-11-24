@@ -26,7 +26,7 @@ public interface CartPersistencePort {
     @Deprecated
     List<TmSpbkEntity> selectCartList() throws Exception;
     
-    Integer updateCartCheck(String unfyCmdtId)throws Exception;
+    Integer updateCartCheck(Cart cart)throws Exception;
 
     /**
      * @Method      : deleteCartCheck

@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.in;
 
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 
 /**
@@ -39,7 +40,7 @@ public interface CartPort {
      * @param unfyCmdtId
      * @return
      */
-    ResponseMessage updateCartCheck(String unfyCmdtId);
+    ResponseMessage updateCartCheck(Cart cart);
 
     /**
      * @Method      : removeProduct

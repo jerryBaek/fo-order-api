@@ -10,8 +10,7 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.cart;
 
-import java.util.List;
-import kyobobook.application.domain.cart.Cart;
+import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -31,7 +30,7 @@ public interface CartWriterMapper {
      * @description : 
      * @param unfyCmdtId
      */
-    Integer updateCartCheck(String unfyCmdtId);
+    Integer updateCartCheck(TmSpbkEntity tmSpbkEntity);
 
     /**
      * @Method      : deleteProduct

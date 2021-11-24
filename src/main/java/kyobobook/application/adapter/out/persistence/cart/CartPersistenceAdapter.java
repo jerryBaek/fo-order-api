@@ -49,10 +49,19 @@ public class CartPersistenceAdapter implements CartPersistencePort {
     }
 
     @Override
-    public Integer updateCartCheck(String unfyCmdtId) throws Exception {
+    public Integer updateCartCheck(Cart cart) throws Exception {
         
-        return this.writer.updateCartCheck(unfyCmdtId);
+//            rCnt += this.writer.updateCartCheck(cart);
+        TmSpbkEntity tmSpbkEntity = TmSpbkEntity.builder()
+                .unfyCmdtIdList(cart.getUnfyCmdtIdList())
+                .chkVal(cart.getChkVal())
+                .build();
         
+//        return writer.updateCartCheck(TmSpbkEntity.builder()
+//                .unfyCmdtIdList(cart.getUnfyCmdtIdList())
+//                .chkVal(cart.getChkVal())
+//                .build());
+        return writer.updateCartCheck(tmSpbkEntity);
     }
 
     @Override

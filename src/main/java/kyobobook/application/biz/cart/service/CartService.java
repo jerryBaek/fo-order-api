@@ -65,13 +65,14 @@ public class CartService implements CartPort {
     }
 
     @Override
-    public ResponseMessage updateCartCheck(String unfyCmdtId) {
+    public ResponseMessage updateCartCheck(Cart cart) {
         
         ResponseMessage responseMessage = null;
         
         try {
+            //int updateCnt = cartRepository.updateCartCheck(cart);
             responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.updateCartCheck(unfyCmdtId)) 
+                    .data(this.cartRepository.updateCartCheck(cart)) 
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage("common.process.complete"))
                     .build();
