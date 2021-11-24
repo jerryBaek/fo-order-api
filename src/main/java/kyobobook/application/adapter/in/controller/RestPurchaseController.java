@@ -50,6 +50,8 @@ public class RestPurchaseController {
     @GetMapping("/api/v1/purchased/cart")
     public ResponseMessage getPurchasedInCart() {
 
+        log.debug("장바구니 내 상품 중 기구매 상품 조회 진입");
+
         return this.purchaseService.getPurchasedInCart();
 
     }

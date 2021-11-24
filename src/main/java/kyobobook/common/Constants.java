@@ -15,7 +15,7 @@ package kyobobook.common;
  * @FileName : Constants.java
  * @Date : 2021. 11. 23.
  * @author : kimsehoon@kyobobook.com
- * @description :
+ * @description : 상수
  */
 public class Constants {
 
