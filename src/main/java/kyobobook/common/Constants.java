@@ -19,6 +19,12 @@ package kyobobook.common;
  */
 public class Constants {
 
+    /** 예 */
+    public static final String YES = "Y";
+
+    /** 아니오 */
+    public static final String NO = "N";
+
     /**
      * @Project : fo-order-api
      * @FileName : Constants.java
