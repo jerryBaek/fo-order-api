@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kyobobook.application.adapter.out.persistence.link.LinkReaderMapper">
+
+	<select id="selectLinkCoprOrdr" resultType="LinkCoprOrdrEntity">
+		SELECT /* LinkReaderMapper.selectLinkCoprOrdrData */
+            copr_ordr_plc_id
+			,link_dvsn_code
+			,chnl_dvsn_code
+			,chnl_dtl_dvsn_code
+			,apl_sttg_dttm
+			,apl_end_dttm
+			,free_dlvr_ysno
+			,crtr_id
+			,cret_dttm
+			,amnr_id
+			,amnd_dttm
+			,dlt_ysno
+		FROM tm_link_copr_ordr_plc
+	   WHERE link_dvsn_code = #{linkDvsnCode}
+	</select>
+
+    <select id="selectLinkCoprOrdrCmdtClstList" resultType="LinkCoprOrdrCmdtClstEntity">
+        SELECT /* LinkReaderMapper.selectLinkCoprOrdrCmdtClstList */
+            copr_ordr_cmdt_clst_srmb
+			,copr_ordr_plc_id
+			,onln_cmdt_dvsn_code
+			,jo_code
+			,crtr_id
+			,cret_dttm
+			,amnr_id
+			,amnd_dttm
+			,dlt_ysno
+			,unfy_cmdt_id
+			,copr_ordr_cmdt_clst_code
+			,dscn_acml_dvsn_code
+			,apl_rate
+			,acml_mthd_code
+        FROM td_link_copr_ordr_cmdt_clst
+       WHERE copr_ordr_plc_id = #{coprOrdrPlcId}
+         AND copr_ordr_cmdt_clst_code = #{coprOrdrCmdtClstCode}
+        <if test='dscnAcmlDvsnCode != null'>
+         AND dscn_acml_dvsn_code = #{dscnAcmlDvsnCode}
+        </if>
+    </select>
+
+    <select id="selectLinkCoprOrdrPymtMthdList" resultType="LinkCoprOrdrPymtMthdEntity">
+        SELECT /* LinkReaderMapper.selectLinkCoprOrdrPymtMthdList */
+            copr_ordr_pymt_mthd_srmb
+			,copr_ordr_plc_id
+			,apl_mthd_code
+			,pymt_mthd_code
+			,cccp_code
+			,crtr_id
+			,cret_dttm
+			,amnr_id
+			,amnd_dttm
+			,dlt_ysno
+        FROM td_link_copr_ordr_pymt_mthd
+       WHERE copr_ordr_plc_id = #{coprOrdrPlcId}
+    </select>
+</mapper>
