@@ -11,13 +11,20 @@
 package kyobobook.application.adapter.in.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.cart.port.in.DeliveryPort;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -50,5 +57,23 @@ public class RestDeliveryController {
         log.debug("########### 배송지 목록조회 Controller :: ");
 
         return deliveryService.selectDeliveryList();
+    }
+    
+    /**
+     * @Method      : deleteDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송지 삭제
+     * @param deliveryAddress
+     * @return
+     */
+    @ApiOperation(value = "배송지 삭제여부 갱신", notes = "배송지 삭제여부 정보를 갱신한다.")
+    @ApiImplicitParam(name = "dlpnSrmb", value = "순번", required = true, dataType = "Integer", paramType = "param", defaultValue = "3")
+    @DeleteMapping(value = "/api/v1/order/deliveryList")
+    public ResponseMessage deleteDeliveryAddress(@RequestParam Integer dlpnSrmb) {
+        
+        log.debug("########### 배송지 삭제 Controller :: ");
+        
+        return deliveryService.deleteDeliveryAddress(dlpnSrmb);
     }
 }

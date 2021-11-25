@@ -10,6 +10,8 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.delivery;
 
+import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -21,5 +23,15 @@ import kyobobook.config.annotation.WriterInterface;
  */
 @WriterInterface
 public interface DeliveryWriterMapper {
+
+    /**
+     * @Method      : deleteDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송지 삭제
+     * @param tSoDlvrAddrMEntity
+     * @return
+     */
+    Integer deleteDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
 
 }

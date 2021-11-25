@@ -31,7 +31,7 @@ public class TSoDlvrAddrMEntity {
     /** 회원번호 */
     private String mmbrNum;
     /** 배송지순번 */
-    private String dlpnSrmb;
+    private int dlpnSrmb;
     /** 배송지명 */
     private String dlpnName;
     /** 전화번호 */

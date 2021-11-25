@@ -20,6 +20,7 @@ import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddr
 import kyobobook.application.biz.cart.port.in.DeliveryPort;
 import kyobobook.application.biz.cart.port.out.DeliveryPersistencePort;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,6 +55,26 @@ public class DeliveryService implements DeliveryPort {
             List<TSoDlvrAddrMEntity> returnData = this.deliveryRepository.selectDeliveryList();
             responseMessage = ResponseMessage.builder()
                     .data(returnData) // 조회
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
+                    .build();
+
+        } catch (Exception e) {
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+        }
+        return responseMessage;
+    }
+
+    @Override
+    public ResponseMessage deleteDeliveryAddress(Integer dlpnSrmb) {
+        
+        log.debug("########### 배송지 삭제 Service :: ");
+        
+        ResponseMessage responseMessage = null;
+        
+        try {
+            responseMessage = ResponseMessage.builder()
+                    .data(this.deliveryRepository.deleteDeliveryAddress(dlpnSrmb))
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage("common.process.complete"))
                     .build();

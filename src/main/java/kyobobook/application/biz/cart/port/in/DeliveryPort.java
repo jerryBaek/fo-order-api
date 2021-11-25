@@ -11,6 +11,7 @@
 package kyobobook.application.biz.cart.port.in;
 
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 
 /**
  * @Project : fo-order-api
@@ -28,4 +29,14 @@ public interface DeliveryPort {
      * @return
      */
     ResponseMessage selectDeliveryList();
+
+    /**
+     * @Method      : deleteDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송지 삭제
+     * @param dlpnSrmb
+     * @return
+     */
+    ResponseMessage deleteDeliveryAddress(Integer dlpnSrmb);
 }
