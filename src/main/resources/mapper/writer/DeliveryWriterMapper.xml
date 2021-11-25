@@ -89,7 +89,7 @@
             AND dlt_ysno = 'N'
     </update>
     
-    <update id="updateDeliveryAddress" parameterType="TSoDlvrAddrMInsertEntity">
+    <update id="updateDeliveryAddress" parameterType="java.lang.String">
      UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
             eos.t_so_dlvr_addr_m 
         SET bsc_dlpn_ysno = 'Y'
@@ -98,7 +98,8 @@
         AND dlpn_srmb = (SELECT MIN(dlpn_srmb)
                            FROM eos.t_so_dlvr_addr_m
                           WHERE mmbr_num = #{mmbrNum}
-                          GROUP BY mmbr_num)
+                            AND dlt_ysno = 'N'
+                        )
     </update>
 
 </mapper>

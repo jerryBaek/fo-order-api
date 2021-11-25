@@ -30,7 +30,7 @@ public interface DeliveryPersistencePort {
      * @Method : deleteDeliveryAddress
      * @Date : 2021. 11. 25.
      * @author : seohee.ko@kyobobook.com
-     * @description : 배송지 삭제
+     * @description : 사용자 배송지 단건 삭제(삭제여부 갱신)
      * @param deliveryAddress
      * @return
      */
@@ -71,8 +71,8 @@ public interface DeliveryPersistencePort {
      * @Date        : 2021. 11. 25.
      * @author      : seohee.ko@kyobobook.com
      * @description : 사용자 배송지 기본배송지여부 상태 갱신
-     * @param deliveryAddress
+     * @param mmbrNum
      */
-    Integer updateDeliveryAddress(DeliveryAddress deliveryAddress);
+    Integer updateDeliveryAddress(String mmbrNum);
 
 }

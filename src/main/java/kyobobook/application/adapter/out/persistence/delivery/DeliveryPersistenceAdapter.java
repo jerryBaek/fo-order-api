@@ -87,13 +87,9 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public Integer updateDeliveryAddress(DeliveryAddress deliveryAddress) {
-        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder()
-                                                                  .mmbrNum(deliveryAddress.getMmbrNum())
-                                                                  .dlpnSrmb(deliveryAddress.getDlpnSrmb())
-                                                                  .build();
+    public Integer updateDeliveryAddress(String mmbrNum) {
         
-        return this.writer.updateDeliveryAddress(tSoDlvrAddrMEntity);
+        return this.writer.updateDeliveryAddress(mmbrNum);
     }
 
 }

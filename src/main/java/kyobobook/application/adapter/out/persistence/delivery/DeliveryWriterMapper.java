@@ -28,7 +28,7 @@ public interface DeliveryWriterMapper {
      * @Method : deleteDeliveryAddress
      * @Date : 2021. 11. 25.
      * @author : seohee.ko@kyobobook.com
-     * @description : 배송지 삭제
+     * @description : 사용자 배송지 단건 삭제(삭제여부 갱신)
      * @param tSoDlvrAddrMEntity
      * @return
      */
@@ -59,9 +59,9 @@ public interface DeliveryWriterMapper {
      * @Date        : 2021. 11. 25.
      * @author      : seohee.ko@kyobobook.com
      * @description : 사용자 배송지 기본배송지여부 상태 갱신
-     * @param tSoDlvrAddrMEntity
+     * @param mmbrNum
      * @return
      */
-    Integer updateDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
+    Integer updateDeliveryAddress(String mmbrNum);
 
 }
