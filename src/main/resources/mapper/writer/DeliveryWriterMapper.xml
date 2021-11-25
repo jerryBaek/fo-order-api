@@ -3,11 +3,90 @@
 <mapper namespace="kyobobook.application.adapter.out.persistence.delivery.DeliveryWriterMapper">
 
     <update id="deleteDeliveryAddress" parameterType="kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity">
-      UPDATE eos.t_so_dlvr_addr_m 
+      UPDATE eos.t_so_dlvr_addr_m
          SET dlt_ysno = 'Y'
        WHERE mmbr_num = #{mmbrNum}
          AND dlpn_srmb = #{dlpnSrmb}
     </update>
-    
+
+    <!--
+        설명     : 배송주소 등록 (배송주소가 10개를 초과하는 경우 등록하지 않음)
+        작성일자  : 2021. 11. 24.
+        작성자   : kimsehoon@kyobobook.com
+    -->
+    <insert id="insertDeliveryAddress" parameterType="TSoDlvrAddrMInsertEntity">
+        INSERT INTO /* DeliveryWriterMapper.insertDeliveryAddress */
+            eos.t_so_dlvr_addr_m (  mmbr_num,<!-- 회원번호 -->
+                                    dlpn_srmb,<!-- 배송지순번 -->
+                                    dlpn_name,<!-- 배송지명 -->
+                                    tlnm,<!-- 전화번호 -->
+                                    cphn_tlnm,<!-- 휴대전화전화번호 -->
+                                    bsc_dlpn_ysno,<!-- 기본배송지여부 -->
+                                    pssr_num,<!-- 우편번호 -->
+                                    bsc_adrs,<!-- 기본주소 -->
+                                    dtl_adrs,<!-- 상세주소 -->
+                                    dlpn_atnm_name,<!-- 배송지별칭명 -->
+                                    crtr_id,<!-- 생성자ID -->
+                                    cret_dttm,<!-- 생성일시 -->
+                                    amnr_id,<!-- 수정자ID -->
+                                    amnd_dttm,<!-- 수정일시 -->
+                                    dlt_ysno<!-- 삭제여부 -->
+        )
+        SELECT                      #{mmbrNum, jdbcType=VARCHAR},<!-- mmbr_num -->
+                                    (   SELECT
+                                            COALESCE(MAX(dlpn_srmb), 0) + 1
+                                        FROM
+                                            eos.t_so_dlvr_addr_m
+                                        WHERE
+                                            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
+                                    ),<!-- dlpn_srmb -->
+                                    #{dlpnName, jdbcType=VARCHAR},<!-- dlpn_name -->
+                                    #{tlnm, jdbcType=VARCHAR},<!-- tlnm -->
+                                    #{cphnTlnm, jdbcType=VARCHAR},<!-- cphn_tlnm -->
+                                    CASE (  SELECT
+                                                COUNT(1)
+                                            FROM
+                                                eos.t_so_dlvr_addr_m
+	                                        WHERE
+	                                            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
+	                                            AND bsc_dlpn_ysno = 'Y'
+	                                            AND dlt_ysno = 'N'
+                                        )
+                                        WHEN 0 THEN 'Y'
+                                        ELSE        #{bscDlpnYsno, jdbcType=VARCHAR}
+                                    END,<!-- bsc_dlpn_ysno -->
+                                    #{pssrNum, jdbcType=VARCHAR},<!-- pssr_num -->
+                                    #{bscAdrs, jdbcType=VARCHAR},<!-- bsc_adrs -->
+                                    #{dtlAdrs, jdbcType=VARCHAR},<!-- dtl_adrs -->
+                                    #{dlpnAtnmName, jdbcType=VARCHAR},<!-- dlpn_atnm_name -->
+                                    #{mmbrId, jdbcType=VARCHAR},<!-- crtr_id -->
+                                    NOW(),<!-- cret_dttm -->
+                                    #{mmbrId, jdbcType=VARCHAR},<!-- amnr_id -->
+                                    NOW(),<!-- amnd_dttm -->
+                                    'N'<!-- dlt_ysno -->
+        FROM
+            DUAL
+        WHERE
+            #{MAX_INSERT_COUNT, jdbcType=NUMERIC} &gt; (  SELECT
+								                            COUNT(1)
+								                        FROM
+								                            eos.t_so_dlvr_addr_m
+								                        WHERE
+								                            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
+								                            AND dlt_ysno = 'N'
+            )<!-- 등록된 배송지가 10개를 초과하는 경우 등록하지 않음 -->
+    </insert>
+
+    <update id="updateDeliveryAddressDefaultClear" parameterType="java.lang.String">
+        UPDATE /* DeliveryWriterMapper.updateDeliveryAddressDefaultClear */
+            eos.t_so_dlvr_addr_m
+        SET
+            bsc_dlpn_ysno = 'N'
+        WHERE
+            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
+            AND bsc_dlpn_ysno = 'Y'
+            AND dlt_ysno = 'N'
+    </update>
+
 </mapper>
 

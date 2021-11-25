@@ -11,10 +11,12 @@
 package kyobobook.application.adapter.out.persistence.delivery;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
-import kyobobook.application.biz.cart.port.out.DeliveryPersistencePort;
+import kyobobook.application.biz.delivery.port.out.DeliveryPersistencePort;
 import kyobobook.application.domain.delivery.DeliveryAddress;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,29 +38,42 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     /** 배송 쓰기 매퍼 */
     @Autowired
     private DeliveryWriterMapper writer;
-    
+
     @Override
     public List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception {
-        
+
         log.debug("########### 배송지 목록조회 Adapter :: ");
-        
+
         List<TSoDlvrAddrMEntity> data = this.reader.selectDeliveryList();
-        
+
         return data;
-        
+
     }
 
     @Override
     public Integer deleteDeliveryAddress(Integer dlpnSrmb) {
-        
+
         log.debug("########### 배송지 삭제 Adapter :: ");
-        
+
         // TODO mmbrNum 세션에서 획득해야함.
-        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder()
-                .mmbrNum("62210667167")
-                .dlpnSrmb(dlpnSrmb)
+        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder().mmbrNum("62210667167").dlpnSrmb(dlpnSrmb)
                 .build();
-        
+
         return this.writer.deleteDeliveryAddress(tSoDlvrAddrMEntity);
     }
+
+    @Override
+    public Boolean insertDeliveryAddress(DeliveryAddress deliveryAddress) {
+
+        return this.writer.insertDeliveryAddress(deliveryAddress.convertToInsertEntity());
+
+    }
+
+    @Override
+    public Integer updateDeliveryAddressDefaultClear(String mmbrNum) {
+
+        return this.writer.updateDeliveryAddressDefaultClear(mmbrNum);
+
+    }
+
 }

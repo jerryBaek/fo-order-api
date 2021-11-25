@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.delivery.entity;
 
+import kyobobook.application.adapter.out.persistence.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,13 @@ import lombok.experimental.SuperBuilder;
  * @FileName : TSoDlvrAddrMEntity.java
  * @Date : 2021. 11. 19.
  * @author : kimsehoon@kyobobook.com
- * @description : SO_주문비실물선물수신대상기본
+ * @description : SO_배송주소록기본
  */
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TSoDlvrAddrMEntity {
+public class TSoDlvrAddrMEntity extends BaseEntity {
 
     /** 회원번호 */
     private String mmbrNum;

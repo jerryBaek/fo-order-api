@@ -8,9 +8,10 @@
  * smlee1@kyobobook.com           2021. 8. 12.  First Draft.
  *
  ****************************************************/
-package kyobobook.application.biz.cart.port.out;
+package kyobobook.application.biz.delivery.port.out;
 
 import java.util.List;
+
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
 import kyobobook.application.domain.delivery.DeliveryAddress;
 
@@ -22,15 +23,37 @@ import kyobobook.application.domain.delivery.DeliveryAddress;
  * @description : 배송 데이터베이스 포트
  */
 public interface DeliveryPersistencePort {
+
     List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception;
 
     /**
-     * @Method      : deleteDeliveryAddress
-     * @Date        : 2021. 11. 25.
-     * @author      : seohee.ko@kyobobook.com
+     * @Method : deleteDeliveryAddress
+     * @Date : 2021. 11. 25.
+     * @author : seohee.ko@kyobobook.com
      * @description : 배송지 삭제
      * @param dlpnSrmb
      * @return
      */
     Integer deleteDeliveryAddress(Integer dlpnSrmb);
+
+    /**
+     * @Method : insertDeliveryAddress
+     * @Date : 2021. 11. 24.
+     * @author : kimsehoon@kyobobook.com
+     * @description : 배송주소 추가 (배송주소가 10개를 초과하는 경우 등록하지 않음)
+     * @param deliveryAddress 배송주소
+     * @return
+     */
+    Boolean insertDeliveryAddress(DeliveryAddress deliveryAddress);
+
+    /**
+     * @Method : updateDeliveryAddressDefaultClear
+     * @Date : 2021. 11. 25.
+     * @author : kimsehoon@kyobobook.com
+     * @description : 기본배송주소 해제
+     * @param mmbrNum 회원번호
+     * @return
+     */
+    Integer updateDeliveryAddressDefaultClear(String mmbrNum);
+
 }
