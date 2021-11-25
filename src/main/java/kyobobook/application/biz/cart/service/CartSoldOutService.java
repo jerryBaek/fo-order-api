@@ -63,7 +63,9 @@ public class CartSoldOutService implements CartSoldOutPort {
             // TODO: 회원 정보를 세션에서 가져오는 것으로 변경 필요.
             List<TmSpbkEntity> cartList = this.cartSoldOutRepository.selectCartSoldOutList(mmbrNum);
             String mmbrYsno = "Y";
-            if(cartList.size() > 0) mmbrYsno = cartList.get(0).getMmbrYsno();
+            if(cartList.size() > 0) {
+                mmbrYsno = cartList.get(0).getMmbrYsno();
+            }
 
             // 2. 장바구니 내 상품에 대해 품/절판 여부를 체크한다.
             // TODO: 품/절판 여부 체크 방법은 상품쪽에 확인 필요.(rq/rs 정보 포함)
