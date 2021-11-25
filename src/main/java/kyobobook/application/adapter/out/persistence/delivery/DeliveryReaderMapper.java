@@ -12,6 +12,7 @@ package kyobobook.application.adapter.out.persistence.delivery;
 
 import java.util.List;
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.config.annotation.ReaderInterface;
 
 /**
@@ -32,4 +33,14 @@ public interface DeliveryReaderMapper {
      * @return
      */
     List<TSoDlvrAddrMEntity> selectDeliveryList();
+    
+    /**
+     * @Method      : getDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @param deliveryAddress 
+     * @description : 사용자 배송지 단건 조회
+     * @return
+     */
+    TSoDlvrAddrMEntity getDeliveryAddress(DeliveryAddress deliveryAddress);
 }

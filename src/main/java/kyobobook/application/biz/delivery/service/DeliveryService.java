@@ -73,11 +73,39 @@ public class DeliveryService implements DeliveryPort {
         log.debug("########### 배송지 삭제 Service :: ");
 
         ResponseMessage responseMessage = null;
+        
+        // TODO mmbrNum 세션에서 획득해야함.
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
+                                                         .mmbrNum("62210667167")
+                                                         .dlpnSrmb(dlpnSrmb)
+                                                         .build();
 
         try {
-            responseMessage = ResponseMessage.builder().data(this.deliveryRepository.deleteDeliveryAddress(dlpnSrmb))
-                    .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
+            
+            // 배송지 상태 확인
+            DeliveryAddress valiDeliveryAddress = this.deliveryRepository.getDeliveryAddress(deliveryAddress);
+            
+            if(valiDeliveryAddress != null) {
+                
+                responseMessage = ResponseMessage.builder().data(this.deliveryRepository.deleteDeliveryAddress(deliveryAddress))
+                        .statusCode(HttpStatus.OK.value())
+                        .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
+                
+                List<TSoDlvrAddrMEntity> deliveryList = this.deliveryRepository.selectDeliveryList();
+                
+                // 기본배송지면 기본배송지여부 N, MIN(순번)의 기본배송지여부 Y로 수정
+                if(valiDeliveryAddress.getBscDlpnYsno().equals("Y") && deliveryList.size() > 1) {
+                    
+                    // 기본배송지여부 갱신
+                    this.deliveryRepository.updateDeliveryAddress(deliveryAddress);
+                    
+                } else {    
+                    // 기본배송지가 아닌경우
+                }
+                
+            } else {
+                // 삭제할 데이터 없음
+            }
 
         } catch (Exception e) {
             throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);

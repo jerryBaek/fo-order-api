@@ -31,10 +31,10 @@ public interface DeliveryPersistencePort {
      * @Date : 2021. 11. 25.
      * @author : seohee.ko@kyobobook.com
      * @description : 배송지 삭제
-     * @param dlpnSrmb
+     * @param deliveryAddress
      * @return
      */
-    Integer deleteDeliveryAddress(Integer dlpnSrmb);
+    Integer deleteDeliveryAddress(DeliveryAddress deliveryAddress);
 
     /**
      * @Method : insertDeliveryAddress
@@ -55,5 +55,24 @@ public interface DeliveryPersistencePort {
      * @return
      */
     Integer updateDeliveryAddressDefaultClear(String mmbrNum);
+    
+    /**
+     * @Method      : getDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 사용자 배송지 단건 조회
+     * @param deliveryAddress
+     * @return
+     */
+    DeliveryAddress getDeliveryAddress(DeliveryAddress deliveryAddress);
+
+    /**
+     * @Method      : updateDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 사용자 배송지 기본배송지여부 상태 갱신
+     * @param deliveryAddress
+     */
+    Integer updateDeliveryAddress(DeliveryAddress deliveryAddress);
 
 }

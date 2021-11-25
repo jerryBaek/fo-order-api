@@ -54,4 +54,14 @@ public interface DeliveryWriterMapper {
      */
     public Integer updateDeliveryAddressDefaultClear(String mmbrNum);
 
+    /**
+     * @Method      : updateDeliveryAddress
+     * @Date        : 2021. 11. 25.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 사용자 배송지 기본배송지여부 상태 갱신
+     * @param tSoDlvrAddrMEntity
+     * @return
+     */
+    Integer updateDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
+
 }
