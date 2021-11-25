@@ -12,7 +12,8 @@ package kyobobook.application.adapter.out.persistence.cart.entity;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -105,5 +106,6 @@ public class TmSpbkEntity {
     
     private String chkVal;
     private String[] unfyCmdtIdList;
+    private ArrayList<HashMap<String, Object>> spbkIdList;
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kyobobook.application.adapter.out.persistence.cart.CartSoldOutWriterMapper">
+
+    <!--
+        설명     : 장바구니 내 품/절판 상품 전체 삭제
+        작성일자  : 2021. 11. 25.
+        작성자   : loutsiderl@kyobobook.com
+    -->
+    <delete id="deleteSoldOuts" parameterType="kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity">
+        DELETE /* CartSoldOutWriterMapper.deleteSoldOuts */ 
+        FROM
+            eos.tm_spbk
+        WHERE spbk_id IN 
+        <foreach collection="spbkIdList" item="item" open="(" close=")" separator=",">
+               #{item.spbkId}
+        </foreach>
+        <choose>
+            <when test='mmbrYsno == "Y"'>
+            AND mmbr_num = #{mmbrNum}
+            </when>
+            <otherwise>
+            AND tmpr_mmbr_num = #{mmbrNum}
+            </otherwise>
+        </choose>
+    </delete>
+    
+</mapper>
+
