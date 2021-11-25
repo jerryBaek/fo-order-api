@@ -49,7 +49,7 @@ public class RestLinkController {
      */
     @ApiOperation(value = "링크제휴정보 정책 조회", notes = "링크제휴주문 정책 정보를 조회합니다.")
     @ApiImplicitParam(name = "linkDvsnCode", value = "링크구분코드", required = true, dataType = "string",
-            paramType = "query")
+            paramType = "query", defaultValue = "CCS")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdr/{linkDvsnCode}")
     public ResponseMessage selectLinkCoprOrdrData(
             @PathVariable(name = "linkDvsnCode") String linkDvsnCode) {
@@ -66,7 +66,7 @@ public class RestLinkController {
      */
     @ApiOperation(value = "링크제휴주문 상품분류 정보 조회", notes = "링크제휴주문 상품분류리스트 정보를 조회합니다.")
     @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true,
-            dataType = "string", paramType = "query")
+            dataType = "string", paramType = "query", defaultValue = "COPR16040016")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdrCmdtClst/{coprOrdrPlcId}")
     public ResponseMessage selectLinkCoprOrdrCmdtClstData(
             @PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
@@ -83,7 +83,7 @@ public class RestLinkController {
      */
     @ApiOperation(value = "링크제휴주문 지불방법 정보 조회", notes = "링크제휴주문 지불방법리스트 정보를 조회합니다.")
     @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true,
-            dataType = "string", paramType = "query")
+            dataType = "string", paramType = "query", defaultValue = "COPR16040016")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdrPymtMthd/{coprOrdrPlcId}")
     public ResponseMessage selectLinkCoprOrdrPymtMthd(
             @PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
