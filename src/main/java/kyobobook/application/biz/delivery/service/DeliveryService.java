@@ -86,7 +86,7 @@ public class DeliveryService implements DeliveryPort {
     }
 
     @Override
-    public ResponseMessage addDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public ResponseMessage insertDeliveryAddress(DeliveryAddress deliveryAddress) {
 
         ResponseMessage responseMessage = null;
 

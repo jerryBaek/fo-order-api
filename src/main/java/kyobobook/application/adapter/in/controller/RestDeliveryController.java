@@ -85,7 +85,7 @@ public class RestDeliveryController {
         log.debug("배송주소록 추가 진입");
         log.debug("입력 정보 : {}", deliveryAddress);
 
-        return this.deliveryService.addDeliveryAddress(deliveryAddress);
+        return this.deliveryService.insertDeliveryAddress(deliveryAddress);
 
     }
 

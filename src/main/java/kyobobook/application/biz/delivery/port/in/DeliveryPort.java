@@ -48,6 +48,6 @@ public interface DeliveryPort {
      * @param deliveryAddress 배송주소
      * @return
      */
-    ResponseMessage addDeliveryAddress(DeliveryAddress deliveryAddress);
+    ResponseMessage insertDeliveryAddress(DeliveryAddress deliveryAddress);
 
 }
