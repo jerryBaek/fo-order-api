@@ -51,12 +51,11 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public Integer deleteDeliveryAddress(Integer dlpnSrmb) {
+    public Integer deleteDeliveryAddress(DeliveryAddress deliveryAddress) {
 
         log.debug("########### 배송지 삭제 Adapter :: ");
 
-        // TODO mmbrNum 세션에서 획득해야함.
-        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder().mmbrNum("62210667167").dlpnSrmb(dlpnSrmb)
+        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder().mmbrNum(deliveryAddress.getMmbrNum()).dlpnSrmb(deliveryAddress.getDlpnSrmb())
                 .build();
 
         return this.writer.deleteDeliveryAddress(tSoDlvrAddrMEntity);
@@ -74,6 +73,27 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
 
         return this.writer.updateDeliveryAddressDefaultClear(mmbrNum);
 
+    }
+
+    @Override
+    public DeliveryAddress getDeliveryAddress(DeliveryAddress searchDeliveryAddress) {
+        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = this.reader.getDeliveryAddress(searchDeliveryAddress);
+        
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
+                                                         .bscDlpnYsno(tSoDlvrAddrMEntity.getBscDlpnYsno())
+                                                         .dlpnSrmb(tSoDlvrAddrMEntity.getDlpnSrmb())
+                                                         .build();
+        return deliveryAddress;
+    }
+
+    @Override
+    public Integer updateDeliveryAddress(DeliveryAddress deliveryAddress) {
+        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder()
+                                                                  .mmbrNum(deliveryAddress.getMmbrNum())
+                                                                  .dlpnSrmb(deliveryAddress.getDlpnSrmb())
+                                                                  .build();
+        
+        return this.writer.updateDeliveryAddress(tSoDlvrAddrMEntity);
     }
 
 }

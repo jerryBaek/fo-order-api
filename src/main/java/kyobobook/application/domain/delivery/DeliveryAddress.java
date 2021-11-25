@@ -37,6 +37,8 @@ public class DeliveryAddress {
     /** 회원번호 */
     @ApiModelProperty(hidden = true)
     private String mmbrNum;
+    /** 배송지순번 */
+    private Integer dlpnSrmb = 0;
     /** 배송지명 */
     @ApiModelProperty(example = "시그니엘")
     private String name;
@@ -61,6 +63,7 @@ public class DeliveryAddress {
     /** 기본배송지여부 */
     @ApiModelProperty(example = "true")
     private boolean defaultAddress;
+    private String bscDlpnYsno;
     /** 삭제여부 */
     @ApiModelProperty(example = "false")
     private boolean removeAddress;
@@ -74,7 +77,7 @@ public class DeliveryAddress {
      */
     public TSoDlvrAddrMInsertEntity convertToInsertEntity() {
 
-        return TSoDlvrAddrMInsertEntity.builder().mmbrId(this.getMmbrId()).mmbrNum(this.getMmbrNum())
+        return TSoDlvrAddrMInsertEntity.builder().mmbrId(this.getMmbrId()).mmbrNum(this.getMmbrNum()).dlpnSrmb(this.getDlpnSrmb())
                 .dlpnName(this.getName()).dlpnAtnmName(this.getAlias()).tlnm(this.getTelephone())
                 .cphnTlnm(this.getCellphone()).pssrNum(this.getZipcode()).bscAdrs(this.getBasicAddress())
                 .dtlAdrs(this.getDetailAddress()).bscDlpnYsno(this.isDefaultAddress() ? Constants.YES : Constants.NO)
