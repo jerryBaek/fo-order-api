@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kyobobook.application.adapter.out.persistence.delivery.DeliveryWriterMapper">
 
+    <!--
+        설명     : 배송주소 삭제
+        작성일자  : 2021. 11. 24.
+        작성자   : seohee.ko@kyobobook.com
+    -->
     <update id="deleteDeliveryAddress" parameterType="kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity">
       UPDATE eos.t_so_dlvr_addr_m
          SET dlt_ysno = 'Y'
@@ -11,7 +16,7 @@
     </update>
 
     <!--
-        설명     : 배송주소 등록 (배송주소가 10개를 초과하는 경우 등록하지 않음)
+        설명     : 배송주소 등록
         작성일자  : 2021. 11. 24.
         작성자   : kimsehoon@kyobobook.com
     -->
@@ -80,6 +85,11 @@
         </if>
     </insert>
 
+    <!--
+        설명     : 기본배송주소 해제
+        작성일자  : 2021. 11. 24.
+        작성자   : kimsehoon@kyobobook.com
+    -->
     <update id="updateDeliveryAddressDefaultClear" parameterType="java.lang.String">
         UPDATE /* DeliveryWriterMapper.updateDeliveryAddressDefaultClear */
             eos.t_so_dlvr_addr_m
@@ -91,6 +101,11 @@
             AND dlt_ysno = 'N'
     </update>
 
+    <!--
+        설명     : 기본배송주소 자동설정 (순번이 가장 빠른 것 순)
+        작성일자  : 2021. 11. 24.
+        작성자   : seohee.ko@kyobobook.com
+    -->
     <update id="updateDeliveryAddress" parameterType="java.lang.String">
      UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
             eos.t_so_dlvr_addr_m

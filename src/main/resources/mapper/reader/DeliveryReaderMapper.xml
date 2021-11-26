@@ -8,8 +8,8 @@
         작성자   : opoiper@kyobobook.com
     -->
     <select id="selectDeliveryList" resultType="TSoDlvrAddrMEntity">
-		SELECT
-		    mmbr_num,       -- 회원번호 
+		SELECT /* DeliveryReaderMapper.selectDeliveryList */
+		    mmbr_num,       -- 회원번호
 		    dlpn_srmb,      -- 배송지순번
 		    dlpn_name,      -- 배송지명
 		    tlnm,           -- 전화번호
@@ -26,7 +26,7 @@
 		    dlt_ysno        -- 삭제여부
 		FROM
 		    eos.t_so_dlvr_addr_m
-		ORDER BY DLPN_SRMB 
+		ORDER BY dlpn_srmb
     </select>
     
     <!--

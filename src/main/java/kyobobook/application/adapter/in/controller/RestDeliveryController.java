@@ -51,6 +51,7 @@ public class RestDeliveryController {
      * @description : 배송지 목록조회
      * @return
      */
+    @ApiOperation(value = "배송주소 목록 조회", notes = "배송주소 목록을 조회한다.")
     @GetMapping(value = "/api/v1/order/deliveryList")
     public ResponseMessage selectDeliveryList() {
 
