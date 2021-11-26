@@ -51,7 +51,6 @@ public class RestDeliveryController {
      * @description : 배송지 목록조회
      * @return
      */
-    @ApiOperation(value = "배송주소 목록 조회", notes = "배송주소 목록을 조회한다.")
     @ApiOperation(value = "배송지 목록 조회", notes = "배송지 정보를 조회합니다.")
     @ApiImplicitParam(name = "searchMmbrNum", value = "회원번호", required = true, dataType = "string", paramType = "param", defaultValue = "62210667167")
     @GetMapping(value = "/api/v1/order/deliveryList/{searchMmbrNum}")
