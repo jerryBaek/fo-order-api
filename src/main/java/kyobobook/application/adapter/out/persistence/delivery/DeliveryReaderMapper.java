@@ -32,7 +32,7 @@ public interface DeliveryReaderMapper {
      * @description : 
      * @return
      */
-    List<TSoDlvrAddrMEntity> selectDeliveryList();
+    List<TSoDlvrAddrMEntity> selectDeliveryList(String searchMmbrNum);
     
     /**
      * @Method      : getDeliveryAddress

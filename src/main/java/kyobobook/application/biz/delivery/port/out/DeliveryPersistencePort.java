@@ -24,7 +24,7 @@ import kyobobook.application.domain.delivery.DeliveryAddress;
  */
 public interface DeliveryPersistencePort {
 
-    List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception;
+    List<TSoDlvrAddrMEntity> selectDeliveryList(String searchMmbrNum) throws Exception;
 
     /**
      * @Method : deleteDeliveryAddress

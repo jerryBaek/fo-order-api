@@ -26,6 +26,8 @@
 		    dlt_ysno        -- 삭제여부
 		FROM
 		    eos.t_so_dlvr_addr_m
+		WHERE dlt_ysno != 'Y'
+		  AND mmbr_num = #{searchMmbrNum}
 		ORDER BY DLPN_SRMB 
     </select>
     
@@ -56,7 +58,7 @@
         WHERE mmbr_num = #{mmbrNum}
           AND dlpn_srmb = #{dlpnSrmb}
           AND dlt_ysno = 'N'
-        ORDER BY DLPN_SRMB 
+        ORDER BY dlpn_srmb 
     </select>
 
 </mapper>

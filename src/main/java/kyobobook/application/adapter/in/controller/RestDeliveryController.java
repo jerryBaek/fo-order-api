@@ -52,12 +52,12 @@ public class RestDeliveryController {
      * @description : 배송지 목록조회
      * @return
      */
-    @GetMapping(value = "/api/v1/order/deliveryList")
-    public ResponseMessage selectDeliveryList() {
-
-        log.debug("########### 배송지 목록조회 Controller :: ");
-
-        return deliveryService.selectDeliveryList();
+    @ApiOperation(value = "배송지 목록 조회", notes = "배송지 정보를 조회합니다.")
+    @ApiImplicitParam(name = "searchMmbrNum", value = "회원번호", required = true, dataType = "string", paramType = "param", defaultValue = "62210667167")
+    @GetMapping(value = "/api/v1/order/deliveryList/{searchMmbrNum}")
+    public ResponseMessage selectDeliveryList(
+            @PathVariable(name = "searchMmbrNum") String searchMmbrNum) {
+        return deliveryService.selectDeliveryList(searchMmbrNum);
     }
 
     /**
