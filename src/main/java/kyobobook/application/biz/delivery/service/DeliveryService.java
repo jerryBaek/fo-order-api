@@ -49,14 +49,14 @@ public class DeliveryService implements DeliveryPort {
     private MessageSourceAccessor messageSource;
 
     @Override
-    public ResponseMessage selectDeliveryList() {
+    public ResponseMessage selectDeliveryList(String searchMmbrNum) {
 
         log.debug("########### 배송지 목록조회 Service :: ");
 
         ResponseMessage responseMessage = null;
 
         try {
-            List<TSoDlvrAddrMEntity> returnData = this.deliveryRepository.selectDeliveryList();
+            List<TSoDlvrAddrMEntity> returnData = this.deliveryRepository.selectDeliveryList(searchMmbrNum);
             responseMessage = ResponseMessage.builder().data(returnData) // 조회
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage("common.process.complete")).build();

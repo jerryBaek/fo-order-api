@@ -73,7 +73,6 @@
                                     'N'<!-- dlt_ysno -->
         FROM
             DUAL
-        <if test="MAX_INSERT_COUNT != null and MAX_INSERT_COUNT gt 0">
         WHERE
             #{MAX_INSERT_COUNT, jdbcType=NUMERIC} &gt; (  SELECT
 								                            COUNT(1)
@@ -83,7 +82,6 @@
 								                            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
 								                            AND dlt_ysno = 'N'
             )<!-- 등록된 배송지가 10개를 초과하는 경우 등록하지 않음 -->
-        </if>
     </insert>
 
     <!--
@@ -101,15 +99,15 @@
             AND bsc_dlpn_ysno = 'Y'
             AND dlt_ysno = 'N'
     </update>
-
+    
     <!--
         설명     : 기본배송주소 자동설정 (순번이 가장 빠른 것 순)
         작성일자  : 2021. 11. 24.
         작성자   : seohee.ko@kyobobook.com
     -->
     <update id="updateDeliveryAddress" parameterType="java.lang.String">
-     UPDATE /* DeliveryWriterMapper.updateDeliveryAddress @@ 삭제예정 @@ */
-            eos.t_so_dlvr_addr_m
+     UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
+            eos.t_so_dlvr_addr_m 
         SET bsc_dlpn_ysno = 'Y'
       WHERE mmbr_num = #{mmbrNum}
         AND dlt_ysno = 'N'

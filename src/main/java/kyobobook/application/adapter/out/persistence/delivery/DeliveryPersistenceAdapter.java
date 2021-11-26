@@ -40,11 +40,11 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     private DeliveryWriterMapper writer;
 
     @Override
-    public List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception {
+    public List<TSoDlvrAddrMEntity> selectDeliveryList(String searchMmbrNum) throws Exception {
 
         log.debug("########### 배송지 목록조회 Adapter :: ");
 
-        List<TSoDlvrAddrMEntity> data = this.reader.selectDeliveryList();
+        List<TSoDlvrAddrMEntity> data = this.reader.selectDeliveryList(searchMmbrNum);
 
         return data;
 

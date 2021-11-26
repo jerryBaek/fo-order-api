@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -52,12 +51,12 @@ public class RestDeliveryController {
      * @description : 배송지 목록조회
      * @return
      */
-    @GetMapping(value = "/api/v1/order/deliveryList")
-    public ResponseMessage selectDeliveryList() {
-
-        log.debug("########### 배송지 목록조회 Controller :: ");
-
-        return deliveryService.selectDeliveryList();
+    @ApiOperation(value = "배송지 목록 조회", notes = "배송지 정보를 조회합니다.")
+    @ApiImplicitParam(name = "searchMmbrNum", value = "회원번호", required = true, dataType = "string", paramType = "param", defaultValue = "62210667167")
+    @GetMapping(value = "/api/v1/order/deliveryList/{searchMmbrNum}")
+    public ResponseMessage selectDeliveryList(
+            @PathVariable(name = "searchMmbrNum") String searchMmbrNum) {
+        return deliveryService.selectDeliveryList(searchMmbrNum);
     }
 
     /**
@@ -69,7 +68,7 @@ public class RestDeliveryController {
      * @return
      */
     @ApiOperation(value = "배송지 삭제여부 갱신", notes = "배송지 삭제여부 정보를 갱신한다.")
-    @ApiImplicitParam(name = "dlpnSrmb", value = "순번", required = true, dataType = "Integer", paramType = "param", defaultValue = "3")
+    @ApiImplicitParam(name = "dlpnSrmb", value = "배송지순번", required = true, dataType = "Integer", paramType = "param", defaultValue = "3")
     @DeleteMapping(value = "/api/v1/order/deliveryList/{dlpnSrmb}")
     public ResponseMessage deleteDeliveryAddress(@PathVariable String dlpnSrmb) {
 
@@ -78,6 +77,14 @@ public class RestDeliveryController {
         return deliveryService.deleteDeliveryAddress(dlpnSrmb);
     }
 
+    /**
+     * @Method : addDeliveryAddress
+     * @Date : 2021. 11. 26.
+     * @author : kimsehoon@kyobobook.com
+     * @description : 배송주소록 추가
+     * @param deliveryAddress 배송주소
+     * @return
+     */
     @ApiOperation(value = "배송주소록 추가", notes = "배송주소록을 추가한다.")
     @ApiImplicitParam(name = "deliveryAddress", value = "배송주소", required = true, dataType = "DeliveryAddress", paramType = "body")
     @PostMapping("/api/v1/delivery/address")

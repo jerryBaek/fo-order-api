@@ -28,7 +28,7 @@ public interface DeliveryPort {
      * @description : 배송지 목록 조회
      * @return
      */
-    ResponseMessage selectDeliveryList();
+    ResponseMessage selectDeliveryList(String searchMmbrNum);
 
     /**
      * @Method : deleteDeliveryAddress

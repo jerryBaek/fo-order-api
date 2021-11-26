@@ -24,7 +24,15 @@ import kyobobook.application.domain.delivery.DeliveryAddress;
  */
 public interface DeliveryPersistencePort {
 
-    List<TSoDlvrAddrMEntity> selectDeliveryList() throws Exception;
+    /**
+     * @Method : selectDeliveryList
+     * @Date : 2021. 11. 25.
+     * @author : kimsehoon@kyobobook.com
+     * @description : 배송목록 조회
+     * @return
+     * @throws Exception
+     */
+    List<TSoDlvrAddrMEntity> selectDeliveryList(String searchMmbrNum) throws Exception;
 
     /**
      * @Method : deleteDeliveryAddress
@@ -55,7 +63,7 @@ public interface DeliveryPersistencePort {
      * @return
      */
     Integer updateDeliveryAddressDefaultClear(String mmbrNum);
-    
+
     /**
      * @Method      : getDeliveryAddress
      * @Date        : 2021. 11. 25.
