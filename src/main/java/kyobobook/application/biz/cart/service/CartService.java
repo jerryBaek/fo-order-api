@@ -11,24 +11,27 @@
 package kyobobook.application.biz.cart.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.biz.cart.port.in.CartPort;
 import kyobobook.application.biz.cart.port.out.CartPersistencePort;
 import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.common.Constants;
 import kyobobook.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Project     : fo-order-api
- * @FileName    : CartService.java
- * @Date        : 2021. 11. 11.
- * @author      : kimsehoon@kyobobook.com
+ * @Project : fo-order-api
+ * @FileName : CartService.java
+ * @Date : 2021. 11. 11.
+ * @author : kimsehoon@kyobobook.com
  * @description : 장바구니 서비스
  */
 @Slf4j
@@ -47,104 +50,95 @@ public class CartService implements CartPort {
     @Deprecated
     @Override
     public ResponseMessage selectCartList() {
-        
+
         ResponseMessage responseMessage = null;
-        
+
         try {
             List<TmSpbkEntity> returnData = this.cartRepository.selectCartList();
-            responseMessage = ResponseMessage.builder()
-                    .data(returnData) // 조회
-                    .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
-                    .build();
+            responseMessage = ResponseMessage.builder().data(returnData).statusCode(HttpStatus.OK.value())
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
         }
         return responseMessage;
     }
 
     @Override
     public ResponseMessage updateCartCheck(Cart cart) {
-        
+
         ResponseMessage responseMessage = null;
-        
+
         try {
-            //int updateCnt = cartRepository.updateCartCheck(cart);
-            responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.updateCartCheck(cart)) 
+            // int updateCnt = cartRepository.updateCartCheck(cart);
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.updateCartCheck(cart))
                     .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
-                    .build();
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
         }
         return responseMessage;
     }
 
     @Override
     public ResponseMessage removeProduct(String unfyCmdtId) {
-        
+
         ResponseMessage responseMessage = null;
-        
+
         try {
-            
-            responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.deleteProduct(unfyCmdtId)) 
+
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(unfyCmdtId))
                     .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
-                    .build();
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
-            
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
-            
+
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
+
         }
-        
+
         return responseMessage;
-        
+
     }
-    
+
     @Override
     public ResponseMessage removeProducts() {
-        
+
         ResponseMessage responseMessage = null;
-        
+
         // TODO 회원세션에서 정보 얻어와야 함
         String memno = "asdfasdfasd";
-        
+
         try {
-            
-            responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.deleteProduct(memno)) 
+
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(memno))
                     .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete"))
-                    .build();
-            
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
+
         } catch (Exception e) {
-            
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
-            
+
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
+
         }
-        
+
         return responseMessage;
-        
+
     }
-    
+
     @Override
     public ResponseMessage selectNewProductCode(String memberId) {
         ResponseMessage responseMessage = null;
 
         try {
-            responseMessage = ResponseMessage.builder()
-                    .data(this.cartRepository.selectNewProductCode(memberId)) // 조회
-                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.selectNewProductCode(memberId))
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
         }
         return responseMessage;
     }
-    
+
 }

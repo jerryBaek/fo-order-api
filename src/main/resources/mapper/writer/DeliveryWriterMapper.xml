@@ -107,7 +107,7 @@
     -->
     <update id="updateDeliveryAddress" parameterType="java.lang.String">
      UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
-            eos.t_so_dlvr_addr_m 
+            eos.t_so_dlvr_addr_m
         SET bsc_dlpn_ysno = 'Y'
       WHERE mmbr_num = #{mmbrNum}
         AND dlt_ysno = 'N'
