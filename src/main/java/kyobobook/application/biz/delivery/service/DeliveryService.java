@@ -83,20 +83,23 @@ public class DeliveryService implements DeliveryPort {
         try {
             
             // 배송지 상태 확인
-            DeliveryAddress valiDeliveryAddress = this.deliveryRepository.getDeliveryAddress(deliveryAddress);
+            //DeliveryAddress valiDeliveryAddress = this.deliveryRepository.getDeliveryAddress(deliveryAddress);
             
-            if(valiDeliveryAddress != null) {
+            //if(valiDeliveryAddress != null) {
+
+                int result = this.deliveryRepository.deleteDeliveryAddress(deliveryAddress);
                 
-                responseMessage = ResponseMessage.builder().data(this.deliveryRepository.deleteDeliveryAddress(deliveryAddress))
-                        .statusCode(HttpStatus.OK.value())
-                        .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
-                
-                // 기본배송지여부 갱신
-                this.deliveryRepository.updateDeliveryAddress(deliveryAddress.getMmbrNum());
-                
-            } else {
-                // 삭제할 데이터 없음
-            }
+                if(result > 0 ) {
+                    responseMessage = ResponseMessage.builder().data(deliveryAddress)
+                                                               .statusCode(HttpStatus.OK.value())
+                                                               .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
+                } else {
+                    responseMessage = ResponseMessage.builder().data(deliveryAddress)
+                                                               .statusCode(HttpStatus.NO_CONTENT.value())
+                                                               .resultMessage(Constants.MessageSource.ERROR).build();
+                }
+            //} else {
+            //}
 
         } catch (Exception e) {
             throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);

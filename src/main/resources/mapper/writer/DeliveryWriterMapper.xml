@@ -13,7 +13,6 @@
            , bsc_dlpn_ysno = 'N'
        WHERE mmbr_num = #{mmbrNum}
          AND dlpn_srmb = #{dlpnSrmb}
-         AND bsc_dlpn_ysno = 'N'
     </update>
 
     <!--
