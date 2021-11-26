@@ -109,5 +109,22 @@ public class RestCartController {
         return this.cartService.removeProducts();
 
     }
+    
+    /**
+     * @Method      : selectNewProductCode
+     * @Date        : 2021. 11. 25.
+     * @author      : eszho@kyobobook.com
+     * @description : 회원별 장바구니 최근 상품코드 리턴
+     * @param       : meberId
+     * @return      : newProductCode
+     */
+    @ApiOperation(value = "회원별 장바구니 최근 상품코드 리턴", notes = "회원별 장바구니 최근 상품코드 리턴한다.")
+    @GetMapping(value = "/api/v1/order/cart/newProductCode/{memberId}")
+    public ResponseMessage selectNewProductCode(@PathVariable String memberId) 
+    {
+
+        return this.cartService.selectNewProductCode(memberId);
+
+    }
 
 }

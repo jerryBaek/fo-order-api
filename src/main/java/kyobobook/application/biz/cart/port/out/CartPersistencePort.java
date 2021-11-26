@@ -12,6 +12,7 @@ package kyobobook.application.biz.cart.port.out;
 
 import java.util.List;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
+import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.application.domain.cart.Cart;
 
 /**
@@ -49,5 +50,16 @@ public interface CartPersistencePort {
      * @throws Exception 
      */
     Integer deleteProducts(String memno) throws Exception;
+    
+    /**
+     * @Method      : selectNewProductData
+     * @Date        : 2021. 11. 25.
+     * @author      : eszho@kyobobook.com
+     * @description : 
+     * @param orderId
+     * @return
+     * @throws Exception
+     */
+    TestEntity selectNewProductCode(String memberId) throws Exception;
     
 }

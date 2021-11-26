@@ -15,6 +15,23 @@
         ORDER BY AMND_DTTM desc
         LIMIT 10 OFFSET 0
     </select>
+    
+    <!--
+    설명     : 회원의 최근 상품코드 정보 리턴
+    작성일자  : 2021. 11. 25.
+    작성자   : eszho@kyobobook.com
+    -->
+    <select id="selectNewProductCode" parameterType="java.lang.String" resultType="TestEntity">
+    SELECT /* CartWriterMapper.selectNewProductCode */
+           unfy_cmdt_id as memberId
+      FROM ( SELECT unfy_cmdt_id
+                  , rank() OVER(partition by mmbr_num order by amnd_dttm desc)
+               from eos.tm_spbk 
+              WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+              group by  mmbr_num,unfy_cmdt_id,  amnd_dttm)
+     WHERE rank = 1
+    </select>
+    
 
 </mapper>
 

@@ -61,4 +61,13 @@ public interface CartPort {
      */
     ResponseMessage removeProducts();
 
+    /**
+     * @Method      : selectNewProductCode
+     * @Date        : 2021. 11. 25.
+     * @author      : eszho@kyobobook.com
+     * @description : 회원별 장바구니 최근 상품코드 리턴
+     * @return
+     */
+    ResponseMessage selectNewProductCode(String memberId);
+    
 }

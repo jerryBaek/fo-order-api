@@ -15,6 +15,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
+import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
 import kyobobook.application.biz.cart.port.out.CartPersistencePort;
 import kyobobook.application.domain.cart.Cart;
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +76,13 @@ public class CartPersistenceAdapter implements CartPersistencePort {
     public Integer deleteProducts(String memno) throws Exception {
 
         return this.writer.deleteProducts(memno);
+        
+    }
+    
+    @Override
+    public TestEntity selectNewProductCode(String memberId) throws Exception {
+
+        return this.reader.selectNewProductCode(memberId);
         
     }
 

@@ -42,5 +42,6 @@ public class TestEntity {
     private LocalDateTime cretDttm;
     private String amnrId;
     private LocalDateTime amndDttm;
+    private String memberId;
 
 }

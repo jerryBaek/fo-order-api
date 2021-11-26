@@ -2,7 +2,7 @@
 <configuration debug="true">
 
 <!-- 	<property name="LOG_DIR" value="${user.dir}/logs/app" /> -->
-	<property name="LOG_DIR" value="D:/kyobo/logs/app" />
+	<property name="LOG_DIR" value="C:/kyobo/logs/app" />
 	
     <!-- property :: LOG_PREFIX  -->
     <springProperty scope="context" name="LOG_PREFIX" source="spring.application.name" />

@@ -131,5 +131,20 @@ public class CartService implements CartPort {
         return responseMessage;
         
     }
+    
+    @Override
+    public ResponseMessage selectNewProductCode(String memberId) {
+        ResponseMessage responseMessage = null;
 
+        try {
+            responseMessage = ResponseMessage.builder()
+                    .data(this.cartRepository.selectNewProductCode(memberId)) // 조회
+                    .statusCode(HttpStatus.OK.value()).resultMessage("common.process.complete").build();
+
+        } catch (Exception e) {
+            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+        }
+        return responseMessage;
+    }
+    
 }
