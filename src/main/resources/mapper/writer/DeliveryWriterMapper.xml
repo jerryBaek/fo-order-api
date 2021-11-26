@@ -67,6 +67,7 @@
                                     'N'<!-- dlt_ysno -->
         FROM
             DUAL
+        <if test="MAX_INSERT_COUNT != null and MAX_INSERT_COUNT gt 0">
         WHERE
             #{MAX_INSERT_COUNT, jdbcType=NUMERIC} &gt; (  SELECT
 								                            COUNT(1)
@@ -76,6 +77,7 @@
 								                            mmbr_num = #{mmbrNum, jdbcType=VARCHAR}
 								                            AND dlt_ysno = 'N'
             )<!-- 등록된 배송지가 10개를 초과하는 경우 등록하지 않음 -->
+        </if>
     </insert>
 
     <update id="updateDeliveryAddressDefaultClear" parameterType="java.lang.String">
@@ -88,10 +90,10 @@
             AND bsc_dlpn_ysno = 'Y'
             AND dlt_ysno = 'N'
     </update>
-    
+
     <update id="updateDeliveryAddress" parameterType="java.lang.String">
      UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
-            eos.t_so_dlvr_addr_m 
+            eos.t_so_dlvr_addr_m
         SET bsc_dlpn_ysno = 'Y'
       WHERE mmbr_num = #{mmbrNum}
         AND dlt_ysno = 'N'
