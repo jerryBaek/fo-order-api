@@ -1,4 +1,4 @@
-// for gRPC 
+// for gRPC
 buildscript {
     repositories {
         maven{
@@ -37,21 +37,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.postgresql:postgresql:42.2.23'
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
-	
+
 	// for gRPC
 	implementation 'net.devh:grpc-server-spring-boot-starter:2.11.0.RELEASE'
     implementation 'net.devh:grpc-client-spring-boot-starter:2.11.0.RELEASE'
-	
+
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     implementation 'io.swagger:swagger-annotations:1.5.21'
     implementation 'io.swagger:swagger-models:1.5.21'
-    
+
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
-    	
+
+    // health check
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor('org.projectlombok:lombok:1.18.20')
-	
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
