@@ -61,9 +61,9 @@ public class RestCartController {
     }
 
     /**
-     * @Method      : updateCartCheck
-     * @Date        : 2021. 11. 10.
-     * @author      : seohee.ko@kyobobook.com
+     * @Method : updateCartCheck
+     * @Date : 2021. 11. 10.
+     * @author : seohee.ko@kyobobook.com
      * @description : 장바구니 체크박스 업데이트
      * @param unfyCmdtId
      * @return
@@ -71,8 +71,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 상품 선택여부 갱신", notes = "장바구니 상품 선택여부 정보를 갱신한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string", paramType = "path", defaultValue = "C20000000B54B")
     @PutMapping(value = "/api/v1/order/cart/updateCartCheck")
-    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {    // @PathVariable String unfyCmdtId
-        
+    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {
+
         log.debug("================체크박스 업데이트");
         return this.cartService.updateCartCheck(cart);
     }
@@ -86,7 +86,7 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
-    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string", paramType = "path", defaultValue = "111111")
+    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string", paramType = "path", defaultValue = "C160000265390")
     @DeleteMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
     public ResponseMessage removeProduct(@PathVariable String unfyCmdtId) {
 
@@ -99,7 +99,6 @@ public class RestCartController {
      * @Date : 2021. 11. 11.
      * @author : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
-     * @param checkList
      * @return
      */
     @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
@@ -109,19 +108,19 @@ public class RestCartController {
         return this.cartService.removeProducts();
 
     }
-    
+
     /**
-     * @Method      : selectNewProductCode
-     * @Date        : 2021. 11. 25.
-     * @author      : eszho@kyobobook.com
+     * @Method : selectNewProductCode
+     * @Date : 2021. 11. 25.
+     * @author : eszho@kyobobook.com
      * @description : 회원별 장바구니 최근 상품코드 리턴
-     * @param       : meberId
-     * @return      : newProductCode
+     * @param : memberId
+     * @return : newProductCode
      */
     @ApiOperation(value = "회원별 장바구니 최근 상품코드 리턴", notes = "회원별 장바구니 최근 상품코드 리턴한다.")
+    @ApiImplicitParam(name = "memberId", value = "회원아이디", required = true, dataType = "string", paramType = "path", defaultValue = "62012413658")
     @GetMapping(value = "/api/v1/order/cart/newProductCode/{memberId}")
-    public ResponseMessage selectNewProductCode(@PathVariable String memberId) 
-    {
+    public ResponseMessage selectNewProductCode(@PathVariable String memberId) {
 
         return this.cartService.selectNewProductCode(memberId);
 

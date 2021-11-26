@@ -55,8 +55,8 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
 
         log.debug("########### 배송지 삭제 Adapter :: ");
 
-        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder().mmbrNum(deliveryAddress.getMmbrNum()).dlpnSrmb(deliveryAddress.getDlpnSrmb())
-                .build();
+        TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder().mmbrNum(deliveryAddress.getMmbrNum())
+                .dlpnSrmb(deliveryAddress.getDlpnSrmb()).build();
 
         return this.writer.deleteDeliveryAddress(tSoDlvrAddrMEntity);
     }
@@ -78,17 +78,15 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     @Override
     public DeliveryAddress getDeliveryAddress(DeliveryAddress searchDeliveryAddress) {
         TSoDlvrAddrMEntity tSoDlvrAddrMEntity = this.reader.getDeliveryAddress(searchDeliveryAddress);
-        
-        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
-                                                         .bscDlpnYsno(tSoDlvrAddrMEntity.getBscDlpnYsno())
-                                                         .dlpnSrmb(tSoDlvrAddrMEntity.getDlpnSrmb())
-                                                         .build();
+
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder().bscDlpnYsno(tSoDlvrAddrMEntity.getBscDlpnYsno())
+                .dlpnSrmb(tSoDlvrAddrMEntity.getDlpnSrmb()).build();
         return deliveryAddress;
     }
 
     @Override
     public Integer updateDeliveryAddress(String mmbrNum) {
-        
+
         return this.writer.updateDeliveryAddress(mmbrNum);
     }
 

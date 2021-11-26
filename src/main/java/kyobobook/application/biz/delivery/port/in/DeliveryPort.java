@@ -21,6 +21,7 @@ import kyobobook.application.domain.delivery.DeliveryAddress;
  * @description : 배송 포트
  */
 public interface DeliveryPort {
+
     /**
      * @Method : selectDeliveryList
      * @Date : 2021. 11. 24.
@@ -41,10 +42,10 @@ public interface DeliveryPort {
     ResponseMessage deleteDeliveryAddress(String dlpnSrmb);
 
     /**
-     * @Method : addDeliveryAddress
+     * @Method : insertDeliveryAddress
      * @Date : 2021. 11. 24.
      * @author : kimsehoon@kyobobook.com
-     * @description : 배송주소 추가 (배송주소가 10개를 초과하는 경우 등록하지 않음)
+     * @description : 배송주소 추가
      * @param deliveryAddress 배송주소
      * @return
      */

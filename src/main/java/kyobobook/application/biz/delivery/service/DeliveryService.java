@@ -59,10 +59,10 @@ public class DeliveryService implements DeliveryPort {
             List<TSoDlvrAddrMEntity> returnData = this.deliveryRepository.selectDeliveryList();
             responseMessage = ResponseMessage.builder().data(returnData) // 조회
                     .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
         }
         return responseMessage;
     }
@@ -73,33 +73,31 @@ public class DeliveryService implements DeliveryPort {
         log.debug("########### 배송지 삭제 Service :: ");
 
         ResponseMessage responseMessage = null;
-        
+
         // TODO mmbrNum 세션에서 획득해야함.
-        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
-                                                         .mmbrNum("62210667167")
-                                                         .dlpnSrmb(dlpnSrmb)
-                                                         .build();
+        DeliveryAddress deliveryAddress = DeliveryAddress.builder().mmbrNum("62210667167").dlpnSrmb(dlpnSrmb).build();
 
         try {
-            
+
             // 배송지 상태 확인
             DeliveryAddress valiDeliveryAddress = this.deliveryRepository.getDeliveryAddress(deliveryAddress);
-            
-            if(valiDeliveryAddress != null) {
-                
-                responseMessage = ResponseMessage.builder().data(this.deliveryRepository.deleteDeliveryAddress(deliveryAddress))
+
+            if (valiDeliveryAddress != null) {
+
+                responseMessage = ResponseMessage.builder()
+                        .data(this.deliveryRepository.deleteDeliveryAddress(deliveryAddress))
                         .statusCode(HttpStatus.OK.value())
-                        .resultMessage(this.messageSource.getMessage("common.process.complete")).build();
-                
+                        .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
+
                 // 기본배송지여부 갱신
                 this.deliveryRepository.updateDeliveryAddress(deliveryAddress.getMmbrNum());
-                
+
             } else {
                 // 삭제할 데이터 없음
             }
 
         } catch (Exception e) {
-            throw new BizRuntimeException(messageSource.getMessage("common.process.error"), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
         }
         return responseMessage;
     }
@@ -119,7 +117,7 @@ public class DeliveryService implements DeliveryPort {
 
                 Integer clearCount = this.deliveryRepository
                         .updateDeliveryAddressDefaultClear(deliveryAddress.getMmbrNum());
-                log.debug("기본배송지로 등록하므로 다른 배송주소에 대한 기본배송지 설정을 {}개를 해제하였습니다.", clearCount);
+                log.debug("기본배송지로 등록하므로 다른 배송주소에 대한 기본배송지 설정을 해제하였습니다. ({}개)", clearCount);
 
             }
 
@@ -142,7 +140,7 @@ public class DeliveryService implements DeliveryPort {
 
         } catch (Exception e) {
 
-            throw new BizRuntimeException(messageSource.getMessage(Constants.MessageSource.ERROR), e);
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
 
         }
 

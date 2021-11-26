@@ -55,7 +55,7 @@ public interface DeliveryPersistencePort {
      * @return
      */
     Integer updateDeliveryAddressDefaultClear(String mmbrNum);
-    
+
     /**
      * @Method      : getDeliveryAddress
      * @Date        : 2021. 11. 25.

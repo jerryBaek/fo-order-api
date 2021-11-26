@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.link.port.in.LinkPort;
 import kyobobook.application.domain.common.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
-
 
 /**
  * @Project : fo-order-api
@@ -48,11 +48,9 @@ public class RestLinkController {
      * @return
      */
     @ApiOperation(value = "링크제휴정보 정책 조회", notes = "링크제휴주문 정책 정보를 조회합니다.")
-    @ApiImplicitParam(name = "linkDvsnCode", value = "링크구분코드", required = true, dataType = "string",
-            paramType = "query", defaultValue = "CCS")
+    @ApiImplicitParam(name = "linkDvsnCode", value = "링크구분코드", required = true, dataType = "string", paramType = "path", defaultValue = "CCS")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdr/{linkDvsnCode}")
-    public ResponseMessage selectLinkCoprOrdrData(
-            @PathVariable(name = "linkDvsnCode") String linkDvsnCode) {
+    public ResponseMessage selectLinkCoprOrdrData(@PathVariable(name = "linkDvsnCode") String linkDvsnCode) {
         return linkInService.selectLinkCoprOrdrData(linkDvsnCode);
     }
 
@@ -65,11 +63,9 @@ public class RestLinkController {
      * @return
      */
     @ApiOperation(value = "링크제휴주문 상품분류 정보 조회", notes = "링크제휴주문 상품분류리스트 정보를 조회합니다.")
-    @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true,
-            dataType = "string", paramType = "query", defaultValue = "COPR16040016")
+    @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true, dataType = "string", paramType = "path", defaultValue = "COPR16040016")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdrCmdtClst/{coprOrdrPlcId}")
-    public ResponseMessage selectLinkCoprOrdrCmdtClstData(
-            @PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
+    public ResponseMessage selectLinkCoprOrdrCmdtClstData(@PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
         return linkInService.selectLinkCoprOrdrCmdtClstList(coprOrdrPlcId);
     }
 
@@ -82,11 +78,9 @@ public class RestLinkController {
      * @return
      */
     @ApiOperation(value = "링크제휴주문 지불방법 정보 조회", notes = "링크제휴주문 지불방법리스트 정보를 조회합니다.")
-    @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true,
-            dataType = "string", paramType = "query", defaultValue = "COPR16040016")
+    @ApiImplicitParam(name = "coprOrdrPlcId", value = "제휴주문정책ID", required = true, dataType = "string", paramType = "path", defaultValue = "COPR16040016")
     @GetMapping(value = "/api/v1/order/link/linkCoprOrdrPymtMthd/{coprOrdrPlcId}")
-    public ResponseMessage selectLinkCoprOrdrPymtMthd(
-            @PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
+    public ResponseMessage selectLinkCoprOrdrPymtMthd(@PathVariable(name = "coprOrdrPlcId") String coprOrdrPlcId) {
         return linkInService.selectLinkCoprOrdrPymtMthdList(coprOrdrPlcId);
     }
 }
