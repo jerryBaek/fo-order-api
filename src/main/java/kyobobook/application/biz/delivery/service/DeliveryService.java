@@ -68,7 +68,7 @@ public class DeliveryService implements DeliveryPort {
     }
 
     @Override
-    public ResponseMessage deleteDeliveryAddress(Integer dlpnSrmb) {
+    public ResponseMessage deleteDeliveryAddress(String dlpnSrmb) {
 
         log.debug("########### 배송지 삭제 Service :: ");
 

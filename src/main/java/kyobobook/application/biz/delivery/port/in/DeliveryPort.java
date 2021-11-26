@@ -38,7 +38,7 @@ public interface DeliveryPort {
      * @param dlpnSrmb
      * @return
      */
-    ResponseMessage deleteDeliveryAddress(Integer dlpnSrmb);
+    ResponseMessage deleteDeliveryAddress(String dlpnSrmb);
 
     /**
      * @Method : addDeliveryAddress

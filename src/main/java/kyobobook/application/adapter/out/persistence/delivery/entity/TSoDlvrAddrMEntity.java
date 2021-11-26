@@ -32,7 +32,7 @@ public class TSoDlvrAddrMEntity extends BaseEntity {
     /** 회원번호 */
     private String mmbrNum;
     /** 배송지순번 */
-    private int dlpnSrmb;
+    private String dlpnSrmb;
     /** 배송지명 */
     private String dlpnName;
     /** 전화번호 */

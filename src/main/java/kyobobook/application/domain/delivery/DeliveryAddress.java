@@ -38,7 +38,7 @@ public class DeliveryAddress {
     @ApiModelProperty(hidden = true)
     private String mmbrNum;
     /** 배송지순번 */
-    private Integer dlpnSrmb = 0;
+    private String dlpnSrmb;
     /** 배송지명 */
     @ApiModelProperty(example = "시그니엘")
     private String name;
