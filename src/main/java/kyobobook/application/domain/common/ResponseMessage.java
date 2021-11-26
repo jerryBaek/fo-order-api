@@ -28,8 +28,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseMessage {
 
+public class ResponseMessage {
     Object data;            // 처리 결과 물
     int statusCode;         // 처리 상태 코드
     String resultMessage;   // 처리 결과 메세지
