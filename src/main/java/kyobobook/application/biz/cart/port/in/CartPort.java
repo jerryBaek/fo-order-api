@@ -69,5 +69,15 @@ public interface CartPort {
      * @return
      */
     ResponseMessage selectNewProductCode(String memberId);
+
+    /**
+     * @Method      : updateCartCheckAll
+     * @Date        : 2021. 11. 29.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 체크여부 전체 업데이트
+     * @param chekVal
+     * @return
+     */
+    ResponseMessage updateCartCheckAll(String chekVal);
     
 }

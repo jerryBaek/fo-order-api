@@ -86,4 +86,9 @@ public class CartPersistenceAdapter implements CartPersistencePort {
         
     }
 
+    @Override
+    public Integer updateCartCheckAll(String chekVal) {
+        return this.writer.updateCartCheckAll(chekVal);
+    }
+
 }

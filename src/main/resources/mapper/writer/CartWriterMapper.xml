@@ -15,6 +15,7 @@
       <foreach collection="unfyCmdtIdList" item="unfyCmdtId" open="(" close=")" separator=",">
                #{unfyCmdtId}
       </foreach>
+           AND spbk_dvsn_code = '002'
     </update>
 
     <!--
@@ -28,6 +29,8 @@
             eos.tm_spbk
         WHERE
             unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
+          AND 
+            spbk_dvsn_code = '002'
     </delete>
 
     <!--
@@ -41,7 +44,22 @@
             eos.tm_spbk
         WHERE
             mmbr_num = #{memno, jdbcType=VARCHAR}
+          AND 
+            spbk_dvsn_code = '002'
     </delete>
+    
+    <!--
+        설명     : 장바구니 체크여부 전체 업데이트
+        작성일자  : 2021. 11. 129.
+        작성자   : seohee.ko@kyobobook.com
+    -->
+    <update id="updateCartCheckAll" parameterType="java.lang.String">
+     UPDATE /* CartWriterMapper.updateCartCheckAll */
+            eos.tm_spbk 
+        SET chek_ysno = #{chkVal}
+      WHERE spbk_dvsn_code  = '002'
+        AND dlt_ysno = 'N'
+    </update>
 
 </mapper>
 
