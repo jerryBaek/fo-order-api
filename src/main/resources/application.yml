@@ -57,4 +57,5 @@ grpc:
 
 logging:
   level:
-    root: ${LOG_LEVEL}
+    root: ${LOGGING_LEVEL_ROOT} 
+    kyobobook: ${LOGGING_LEVEL_KYOBOBOOK}
