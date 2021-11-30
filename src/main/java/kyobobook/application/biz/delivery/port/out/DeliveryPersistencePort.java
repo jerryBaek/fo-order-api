@@ -83,4 +83,14 @@ public interface DeliveryPersistencePort {
      */
     Integer updateDeliveryAddress(String mmbrNum);
 
+    /**
+     * @Method      : updateDeliveryAddress
+     * @Date        : 2021. 11. 30.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송주소록 수정
+     * @param deliveryAddress
+     * @return
+     */
+    Boolean updateDeliveryAddress(DeliveryAddress deliveryAddress);
+
 }

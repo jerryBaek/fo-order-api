@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -95,6 +96,21 @@ public class RestDeliveryController {
 
         return this.deliveryService.insertDeliveryAddress(deliveryAddress);
 
+    }
+    
+    /**
+     * @Method : updateDeliveryAddress
+     * @Date : 2021. 11. 30.
+     * @author : seohee.ko@kyobobook.com
+     * @description : 배송주소록 수정
+     * @param deliveryAddress
+     * @return
+     */
+    @ApiOperation(value = "배송주소록 수정", notes = "배송주소록을 수정한다.")
+    @PutMapping(value = "/api/v1/delivery/address")
+    public ResponseMessage updateDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
+
+        return this.deliveryService.updateDeliveryAddress(deliveryAddress);
     }
 
 }

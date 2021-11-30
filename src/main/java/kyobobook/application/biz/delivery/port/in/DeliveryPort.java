@@ -50,4 +50,14 @@ public interface DeliveryPort {
      */
     ResponseMessage insertDeliveryAddress(DeliveryAddress deliveryAddress);
 
+    /**
+     * @Method : updateDeliveryAddress
+     * @Date : 2021. 11. 30.
+     * @author : seohee.ko@kyobobook.com
+     * @description : 배송주소록 수정
+     * @param deliveryAddress
+     * @return
+     */
+    ResponseMessage updateDeliveryAddress(DeliveryAddress deliveryAddress);
+
 }

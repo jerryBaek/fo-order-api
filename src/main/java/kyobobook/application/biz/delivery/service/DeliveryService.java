@@ -153,4 +153,27 @@ public class DeliveryService implements DeliveryPort {
 
     }
 
+    @Override
+    public ResponseMessage updateDeliveryAddress(DeliveryAddress deliveryAddress) {
+        
+        ResponseMessage responseMessage = null;
+        
+        // TODO 회원주소 세션에서 가져와야 함
+        deliveryAddress.setMmbrId("kimsehoon@kyobobook.com");
+        deliveryAddress.setMmbrNum("62210667167");
+        
+        try {
+            
+            Boolean result = this.deliveryRepository.updateDeliveryAddress(deliveryAddress);
+            
+        } catch (Exception e) {
+
+            throw new BizRuntimeException(messageSource.getMessage(Constants.MessageSource.ERROR), e);
+
+        }
+        
+        return null;
+        
+    }
+
 }

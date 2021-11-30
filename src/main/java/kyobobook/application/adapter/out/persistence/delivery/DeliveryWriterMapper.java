@@ -12,6 +12,7 @@ package kyobobook.application.adapter.out.persistence.delivery;
 
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMInsertEntity;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -32,7 +33,7 @@ public interface DeliveryWriterMapper {
      * @param tSoDlvrAddrMEntity
      * @return
      */
-    Integer deleteDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
+    public Integer deleteDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
 
     /**
      * @Method : insertTSoDlvrAddrM
@@ -55,13 +56,23 @@ public interface DeliveryWriterMapper {
     public Integer updateDeliveryAddressDefaultClear(String mmbrNum);
 
     /**
-     * @Method      : updateDeliveryAddress
-     * @Date        : 2021. 11. 25.
-     * @author      : seohee.ko@kyobobook.com
+     * @Method : updateDeliveryAddress
+     * @Date : 2021. 11. 25.
+     * @author : seohee.ko@kyobobook.com
      * @description : 사용자 배송지 기본배송지여부 상태 갱신
      * @param mmbrNum
      * @return
      */
-    Integer updateDeliveryAddress(String mmbrNum);
+    public Integer updateBscDlpnYsno(String mmbrNum);
+
+    /**
+     * @Method : updateDeliveryAddress
+     * @Date : 2021. 11. 30.
+     * @author : seohee.ko@kyobobook.com
+     * @description : 배송주소록 수정
+     * @param tSoDlvrAddrMInsertEntity
+     * @return
+     */
+    public Boolean updateDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
 
 }

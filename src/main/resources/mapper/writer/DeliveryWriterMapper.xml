@@ -104,8 +104,8 @@
         작성일자  : 2021. 11. 24.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <update id="updateDeliveryAddress" parameterType="java.lang.String">
-     UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
+    <update id="updateBscDlpnYsno" parameterType="java.lang.String">
+     UPDATE /* DeliveryWriterMapper.updateBscDlpnYsno */
             eos.t_so_dlvr_addr_m
         SET bsc_dlpn_ysno = 'Y'
       WHERE mmbr_num = #{mmbrNum}
@@ -115,6 +115,28 @@
                           WHERE mmbr_num = #{mmbrNum}
                             AND dlt_ysno = 'N'
                         )
+    </update>
+    
+    <!--
+        설명     : 배송주소록 수정
+        작성일자  : 2021. 11. 30.
+        작성자   : seohee.ko@kyobobook.com
+    -->
+    <update id="updateDeliveryAddress" parameterType="TSoDlvrAddrMEntity">
+     UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
+            eos.t_so_dlvr_addr_m 
+        SET dlpn_name = #{dlpnName},<!-- 배송지명 -->
+	        tlnm = #{tlnm},<!-- 전화번호 -->
+	        cphn_tlnm = #{cphnTlnm},<!-- 휴대전화전화번호 -->
+	        bsc_dlpn_ysno = #{bscDlpnYsno},<!-- 기본배송지여부 -->
+	        pssr_num = #{pssrNum},<!-- 우편번호 -->
+	        bsc_adrs = #{bscAdrs},<!-- 기본주소 -->
+	        dtl_adrs = #{dtlAdrs},<!-- 상세주소 -->
+	        dlpn_atnm_name = #{dlpnAtnmName},<!-- 배송지별칭명 -->
+	        amnr_id = #{amnrId},<!-- 수정자ID -->
+	        amnd_dttm = NOW()<!-- 수정일시 -->
+      WHERE mmbr_num = #{mmbrNum}
+        AND dlpn_srmb = #{dlpnSrmb}
     </update>
 
 </mapper>
