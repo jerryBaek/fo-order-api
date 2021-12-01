@@ -1,11 +1,9 @@
 /***************************************************
- * Copyright(c) 2021-2022 Kyobo Book Centre All right reserved.
- * This software is the proprietary information of Kyobo Book.
+ * Copyright(c) 2021-2022 Kyobo Book Centre All right reserved. This software is the proprietary
+ * information of Kyobo Book.
  *
- * Revision History
- * Author                         Date          Description
- * --------------------------     ----------    ----------------------------------------
- * smlee1@kyobobook.com           2021. 8. 17.  First Draft.
+ * Revision History Author Date Description -------------------------- ----------
+ * ---------------------------------------- smlee1@kyobobook.com 2021. 8. 17. First Draft.
  *
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
@@ -61,18 +59,20 @@ public class RestCartController {
     }
 
     /**
-     * @Method      : updateCartCheck
-     * @Date        : 2021. 11. 10.
-     * @author      : seohee.ko@kyobobook.com
+     * @Method : updateCartCheck
+     * @Date : 2021. 11. 10.
+     * @author : seohee.ko@kyobobook.com
      * @description : 장바구니 체크박스 업데이트
      * @param unfyCmdtId
      * @return
      */
     @ApiOperation(value = "장바구니 상품 선택여부 갱신", notes = "장바구니 상품 선택여부 정보를 갱신한다.")
-    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string", paramType = "path", defaultValue = "C20000000B54B")
+    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
+            paramType = "path", defaultValue = "C20000000B54B")
     @PutMapping(value = "/api/v1/order/cart/updateCartCheck")
-    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {    // @PathVariable String unfyCmdtId
-        
+    public ResponseMessage updateCartCheck(@RequestBody Cart cart) { // @PathVariable String
+                                                                     // unfyCmdtId
+
         log.debug("================체크박스 업데이트");
         return this.cartService.updateCartCheck(cart);
     }
@@ -86,7 +86,8 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
-    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string", paramType = "path", defaultValue = "111111")
+    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string",
+            paramType = "path", defaultValue = "111111")
     @DeleteMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
     public ResponseMessage removeProduct(@PathVariable String unfyCmdtId) {
 
@@ -109,22 +110,35 @@ public class RestCartController {
         return this.cartService.removeProducts();
 
     }
-    
+
     /**
-     * @Method      : selectNewProductCode
-     * @Date        : 2021. 11. 25.
-     * @author      : eszho@kyobobook.com
+     * @Method : selectNewProductCode
+     * @Date : 2021. 11. 25.
+     * @author : eszho@kyobobook.com
      * @description : 회원별 장바구니 최근 상품코드 리턴
-     * @param       : meberId
-     * @return      : newProductCode
+     * @param : meberId
+     * @return : newProductCode
      */
     @ApiOperation(value = "회원별 장바구니 최근 상품코드 리턴", notes = "회원별 장바구니 최근 상품코드 리턴한다.")
     @GetMapping(value = "/api/v1/order/cart/newProductCode/{memberId}")
-    public ResponseMessage selectNewProductCode(@PathVariable String memberId) 
-    {
+    public ResponseMessage selectNewProductCode(@PathVariable String memberId) {
 
         return this.cartService.selectNewProductCode(memberId);
 
+    }
+
+    /**
+     * @Method : updateCartCheckAll
+     * @Date : 2021. 11. 29.
+     * @author : seohee.ko@kyobobook.com
+     * @description : 장바구니 체크여부 전체 업데이트
+     * @param chekVal
+     * @return
+     */
+    @ApiOperation(value = "회원별 장바구니 전체선택시 체크여부 갱신", notes = "회원별 장바구니 전체선택시 체크여부를 갱신한다.")
+    @PutMapping(value = "/api/v1/order/cart/products/{chekVal}")
+    public ResponseMessage updateCartCheckAll(@PathVariable String chekVal) {
+        return this.cartService.updateCartCheckAll(chekVal);
     }
     
     /**
