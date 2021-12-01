@@ -23,7 +23,7 @@
     -->
     <select id="selectNewProductCode" parameterType="java.lang.String" resultType="TestEntity">
     SELECT /* CartWriterMapper.selectNewProductCode */
-           unfy_cmdt_id as memberId
+           unfy_cmdt_id AS unfyCmdtId
       FROM ( SELECT unfy_cmdt_id
                   , rank() OVER(partition by mmbr_num order by amnd_dttm desc)
                from eos.tm_spbk 
@@ -33,6 +33,233 @@
      limit 1
     </select>
     
+       
+    <!--
+    설명    : 장바구니 그룹별 목록 조회
+    작성일자  : 2021. 11. 29.
+    작성자   : eszho@kyobobook.com
+    -->
+    <select id="selectCartGroupList" parameterType="java.lang.String" resultType="TmSpbkEntity">
+            SELECT spbk_id                                                                  /** 장바구니 ID     **/
+           , spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+           , spbk_kind_code                                                                 /** 장바구니종류코드   **/
+           , decode(spbk_kind_code,'010','교보배송'
+                                 ,'020', '바로드림'
+                                 , '030', '업체배송'
+                                 , '040', '디지털배송'
+                                 , '050', '정기배송'
+                                 , '060', '중고장터'
+                                 , '070', '북모닝CEO'
+                                 , '080', '북토큰'
+                                 , '090', '분철'
+                                 , '없음')                                                   spbk_kind_name                                                                     
+           , unfy_cmdt_id                                                                   /** 통합상품ID      **/
+           , unt_itm_srmb                                                                   /** 단위품목순번     **/
+           , mmbr_num                                                                       /** 회원번호        **/
+           , requ_qntt                                                                      /** 요청수량        **/
+           , mmbr_ysno                                                                      /** 회원여부        **/
+           , frbe_ysno                                                                      /** 사은품여부       **/
+           , amnd_dttm            
+          FROM(
+                          ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                               , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                               , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                               , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                               , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                               , a.mmbr_num                                                                       /** 회원번호        **/
+                               , a.requ_qntt                                                                      /** 요청수량        **/
+                               , a.mmbr_ysno                                                                      /** 회원여부        **/
+                               , a.frbe_ysno                                                                      /** 사은품여부       **/
+                               , a.amnd_dttm  
+                              FROM eos.tm_spbk a
+                                 WHERE EXISTS (SELECT '1' 
+                                                                 FROM (   SELECT spbk_kind_code
+                                                                         , rank() OVER(order by max(amnd_dttm) desc)
+                                                                        FROM eos.tm_spbk 
+                                                                         WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                     GROUP BY spbk_kind_code) 
+                                                     WHERE RANK = 1  
+                                                               AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                 ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 2
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}                                                                  
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 3
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 4
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 5
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 6
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}   
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 7
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 8
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc)
+                                 union all
+                              ( select a.spbk_id                                                                      /** 장바구니 ID     **/
+                                   , a.spbk_dvsn_code                                                                 /** 장바구니구분코드  **/
+                                   , a.spbk_kind_code                                                                 /** 장바구니종류코드   **/                                                                                    
+                                   , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+                                   , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+                                   , a.mmbr_num                                                                       /** 회원번호        **/
+                                   , a.requ_qntt                                                                      /** 요청수량        **/
+                                   , a.mmbr_ysno                                                                      /** 회원여부        **/
+                                   , a.frbe_ysno                                                                      /** 사은품여부       **/
+                                   , a.amnd_dttm  
+                                  FROM eos.tm_spbk a
+                                     WHERE EXISTS (SELECT '1' 
+                                                                     FROM (   SELECT spbk_kind_code
+                                                                             , rank() OVER(order by max(amnd_dttm) desc)
+                                                                            FROM eos.tm_spbk 
+                                                                             WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                                         GROUP BY spbk_kind_code) 
+                                                         WHERE RANK = 9
+                                                                   AND spbk_kind_code = a.spbk_kind_code)
+                                     AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                     ORDER BY amnd_dttm desc))
+                                     
+    </select>
 
 </mapper>
 

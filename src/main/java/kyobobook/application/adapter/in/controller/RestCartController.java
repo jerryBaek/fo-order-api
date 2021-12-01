@@ -126,5 +126,18 @@ public class RestCartController {
         return this.cartService.selectNewProductCode(memberId);
 
     }
+    
+    /**
+     * @Method      : selectCartGroupList
+     * @Date        : 2021. 11. 09.
+     * @author      : eszho@kyobobook.com
+     * @description : 장바구니 그룹별 목록 조회
+     * @return
+     */
+    @GetMapping(value = "/api/v1/order/cart/cartGroupList/{memberId}")
+    public ResponseMessage selectCartGroupList(String memberId) {
+
+        return cartService.selectCartGroupList(memberId);
+    }
 
 }

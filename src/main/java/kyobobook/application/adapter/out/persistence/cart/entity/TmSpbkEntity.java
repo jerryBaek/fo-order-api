@@ -37,6 +37,7 @@ public class TmSpbkEntity {
 
     /** 장바구니구분코드 */
     private String spbkDvsnCode;
+    
 
     /** 장바구니종류코드 */
     private String spbkKindCode;
@@ -103,6 +104,13 @@ public class TmSpbkEntity {
 
     /** 단위품목순번 */
     private BigInteger untItmSrmb;
+    
+    /** 장바구니종류명 */
+    private String spbkKindName;
+
+
+    
+
     
     private String chkVal;
     private String[] unfyCmdtIdList;

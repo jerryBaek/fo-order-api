@@ -43,4 +43,14 @@ public interface CartReaderMapper {
      * @return
      */
     TestEntity selectNewProductCode(String memberId);
+    
+    /**
+     * @Method      : selectCartGroupList
+     * @Date        : 2021. 11. 29.
+     * @author      : eszho@kyobobook.com
+     * @description : 장바구니 그룹별 목록 조회
+     * @param       : memberId
+     * @return
+     */
+    List<TmSpbkEntity> selectCartGroupList(String memberId);
 }

@@ -85,5 +85,14 @@ public class CartPersistenceAdapter implements CartPersistencePort {
         return this.reader.selectNewProductCode(memberId);
         
     }
+    
+    @Override
+    public List<TmSpbkEntity> selectCartGroupList(String memberId) throws Exception {
+        
+        List<TmSpbkEntity> data = this.reader.selectCartGroupList(memberId);
+        
+        return data;
+    
+    }
 
 }

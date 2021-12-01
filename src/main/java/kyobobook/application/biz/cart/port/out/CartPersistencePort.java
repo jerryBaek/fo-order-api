@@ -62,4 +62,16 @@ public interface CartPersistencePort {
      */
     TestEntity selectNewProductCode(String memberId) throws Exception;
     
+    
+    /**
+     * @Method      : selectNewProductData
+     * @Date        : 2021. 11. 25.
+     * @author      : eszho@kyobobook.com
+     * @description : 
+     * @param orderId
+     * @return
+     * @throws Exception
+     */
+    List<TmSpbkEntity> selectCartGroupList(String memberId) throws Exception;
+    
 }

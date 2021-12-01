@@ -103,6 +103,8 @@ public class Cart {
     /** 단위품목순번 */
     private BigInteger untItmSrmb;
     
+    private String spbkKindName;
+    
     private String chkVal;
     private String[] unfyCmdtIdList;
 }
