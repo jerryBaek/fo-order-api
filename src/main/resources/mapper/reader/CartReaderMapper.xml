@@ -12,6 +12,8 @@
 		    *
         FROM
             eos.tm_spbk
+        WHERE spbk_dvsn_code = '002'
+          AND dlt_ysno = 'N'
         ORDER BY AMND_DTTM desc
         LIMIT 10 OFFSET 0
     </select>
@@ -260,6 +262,4 @@
                                      ORDER BY amnd_dttm desc))
                                      
     </select>
-
 </mapper>
-
