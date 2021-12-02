@@ -153,5 +153,18 @@ public class RestCartController {
 
         return cartService.selectCartGroupList(memberId);    
     }
+    
+    /**
+     * @Method : selectCartProduct
+     * @Date : 2021. 12. 2.
+     * @author : seohee.ko@kyobobook.com
+     * @description : 장바구니 특정상품 조회
+     * @param unfyCmdtId
+     * @return
+     */
+    @GetMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
+    public ResponseMessage selectCartProduct(@PathVariable String unfyCmdtId) {
+        return this.cartService.selectCartProduct(unfyCmdtId);
+    }
 
 }

@@ -100,4 +100,9 @@ public class CartPersistenceAdapter implements CartPersistencePort {
         return this.writer.updateCartCheckAll(chekVal);
     }
 
+    @Override
+    public TmSpbkEntity selectCartProduct(TmSpbkEntity tmSpbkEntity) {
+        return this.reader.selectCartProduct(tmSpbkEntity);
+    }
+
 }

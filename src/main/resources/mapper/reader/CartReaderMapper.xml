@@ -262,4 +262,20 @@
                                      ORDER BY amnd_dttm desc))
                                      
     </select>
+    
+    <!--
+    설명    : 장바구니 특정상품 조회
+    작성일자  : 2021. 12. 2.
+    작성자   : seohee.ko@kyobobook.com
+    -->
+    <select id="selectCartProduct" parameterType="TmSpbkEntity" resultType="TmSpbkEntity">
+     SELECT /* CartWriterMapper.selectCartProduct */
+            * 
+	   FROM eos.tm_spbk ts
+	  WHERE unfy_cmdt_id = #{unfyCmdtId}
+	    AND mmbr_num = #{mmbrNum}
+	    AND dlt_ysno = 'N'
+        AND spbk_dvsn_code = '002'
+    </select>
+    
 </mapper>

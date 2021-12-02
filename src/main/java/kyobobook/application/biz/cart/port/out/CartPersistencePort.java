@@ -83,5 +83,15 @@ public interface CartPersistencePort {
      * @throws Exception
      */
     List<TmSpbkEntity> selectCartGroupList(String memberId) throws Exception;
+
+    /**
+     * @Method      : selectCartProduct
+     * @Date        : 2021. 12. 2.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 특정상품 조회
+     * @param tmSpbkEntity
+     * @return
+     */
+    TmSpbkEntity selectCartProduct(TmSpbkEntity tmSpbkEntity);
     
 }
