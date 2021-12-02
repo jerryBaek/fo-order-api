@@ -49,5 +49,15 @@ public interface CartWriterMapper {
      * @param unfyCmdtId
      */
     Integer deleteProducts(String memno);
+
+    /**
+     * @Method      : updateCartCheckAll
+     * @Date        : 2021. 12. 2.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 
+     * @param chekVal
+     * @return
+     */
+    Integer updateCartCheckAll(String chekVal);
     
 }

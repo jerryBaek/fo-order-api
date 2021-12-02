@@ -42,6 +42,19 @@
         WHERE
             mmbr_num = #{memno, jdbcType=VARCHAR}
     </delete>
+    
+    <!--
+        설명     : 장바구니 체크여부 전체 업데이트
+        작성일자  : 2021. 12. 2.
+        작성자   : seohee.ko@kyobobook.com
+    -->
+    <update id="updateCartCheckAll" parameterType="java.lang.String">
+     UPDATE /* CartWriterMapper.updateCartCheckAll */
+            eos.tm_spbk 
+        SET chek_ysno = #{chkVal}
+      WHERE spbk_dvsn_code  = '002'
+        AND dlt_ysno = 'N'
+    </update>
 
 </mapper>
 
