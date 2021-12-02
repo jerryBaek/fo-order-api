@@ -328,7 +328,7 @@
                             SELECT '090' code_id , '분철'      code_name from dual      
                         ) /** T_MD_CMM_CODE_M  변경 예정 **/
                  ) b
-        WHERE a.spbk_kind_code = b.code_id            
+        WHERE a.spbk_kind_code = b.code_id              
     </select>  
     
     <!--
