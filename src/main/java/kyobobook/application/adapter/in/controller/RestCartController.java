@@ -167,4 +167,16 @@ public class RestCartController {
         return this.cartService.selectCartProduct(unfyCmdtId);
     }
 
+    /**
+     * @Method      : selectCartProducts
+     * @Date        : 2021. 12. 2.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 선택상품 목록 조회 
+     * @return
+     */
+    @GetMapping(value = "/api/v1/order/cart/products")
+    public ResponseMessage selectCartProducts() {
+        return this.cartService.selectCartProducts();
+    }
+    
 }

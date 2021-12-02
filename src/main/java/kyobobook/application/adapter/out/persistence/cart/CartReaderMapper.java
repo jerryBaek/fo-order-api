@@ -63,4 +63,14 @@ public interface CartReaderMapper {
      * @return
      */
     TmSpbkEntity selectCartProduct(TmSpbkEntity tmSpbkEntity);
+
+    /**
+     * @Method      : selectCartProducts
+     * @Date        : 2021. 12. 2.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 장바구니 선택상품 목록 조회 
+     * @param mmbrNum
+     * @return
+     */
+    List<TmSpbkEntity> selectCartProducts(String mmbrNum);
 }

@@ -204,4 +204,19 @@ public class CartService implements CartPort {
         return responseMessage;
     }
 
+    @Override
+    public ResponseMessage selectCartProducts() {
+        ResponseMessage responseMessage = null;
+        
+        try {
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.selectCartProducts("62012413657"))
+                    .statusCode(HttpStatus.OK.value())
+                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
+
+        } catch (Exception e) {
+            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
+        }
+        return responseMessage;
+    }
+
 }
