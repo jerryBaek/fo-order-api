@@ -55,13 +55,23 @@ public interface DeliveryWriterMapper {
     public Integer updateDeliveryAddressDefaultClear(String mmbrNum);
 
     /**
-     * @Method      : updateDeliveryAddress
+     * @Method      : updateDeliveryAddressStus
      * @Date        : 2021. 11. 25.
      * @author      : seohee.ko@kyobobook.com
      * @description : 사용자 배송지 기본배송지여부 상태 갱신
      * @param mmbrNum
      * @return
      */
-    Integer updateDeliveryAddress(String mmbrNum);
+    Integer updateDeliveryAddressStus(String mmbrNum);
+
+    /**
+     * @Method      : updateDeliveryAddress
+     * @Date        : 2021. 12. 2.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송주소록 수정
+     * @param tSoDlvrAddrMEntity
+     * @return
+     */
+    int updateDeliveryAddress(TSoDlvrAddrMEntity tSoDlvrAddrMEntity);
 
 }
