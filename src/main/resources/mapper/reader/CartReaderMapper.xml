@@ -42,26 +42,17 @@
     작성자   : eszho@kyobobook.com
     -->
     <select id="selectCartGroupList" parameterType="java.lang.String" resultType="TmSpbkEntity">
-        SELECT spbk_id                                                                        /** 장바구니 ID      **/
-             , spbk_dvsn_code                                                                 /** 장바구니구분코드    **/
-             , spbk_kind_code                                                                 /** 장바구니종류코드    **/
-             , decode(spbk_kind_code, '010', '교보배송'
-                                    , '020', '바로드림'
-                                    , '030', '업체배송'
-                                    , '040', '디지털배송'
-                                    , '050', '정기배송'
-                                    , '060', '중고장터'
-                                    , '070', '북모닝CEO'
-                                    , '080', '북토큰'
-                                    , '090', '분철'
-                                    , '없음'          )                                        spbk_kind_name                                                                     
-             , unfy_cmdt_id                                                                   /** 통합상품ID      **/
-             , unt_itm_srmb                                                                   /** 단위품목순번     **/
-             , mmbr_num                                                                       /** 회원번호        **/
-             , requ_qntt                                                                      /** 요청수량        **/
-             , mmbr_ysno                                                                      /** 회원여부        **/
-             , frbe_ysno                                                                      /** 사은품여부       **/
-             , amnd_dttm            
+        SELECT a.spbk_id                                                                        /** 장바구니 ID      **/
+             , a.spbk_dvsn_code                                                                 /** 장바구니구분코드    **/
+             , a.spbk_kind_code                                                                 /** 장바구니종류코드    **/
+             , b.code_name                                                                      spbk_kind_name                                                                     
+             , a.unfy_cmdt_id                                                                   /** 통합상품ID      **/
+             , a.unt_itm_srmb                                                                   /** 단위품목순번     **/
+             , a.mmbr_num                                                                       /** 회원번호        **/
+             , a.requ_qntt                                                                      /** 요청수량        **/
+             , a.mmbr_ysno                                                                      /** 회원여부        **/
+             , a.frbe_ysno                                                                      /** 사은품여부       **/
+             , a.amnd_dttm            
           FROM(
                  ( 
                       SELECT a.spbk_id                                                                      
@@ -79,11 +70,15 @@
                                         FROM (   SELECT spbk_kind_code
                                                       , rank() OVER(order by max(amnd_dttm) desc)
                                                    FROM eos.tm_spbk 
-                                                  WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                  WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                    AND spbk_dvsn_code = '002'
+                                                    AND mmbr_ysno      = 'Y'     
                                                   GROUP BY spbk_kind_code) 
                                        WHERE rank = 1  
                                          AND spbk_kind_code = a.spbk_kind_code)
-                          AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                          AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                          AND spbk_dvsn_code = '002'
+                          AND mmbr_ysno      = 'Y'  
                         ORDER BY amnd_dttm desc
                     )
                     UNION ALL
@@ -103,11 +98,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 2  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -127,11 +126,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 3  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -151,11 +154,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
-                                                      GROUP BY spbk_kind_code) 
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
+                                                      GROUP BY spbk_kind_code)  
                                            WHERE rank = 4  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -175,11 +182,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
-                                                      GROUP BY spbk_kind_code) 
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
+                                                      GROUP BY spbk_kind_code)  
                                            WHERE rank = 5  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -199,11 +210,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                       WHERE mmbr_num      = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 6  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -223,11 +238,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 7 
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -247,11 +266,15 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 8  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                         )
                     UNION ALL
@@ -271,14 +294,41 @@
                                             FROM (   SELECT spbk_kind_code
                                                           , rank() OVER(order by max(amnd_dttm) desc)
                                                        FROM eos.tm_spbk 
-                                                      WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
+                                                      WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                                                        AND spbk_dvsn_code = '002'
+                                                        AND mmbr_ysno      = 'Y'     
                                                       GROUP BY spbk_kind_code) 
                                            WHERE rank = 9  
                                              AND spbk_kind_code = a.spbk_kind_code)
-                              AND mmbr_num = #{memberId, jdbcType=VARCHAR}
+                              AND mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                              AND spbk_dvsn_code = '002'
+                              AND mmbr_ysno      = 'Y'  
                             ORDER BY amnd_dttm desc
                     )
-                )
+                ) a
+            ,   (SELECT code_id
+                      , code_name 
+                   FROM (
+                            SELECT '010' code_id , '교보배송'   code_name from dual
+                            UNION ALL                        
+                            SELECT '020' code_id , '바로드림'   code_name from dual
+                            UNION ALL                        
+                            SELECT '030' code_id , '업체배송'   code_name from dual
+                            UNION ALL            
+                            SELECT '040' code_id , '디지털배송'  code_name from dual
+                            UNION ALL            
+                            SELECT '050' code_id , '정기배송'   code_name from dual
+                            UNION ALL            
+                            SELECT '060' code_id , '중고장터'   code_name from dual
+                            UNION ALL            
+                            SELECT '070' code_id , '북모닝CEO'  code_name from dual
+                            UNION ALL            
+                            SELECT '080' code_id , '북토큰'     code_name from dual
+                            UNION ALL            
+                            SELECT '090' code_id , '분철'      code_name from dual      
+                        ) /** T_MD_CMM_CODE_M  변경 예정 **/
+                 ) b
+        WHERE a.spbk_kind_code = b.code_id            
     </select>
     
     <!--
