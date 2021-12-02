@@ -29,8 +29,10 @@
       FROM ( SELECT unfy_cmdt_id
                   , rank() OVER(partition by mmbr_num order by amnd_dttm desc)
                from eos.tm_spbk 
-              WHERE mmbr_num = #{memberId, jdbcType=VARCHAR}
-              group by  mmbr_num,unfy_cmdt_id,  amnd_dttm)
+              WHERE mmbr_num       = #{memberId, jdbcType=VARCHAR}
+                AND spbk_dvsn_code = '002'
+                AND mmbr_ysno      = 'Y'  
+              GROUP BY mmbr_num,unfy_cmdt_id,  amnd_dttm)
      WHERE rank = 1
      limit 1
     </select>
