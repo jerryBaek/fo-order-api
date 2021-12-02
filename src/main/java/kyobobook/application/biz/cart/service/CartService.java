@@ -156,9 +156,6 @@ public class CartService implements CartPort {
         ResponseMessage responseMessage = null;
 
         try {
-                memberId ="62012413657"; // 세션으로 변경
-                //memberId ="62012413659";
-                
                 List<TmSpbkEntity> returnData = this.cartRepository.selectCartGroupList(memberId);
                 responseMessage = ResponseMessage.builder().data(returnData).statusCode(HttpStatus.OK.value())
                         .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
