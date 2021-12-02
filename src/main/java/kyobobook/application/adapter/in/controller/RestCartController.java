@@ -149,7 +149,7 @@ public class RestCartController {
      * @return
      */
     @GetMapping(value = "/api/v1/order/cart/cartGroupList/{memberId}")
-    public ResponseMessage selectCartGroupList(String memberId) {
+    public ResponseMessage selectCartGroupList(@PathVariable String memberId) {
 
         return cartService.selectCartGroupList(memberId);        
     }
