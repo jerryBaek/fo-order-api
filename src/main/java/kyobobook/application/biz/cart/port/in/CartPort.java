@@ -47,10 +47,10 @@ public interface CartPort {
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
-     * @param unfyCmdtId
+     * @param cart
      * @return
      */
-    ResponseMessage removeProduct(String unfyCmdtId);
+    ResponseMessage removeProduct(Cart cart);
     
     /**
      * @Method      : removeProducts

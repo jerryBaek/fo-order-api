@@ -82,13 +82,13 @@ public class CartService implements CartPort {
     }
 
     @Override
-    public ResponseMessage removeProduct(String unfyCmdtId) {
+    public ResponseMessage removeProduct(Cart cart) {
 
         ResponseMessage responseMessage = null;
 
         try {
 
-            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(unfyCmdtId))
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(cart))
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
@@ -108,11 +108,12 @@ public class CartService implements CartPort {
         ResponseMessage responseMessage = null;
 
         // TODO 회원세션에서 정보 얻어와야 함
-        String memno = "asdfasdfasd";
+        //String memno = "asdfasdfasd";
+        Cart cart = Cart.builder().mmbrNum("asdfasdfasd").build();
 
         try {
 
-            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(memno))
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(cart))
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 

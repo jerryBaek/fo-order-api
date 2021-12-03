@@ -27,6 +27,15 @@ public interface CartPersistencePort {
     @Deprecated
     List<TmSpbkEntity> selectCartList() throws Exception;
     
+    /**
+     * @Method      : updateCartCheck
+     * @Date        : 2021. 11. 11.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 
+     * @param cart
+     * @return
+     * @throws Exception
+     */
     Integer updateCartCheck(Cart cart)throws Exception;
 
     /**
@@ -34,11 +43,11 @@ public interface CartPersistencePort {
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 상품삭제(상태변경)
-     * @param unfyCmdtId
+     * @param cart
      * @return
      * @throws Exception 
      */
-    Integer deleteProduct(String unfyCmdtId) throws Exception;
+    Integer deleteProduct(Cart cart) throws Exception;
     
     /**
      * @Method      : deleteProducts

@@ -69,9 +69,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 상품 선택여부 갱신", notes = "장바구니 상품 선택여부 정보를 갱신한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
             paramType = "path", defaultValue = "C20000000B54B")
-    @PutMapping(value = "/api/v1/order/cart/updateCartCheck")
-    public ResponseMessage updateCartCheck(@RequestBody Cart cart) { // @PathVariable String
-                                                                     // unfyCmdtId
+    @PutMapping(value = "/api/v1/cart/product/status")
+    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {
 
         log.debug("================체크박스 업데이트");
         return this.cartService.updateCartCheck(cart);
@@ -88,10 +87,16 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string",
             paramType = "path", defaultValue = "111111")
-    @DeleteMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
-    public ResponseMessage removeProduct(@PathVariable String unfyCmdtId) {
-
-        return this.cartService.removeProduct(unfyCmdtId);
+    @DeleteMapping(value = "/api/v1/cart/product")
+    public ResponseMessage removeProduct(@RequestBody Cart cart) {
+//        Cart cart = Cart.builder()
+//                        .mmbrNum(mmbrNum)
+//                        .tmprMmbrNum(tmprMmbrNum)
+//                        .mmbrYsno(mmbrYsno)
+//                        .unfyCmdtId(unfyCmdtId)
+//                        .build();
+        
+        return this.cartService.removeProduct(cart);
 
     }
 

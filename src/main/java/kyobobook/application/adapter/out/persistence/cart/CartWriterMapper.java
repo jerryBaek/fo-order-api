@@ -37,9 +37,9 @@ public interface CartWriterMapper {
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 내 상품을 삭제
-     * @param unfyCmdtId
+     * @param tmSpbkEntity
      */
-    Integer deleteProduct(String unfyCmdtId);
+    Integer deleteProduct(TmSpbkEntity tmSpbkEntity);
     
     /**
      * @Method      : deleteProducts

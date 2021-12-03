@@ -52,23 +52,26 @@ public class CartPersistenceAdapter implements CartPersistencePort {
     @Override
     public Integer updateCartCheck(Cart cart) throws Exception {
         
-//            rCnt += this.writer.updateCartCheck(cart);
         TmSpbkEntity tmSpbkEntity = TmSpbkEntity.builder()
-                .unfyCmdtIdList(cart.getUnfyCmdtIdList())
-                .chkVal(cart.getChkVal())
-                .build();
-        
-//        return writer.updateCartCheck(TmSpbkEntity.builder()
-//                .unfyCmdtIdList(cart.getUnfyCmdtIdList())
-//                .chkVal(cart.getChkVal())
-//                .build());
+                                                .mmbrNum(cart.getMmbrNum())
+                                                .unfyCmdtId(cart.getUnfyCmdtId())
+                                                .chekYsno(cart.getChkVal())
+                                                .build();
+
         return writer.updateCartCheck(tmSpbkEntity);
     }
 
     @Override
-    public Integer deleteProduct(String unfyCmdtId) throws Exception {
-
-        return this.writer.deleteProduct(unfyCmdtId);
+    public Integer deleteProduct(Cart cart) throws Exception {
+        
+        TmSpbkEntity tmSpbkEntity = TmSpbkEntity.builder()
+                .mmbrNum(cart.getMmbrNum())
+                .tmprMmbrNum(cart.getTmprMmbrNum())
+                .mmbrYsno(cart.getMmbrYsno())
+                .unfyCmdtId(cart.getUnfyCmdtId())
+                .build();
+        
+        return this.writer.deleteProduct(tmSpbkEntity);
         
     }
     

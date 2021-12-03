@@ -106,5 +106,5 @@ public class Cart {
     private String spbkKindName;
     
     private String chkVal;
-    private String[] unfyCmdtIdList;
+    //private String[] unfyCmdtIdList;
 }

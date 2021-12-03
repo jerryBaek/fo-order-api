@@ -11,10 +11,7 @@
         UPDATE /* CartWriterMapper-updateCartCheck, 작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
                EOS.TM_SPBK
            SET CHEK_YSNO      = #{chkVal}
-         WHERE UNFY_CMDT_ID IN
-      <foreach collection="unfyCmdtIdList" item="unfyCmdtId" open="(" close=")" separator=",">
-               #{unfyCmdtId}
-      </foreach>
+         WHERE UNFY_CMDT_ID   = #{unfyCmdtId}
     </update>
 
     <!--
@@ -22,13 +19,20 @@
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <delete id="deleteProduct" parameterType="java.lang.String">
-        DELETE /* CartWriterMapper.deleteProduct */
-        FROM
+    <update id="deleteProduct" parameterType="TmSpbkEntity">
+     UPDATE /* CartWriterMapper.deleteProduct */
             eos.tm_spbk
-        WHERE
-            unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
-    </delete>
+        SET dlt_ysno = 'Y'
+      WHERE unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
+        <choose>
+            <when test='mmbrYsno == "Y"'>
+             AND mmbr_num = #{mmbrNum}
+            </when>
+            <otherwise>
+             AND tmpr_mmbr_num = #{tmprMmbrNum}
+            </otherwise>
+        </choose>
+    </update>
 
     <!--
         설명     : 장바구니 상품 전체 삭제(상태변경)
