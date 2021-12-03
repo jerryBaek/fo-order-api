@@ -19,6 +19,9 @@ package kyobobook.common;
  */
 public class Constants {
 
+    /** 공백 */
+    public static final String SPACE = " ";
+
     /** 예 */
     public static final String YES = "Y";
 
