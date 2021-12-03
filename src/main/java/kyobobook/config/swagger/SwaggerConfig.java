@@ -16,8 +16,11 @@ import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import kyobobook.common.Constants;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -30,22 +33,50 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration
 public class SwaggerConfig {
-    
-    /**
-     * @Method      : api
-     * @Date        : 2021. 8. 12.
-     * @author      : smlee1@kyobobook.com
-     * @description : Swagger 설정들이 담긴 Docket Bean 등록
-     * @return
-     */
+
+    /** 탐색 경로 */
+    private final String SWAGGER_SCAN_PACKAGE = "kyobobook.application.adapter";
+
+    /** 제목 */
+    private final String TITLE = "주문";
+
     @Bean
-    public Docket api() {
+    public Docket apiV1() {
+        String docVersion = "v1";
+        String docTitle = this.TITLE.concat(Constants.SPACE).concat(docVersion);
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .consumes(getConsumeContentTypes())
                 .produces(getProduceContentTypes())
+                .groupName(docVersion)
+                .apiInfo(getApiInfo(docTitle, docVersion))
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_PACKAGE))
+                .paths(PathSelectors.ant("/ord/api/" + docVersion + "/**"))
+                .build();
+    }
+
+    @Bean
+    public Docket apiV2() {
+        String docVersion = "v2";
+        String docTitle = this.TITLE.concat(Constants.SPACE).concat(docVersion);
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .consumes(getConsumeContentTypes())
+                .produces(getProduceContentTypes())
+                .groupName(docVersion)
+                .apiInfo(getApiInfo(docTitle, docVersion))
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_PACKAGE))
+                .paths(PathSelectors.ant("/ord/api/" + docVersion + "/**"))
+                .build();
+    }
+
+    private ApiInfo getApiInfo(String title, String version) {
+        return new ApiInfoBuilder()
+                .title(title)
+                .description("주문 API " + version)
+                .version(version)
                 .build();
     }
 
@@ -61,4 +92,5 @@ public class SwaggerConfig {
         produces.add("application/json;charset=UTF-8");
         return produces;
     }
+
 }
