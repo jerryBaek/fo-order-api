@@ -12,6 +12,7 @@ package kyobobook.application.adapter.out.persistence.cart;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
@@ -50,38 +51,22 @@ public class CartPersistenceAdapter implements CartPersistencePort {
     }
 
     @Override
-    public Integer updateCartCheck(Cart cart) throws Exception {
-        
-        TmSpbkEntity tmSpbkEntity = TmSpbkEntity.builder()
-                                                .mmbrNum(cart.getMmbrNum())
-                                                .unfyCmdtId(cart.getUnfyCmdtId())
-                                                .chekYsno(cart.getChkVal())
-                                                .build();
+    public Integer updateCartCheck(List<Cart> cartList) throws Exception {
+        Map<String, Object> mapParam = new HashMap<>();
 
-        return writer.updateCartCheck(tmSpbkEntity);
+        mapParam.put("list", cartList);
+        return writer.updateCartCheck(mapParam);
     }
 
     @Override
-    public Integer deleteProduct(Cart cart) throws Exception {
-        
-        TmSpbkEntity tmSpbkEntity = TmSpbkEntity.builder()
-                .mmbrNum(cart.getMmbrNum())
-                .tmprMmbrNum(cart.getTmprMmbrNum())
-                .mmbrYsno(cart.getMmbrYsno())
-                .unfyCmdtId(cart.getUnfyCmdtId())
-                .build();
-        
-        return this.writer.deleteProduct(tmSpbkEntity);
-        
-    }
-    
-    @Override
-    public Integer deleteProducts(String memno) throws Exception {
+    public Integer deleteProduct(List<Cart> cartList) throws Exception {
+        Map<String, Object> mapParam= new HashMap<>();
 
-        return this.writer.deleteProducts(memno);
+        mapParam.put("list", cartList);
+        return this.writer.deleteProduct(cartList);
         
     }
-    
+
     @Override
     public TestEntity selectNewProductCode(String memberId) throws Exception {
 
@@ -96,11 +81,6 @@ public class CartPersistenceAdapter implements CartPersistencePort {
         
         return data;
     
-    }
-
-    @Override
-    public Integer updateCartCheckAll(String chekVal) {
-        return this.writer.updateCartCheckAll(chekVal);
     }
 
     @Override

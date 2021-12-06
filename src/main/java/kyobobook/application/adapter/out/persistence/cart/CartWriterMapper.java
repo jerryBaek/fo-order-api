@@ -10,7 +10,12 @@
  ****************************************************/
 package kyobobook.application.adapter.out.persistence.cart;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.data.repository.query.Param;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.config.annotation.WriterInterface;
 
 /**
@@ -30,34 +35,15 @@ public interface CartWriterMapper {
      * @description : 
      * @param unfyCmdtId
      */
-    Integer updateCartCheck(TmSpbkEntity tmSpbkEntity);
+    Integer updateCartCheck(Map<String, Object> mapParam);
 
     /**
      * @Method      : deleteProduct
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 장바구니 내 상품을 삭제
-     * @param tmSpbkEntity
+     * @param cart
      */
-    Integer deleteProduct(TmSpbkEntity tmSpbkEntity);
-    
-    /**
-     * @Method      : deleteProducts
-     * @Date        : 2021. 11. 11.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 내 상품을 삭제
-     * @param unfyCmdtId
-     */
-    Integer deleteProducts(String memno);
+    Integer deleteProduct(List<Cart> cart);
 
-    /**
-     * @Method      : updateCartCheckAll
-     * @Date        : 2021. 12. 2.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 
-     * @param chekVal
-     * @return
-     */
-    Integer updateCartCheckAll(String chekVal);
-    
 }

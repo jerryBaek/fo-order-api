@@ -7,11 +7,15 @@
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
-	<update id="updateCartCheck" parameterType="kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity">
+	<update id="updateCartCheck" parameterType="java.util.Map">
+	   <foreach collection="list" item="item" open="" close="" separator=";">
         UPDATE /* CartWriterMapper-updateCartCheck, 작성일자 2021.11.11 by 고서희, 수정일자 YYYY.MM.DD by OOO */
-               EOS.TM_SPBK
-           SET CHEK_YSNO      = #{chkVal}
-         WHERE UNFY_CMDT_ID   = #{unfyCmdtId}
+               eos.tm_spbk
+           SET CHEK_YSNO    = #{item.chkVal}
+         WHERE UNFY_CMDT_ID = #{item.unfyCmdtId} 
+           AND mmbr_num = #{item.mmbrNum}
+           AND dlt_ysno = 'N'
+       </foreach>
     </update>
 
     <!--
@@ -19,46 +23,22 @@
         작성일자  : 2021. 11. 11.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <update id="deleteProduct" parameterType="TmSpbkEntity">
-     UPDATE /* CartWriterMapper.deleteProduct */
-            eos.tm_spbk
-        SET dlt_ysno = 'Y'
-      WHERE unfy_cmdt_id = #{unfyCmdtId, jdbcType=VARCHAR}
-        <choose>
-            <when test='mmbrYsno == "Y"'>
-             AND mmbr_num = #{mmbrNum}
+    <update id="deleteProduct" parameterType="java.util.Map">
+       <foreach collection="list" item="item" open="" close="" separator=";">
+        UPDATE /* CartWriterMapper.deleteProduct */
+               eos.tm_spbk
+           SET dlt_ysno = 'Y'
+         WHERE spbk_id = #{item.spbkId}
+         <choose>
+            <when test='item.mmbrYsno == "Y"'>
+             AND mmbr_num = #{item.mmbrNum}
             </when>
             <otherwise>
-             AND tmpr_mmbr_num = #{tmprMmbrNum}
+             AND tmpr_mmbr_num = #{item.tmprMmbrNum}
             </otherwise>
-        </choose>
-    </update>
-
-    <!--
-        설명     : 장바구니 상품 전체 삭제(상태변경)
-        작성일자  : 2021. 11. 11.
-        작성자   : seohee.ko@kyobobook.com
-    -->
-    <delete id="deleteProducts" parameterType="java.lang.String">
-        DELETE /* CartWriterMapper.deleteProducts */
-        FROM
-            eos.tm_spbk
-        WHERE
-            mmbr_num = #{memno, jdbcType=VARCHAR}
-    </delete>
-    
-    <!--
-        설명     : 장바구니 체크여부 전체 업데이트
-        작성일자  : 2021. 12. 2.
-        작성자   : seohee.ko@kyobobook.com
-    -->
-    <update id="updateCartCheckAll" parameterType="java.lang.String">
-     UPDATE /* CartWriterMapper.updateCartCheckAll */
-            eos.tm_spbk 
-        SET chek_ysno = #{chkVal}
-      WHERE spbk_dvsn_code  = '002'
-        AND dlt_ysno = 'N'
+         </choose>
+        </foreach>
+           AND dlt_ysno = 'N'
     </update>
 
 </mapper>
-

@@ -10,6 +10,8 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.in;
 
+import java.util.HashMap;
+import java.util.List;
 import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 
@@ -40,7 +42,7 @@ public interface CartPort {
      * @param unfyCmdtId
      * @return
      */
-    ResponseMessage updateCartCheck(Cart cart);
+    ResponseMessage updateCartCheck(List<Cart> cartList);
 
     /**
      * @Method      : removeProduct
@@ -50,17 +52,8 @@ public interface CartPort {
      * @param cart
      * @return
      */
-    ResponseMessage removeProduct(Cart cart);
+    ResponseMessage removeProduct(List<Cart> cart);
     
-    /**
-     * @Method      : removeProducts
-     * @Date        : 2021. 11. 11.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 상품삭제(상태변경)
-     * @return
-     */
-    ResponseMessage removeProducts();
-
     /**
      * @Method      : selectNewProductCode
      * @Date        : 2021. 11. 25.
@@ -70,16 +63,6 @@ public interface CartPort {
      */
     ResponseMessage selectNewProductCode(String memberId);
 
-    /**
-     * @Method      : updateCartCheckAll
-     * @Date        : 2021. 11. 29.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 체크여부 전체 업데이트
-     * @param chekVal
-     * @return
-     */
-    ResponseMessage updateCartCheckAll(String chekVal);
-    
     /**
      * @Method      : selectCartGroupList
      * @Date        : 2021. 11. 29.

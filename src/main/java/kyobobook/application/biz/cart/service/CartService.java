@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.biz.cart.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,13 +66,13 @@ public class CartService implements CartPort {
     }
 
     @Override
-    public ResponseMessage updateCartCheck(Cart cart) {
+    public ResponseMessage updateCartCheck(List<Cart> cartList) {
 
         ResponseMessage responseMessage = null;
 
         try {
             // int updateCnt = cartRepository.updateCartCheck(cart);
-            responseMessage = ResponseMessage.builder().data(this.cartRepository.updateCartCheck(cart))
+            responseMessage = ResponseMessage.builder().data(this.cartRepository.updateCartCheck(cartList))
                     .statusCode(HttpStatus.OK.value())
                     .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
@@ -82,34 +83,9 @@ public class CartService implements CartPort {
     }
 
     @Override
-    public ResponseMessage removeProduct(Cart cart) {
+    public ResponseMessage removeProduct(List<Cart> cart) {
 
         ResponseMessage responseMessage = null;
-
-        try {
-
-            responseMessage = ResponseMessage.builder().data(this.cartRepository.deleteProduct(cart))
-                    .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
-
-        } catch (Exception e) {
-
-            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
-
-        }
-
-        return responseMessage;
-
-    }
-
-    @Override
-    public ResponseMessage removeProducts() {
-
-        ResponseMessage responseMessage = null;
-
-        // TODO 회원세션에서 정보 얻어와야 함
-        //String memno = "asdfasdfasd";
-        Cart cart = Cart.builder().mmbrNum("asdfasdfasd").build();
 
         try {
 
@@ -160,21 +136,6 @@ public class CartService implements CartPort {
                 List<TmSpbkEntity> returnData = this.cartRepository.selectCartGroupList(memberId);
                 responseMessage = ResponseMessage.builder().data(returnData).statusCode(HttpStatus.OK.value())
                         .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
-
-        } catch (Exception e) {
-            throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);
-        }
-        return responseMessage;
-    }
-
-    @Override
-    public ResponseMessage updateCartCheckAll(String chekVal) {
-        ResponseMessage responseMessage = null;
-
-        try {
-            responseMessage = ResponseMessage.builder().data(this.cartRepository.updateCartCheckAll(chekVal))
-                    .statusCode(HttpStatus.OK.value())
-                    .resultMessage(this.messageSource.getMessage(Constants.MessageSource.COMPLETE)).build();
 
         } catch (Exception e) {
             throw new BizRuntimeException(this.messageSource.getMessage(Constants.MessageSource.ERROR), e);

@@ -7,7 +7,7 @@
         작성일자  : 2021. 11. 24.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <update id="deleteDeliveryAddress" parameterType="kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity">
+    <update id="deleteDeliveryAddress" parameterType="TSoDlvrAddrMEntity">
       UPDATE eos.t_so_dlvr_addr_m
          SET dlt_ysno = 'Y'
            , bsc_dlpn_ysno = 'N'
@@ -122,7 +122,7 @@
         작성일자  : 2021. 12. 2.
         작성자   : seohee.ko@kyobobook.com
     -->
-    <update id="updateDeliveryAddress" parameterType="kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity">
+    <update id="updateDeliveryAddress" parameterType="TSoDlvrAddrMEntity">
      UPDATE /* DeliveryWriterMapper.updateDeliveryAddress */
             eos.t_so_dlvr_addr_m 
         SET dlpn_name = #{dlpnName},<!-- 배송지명 -->

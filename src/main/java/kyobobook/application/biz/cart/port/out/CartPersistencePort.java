@@ -10,6 +10,7 @@
  ****************************************************/
 package kyobobook.application.biz.cart.port.out;
 
+import java.util.HashMap;
 import java.util.List;
 import kyobobook.application.adapter.out.persistence.cart.entity.TmSpbkEntity;
 import kyobobook.application.adapter.out.persistence.test.entity.TestEntity;
@@ -32,11 +33,11 @@ public interface CartPersistencePort {
      * @Date        : 2021. 11. 11.
      * @author      : seohee.ko@kyobobook.com
      * @description : 
-     * @param cart
+     * @param cartList
      * @return
      * @throws Exception
      */
-    Integer updateCartCheck(Cart cart)throws Exception;
+    Integer updateCartCheck(List<Cart> cartList)throws Exception;
 
     /**
      * @Method      : deleteCartCheck
@@ -47,18 +48,7 @@ public interface CartPersistencePort {
      * @return
      * @throws Exception 
      */
-    Integer deleteProduct(Cart cart) throws Exception;
-    
-    /**
-     * @Method      : deleteProducts
-     * @Date        : 2021. 11. 11.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 상품삭제(상태변경)
-     * @param memno
-     * @return
-     * @throws Exception 
-     */
-    Integer deleteProducts(String memno) throws Exception;
+    Integer deleteProduct(List<Cart> cart) throws Exception;
     
     /**
      * @Method      : selectNewProductData
@@ -71,17 +61,6 @@ public interface CartPersistencePort {
      */
     TestEntity selectNewProductCode(String memberId) throws Exception;
 
-    /**
-     * @Method      : updateCartCheckAll
-     * @Date        : 2021. 11. 29.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 체크여부 전체 업데이트
-     * @param chekVal
-     * @return
-     */
-    Integer updateCartCheckAll(String chekVal);
-    
-    
     /**
      * @Method      : selectNewProductData
      * @Date        : 2021. 11. 25.

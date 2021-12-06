@@ -8,6 +8,8 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,10 +72,10 @@ public class RestCartController {
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
             paramType = "path", defaultValue = "C20000000B54B")
     @PutMapping(value = "/api/v1/cart/product/status")
-    public ResponseMessage updateCartCheck(@RequestBody Cart cart) {
+    public ResponseMessage updateCartCheck(@RequestBody List<Cart> cartList) { 
 
         log.debug("================체크박스 업데이트");
-        return this.cartService.updateCartCheck(cart);
+        return this.cartService.updateCartCheck(cartList);
     }
 
     /**
@@ -88,7 +90,7 @@ public class RestCartController {
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string",
             paramType = "path", defaultValue = "111111")
     @DeleteMapping(value = "/api/v1/cart/product")
-    public ResponseMessage removeProduct(@RequestBody Cart cart) {
+    public ResponseMessage removeProduct(@RequestBody List<Cart> cart) {
 //        Cart cart = Cart.builder()
 //                        .mmbrNum(mmbrNum)
 //                        .tmprMmbrNum(tmprMmbrNum)
@@ -97,22 +99,6 @@ public class RestCartController {
 //                        .build();
         
         return this.cartService.removeProduct(cart);
-
-    }
-
-    /**
-     * @Method : removeProducts
-     * @Date : 2021. 11. 11.
-     * @author : seohee.ko@kyobobook.com
-     * @description : 장바구니 상품삭제(상태변경)
-     * @param checkList
-     * @return
-     */
-    @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
-    @DeleteMapping(value = "/api/v1/order/cart/products")
-    public ResponseMessage removeProducts() {
-
-        return this.cartService.removeProducts();
 
     }
 
@@ -130,20 +116,6 @@ public class RestCartController {
 
         return this.cartService.selectNewProductCode(memberId);
 
-    }
-
-    /**
-     * @Method : updateCartCheckAll
-     * @Date : 2021. 11. 29.
-     * @author : seohee.ko@kyobobook.com
-     * @description : 장바구니 체크여부 전체 업데이트
-     * @param chekVal
-     * @return
-     */
-    @ApiOperation(value = "회원별 장바구니 전체선택시 체크여부 갱신", notes = "회원별 장바구니 전체선택시 체크여부를 갱신한다.")
-    @PutMapping(value = "/api/v1/order/cart/products/{chekVal}")
-    public ResponseMessage updateCartCheckAll(@PathVariable String chekVal) {
-        return this.cartService.updateCartCheckAll(chekVal);
     }
     
     /**
