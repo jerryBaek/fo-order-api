@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiOperation;
 import kyobobook.application.biz.cart.port.in.CartPort;
 import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -155,5 +156,123 @@ public class RestCartController {
     public ResponseMessage selectCartProducts() {
         return this.cartService.selectCartProducts();
     }
+    
+    
+    /**
+     * @Method : selectTotalProductCount
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 총 상품 갯수 조회
+     * @param 
+     * @return
+     */
+    @ApiOperation(value = " 장바구니 총 상품 갯수 조회", notes = "장바구니 총 상품 갯수를 리턴한다.")
+    @GetMapping(value = "/api/v1/order/cart/count")
+    public ResponseMessage selectTotalProductCount() {
+        return null;
+    }    
+    
+    
+    
+    /**
+     * @Method : selectGrpFreeTransInfo
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 그룹별 무료배송정보 조회
+     * @param
+     * @return
+     */
+    @ApiOperation(value = " 장바구니 그룹별 무료배송정보 조회", notes = "장바구니 그룹별 무료배송정보를 리턴한다.")
+    @GetMapping(value = "/api/v1/order/cart/group")
+    public ResponseMessage selectGrpFreeTransInfo() {
+        return null;
+    }    
+        
+    
+    /**
+     * @Method : updateSelProductStat
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 상품 선택 수정
+     * @param : unfyCmdtId
+     * @return
+     */
+    @ApiOperation(value = "장바구니 상품 선택 상태 수정", notes = "장바구니 상품 선택 상태를 수정한다. ")
+    @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
+    paramType = "path", defaultValue = "C20000000B54B")    
+    @PutMapping(value = "/api/v1/order/cart/status")
+    public ResponseMessage updateSelProductStat(@RequestBody List<Cart> cartList) {
+        //return null;
+        log.debug("================장바구니 상품 선택 업데이트");
+        return null;        
+    }
+    
+    
+    /**
+     * @Method : selectBaroDrimPrdExstYN
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 바로드림상품 포함 유무 조회
+     * @param
+     * @return
+     */
+    @ApiOperation(value = " 장바구니 바로드림상품 포함 유무 조회", notes = "장바구니 바로드림상품 포함 유무값을 리턴한다.")
+    @GetMapping(value = "/api/v1/cart/product/exist/barodrim")
+    public ResponseMessage selectBaroDrimPrdExstYN() {
+        return null;
+    }        
+    
+    /**
+     * @Method : selectSelProductAmount
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 선택상품 금액정보 조회
+     * @param : unfyCmdtId
+     * @return : 
+     */
+    @ApiOperation(value = "장바구니 선택상품 금액정보 조회", notes = "장바구니 선택상품의 금액정보를 리턴한다.")
+    @GetMapping(value = "/api/v1/cart/price/{unfyCmdtId}")
+    public ResponseMessage selectSelProductAmount(@PathVariable String unfyCmdtId) {
+        return null;
+    }
+    
+    
+    /**
+     * @Method : updateProductOption
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 상품 옵션 변경 적용
+     * @param : 
+     * @return
+     */
+    @ApiOperation(value = "상품 옵션 변경 적용", notes = "상품 옵션 변경을 적용한다.")
+    @PutMapping(value = "/api/v1/cart/product/option")
+    public ResponseMessage updateProductOption(@RequestBody List<Cart> cartList) {
+        //return null;
+        log.debug("================상품 옵션 업데이트");
+        return null;        
+    }
+    
+    
+    /**
+     * @Method : removeSoldOutTotal
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 장바구니 내 품/절판 전체 삭제
+     * @param mmbrNum
+     * @return
+     */
+    @ApiOperation(value = "장바구니 내 품/절판 전체 상품 삭제", notes = "장바구니 내 품/절판 상품 전체를 삭제한다.")
+    @ApiImplicitParam(name = "mmbrNum", value = "회원아이디", required = true, dataType = "string",
+            paramType = "path", defaultValue = "62012413658")
+    @DeleteMapping(value = "/api/v1/cart/prod"
+            + "uct/sold-out/{mmbrNum}")
+    public ResponseMessage removeSoldOutTotal(@PathVariable String mmbrNum) {
+        //return this.cartSoldOutService.removeSoldOuts(mmbrNum);
+        return null;
+    }
+    
+    
+    
     
 }

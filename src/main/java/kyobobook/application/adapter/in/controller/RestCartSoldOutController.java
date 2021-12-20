@@ -45,7 +45,7 @@ public class RestCartSoldOutController {
      * @param mmbrNum
      * @return
      */
-    @ApiOperation(value = "장바구니 내 품/절판 전체 상품 삭제", notes = "장바구니 내 품/절판 상품을 삭제한다.")
+    @ApiOperation(value = "장바구니 내 품/절판 전체 상품 삭제", notes = "장바구니 내 품/절판 상품을 삭제합니다.")
     @ApiImplicitParam(name = "mmbrNum", value = "회원아이디", required = true, dataType = "string",
             paramType = "path", defaultValue = "62012413658")
     @DeleteMapping(value = "/api/v1/order/cart/soldOut/{mmbrNum}")
