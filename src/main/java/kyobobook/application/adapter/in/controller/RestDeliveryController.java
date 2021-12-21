@@ -88,7 +88,7 @@ public class RestDeliveryController {
      */
     @ApiOperation(value = "배송주소록 추가", notes = "배송주소록을 추가한다.")
     @ApiImplicitParam(name = "deliveryAddress", value = "배송주소", required = true, dataType = "DeliveryAddress", paramType = "body")
-    @PostMapping("/api/v1/delivery/address")
+    @PostMapping("/api/v1/delivery/address/addDeliveryAddress")
     public ResponseMessage addDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
 
         log.debug("배송주소록 추가 진입");
@@ -107,10 +107,83 @@ public class RestDeliveryController {
      * @return
      */
     @ApiOperation(value = "배송주소록 수정", notes = "배송주소록을 수정한다.")
-    @PutMapping("/api/v1/delivery/address")
+    @PutMapping("/api/v1/delivery/address/updDeliveryAddress")
     public ResponseMessage updateDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
         
         return this.deliveryService.updateDeliveryAddress(deliveryAddress);
     }
+    
+    /**
+     * @Method : selectBaroDrimStandardStoreList
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 바로드림 기준매장 조회
+     * @return
+     */
+    @ApiOperation(value = "바로드림 기준매장 조회", notes = "바로드림 기준매장을 리턴합니다.")
+    @GetMapping(value = "/api/v1/delivery/base/store/barodrim")
+    public ResponseMessage selectBaroDrimStandardStoreList() {
+        return null;
+    }   
+    
+    
+    /**
+     * @Method : selectDeliveryAddressList
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 배송주소목록 조회
+     * @return
+     */
+    @ApiOperation(value = "배송주소목록 조회", notes = "배송주소목록을 리턴한다. ")
+    @GetMapping(value = "/api/v1/delivery/selDeliveryAddress")
+    public ResponseMessage selectDeliveryAddressList() {
+        return null;
+    }   
+        
 
+    /**
+     * @Method : selectShippingAddress
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 기본배송지 조회
+     * @return
+     */
+    @ApiOperation(value = "기본배송지 조회", notes = "사용자 기본배송지를 조회한다.")
+    @GetMapping(value = "/api/v1/delivery/selshipAddress")
+    public ResponseMessage selectShippingAddress() {
+        return null;
+    }   
+    
+    /**
+     * @Method : selectShippingInfoNoticeInq
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 배송안내 공지 조회
+     * @return
+     */
+    @ApiOperation(value = "배송안내 공지 조회", notes = "주문 시 노출 할 배송안내공지를 조회한다.")
+    @GetMapping(value = "/api/v1/delivery/notice")
+    public ResponseMessage selectShippingInfoNoticeInq() {
+        return null;
+    }   
+    
+    
+    /**
+     * @Method : addShippingAddress
+     * @Date : 2021. 12. 20.
+     * @author : jhbaek@kyobobook.com
+     * @description : 배송지 등록
+     * @param deliveryAddress 배송주소
+     * @return
+     */
+    @ApiOperation(value = "배송지 등록 추가", notes = "사용자 배송지를 등록한다.")
+    @ApiImplicitParam(name = "shippingAddress", value = "배송지", required = true, dataType = "DeliveryAddress", paramType = "body")
+    @PostMapping("/api/v1/delivery/address/addShippingAddress")
+    public ResponseMessage addShippingAddress(@RequestBody DeliveryAddress deliveryAddress) {
+
+        log.debug("배송지 등록");
+        return null;
+    }
+    
+    
 }
