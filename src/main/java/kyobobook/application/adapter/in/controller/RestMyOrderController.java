@@ -41,7 +41,7 @@ public class RestMyOrderController {
      */
     @ApiOperation(value = "주문, 배송 목록 조회", notes = "주문, 배송 목록을 조회합니다.")
     @GetMapping(value = {"/", ""})
-    public ResponseMessage selectMyOrder() {
+    public ResponseMessage selectMyOrderList() {
         
         return null;
     }

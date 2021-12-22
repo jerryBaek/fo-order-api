@@ -102,4 +102,32 @@ public class RestMyClaimController {
         
         return null;
     }
+
+    /**
+     * @Method      : insertFreebieCancel
+     * @Date        : 2021. 12. 21.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 사은품 주문 취소신청
+     * @return
+     */
+    @ApiOperation(value = "사은품 주문 취소신청", notes = "사은품 주문 취소신청을 한다.")
+    @PostMapping(value = "/freebie/cancel")
+    public ResponseMessage insertFreebieCancel() {
+        
+        return null;
+    }
+    
+    /**
+     * @Method      : insertFreebieReturn
+     * @Date        : 2021. 12. 21.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 사은품 반품신청
+     * @return
+     */
+    @ApiOperation(value = "사은품 반품신청", notes = "사은품 반품신청을 한다.")
+    @PostMapping(value = "/freebie/return")
+    public ResponseMessage insertFreebieReturn() {
+        
+        return null;
+    }
 }
