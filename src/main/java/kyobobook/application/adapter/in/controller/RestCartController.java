@@ -8,12 +8,13 @@
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
-import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kyobobook.application.biz.cart.port.in.CartPort;
 import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -73,7 +76,7 @@ public class RestCartController {
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
             paramType = "path", defaultValue = "C20000000B54B")
     @PutMapping(value = "/api/v1/cart/product/status")
-    public ResponseMessage updateCartCheck(@RequestBody List<Cart> cartList) { 
+    public ResponseMessage updateCartCheck(@RequestBody List<Cart> cartList) {
 
         log.debug("================체크박스 업데이트");
         return this.cartService.updateCartCheck(cartList);
@@ -98,7 +101,7 @@ public class RestCartController {
 //                        .mmbrYsno(mmbrYsno)
 //                        .unfyCmdtId(unfyCmdtId)
 //                        .build();
-        
+
         return this.cartService.removeProduct(cart);
 
     }
@@ -118,7 +121,7 @@ public class RestCartController {
         return this.cartService.selectNewProductCode(memberId);
 
     }
-    
+
     /**
      * @Method      : selectCartGroupList
      * @Date        : 2021. 11. 09.
@@ -129,9 +132,9 @@ public class RestCartController {
     @GetMapping(value = "/api/v1/order/cart/cartGroupList/{memberId}")
     public ResponseMessage selectCartGroupList(@PathVariable String memberId) {
 
-        return cartService.selectCartGroupList(memberId);        
+        return cartService.selectCartGroupList(memberId);
     }
-    
+
     /**
      * @Method : selectCartProduct
      * @Date : 2021. 12. 2.
@@ -149,31 +152,30 @@ public class RestCartController {
      * @Method      : selectCartProducts
      * @Date        : 2021. 12. 2.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 장바구니 선택상품 목록 조회 
+     * @description : 장바구니 선택상품 목록 조회
      * @return
      */
     @GetMapping(value = "/api/v1/order/cart/products")
     public ResponseMessage selectCartProducts() {
         return this.cartService.selectCartProducts();
     }
-    
-    
+
     /**
      * @Method : selectTotalProductCount
      * @Date : 2021. 12. 20.
      * @author : jhbaek@kyobobook.com
      * @description : 장바구니 총 상품 갯수 조회
-     * @param 
+     * @param
      * @return
      */
     @ApiOperation(value = " 장바구니 총 상품 갯수 조회", notes = "장바구니 총 상품 갯수를 리턴한다.")
     @GetMapping(value = "/api/v1/order/cart/count")
     public ResponseMessage selectTotalProductCount() {
         return null;
-    }    
-    
-    
-    
+    }
+
+
+
     /**
      * @Method : selectGrpFreeTransInfo
      * @Date : 2021. 12. 20.
@@ -186,9 +188,9 @@ public class RestCartController {
     @GetMapping(value = "/api/v1/order/cart/group")
     public ResponseMessage selectGrpFreeTransInfo() {
         return null;
-    }    
-        
-    
+    }
+
+
     /**
      * @Method : updateSelProductStat
      * @Date : 2021. 12. 20.
@@ -199,15 +201,15 @@ public class RestCartController {
      */
     @ApiOperation(value = "장바구니 상품 선택 상태 수정", notes = "장바구니 상품 선택 상태를 수정한다. ")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
-    paramType = "path", defaultValue = "C20000000B54B")    
+    paramType = "path", defaultValue = "C20000000B54B")
     @PutMapping(value = "/api/v1/order/cart/status")
     public ResponseMessage updateSelProductStat(@RequestBody List<Cart> cartList) {
         //return null;
         log.debug("================장바구니 상품 선택 업데이트");
-        return null;        
+        return null;
     }
-    
-    
+
+
     /**
      * @Method : selectBaroDrimPrdExstYN
      * @Date : 2021. 12. 20.
@@ -220,29 +222,29 @@ public class RestCartController {
     @GetMapping(value = "/api/v1/cart/product/exist/barodrim")
     public ResponseMessage selectBaroDrimPrdExstYN() {
         return null;
-    }        
-    
+    }
+
     /**
      * @Method : selectSelProductAmount
      * @Date : 2021. 12. 20.
      * @author : jhbaek@kyobobook.com
      * @description : 장바구니 선택상품 금액정보 조회
      * @param : unfyCmdtId
-     * @return : 
+     * @return :
      */
     @ApiOperation(value = "장바구니 선택상품 금액정보 조회", notes = "장바구니 선택상품의 금액정보를 리턴한다.")
     @GetMapping(value = "/api/v1/cart/price/{unfyCmdtId}")
     public ResponseMessage selectSelProductAmount(@PathVariable String unfyCmdtId) {
         return null;
     }
-    
-    
+
+
     /**
      * @Method : updateProductOption
      * @Date : 2021. 12. 20.
      * @author : jhbaek@kyobobook.com
      * @description : 상품 옵션 변경 적용
-     * @param : 
+     * @param :
      * @return
      */
     @ApiOperation(value = "상품 옵션 변경 적용", notes = "상품 옵션 변경을 적용한다.")
@@ -250,10 +252,10 @@ public class RestCartController {
     public ResponseMessage updateProductOption(@RequestBody List<Cart> cartList) {
         //return null;
         log.debug("================상품 옵션 업데이트");
-        return null;        
+        return null;
     }
-    
-    
+
+
     /**
      * @Method : removeSoldOutTotal
      * @Date : 2021. 12. 20.
@@ -271,8 +273,223 @@ public class RestCartController {
         //return this.cartSoldOutService.removeSoldOuts(mmbrNum);
         return null;
     }
-    
-    
-    
-    
+
+    /**
+     * @Method      : getCountCount
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 총 상품 갯수 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 총 상품 갯수 조회", notes = "사용자가 장바구니에 담은 상품 총 갯수를 조회한다. 모든 상품(사은품 제외)을 포함한 채로 조회하거나 바로드림 상품만을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/count")
+    public ResponseMessage getCountCount() {
+        return null;
+    }
+
+    /**
+     * @Method      : removeProduct
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 상품 삭제
+     * @return
+     */
+    @ApiOperation(value = "장바구니 상품 삭제", notes = "선택된 상품들을 장바구니에서 삭제한다.")
+    @ApiImplicitParam(name = "spbkId", value = "장바구니ID", required = true, dataType = "string", paramType = "path")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @DeleteMapping(value = "/api/v1/cart/{spbkId}")
+    public ResponseMessage removeProduct() {
+        return null;
+    }
+
+    /**
+     * @Method      : getGroup
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 그룹 목록 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 그룹 목록 조회", notes = "장바구니 그룹과 각 그룹별 상품유무를 조회한다. 모든 상품에 대한 그룹을 조회하거나 바로드림과 관련된 그룹만 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/group")
+    public ResponseMessage getGroup() {
+        return null;
+    }
+
+    /**
+     * @Method      : getDeliferyInfoByGroup
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 그룹별 무료배송정보 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 그룹별 무료배송정보 조회", notes = "장바구니 그룹별 배송비합계와 무료배송기준 조회한다. 모든 상품에 대한 배송정보를 조회하거나 바로드림상품에 대한 배송정보를 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/info/delivery/group")
+    public ResponseMessage getDeliferyInfoByGroup() {
+        return null;
+    }
+
+    /**
+     * @Method      : getProductEachGroup
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 그룹 상품목록 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 그룹 상품목록 조회", notes = "장바구니 상품목록을 조회한다. 각 그룹별 모든 상품목록을 조회하거나 바로드림상품목록을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/product")
+    public ResponseMessage getProductEachGroup() {
+        return null;
+    }
+
+    /**
+     * @Method      : putPick
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 상품 선택 상태 수정
+     * @return
+     */
+    @ApiOperation(value = "장바구니 상품 선택 상태 수정", notes = "장바구니 상품 선택 상태를 선택 또는 선택해제로 변경한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PutMapping(value = "/api/v1/cart/pick")
+    public ResponseMessage putPick() {
+        return null;
+    }
+
+    /**
+     * @Method      : existsBarodrimProduct
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 바로드림상품 포함 유무 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 바로드림상품 포함 유무 조회", notes = "장바구니 상품 중 바로드림상품이 포함되어있는지 확인한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/product/exist/barodrim")
+    public ResponseMessage existsBarodrimProduct() {
+        return null;
+    }
+
+    @ApiOperation(value = "장바구니 전체 상품 중 선택상품 구매금액정보 조회", notes = "장바구니 내 선택상품에 대한 금액정보(갯수, 상품금액합계, 배송비합계, 결제예정금액)를 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/price")
+    public ResponseMessage getPrice() {
+        return null;
+    }
+
+    @ApiOperation(value = "상품 옵션 변경 적용", notes = "장바구니 내 상품 옵션을 변경한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PutMapping(value = "/api/v1/cart/product/option")
+    public ResponseMessage putProductOption() {
+        return null;
+    }
+
+    @ApiOperation(value = "각인 옵션 변경 적용", notes = "장바구니 내 각인 옵션을 변경한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PutMapping(value = "/api/v1/cart/product/option/carved-seal")
+    public ResponseMessage putProductCarvedSealOption() {
+        return null;
+    }
+
+    @ApiOperation(value = "장바구니 품/절판 전체 삭제", notes = "장바구니 내 품/절판 상품을 삭제한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @DeleteMapping(value = "/api/v1/cart/product/sold-out")
+    public ResponseMessage removeSoldOutProduct() {
+        return null;
+    }
+
+    @ApiOperation(value = "장바구니 추가", notes = "상품을 장바구니에 추가한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PostMapping(value = "/api/v1/cart")
+    public ResponseMessage insertCart() {
+        return null;
+    }
+
 }
