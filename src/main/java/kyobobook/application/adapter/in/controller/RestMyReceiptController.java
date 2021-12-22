@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -41,6 +44,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "영수증 목록 조회", notes = "영수증 목록을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = {"/", ""})
     public ResponseMessage selectReceiptList() {
         
@@ -55,6 +66,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "영수증 상세 조회", notes = "영수증 상세내역을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/{ordrId}")
     public ResponseMessage selectReceiptDetail() {
         
@@ -69,6 +88,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "신용카드 매출전표 상세 조회", notes = "신용카드 매출전표 상세내역을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/creditcard-statement/{ordrId}")
     public ResponseMessage selectCreditcardStatementDetail() {
         
@@ -83,6 +110,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "현금영수증 상세 조회", notes = "현금영수증 상세내역을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/cash-receipt/{ordrId}")
     public ResponseMessage selectCashReceiptDetail() {
         log.debug("RestMyReceiptController.selectCashReceiptDetail:: 현금영수증 상세내역 조회");
@@ -97,6 +132,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "스마트 영수증 상세 조회", notes = "스마트 영수증 상세내역을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/smart-receipt/{ordrId}")
     public ResponseMessage selectSmartReceiptDetail() {
         
@@ -111,6 +154,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "스마트 영수증 설정", notes = "스마트 영수증 설정을 한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @PostMapping(value = "/smart-receipt")
     public ResponseMessage insertSmartReceipt() {
         
@@ -125,6 +176,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "스마트 영수증 설정 해제", notes = "스마트 영수증 설정해제를 한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @DeleteMapping(value = "/smart-receipt")
     public ResponseMessage deleteSmartReceipt() {
         
@@ -139,6 +198,14 @@ public class RestMyReceiptController {
      * @return
      */
     @ApiOperation(value = "온라인/매장 구매내역 조회", notes = "온라인/매장 구매내역을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/o2o")
     public ResponseMessage selectOnOfflineOrderList() {
         

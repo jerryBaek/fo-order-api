@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -41,6 +44,14 @@ public class RestMyBankAccountController {
      * @return
      */
     @ApiOperation(value = "환불계좌 목록 조회", notes = "환불계좌 목록을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = {"/", ""})
     public ResponseMessage selectMyBankAccountList() {
         
@@ -55,6 +66,14 @@ public class RestMyBankAccountController {
      * @return
      */
     @ApiOperation(value = "환불계좌 신규 등록", notes = "환불계좌를 신규 등록한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @PostMapping(value = {"/", ""})
     public ResponseMessage insertMyBankAccount() {
         
@@ -69,6 +88,14 @@ public class RestMyBankAccountController {
      * @return
      */
     @ApiOperation(value = "환불계좌 삭제", notes = "환불계좌를 삭제한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @DeleteMapping(value = "/{rfnmBnacRgstNum}")
     public ResponseMessage deleteMyBankAccount() {
         

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -40,6 +43,14 @@ public class RestMyOrderController {
      * @return
      */
     @ApiOperation(value = "주문, 배송 목록 조회", notes = "주문, 배송 목록을 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = {"/", ""})
     public ResponseMessage selectMyOrderList() {
         
@@ -53,7 +64,15 @@ public class RestMyOrderController {
      * @description : 주문, 배송 요약 정보 조회
      * @return
      */
-    @ApiOperation(value = "주문, 배송 요약 정보 조회", notes = "주문, 배송 요약 정보를 조회합니다.")
+    @ApiOperation(value = "주문, 배 요약 정보 조회", notes = "주문, 배송 요약 정보를 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/count")
     public ResponseMessage selectMyOrderCount() {
         
@@ -68,6 +87,14 @@ public class RestMyOrderController {
      * @return
      */
     @ApiOperation(value = "주문내역 삭제", notes = "주문내역을 삭제합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @DeleteMapping(value = "/{ordrId}")
     public ResponseMessage deleteMyOrder() {
         
@@ -82,6 +109,14 @@ public class RestMyOrderController {
      * @return
      */
     @ApiOperation(value = "주문, 배송 상세 조회", notes = "주문, 배송 상세내역을 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/{ordrId}")
     public ResponseMessage selectMyOrderDetail() {
         
@@ -96,6 +131,14 @@ public class RestMyOrderController {
      * @return
      */
     @ApiOperation(value = "할인 상세내역 조회", notes = "할인 상세내역을 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/description/{ordrId}")
     public ResponseMessage selectDiscountDescription() {
         
