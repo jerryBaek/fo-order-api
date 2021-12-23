@@ -23,9 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import kyobobook.application.biz.delivery.port.in.DeliveryPort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Api(tags = "배송")
-@RequestMapping("/ord")
+@RequestMapping(Constants.PATH_PREFIX)
 @RestController
 public class RestDeliveryController {
 
@@ -97,7 +100,7 @@ public class RestDeliveryController {
         return this.deliveryService.insertDeliveryAddress(deliveryAddress);
 
     }
-    
+
     /**
      * @Method      : updateDeliveryAddress
      * @Date        : 2021. 12. 2.
@@ -109,81 +112,134 @@ public class RestDeliveryController {
     @ApiOperation(value = "배송주소록 수정", notes = "배송주소록을 수정한다.")
     @PutMapping("/api/v1/delivery/address/updDeliveryAddress")
     public ResponseMessage updateDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
-        
+
         return this.deliveryService.updateDeliveryAddress(deliveryAddress);
     }
-    
+
     /**
-     * @Method : selectBaroDrimStandardStoreList
-     * @Date : 2021. 12. 20.
-     * @author : jhbaek@kyobobook.com
+     * @Method      : getBaseDeliveryAddress
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 기준배송지 조회
+     * @return
+     */
+    @ApiOperation(value = "기준배송지 조회", notes = "사용자 기준배송지를 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/delivery/base/address")
+    public ResponseMessage getBaseDeliveryAddress() {
+        return null;
+    }
+
+    /**
+     * @Method      : getBaseBarodrimStore
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
      * @description : 바로드림 기준매장 조회
      * @return
      */
-    @ApiOperation(value = "바로드림 기준매장 조회", notes = "바로드림 기준매장을 리턴합니다.")
+    @ApiOperation(value = "바로드림 기준매장 조회", notes = "사용자 바로드림 기준매장을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
     @GetMapping(value = "/api/v1/delivery/base/store/barodrim")
-    public ResponseMessage selectBaroDrimStandardStoreList() {
-        return null;
-    }   
-    
-    
-    /**
-     * @Method : selectDeliveryAddressList
-     * @Date : 2021. 12. 20.
-     * @author : jhbaek@kyobobook.com
-     * @description : 배송주소목록 조회
-     * @return
-     */
-    @ApiOperation(value = "배송주소목록 조회", notes = "배송주소목록을 리턴한다. ")
-    @GetMapping(value = "/api/v1/delivery/selDeliveryAddress")
-    public ResponseMessage selectDeliveryAddressList() {
-        return null;
-    }   
-        
-
-    /**
-     * @Method : selectShippingAddress
-     * @Date : 2021. 12. 20.
-     * @author : jhbaek@kyobobook.com
-     * @description : 기본배송지 조회
-     * @return
-     */
-    @ApiOperation(value = "기본배송지 조회", notes = "사용자 기본배송지를 조회한다.")
-    @GetMapping(value = "/api/v1/delivery/selshipAddress")
-    public ResponseMessage selectShippingAddress() {
-        return null;
-    }   
-    
-    /**
-     * @Method : selectShippingInfoNoticeInq
-     * @Date : 2021. 12. 20.
-     * @author : jhbaek@kyobobook.com
-     * @description : 배송안내 공지 조회
-     * @return
-     */
-    @ApiOperation(value = "배송안내 공지 조회", notes = "주문 시 노출 할 배송안내공지를 조회한다.")
-    @GetMapping(value = "/api/v1/delivery/notice")
-    public ResponseMessage selectShippingInfoNoticeInq() {
-        return null;
-    }   
-    
-    
-    /**
-     * @Method : addShippingAddress
-     * @Date : 2021. 12. 20.
-     * @author : jhbaek@kyobobook.com
-     * @description : 배송지 등록
-     * @param deliveryAddress 배송주소
-     * @return
-     */
-    @ApiOperation(value = "배송지 등록 추가", notes = "사용자 배송지를 등록한다.")
-    @ApiImplicitParam(name = "shippingAddress", value = "배송지", required = true, dataType = "DeliveryAddress", paramType = "body")
-    @PostMapping("/api/v1/delivery/address/addShippingAddress")
-    public ResponseMessage addShippingAddress(@RequestBody DeliveryAddress deliveryAddress) {
-
-        log.debug("배송지 등록");
+    public ResponseMessage getBaseBarodrimStore() {
         return null;
     }
-    
-    
+
+    /**
+     * @Method      : setBaseBarodrimStore
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 바로드림 기준매장 설정
+     * @return
+     */
+    @ApiOperation(value = "바로드림 기준매장 설정", notes = "사용자 바로드림 기준매장을 설정한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PostMapping(value = "/api/v1/delivery/base/store/barodrim")
+    public ResponseMessage setBaseBarodrimStore() {
+        return null;
+    }
+
+    /**
+     * @Method      : getDeliveryAddress
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 사용자 배송지 조회
+     * @return
+     */
+    @ApiOperation(value = "사용자 배송지 조회", notes = "사용자가 등록한 배송지 목록을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/delivery/address")
+    public ResponseMessage getDeliveryAddress() {
+        return null;
+    }
+
+    /**
+     * @Method      : getDeliveryNotice
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 배송 안내 공지 조회
+     * @return
+     */
+    @ApiOperation(value = "배송 안내 공지 조회", notes = "주문 시 노출 할 배송안내공지를 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/delivery/notice")
+    public ResponseMessage getDeliveryNotice() {
+        return null;
+    }
+
+    /**
+     * @Method      : setDeliveryAddress
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 배송지 등록
+     * @return
+     */
+    @ApiOperation(value = "배송지 등록", notes = "사용자 배송지를 등록한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PostMapping(value = "/api/v1/delivery/address")
+    public ResponseMessage setDeliveryAddress() {
+        return null;
+    }
+
 }

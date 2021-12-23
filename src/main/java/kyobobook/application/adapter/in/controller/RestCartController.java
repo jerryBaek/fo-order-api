@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Api(tags = "장바구니")
-@RequestMapping("/ord")
+@RequestMapping(Constants.PATH_PREFIX)
 @RestController
 public class RestCartController {
 
@@ -75,7 +75,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 상품 선택여부 갱신", notes = "장바구니 상품 선택여부 정보를 갱신한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
             paramType = "path", defaultValue = "C20000000B54B")
-    @PutMapping(value = "/api/v1/cart/product/status")
+    @PutMapping(value = "/api/v1/deprecated/product/status")
+    @Deprecated
     public ResponseMessage updateCartCheck(@RequestBody List<Cart> cartList) {
 
         log.debug("================체크박스 업데이트");
@@ -93,7 +94,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 내 상품 삭제", notes = "장바구니 내 상품을 삭제한다.")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호목록", required = true, dataType = "string",
             paramType = "path", defaultValue = "111111")
-    @DeleteMapping(value = "/api/v1/cart/product")
+    @DeleteMapping(value = "/api/v1/deprecated/product")
+    @Deprecated
     public ResponseMessage removeProduct(@RequestBody List<Cart> cart) {
 //        Cart cart = Cart.builder()
 //                        .mmbrNum(mmbrNum)
@@ -115,7 +117,8 @@ public class RestCartController {
      * @return : newProductCode
      */
     @ApiOperation(value = "회원별 장바구니 최근 상품코드 리턴", notes = "회원별 장바구니 최근 상품코드 리턴한다.")
-    @GetMapping(value = "/api/v1/order/cart/newProductCode/{memberId}")
+    @GetMapping(value = "/api/v1/deprecated/newProductCode/{memberId}")
+    @Deprecated
     public ResponseMessage selectNewProductCode(@PathVariable String memberId) {
 
         return this.cartService.selectNewProductCode(memberId);
@@ -129,7 +132,8 @@ public class RestCartController {
      * @description : 장바구니 그룹별 목록 조회
      * @return
      */
-    @GetMapping(value = "/api/v1/order/cart/cartGroupList/{memberId}")
+    @GetMapping(value = "/api/v1/deprecated/cartGroupList/{memberId}")
+    @Deprecated
     public ResponseMessage selectCartGroupList(@PathVariable String memberId) {
 
         return cartService.selectCartGroupList(memberId);
@@ -143,7 +147,8 @@ public class RestCartController {
      * @param unfyCmdtId
      * @return
      */
-    @GetMapping(value = "/api/v1/order/cart/product/{unfyCmdtId}")
+    @GetMapping(value = "/api/v1/deprecated/product/{unfyCmdtId}")
+    @Deprecated
     public ResponseMessage selectCartProduct(@PathVariable String unfyCmdtId) {
         return this.cartService.selectCartProduct(unfyCmdtId);
     }
@@ -155,7 +160,8 @@ public class RestCartController {
      * @description : 장바구니 선택상품 목록 조회
      * @return
      */
-    @GetMapping(value = "/api/v1/order/cart/products")
+    @GetMapping(value = "/api/v1/deprecated/products")
+    @Deprecated
     public ResponseMessage selectCartProducts() {
         return this.cartService.selectCartProducts();
     }
@@ -169,7 +175,8 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = " 장바구니 총 상품 갯수 조회", notes = "장바구니 총 상품 갯수를 리턴한다.")
-    @GetMapping(value = "/api/v1/order/cart/count")
+    @GetMapping(value = "/api/v1/deprecated/count")
+    @Deprecated
     public ResponseMessage selectTotalProductCount() {
         return null;
     }
@@ -185,7 +192,8 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = " 장바구니 그룹별 무료배송정보 조회", notes = "장바구니 그룹별 무료배송정보를 리턴한다.")
-    @GetMapping(value = "/api/v1/order/cart/group")
+    @GetMapping(value = "/api/v1/deprecated/group")
+    @Deprecated
     public ResponseMessage selectGrpFreeTransInfo() {
         return null;
     }
@@ -202,7 +210,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 상품 선택 상태 수정", notes = "장바구니 상품 선택 상태를 수정한다. ")
     @ApiImplicitParam(name = "unfyCmdtId", value = "통합상품번호", required = true, dataType = "string",
     paramType = "path", defaultValue = "C20000000B54B")
-    @PutMapping(value = "/api/v1/order/cart/status")
+    @PutMapping(value = "/api/v1/deprecated/status")
+    @Deprecated
     public ResponseMessage updateSelProductStat(@RequestBody List<Cart> cartList) {
         //return null;
         log.debug("================장바구니 상품 선택 업데이트");
@@ -219,7 +228,8 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = " 장바구니 바로드림상품 포함 유무 조회", notes = "장바구니 바로드림상품 포함 유무값을 리턴한다.")
-    @GetMapping(value = "/api/v1/cart/product/exist/barodrim")
+    @GetMapping(value = "/api/v1/deprecated/product/exist/barodrim")
+    @Deprecated
     public ResponseMessage selectBaroDrimPrdExstYN() {
         return null;
     }
@@ -233,7 +243,8 @@ public class RestCartController {
      * @return :
      */
     @ApiOperation(value = "장바구니 선택상품 금액정보 조회", notes = "장바구니 선택상품의 금액정보를 리턴한다.")
-    @GetMapping(value = "/api/v1/cart/price/{unfyCmdtId}")
+    @GetMapping(value = "/api/v1/deprecated/price/{unfyCmdtId}")
+    @Deprecated
     public ResponseMessage selectSelProductAmount(@PathVariable String unfyCmdtId) {
         return null;
     }
@@ -248,7 +259,8 @@ public class RestCartController {
      * @return
      */
     @ApiOperation(value = "상품 옵션 변경 적용", notes = "상품 옵션 변경을 적용한다.")
-    @PutMapping(value = "/api/v1/cart/product/option")
+    @PutMapping(value = "/api/v1/deprecated/product/option")
+    @Deprecated
     public ResponseMessage updateProductOption(@RequestBody List<Cart> cartList) {
         //return null;
         log.debug("================상품 옵션 업데이트");
@@ -267,8 +279,8 @@ public class RestCartController {
     @ApiOperation(value = "장바구니 내 품/절판 전체 상품 삭제", notes = "장바구니 내 품/절판 상품 전체를 삭제한다.")
     @ApiImplicitParam(name = "mmbrNum", value = "회원아이디", required = true, dataType = "string",
             paramType = "path", defaultValue = "62012413658")
-    @DeleteMapping(value = "/api/v1/cart/prod"
-            + "uct/sold-out/{mmbrNum}")
+    @DeleteMapping(value = "/api/v1/deprecated/product/sold-out/{mmbrNum}")
+    @Deprecated
     public ResponseMessage removeSoldOutTotal(@PathVariable String mmbrNum) {
         //return this.cartSoldOutService.removeSoldOuts(mmbrNum);
         return null;
@@ -422,6 +434,13 @@ public class RestCartController {
         return null;
     }
 
+    /**
+     * @Method      : getPrice
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 전체 상품 중 선택상품 구매금액정보 조회
+     * @return
+     */
     @ApiOperation(value = "장바구니 전체 상품 중 선택상품 구매금액정보 조회", notes = "장바구니 내 선택상품에 대한 금액정보(갯수, 상품금액합계, 배송비합계, 결제예정금액)를 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
@@ -436,6 +455,13 @@ public class RestCartController {
         return null;
     }
 
+    /**
+     * @Method      : putProductOption
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 상품 옵션 변경 적용
+     * @return
+     */
     @ApiOperation(value = "상품 옵션 변경 적용", notes = "장바구니 내 상품 옵션을 변경한다.")
     @ApiResponses({
         @ApiResponse(code = 200
@@ -450,6 +476,13 @@ public class RestCartController {
         return null;
     }
 
+    /**
+     * @Method      : putProductCarvedSealOption
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 각인 옵션 변경 적용
+     * @return
+     */
     @ApiOperation(value = "각인 옵션 변경 적용", notes = "장바구니 내 각인 옵션을 변경한다.")
     @ApiResponses({
         @ApiResponse(code = 200
@@ -464,6 +497,13 @@ public class RestCartController {
         return null;
     }
 
+    /**
+     * @Method      : removeSoldOutProduct
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 품/절판 전체 삭제
+     * @return
+     */
     @ApiOperation(value = "장바구니 품/절판 전체 삭제", notes = "장바구니 내 품/절판 상품을 삭제한다.")
     @ApiResponses({
         @ApiResponse(code = 200
@@ -478,6 +518,55 @@ public class RestCartController {
         return null;
     }
 
+    /**
+     * @Method      : getPurchasedProduct
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 내 이미 구매한 상품 조회
+     * @return
+     */
+    @ApiOperation(value = "장바구니 내 이미 구매한 상품 조회", notes = "장바구니에서 이미 구매한(1년 이내) 상품 목록을 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/purchased-product")
+    public ResponseMessage getPurchasedProduct() {
+        return null;
+    }
+
+    /**
+     * @Method      : getRecentAddedProduct
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 최근 장바구니 추가 상품 조회
+     * @return
+     */
+    @ApiOperation(value = "최근 장바구니 추가 상품 조회", notes = "최근에 장바구니에 추가 한 상품ID를 조회한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/api/v1/cart/recent-added-product")
+    public ResponseMessage getRecentAddedProduct() {
+        return null;
+    }
+
+    /**
+     * @Method      : insertCart
+     * @Date        : 2021. 12. 22.
+     * @author      : kimsehoon@kyobobook.com
+     * @description : 장바구니 추가
+     * @return
+     */
     @ApiOperation(value = "장바구니 추가", notes = "상품을 장바구니에 추가한다.")
     @ApiResponses({
         @ApiResponse(code = 200
