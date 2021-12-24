@@ -144,4 +144,26 @@ public class RestMyOrderController {
         
         return null;
     }
+    
+    /**
+     * @Method      : selectDepositInformation
+     * @Date        : 2021. 12. 24.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 온라인입금 안내 조회
+     * @return
+     */
+    @ApiOperation(value = "온라인입금 안내 조회", notes = "온라인입금 주문의 입금기한을 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @GetMapping(value = "/deposit-Information")
+    public ResponseMessage selectDepositInformation() {
+        
+        return null;
+    }
 }
