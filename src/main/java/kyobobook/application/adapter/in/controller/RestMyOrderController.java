@@ -12,6 +12,7 @@ package kyobobook.application.adapter.in.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
@@ -163,6 +164,28 @@ public class RestMyOrderController {
     })
     @GetMapping(value = "/deposit-Information")
     public ResponseMessage selectDepositInformation() {
+        
+        return null;
+    }
+    
+    /**
+     * @Method      : updateMyOrderDeliveryAddress
+     * @Date        : 2021. 12. 24.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 배송지 변경
+     * @return
+     */
+    @ApiOperation(value = "배송지 변경", notes = "주문서에 입력된 배송지를 변경합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PutMapping(value = "/delivery-address/{ordrId}")
+    public ResponseMessage updateMyOrderDeliveryAddress() {
         
         return null;
     }
