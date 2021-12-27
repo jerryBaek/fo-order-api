@@ -5,14 +5,14 @@
  * Revision History
  * Author                         Date          Description
  * --------------------------     ----------    ----------------------------------------
- * seohee.ko@kyobobook.com      2021. 12. 21.
+ * seohee.ko@kyobobook.com      2021. 12. 22.
  *
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
@@ -25,25 +25,25 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Project     : fo-order-api
- * @FileName    : RestMyOrderController.java
- * @Date        : 2021. 12. 21.
+ * @FileName    : RestMyPresentController.java
+ * @Date        : 2021. 12. 22.
  * @author      : seohee.ko@kyobobook.com
- * @description : 
+ * @description :
  */
 @Slf4j
-@Api(tags = "주문, 배송")
-@RequestMapping("/ord/api/v1/my-order")
+@Api(tags = "선물함")
+@RequestMapping("/ord/api/v1/my-present")
 @RestController
-public class RestMyOrderController {
+public class RestMyPresentController {
 
     /**
-     * @Method      : selectMyOrder
-     * @Date        : 2021. 12. 21.
+     * @Method      : selectPresentList
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 주문, 배송 목록 조회
+     * @description : 선물 목록 조회
      * @return
      */
-    @ApiOperation(value = "주문, 배송 목록 조회", notes = "주문, 배송 목록을 조회합니다.")
+    @ApiOperation(value = "선물 목록 조회", notes = "받은 선물, 보낸 선물 목록을 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -53,63 +53,19 @@ public class RestMyOrderController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = {"/", ""})
-    public ResponseMessage selectMyOrderList() {
+    public ResponseMessage selectPresentList() {
         
         return null;
     }
     
     /**
-     * @Method      : selectOrderCount
-     * @Date        : 2021. 12. 21.
+     * @Method      : selectPresentDetail
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 주문, 배송 요약 정보 조회
+     * @description : 선물 상세조회
      * @return
      */
-    @ApiOperation(value = "주문, 배 요약 정보 조회", notes = "주문, 배송 요약 정보를 조회합니다.")
-    @ApiResponses({
-        @ApiResponse(code = 200
-                , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
-        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
-        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
-    })
-    @GetMapping(value = "/count")
-    public ResponseMessage selectMyOrderCount() {
-        
-        return null;
-    }
-    
-    /**
-     * @Method      : deleteMyOrder
-     * @Date        : 2021. 12. 21.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 주문내역 삭제
-     * @return
-     */
-    @ApiOperation(value = "주문내역 삭제", notes = "주문내역을 삭제합니다.")
-    @ApiResponses({
-        @ApiResponse(code = 200
-                , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
-        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
-        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
-    })
-    @DeleteMapping(value = "/{ordrId}")
-    public ResponseMessage deleteMyOrder() {
-        
-        return null;
-    }
-    
-    /**
-     * @Method      : selectMyOrderDetail
-     * @Date        : 2021. 12. 21.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 주문, 배송 상세 조회
-     * @return
-     */
-    @ApiOperation(value = "주문, 배송 상세 조회", notes = "주문, 배송 상세내역을 조회합니다.")
+    @ApiOperation(value = "선물 상세 조회", notes = "선물 상세내역을 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -119,19 +75,19 @@ public class RestMyOrderController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/{ordrId}")
-    public ResponseMessage selectMyOrderDetail() {
+    public ResponseMessage selectPresentDetail() {
         
         return null;
     }
     
     /**
-     * @Method      : selectDiscountDescription
-     * @Date        : 2021. 12. 21.
+     * @Method      : insertPresent
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 할인 상세내역 조회
+     * @description : 받은 선물 신규 등록
      * @return
      */
-    @ApiOperation(value = "할인 상세내역 조회", notes = "할인 상세내역을 조회합니다.")
+    @ApiOperation(value = "받은 선물 신규 등록", notes = "반은 선물을 신규 등록한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -140,20 +96,20 @@ public class RestMyOrderController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @GetMapping(value = "/description/{ordrId}")
-    public ResponseMessage selectDiscountDescription() {
+    @PostMapping(value = "/accept")
+    public ResponseMessage insertPresentReceived() {
         
         return null;
     }
-    
+
     /**
-     * @Method      : selectDepositInformation
-     * @Date        : 2021. 12. 24.
+     * @Method      : selectPresentAvailableYn
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 온라인입금 안내 조회
+     * @description : 선물 등록/거절 가능여부 조회
      * @return
      */
-    @ApiOperation(value = "온라인입금 안내 조회", notes = "온라인입금 주문의 입금기한을 조회합니다.")
+    @ApiOperation(value = "선물 등록/거절 가능여부 조회", notes = "선물 등록/거절 가능여부를 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -162,20 +118,20 @@ public class RestMyOrderController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @GetMapping(value = "/deposit-Information")
-    public ResponseMessage selectDepositInformation() {
+    @GetMapping(value = "/available")
+    public ResponseMessage selectPresentAvailableYn() {
         
         return null;
     }
     
     /**
-     * @Method      : updateMyOrderDeliveryAddress
-     * @Date        : 2021. 12. 24.
+     * @Method      : deletePresent
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 배송지 변경
+     * @description : 선물 취소
      * @return
      */
-    @ApiOperation(value = "배송지 변경", notes = "주문서에 입력된 배송지를 변경합니다.")
+    @ApiOperation(value = "보낸선물 취소", notes = "보낸선물을 주문 취소한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -184,9 +140,32 @@ public class RestMyOrderController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @PutMapping(value = "/delivery-address/{ordrId}")
-    public ResponseMessage updateMyOrderDeliveryAddress() {
+    @DeleteMapping(value = "/cancel")
+    public ResponseMessage presentSentCancel() {
         
         return null;
     }
+    
+    /**
+     * @Method      : presentReceivedReject
+     * @Date        : 2021. 12. 23.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 선물 거절
+     * @return
+     */
+    @ApiOperation(value = "선물 거절", notes = "선물을 거절처리 한다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = ResponseMessage.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @DeleteMapping(value = "/reject")
+    public ResponseMessage presentReceivedReject() {
+        
+        return null;
+    }
+    
 }

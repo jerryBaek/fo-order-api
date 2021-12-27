@@ -5,46 +5,48 @@
  * Revision History
  * Author                         Date          Description
  * --------------------------     ----------    ----------------------------------------
- * seohee.ko@kyobobook.com      2021. 12. 22.
+ * seohee.ko@kyobobook.com      2021. 12. 23.
  *
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Project     : fo-order-api
- * @FileName    : RestMyStoreController.java
- * @Date        : 2021. 12. 22.
+ * @FileName    : RestMyDeliveryController.java
+ * @Date        : 2021. 12. 23.
  * @author      : seohee.ko@kyobobook.com
  * @description :
  */
 @Slf4j
-@Api(tags = "관심매장")
-@RequestMapping("/ord/api/v1/my-store")
+@Api(tags = "배송지")
+@RequestMapping("/ord/api/v1/my-delivery")
 @RestController
-public class RestMyStoreController {
+public class RestMyDeliveryAddressController {
 
     /**
-     * @Method      : selectConcernStoreList
-     * @Date        : 2021. 12. 22.
+     * @Method      : selectDeliveryAddressList
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 관심매장 목록 조회
+     * @description : 
      * @return
      */
-    @ApiOperation(value = "관심매장 목록 조회", notes = "관심매장 목록을 조회한다.")
+    @ApiOperation(value = "배송지 목록 조회", notes = "배송지 목록을 조회합니다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -54,19 +56,18 @@ public class RestMyStoreController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = {"/", ""})
-    public ResponseMessage selectConcernStoreList() {
-        
+    public ResponseMessage selectDeliveryAddressList() {
         return null;
     }
     
     /**
-     * @Method      : insertConcernStore
-     * @Date        : 2021. 12. 22.
+     * @Method      : insertDeliveryAddress
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 관심매장 설정
+     * @description : 배송지 추가
      * @return
      */
-    @ApiOperation(value = "관심매장 설정", notes = "관심매장을 신규 등록한다.")
+    @ApiOperation(value = "배송지 추가", notes = "배송지를 신규 등록한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -75,20 +76,21 @@ public class RestMyStoreController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @PostMapping(value = {"/{지점코드}"})
-    public ResponseMessage insertConcernStore() {
-        
+    @PostMapping(value = {"/", ""})
+    public ResponseMessage insertDeliveryAddress() {
+
         return null;
+
     }
     
     /**
-     * @Method      : deleteConcernStore
-     * @Date        : 2021. 12. 22.
+     * @Method      : updateDeliveryAddress
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 관심매장 삭제
+     * @description : 배송지 수정
      * @return
      */
-    @ApiOperation(value = "관심매장 삭제", notes = "관심매장을 삭제한다.")
+    @ApiOperation(value = "배송지 수정", notes = "배송지를 수정한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -97,20 +99,20 @@ public class RestMyStoreController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @DeleteMapping(value = "/{지점코드}")
-    public ResponseMessage deleteConcernStore() {
-        
+    @PostMapping(value = "/{ordrDlpnId}")
+    public ResponseMessage updateDeliveryAddress() {
+
         return null;
     }
     
     /**
-     * @Method      : selectRegularStore
-     * @Date        : 2021. 12. 22.
+     * @Method      : selectRegularDeliveryAddress
+     * @Date        : 2021. 12. 23.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 기본매장 조회
+     * @description : 기본 배송지 조회
      * @return
      */
-    @ApiOperation(value = "기본매장 조회", notes = "기본매장을 조회한다.")
+    @ApiOperation(value = "기본 배송지 조회", notes = "기본 배송지를 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
@@ -120,29 +122,7 @@ public class RestMyStoreController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/regular")
-    public ResponseMessage selectRegularStore() {
-        
-        return null;
-    }
-    
-    /**
-     * @Method      : updateRegularStore
-     * @Date        : 2021. 12. 23.
-     * @author      : seohee.ko@kyobobook.com
-     * @description : 기본매장 설정
-     * @return
-     */
-    @ApiOperation(value = "기본매장 설정", notes = "기본매장으로 설정한다.")
-    @ApiResponses({
-        @ApiResponse(code = 200
-                , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
-        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
-        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
-    })
-    @PutMapping(value = "/regular")
-    public ResponseMessage updateRegularStore() {
+    public ResponseMessage selectRegularDeliveryAddress() {
         
         return null;
     }
