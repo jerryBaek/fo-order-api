@@ -26,6 +26,7 @@ spring:
     port: ${REDIS_CACHE_PORT}
     username: ${REDIS_CACHE_USERNAME}
     password: ${REDIS_CACHE_PASSWORD}
+    ssl: ${REDIS_CACHE_SSL}
     timeout: 10000
   data:
     mongodb:
