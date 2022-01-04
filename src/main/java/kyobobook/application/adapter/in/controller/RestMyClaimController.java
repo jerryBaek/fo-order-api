@@ -150,7 +150,7 @@ public class RestMyClaimController {
      * @Method      : insertFreebieCancel
      * @Date        : 2021. 12. 21.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 사은품 주문 취소신청
+     * @description : 사은품 주문 취소신청 - 확인 후 삭제예정
      * @return
      */
     @ApiOperation(value = "사은품 주문 취소신청", notes = "사은품 주문 취소신청을 한다.")
@@ -162,6 +162,7 @@ public class RestMyClaimController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
+    @Deprecated
     @PostMapping(value = "/freebie/cancel")
     public ResponseMessage insertFreebieCancel() {
         
@@ -172,7 +173,7 @@ public class RestMyClaimController {
      * @Method      : insertFreebieReturn
      * @Date        : 2021. 12. 21.
      * @author      : seohee.ko@kyobobook.com
-     * @description : 사은품 반품신청
+     * @description : 사은품 반품신청 - 확인 후 삭제예정
      * @return
      */
     @ApiOperation(value = "사은품 반품신청", notes = "사은품 반품신청을 한다.")
@@ -184,6 +185,7 @@ public class RestMyClaimController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
+    @Deprecated
     @PostMapping(value = "/freebie/return")
     public ResponseMessage insertFreebieReturn() {
         
