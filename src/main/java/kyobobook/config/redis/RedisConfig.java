@@ -33,7 +33,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 //@Configuration
 public class RedisConfig {
 
-    @Bean
+//    @Bean
     public RedisConnectionFactory redisConnectionFactory(RedisProperties props) {
 
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
