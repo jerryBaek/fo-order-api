@@ -42,7 +42,7 @@ public class RedisConfig {
         redisConfig.setUsername(props.getUsername());
 
         LettuceClientConfiguration lettuceClientConfiguration = LettuceClientConfiguration.builder()
-                .useSsl().and()
+                .useSsl().disablePeerVerification().and()
                 .commandTimeout(Duration.ofSeconds(2))
                 .shutdownTimeout(Duration.ZERO)
                 .build();
