@@ -33,6 +33,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 //@Configuration
 public class RedisConfig {
 
+// TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
 //    @Bean
     public RedisConnectionFactory redisConnectionFactory(RedisProperties props) {
 

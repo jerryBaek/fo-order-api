@@ -31,14 +31,16 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author      : sykim@kyobobook.com
  * @description : Redis Cache 설정
  */
-@Configuration
+//TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
+//@Configuration
 public class CacheConfig {
-    
+
     private final RedisConnectionFactory redisConnectionFactory;
 
-    @Value("${spring.cache.redis.time-to-live}")
+// TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
+//    @Value("${spring.cache.redis.time-to-live}")
     public long ttl;
-    
+
     /**
      * Constructor
      * @param redisConnectionFactory
@@ -46,21 +48,22 @@ public class CacheConfig {
     public CacheConfig(RedisConnectionFactory redisConnectionFactory) {
         this.redisConnectionFactory = redisConnectionFactory;
     }
-    
-    @Bean
+
+// TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
+//    @Bean
     public CacheManager redisCacheManager() {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
                 .defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
                 .entryTtl(Duration.ofSeconds(ttl));
-        
+
         RedisCacheManager redisCacheManager = RedisCacheManager
                 .RedisCacheManagerBuilder
                 .fromConnectionFactory(redisConnectionFactory)
                 .cacheDefaults(redisCacheConfiguration)
                 .build();
-        
+
         return redisCacheManager;
     }
 
