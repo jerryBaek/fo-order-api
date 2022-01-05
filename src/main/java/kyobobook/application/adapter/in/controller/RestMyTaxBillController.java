@@ -1,9 +1,11 @@
 /***************************************************
- * Copyright(c) 2021-2022 Kyobo Book Centre All right reserved. This software is the proprietary
- * information of Kyobo Book.
+ * Copyright(c) 2021-2022 Kyobo Book Centre All right reserved.
+ * This software is the proprietary information of Kyobo Book.
  *
- * Revision History Author Date Description -------------------------- ----------
- * ---------------------------------------- smlee1@kyobobook.com 2021. 8. 17. First Draft.
+ * Revision History
+ * Author                         Date          Description
+ * --------------------------     ----------    ----------------------------------------
+ * jhbaek@kyobobook.com      2022. 01. 05.
  *
  ****************************************************/
 package kyobobook.application.adapter.in.controller;
