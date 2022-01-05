@@ -67,7 +67,8 @@ public class RestMyTaxBillController {
     @GetMapping("/api/v1/my/tax-bill")
     public ResponseMessage selectTaxBillList(@RequestBody TaxbillMaster taxbillMaster) {
         log.debug("RestMyTaxBillController :: 세금계산서 목록 조회\" + TaxbillMaster");
-        return ResponseMessage.builder().build().setExample(TaxbillMaster.class); 
+        //return ResponseMessage.builder().build().setExample(TaxbillMaster.class); 
+        return new ResponseMessage().setExample(taxbillMaster.getClass(), 3);
         //return ResponseMessage.builder().build().setExampleByMultiField(TaxbillMaster.class, 2);
     }
 
