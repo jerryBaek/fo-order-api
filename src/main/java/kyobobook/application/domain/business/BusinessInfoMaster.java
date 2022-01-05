@@ -10,7 +10,6 @@
  ****************************************************/
 package kyobobook.application.domain.business;
 
-import java.util.List;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

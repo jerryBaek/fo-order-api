@@ -110,12 +110,5 @@ public class TaxbillMaster {
     @ApiModelProperty(value="세금계산서 목록", required=false)
     private List<TaxbillMaster> taxBillList;
     
-    /*
-     * @ApiModelProperty(value = "수정자ID", required=false, example = "b1234") public String amnrId;
-     */
-    
-    
-    
-    
     
 }
