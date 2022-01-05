@@ -28,11 +28,13 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
  * @author      : smlee1@kyobobook.com
  * @description : Resis Configuration
  */
-@EnableCaching
-@Configuration
+// TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
+//@EnableCaching
+//@Configuration
 public class RedisConfig {
 
-    @Bean
+// TODO On-Prem에서 방화벽 문제로 인해 비활성화. 향후 캐시사용 시 활성화 필요
+//    @Bean
     public RedisConnectionFactory redisConnectionFactory(RedisProperties props) {
 
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
