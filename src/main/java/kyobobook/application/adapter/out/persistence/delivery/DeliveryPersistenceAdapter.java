@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
 import kyobobook.application.biz.delivery.port.out.DeliveryPersistencePort;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.application.domain.delivery.DeliveryAddressBefore;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -51,7 +51,7 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public Integer deleteDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public Integer deleteDeliveryAddress(DeliveryAddressBefore deliveryAddress) {
 
         log.debug("########### 배송지 삭제 Adapter :: ");
 
@@ -62,7 +62,7 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public Boolean insertDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public Boolean insertDeliveryAddress(DeliveryAddressBefore deliveryAddress) {
 
         return this.writer.insertDeliveryAddress(deliveryAddress.convertToInsertEntity());
 
@@ -76,10 +76,10 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public DeliveryAddress getDeliveryAddress(DeliveryAddress searchDeliveryAddress) {
+    public DeliveryAddressBefore getDeliveryAddress(DeliveryAddressBefore searchDeliveryAddress) {
         TSoDlvrAddrMEntity tSoDlvrAddrMEntity = this.reader.getDeliveryAddress(searchDeliveryAddress);
         
-        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
+        DeliveryAddressBefore deliveryAddress = DeliveryAddressBefore.builder()
                                                          .bscDlpnYsno(tSoDlvrAddrMEntity.getBscDlpnYsno())
                                                          .dlpnSrmb(tSoDlvrAddrMEntity.getDlpnSrmb())
                                                          .build();
@@ -93,7 +93,7 @@ public class DeliveryPersistenceAdapter implements DeliveryPersistencePort {
     }
 
     @Override
-    public int updateDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public int updateDeliveryAddress(DeliveryAddressBefore deliveryAddress) {
         
         TSoDlvrAddrMEntity tSoDlvrAddrMEntity = TSoDlvrAddrMEntity.builder()
                                                                   .mmbrNum(deliveryAddress.getMmbrNum())

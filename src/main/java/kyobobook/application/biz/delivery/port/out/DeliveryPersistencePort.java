@@ -13,7 +13,7 @@ package kyobobook.application.biz.delivery.port.out;
 import java.util.List;
 
 import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddrMEntity;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.application.domain.delivery.DeliveryAddressBefore;
 
 /**
  * @Project : fo-order-api
@@ -42,7 +42,7 @@ public interface DeliveryPersistencePort {
      * @param deliveryAddress
      * @return
      */
-    Integer deleteDeliveryAddress(DeliveryAddress deliveryAddress);
+    Integer deleteDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
     /**
      * @Method : insertDeliveryAddress
@@ -52,7 +52,7 @@ public interface DeliveryPersistencePort {
      * @param deliveryAddress 배송주소
      * @return
      */
-    Boolean insertDeliveryAddress(DeliveryAddress deliveryAddress);
+    Boolean insertDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
     /**
      * @Method : updateDeliveryAddressDefaultClear
@@ -72,7 +72,7 @@ public interface DeliveryPersistencePort {
      * @param deliveryAddress
      * @return
      */
-    DeliveryAddress getDeliveryAddress(DeliveryAddress deliveryAddress);
+    DeliveryAddressBefore getDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
     /**
      * @Method      : updateDeliveryAddress
@@ -91,6 +91,6 @@ public interface DeliveryPersistencePort {
      * @param deliveryAddress
      * @return
      */
-    int updateDeliveryAddress(DeliveryAddress deliveryAddress);
+    int updateDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
 }

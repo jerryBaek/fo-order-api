@@ -23,7 +23,7 @@ import kyobobook.application.adapter.out.persistence.delivery.entity.TSoDlvrAddr
 import kyobobook.application.biz.delivery.port.in.DeliveryPort;
 import kyobobook.application.biz.delivery.port.out.DeliveryPersistencePort;
 import kyobobook.application.domain.common.ResponseMessage;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.application.domain.delivery.DeliveryAddressBefore;
 import kyobobook.common.Constants;
 import kyobobook.exception.BizRuntimeException;
 import lombok.extern.slf4j.Slf4j;
@@ -75,7 +75,7 @@ public class DeliveryService implements DeliveryPort {
         ResponseMessage responseMessage = null;
         
         // TODO mmbrNum 세션에서 획득해야함.
-        DeliveryAddress deliveryAddress = DeliveryAddress.builder()
+        DeliveryAddressBefore deliveryAddress = DeliveryAddressBefore.builder()
                                                          .mmbrNum("62210667167")
                                                          .dlpnSrmb(dlpnSrmb)
                                                          .build();
@@ -108,7 +108,7 @@ public class DeliveryService implements DeliveryPort {
     }
 
     @Override
-    public ResponseMessage insertDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public ResponseMessage insertDeliveryAddress(DeliveryAddressBefore deliveryAddress) {
 
         ResponseMessage responseMessage = null;
 
@@ -154,7 +154,7 @@ public class DeliveryService implements DeliveryPort {
     }
 
     @Override
-    public ResponseMessage updateDeliveryAddress(DeliveryAddress deliveryAddress) {
+    public ResponseMessage updateDeliveryAddress(DeliveryAddressBefore deliveryAddress) {
         
         ResponseMessage responseMessage = null;
         

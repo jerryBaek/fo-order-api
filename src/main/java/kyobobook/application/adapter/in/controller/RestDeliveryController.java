@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kyobobook.application.biz.delivery.port.in.DeliveryPort;
 import kyobobook.application.domain.common.ResponseMessage;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.application.domain.delivery.DeliveryAddressBefore;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -92,7 +92,7 @@ public class RestDeliveryController {
     @ApiOperation(value = "배송주소록 추가", notes = "배송주소록을 추가한다.")
     @ApiImplicitParam(name = "deliveryAddress", value = "배송주소", required = true, dataType = "DeliveryAddress", paramType = "body")
     @PostMapping("/api/v1/delivery/address/addDeliveryAddress")
-    public ResponseMessage addDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
+    public ResponseMessage addDeliveryAddress(@RequestBody DeliveryAddressBefore deliveryAddress) {
 
         log.debug("배송주소록 추가 진입");
         log.debug("입력 정보 : {}", deliveryAddress);
@@ -111,7 +111,7 @@ public class RestDeliveryController {
      */
     @ApiOperation(value = "배송주소록 수정", notes = "배송주소록을 수정한다.")
     @PutMapping("/api/v1/delivery/address/updDeliveryAddress")
-    public ResponseMessage updateDeliveryAddress(@RequestBody DeliveryAddress deliveryAddress) {
+    public ResponseMessage updateDeliveryAddress(@RequestBody DeliveryAddressBefore deliveryAddress) {
 
         return this.deliveryService.updateDeliveryAddress(deliveryAddress);
     }

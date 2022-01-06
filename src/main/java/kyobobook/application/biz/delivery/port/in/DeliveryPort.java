@@ -11,7 +11,7 @@
 package kyobobook.application.biz.delivery.port.in;
 
 import kyobobook.application.domain.common.ResponseMessage;
-import kyobobook.application.domain.delivery.DeliveryAddress;
+import kyobobook.application.domain.delivery.DeliveryAddressBefore;
 
 /**
  * @Project : fo-order-api
@@ -48,7 +48,7 @@ public interface DeliveryPort {
      * @param deliveryAddress 배송주소
      * @return
      */
-    ResponseMessage insertDeliveryAddress(DeliveryAddress deliveryAddress);
+    ResponseMessage insertDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
     /**
      * @Method      : updateDeliveryAddress
@@ -58,6 +58,6 @@ public interface DeliveryPort {
      * @param deliveryAddress
      * @return
      */
-    ResponseMessage updateDeliveryAddress(DeliveryAddress deliveryAddress);
+    ResponseMessage updateDeliveryAddress(DeliveryAddressBefore deliveryAddress);
 
 }
