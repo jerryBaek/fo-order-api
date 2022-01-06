@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import kyobobook.application.biz.cart.port.in.CartPort;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -37,10 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/ord")
 @RestController
 public class RestMyBenefitController {
-
-    /** 장바구니 서비스 */
-    @Autowired
-    private CartPort cartService;
 
     /**
      * @Method : selectMileageUsedList

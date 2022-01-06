@@ -19,6 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kyobobook.application.domain.claim.ClaimApplication;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -69,15 +70,17 @@ public class RestMyClaimController {
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , response = ClaimApplication.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "ClaimApplication" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/cancel")
-    public ResponseMessage insertOrderCancel() {
+    public ResponseMessage insertOrderCancel(ClaimApplication claimApplication) {
      
-        return null;
+        return new ResponseMessage();
     }
     
     /**
@@ -91,15 +94,17 @@ public class RestMyClaimController {
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , response = ClaimApplication.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "ClaimApplication" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/exchange")
-    public ResponseMessage insertOrderExchange() {
+    public ResponseMessage insertOrderExchange(ClaimApplication claimApplication) {
         
-        return null;
+        return new ResponseMessage();
     }
     
     /**
@@ -113,15 +118,17 @@ public class RestMyClaimController {
     @ApiResponses({
         @ApiResponse(code = 200
                 , responseContainer = ""
-                , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , response = ClaimApplication.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "ClaimApplication" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/return")
-    public ResponseMessage insertOrderReturn() {
+    public ResponseMessage insertOrderReturn(ClaimApplication claimApplication) {
         
-        return null;
+        return new ResponseMessage();
     }
     
     /**

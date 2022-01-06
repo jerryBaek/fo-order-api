@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.orderhistory.OrderHistoryDetail;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -188,5 +189,27 @@ public class RestMyOrderController {
     public ResponseMessage updateMyOrderDeliveryAddress() {
         
         return null;
+    }
+    
+    /**
+     * @Method      : selectCouponApplyAmount
+     * @Date        : 2022. 1. 6.
+     * @author      : seohee.ko@kyobobook.com
+     * @description : 쿠폰 사용내역 조회
+     * @return
+     */
+    @ApiOperation(value = "쿠폰 사용내역 조회", notes = "해당 주문의 쿠폰 적용 내역을 조회합니다.")
+    @ApiResponses({
+        @ApiResponse(code = 200
+                , responseContainer = ""
+                , response = OrderHistoryDetail.class
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OrderHistoryDetail" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+        @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
+        @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
+    })
+    @PutMapping(value = "/coupon")
+    public ResponseMessage selectCouponApplyAmount(OrderHistoryDetail orderHistoryDetail) {
+        
+        return new ResponseMessage();
     }
 }
