@@ -75,7 +75,7 @@ public class RestCashVoucherController {
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
-    @GetMapping(value = "/api/v1/cash-voucher/bank-balance")
+    @PostMapping(value = "/api/v1/cash-voucher/bank-balance")
     public ResponseMessage spendBankBalance() {
         return null;
     }
