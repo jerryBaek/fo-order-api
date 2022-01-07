@@ -32,6 +32,7 @@ import kyobobook.application.domain.commoncode.CommonCodeDetail;
 import kyobobook.application.domain.primitive.NumberType;
 import kyobobook.application.domain.primitive.StringType;
 import kyobobook.application.domain.hybrid.Apibiz0602006;
+import kyobobook.application.domain.hybrid.Apibiz0602013;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -420,14 +421,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "StringType" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PutMapping(value = "/api/v1/cart/pick")
     public ResponseMessage putPick() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -443,14 +444,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "StringType" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cart/product/exist/barodrim")
     public ResponseMessage existsBarodrimProduct() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -466,14 +467,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "Apibiz0602006" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cart/price")
-    public ResponseMessage getPrice() {
-        return null;
+    public ResponseMessage getPrice(@RequestBody Apibiz0602006 apibiz0602006) {
+        return new ResponseMessage().setExample(apibiz0602006.getClass(), 1);
     }
 
     /**
@@ -489,14 +490,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "Apibiz0602013" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PutMapping(value = "/api/v1/cart/product/option")
-    public ResponseMessage putProductOption() {
-        return null;
+    public ResponseMessage putProductOption(@RequestBody Apibiz0602013 apibiz0602013) {
+        return new ResponseMessage().setExample(apibiz0602013.getClass(), 1);
     }
 
     /**
@@ -512,14 +513,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "StringType" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PutMapping(value = "/api/v1/cart/product/option/carved-seal")
     public ResponseMessage putProductCarvedSealOption() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -535,14 +536,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "StringType" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @DeleteMapping(value = "/api/v1/cart/product/sold-out")
     public ResponseMessage removeSoldOutProduct() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -558,14 +559,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "Apibiz0602006" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cart/purchased-product")
-    public ResponseMessage getPurchasedProduct() {
-        return null;
+    public ResponseMessage getPurchasedProduct(@RequestBody Apibiz0602006 apibiz0602006) {
+        return new ResponseMessage().setExample(apibiz0602006.getClass(), 1);
     }
 
     /**
@@ -578,17 +579,17 @@ public class RestCartController {
     @ApiOperation(value = "최근 장바구니 추가 상품 조회", notes = "최근에 장바구니에 추가 한 상품ID를 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
-                , responseContainer = ""
+                , responseContainer = "List"
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "Cart" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cart/recent-added-product")
-    public ResponseMessage getRecentAddedProduct() {
-        return null;
+    public ResponseMessage getRecentAddedProduct(@RequestBody Cart cart) {
+        return new ResponseMessage().setExample(cart.getClass(), 1);
     }
 
     /**

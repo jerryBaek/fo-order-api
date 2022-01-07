@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.primitive.StringType;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,13 +50,15 @@ public class RestPackagingOptionController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/packaging/option/check")
     public ResponseMessage checkPackagingOption() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
 }

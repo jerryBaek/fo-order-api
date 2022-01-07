@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import kyobobook.application.domain.taxbill.TaxbillMaster;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,10 +33,10 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(description = "API-BIZ06-02-006")
+@ApiModel(description = "API-BIZ06-02-006 : Cart + UnifyCommodity + UnitItem")
 public class Apibiz0602006 {
 
-    // cart
+    // Cart
     /** 장바구니ID */
     @ApiModelProperty(required = true, value = "장바구니ID", example = "B19055055A03")
     private String spbkId;
