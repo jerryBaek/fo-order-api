@@ -21,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
 import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.application.domain.delivery.ForeignDeliveryExpense;
@@ -62,7 +63,7 @@ public class RestOrderController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/product/count")
-    public ResponseMessage getProductCount() {
+    public ResponseMessage getProductCount(@RequestBody Cart cart) {
         return ResponseMessage.builder().build().setExample(NumberType.class);
     }
 
@@ -106,8 +107,8 @@ public class RestOrderController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/product/overseas")
-    public ResponseMessage getOverseasProduct(@RequestBody Apibiz0602006 apibiz0602006) {
-        return new ResponseMessage().setExample(apibiz0602006.getClass(), 1);
+    public ResponseMessage getOverseasProduct(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(Apibiz0602006.class, 1);
     }
 
     /**

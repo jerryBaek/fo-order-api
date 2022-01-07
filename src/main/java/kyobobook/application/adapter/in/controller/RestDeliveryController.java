@@ -155,15 +155,13 @@ public class RestDeliveryController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            //+ "MemberBarodrimReceiptsAndDisbursementsPlace" 
                             + "StringType"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/delivery/base/store/barodrim")
-    public ResponseMessage getBaseBarodrimStore() {
-        //return ResponseMessage.builder().build().setExample(MemberBarodrimReceiptsAndDisbursementsPlace.class);
+    public ResponseMessage getBaseBarodrimStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
         return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
@@ -179,13 +177,15 @@ public class RestDeliveryController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/delivery/base/store/barodrim")
-    public ResponseMessage setBaseBarodrimStore() {
-        return null;
+    public ResponseMessage setBaseBarodrimStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**

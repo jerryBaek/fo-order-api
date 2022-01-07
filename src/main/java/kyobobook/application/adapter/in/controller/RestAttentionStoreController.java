@@ -13,6 +13,7 @@ package kyobobook.application.adapter.in.controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,7 +59,7 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage getAttentionStore() {
+    public ResponseMessage getAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
         return ResponseMessage.builder().build().setExample(MemberBarodrimReceiptsAndDisbursementsPlace.class);
     }
 
@@ -81,7 +82,7 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage setAttentionStore() {
+    public ResponseMessage setAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
         return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
@@ -104,7 +105,7 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @DeleteMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage removeAttentionStore() {
+    public ResponseMessage removeAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
         return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
