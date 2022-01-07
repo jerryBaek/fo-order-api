@@ -90,7 +90,7 @@ public class RestDeliveryController {
      * @return
      */
     @ApiOperation(value = "배송주소록 추가", notes = "배송주소록을 추가한다.")
-    @ApiImplicitParam(name = "deliveryAddress", value = "배송주소", required = true, dataType = "DeliveryAddress", paramType = "body")
+    @ApiImplicitParam(name = "deliveryAddress", value = "배송주소", required = true, dataType = "DeliveryAddressBefore", paramType = "body")
     @PostMapping("/api/v1/delivery/address/addDeliveryAddress")
     public ResponseMessage addDeliveryAddress(@RequestBody DeliveryAddressBefore deliveryAddress) {
 
