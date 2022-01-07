@@ -38,7 +38,7 @@ import lombok.experimental.SuperBuilder;
 public class NumberType {
 
     /** 결과 */
-    @ApiModelProperty(required = false, value = "결과", example = "")
+    @ApiModelProperty(required = false, value = "결과", example = "2")
     private BigInteger result;
 
 }

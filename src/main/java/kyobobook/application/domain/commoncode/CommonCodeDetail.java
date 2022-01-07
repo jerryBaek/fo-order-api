@@ -37,13 +37,13 @@ import lombok.experimental.SuperBuilder;
 public class CommonCodeDetail {
 
     /** 코드ID */
-    @ApiModelProperty(required = true, value = "코드ID", example = "")
+    @ApiModelProperty(required = true, value = "코드ID", example = "1708")
     private String codeId;
     /** 코드값 */
-    @ApiModelProperty(required = true, value = "코드값", example = "")
+    @ApiModelProperty(required = true, value = "코드값", example = "10")
     private String codeWrth;
     /** 코드값명 */
-    @ApiModelProperty(required = true, value = "코드값명", example = "")
+    @ApiModelProperty(required = true, value = "코드값명", example = "교보문고")
     private String codeWrthName;
     /** 코드값설명 */
     @ApiModelProperty(required = true, value = "코드값설명", example = "")
