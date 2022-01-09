@@ -12,9 +12,11 @@ package kyobobook.application.domain.commodity;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-
+import java.util.List;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kyobobook.application.domain.delivery.OrderDeliveryPoint;
+import kyobobook.application.domain.ordercashvoucher.OrderExpense;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

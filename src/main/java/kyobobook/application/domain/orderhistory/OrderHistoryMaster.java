@@ -10,8 +10,13 @@
  ****************************************************/
 package kyobobook.application.domain.orderhistory;
 
+import java.util.List;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kyobobook.application.domain.commodity.OrderCommodity;
+import kyobobook.application.domain.delivery.OrderDeliveryPoint;
+import kyobobook.application.domain.gift.OrderGiftReceiptOfMessageTarget;
+import kyobobook.application.domain.ordercashvoucher.OrderExpense;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,60 +38,44 @@ import lombok.experimental.SuperBuilder;
 @ApiModel(description = "주문, 배송 마스터 도메인")
 public class OrderHistoryMaster {
     
-    @ApiModelProperty(value = "조회기간 시작", example = "20220101")
-    private String strtPeriod;
-    
-    @ApiModelProperty(value = "조회기간 종료", example = "20220105")
-    private String endPeriod;
-    
-
-    @ApiModelProperty(value = "주문ID", example = "20210105")
-    public String ordrId;
-    
-    @ApiModelProperty(value = "주문일자", example = "20210105")
-    public String ordrDate;
-    
-    @ApiModelProperty(value = "주문진행상태코드", example = "115:배송완료")
-    public String ordrPrgsCdtnCode;
-    
-    @ApiModelProperty(value = "배송담당코드", example = "010:북시티")
-    public String dlvrRspbCode;
-    
-    @ApiModelProperty(value = "상품명", example = "찰랑찰랑 물이 있어요")
-    public String cmdtName;
-    
-    @ApiModelProperty(value = "판매상품ID", example = "C160000008779")
-    public String saleCmdtid;
-    
-    @ApiModelProperty(value = "요청수량", example = "2")
-    public String requQntt;
-    
-    @ApiModelProperty(value = "상품매출금액", example = "15300")
-    public String cmdtSlsAmnt;
-    
-    @ApiModelProperty(value = "단위품목명", example = "명조체")
-    public String untItmName;
-    
-    @ApiModelProperty(value = "판매상품구분코드", example = "")
-    public String saleCmdtDvsnCode;
-    
-    @ApiModelProperty(value = "수신자명", example = "")
-    public String recvName;
+    /** 주문마스터기본정보 */
+    /** 주문ID */
+    @ApiModelProperty(required = true, value = "주문ID", example = "")
+    private String ordrId;
+    /** 회원번호 */
+    @ApiModelProperty(required = true, value = "회원번호", example = "")
+    private String mmbrNum;
+    /** 주문자명 */
+    @ApiModelProperty(required = true, value = "주문자명", example = "")
+    private String aordName;
+    /** 주문자이메일주소 */
+    @ApiModelProperty(required = true, value = "주문자이메일주소", example = "")
+    private String aordEmlAdrs;
+    /** 주문자휴대전화번호 */
+    @ApiModelProperty(required = true, value = "주문자휴대전화번호", example = "")
+    private String aordPrtbTlnm;
+    /** 주문일자 */
+    @ApiModelProperty(required = true, value = "주문일자", example = "")
+    private String ordrDate;
+    /** 주문시각 */
+    @ApiModelProperty(required = true, value = "주문시각", example = "")
+    private String ordrHms;
+    /** 결제완료일자 */
+    @ApiModelProperty(required = true, value = "결제완료일자", example = "")
+    private String stlmFnshDate;
     
     
-    @ApiModelProperty(value = "준비중 건수", example = "")
-    public String prepNumc;
+    /** 주문상품목록 */
+    private List<OrderCommodity> orderCommodityList;
     
-    @ApiModelProperty(value = "배송완료 건수", example = "")
-    public String dlvrFnshNumc;
+    /** 주문비용 */
+    private List<OrderExpense> orderExpenseList;
     
-    @ApiModelProperty(value = "취소 건수", example = "")
-    public String cnclNumc;
+    /** 주문배송지 */
+    private List<OrderDeliveryPoint> orderDeliveryPointList;
     
-    @ApiModelProperty(value = "교환 건수", example = "")
-    public String xchgNumc;
+    /** 선물수신대상기본 */
+    private List<OrderGiftReceiptOfMessageTarget> orderGiftReceiptOfMessageTargetList;
     
-    @ApiModelProperty(value = "반품 건수", example = "")
-    public String rtgdNumc;
     
 }
