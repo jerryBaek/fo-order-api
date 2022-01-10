@@ -58,6 +58,9 @@ dependencies {
     // health check
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+    // kyobo common library
+    implementation 'kyobobook:cm-common-lib:0.3.0'
+
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor('org.projectlombok:lombok:1.18.20')
 
