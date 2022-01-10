@@ -36,13 +36,13 @@ import lombok.experimental.SuperBuilder;
 public class MemberBarodrimReceiptsAndDisbursementsPlace {
 
     /** 회원번호 */
-    @ApiModelProperty(required = true, value = "회원번호", example = "")
+    @ApiModelProperty(required = true, value = "회원번호", example = "62210667167")
     private String mmbrNum;
     /** 바로드림점포수불처코드 */
-    @ApiModelProperty(required = true, value = "바로드림점포수불처코드", example = "")
+    @ApiModelProperty(required = true, value = "바로드림점포수불처코드", example = "1")
     private String brdrStrRdpCode;
     /** 기본바로드림점포여부 */
-    @ApiModelProperty(required = true, value = "기본바로드림점포여부", example = "")
+    @ApiModelProperty(required = true, value = "기본바로드림점포여부", example = "Y")
     private String bscBrdrStrYsno;
     /** 생성자ID */
     @ApiModelProperty(required = true, value = "생성자ID", example = "")

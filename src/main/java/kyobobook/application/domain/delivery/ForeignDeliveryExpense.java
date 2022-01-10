@@ -43,10 +43,10 @@ public class ForeignDeliveryExpense {
     @ApiModelProperty(required = true, value = "해외배송상품기준수량", example = "")
     private BigInteger frngDlvrCmdtStnrQntt;
     /** 해외배송금액 */
-    @ApiModelProperty(required = true, value = "해외배송금액", example = "")
+    @ApiModelProperty(required = true, value = "해외배송금액", example = "25000")
     private BigInteger frngDlvrAmnt;
     /** 해외택배사코드 */
-    @ApiModelProperty(required = true, value = "해외택배사코드", example = "")
+    @ApiModelProperty(required = true, value = "해외택배사코드", example = "FX001")
     private String frngDscmCode;
     /** 생성자ID */
     @ApiModelProperty(required = true, value = "생성자ID", example = "")

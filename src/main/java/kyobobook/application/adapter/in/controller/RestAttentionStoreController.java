@@ -13,6 +13,7 @@ package kyobobook.application.adapter.in.controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kyobobook.application.domain.barodrim.MemberBarodrimReceiptsAndDisbursementsPlace;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.primitive.StringType;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,13 +52,15 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "MemberBarodrimReceiptsAndDisbursementsPlace" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage getAttentionStore() {
-        return null;
+    public ResponseMessage getAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
+        return ResponseMessage.builder().build().setExample(MemberBarodrimReceiptsAndDisbursementsPlace.class);
     }
 
     /**
@@ -70,13 +75,15 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage setAttentionStore() {
-        return null;
+    public ResponseMessage setAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -91,13 +98,15 @@ public class RestAttentionStoreController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @DeleteMapping(value = "/api/v1/attention-store/barodrim")
-    public ResponseMessage removeAttentionStore() {
-        return null;
+    public ResponseMessage removeAttentionStore(@RequestBody MemberBarodrimReceiptsAndDisbursementsPlace memberBarodrimReceiptsAndDisbursementsPlace) {
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
 }

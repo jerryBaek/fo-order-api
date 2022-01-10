@@ -13,6 +13,7 @@ package kyobobook.application.adapter.in.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.delivery.ForeignDeliveryExpense;
+import kyobobook.application.domain.hybrid.Apibiz0602006;
+import kyobobook.application.domain.hybrid.Apibiz0602067;
+import kyobobook.application.domain.order.Order;
+import kyobobook.application.domain.primitive.NumberType;
+import kyobobook.application.domain.primitive.StringType;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,13 +57,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "NumberType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/product/count")
-    public ResponseMessage getProductCount() {
-        return null;
+    public ResponseMessage getProductCount(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(NumberType.class);
     }
 
     /**
@@ -91,13 +101,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "Apibiz0602006" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/product/overseas")
-    public ResponseMessage getOverseasProduct() {
-        return null;
+    public ResponseMessage getOverseasProduct(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(Apibiz0602006.class, 1);
     }
 
     /**
@@ -112,13 +124,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "ForeignDeliveryExpense" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/expection/overseas/delivery-fee/fedex")
     public ResponseMessage getExpectDeliveryFeeForOverseasProductInFedex() {
-        return null;
+        return ResponseMessage.builder().build().setExample(ForeignDeliveryExpense.class);
     }
 
     /**
@@ -131,15 +145,17 @@ public class RestOrderController {
     @ApiOperation(value = "해외배송국가목록 조회", notes = "해외배송 국가 목록을 조회한다.")
     @ApiResponses({
         @ApiResponse(code = 200
-                , responseContainer = ""
+                , responseContainer = "List"
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "Apibiz0602067" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/overseas/nation")
-    public ResponseMessage getOverseasNation() {
-        return null;
+    public ResponseMessage getOverseasNation(@RequestBody Apibiz0602067 apibiz0602067) {
+        return new ResponseMessage().setExample(apibiz0602067.getClass(), 1);
     }
 
     /**
@@ -175,13 +191,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/expection/pay/twice")
-    public ResponseMessage getExpectedPayTwice() {
-        return null;
+    public ResponseMessage getExpectedPayTwice(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -196,13 +214,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "Order" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/order")
-    public ResponseMessage setOrder() {
-        return null;
+    public ResponseMessage setOrder(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(Order.class);
     }
 
 

@@ -36,25 +36,25 @@ import lombok.experimental.SuperBuilder;
 public class MemberBasicOrderMethod {
 
     /** 회원번호 */
-    @ApiModelProperty(required = true, value = "회원번호", example = "")
+    @ApiModelProperty(required = true, value = "회원번호", example = "62210667167")
     private String mmbrNum;
     /** 회원기본주문방법구분코드 */
-    @ApiModelProperty(required = true, value = "회원기본주문방법구분코드", example = "")
+    @ApiModelProperty(required = true, value = "회원기본주문방법구분코드", example = "3")
     private String mmbrBscOrdrMthdDvsnCode;
     /** 방법내용1 */
-    @ApiModelProperty(required = true, value = "방법내용1", example = "")
+    @ApiModelProperty(required = true, value = "방법내용1", example = "2")
     private String mthdCntt1;
     /** 방법내용2 */
-    @ApiModelProperty(required = true, value = "방법내용2", example = "")
+    @ApiModelProperty(required = true, value = "방법내용2", example = "3")
     private String mthdCntt2;
     /** 방법내용3 */
-    @ApiModelProperty(required = true, value = "방법내용3", example = "")
+    @ApiModelProperty(required = true, value = "방법내용3", example = "785")
     private String mthdCntt3;
     /** 방법내용4 */
-    @ApiModelProperty(required = true, value = "방법내용4", example = "")
+    @ApiModelProperty(required = true, value = "방법내용4", example = "87")
     private String mthdCntt4;
     /** 방법내용5 */
-    @ApiModelProperty(required = true, value = "방법내용5", example = "")
+    @ApiModelProperty(required = true, value = "방법내용5", example = "1760")
     private String mthdCntt5;
     /** 방법내용6 */
     @ApiModelProperty(required = true, value = "방법내용6", example = "")
