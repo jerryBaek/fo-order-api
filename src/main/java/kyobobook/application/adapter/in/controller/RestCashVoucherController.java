@@ -19,7 +19,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import kyobobook.application.domain.cashvoucher.BankBalanceMileage;
+import kyobobook.application.domain.cashvoucher.KyoboCashAccumulation;
 import kyobobook.application.domain.common.ResponseMessage;
+import kyobobook.application.domain.primitive.StringType;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,13 +51,15 @@ public class RestCashVoucherController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "BankBalanceMileage" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cash-voucher/bank-balance")
     public ResponseMessage getBankBalance() {
-        return null;
+        return ResponseMessage.builder().build().setExample(BankBalanceMileage.class);
     }
 
     /**
@@ -70,14 +75,14 @@ public class RestCashVoucherController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX
-                            + "OBJECT_NAME"
+                            + "StringType"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/cash-voucher/bank-balance")
     public ResponseMessage spendBankBalance() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -93,14 +98,14 @@ public class RestCashVoucherController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX
-                            + "OBJECT_NAME"
+                            + "BankBalanceMileage"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cash-voucher/mileage")
     public ResponseMessage getMileage() {
-        return null;
+        return ResponseMessage.builder().build().setExample(BankBalanceMileage.class);
     }
 
     /**
@@ -116,14 +121,14 @@ public class RestCashVoucherController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX
-                            + "OBJECT_NAME"
+                            + "StringType"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/cash-voucher/mileage")
     public ResponseMessage spendMileage() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -139,14 +144,14 @@ public class RestCashVoucherController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX
-                            + "OBJECT_NAME"
+                            + "KyoboCashAccumulation"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/cash-voucher/kyobo-cash")
     public ResponseMessage getKyoboCash() {
-        return null;
+        return ResponseMessage.builder().build().setExample(KyoboCashAccumulation.class);
     }
 
     /**
@@ -162,14 +167,14 @@ public class RestCashVoucherController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX
-                            + "OBJECT_NAME"
+                            + "StringType"
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/cash-voucher/kyobo-cash")
     public ResponseMessage spendKyoboCash() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
 }

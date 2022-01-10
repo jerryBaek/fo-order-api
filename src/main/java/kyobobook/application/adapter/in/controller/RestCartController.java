@@ -605,14 +605,14 @@ public class RestCartController {
                 , responseContainer = ""
                 , response = ResponseMessage.class
                 , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
-                            + "OBJECT_NAME" 
+                            + "StringType" 
                             + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/cart")
     public ResponseMessage insertCart() {
-        return null;
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
 }

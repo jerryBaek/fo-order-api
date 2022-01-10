@@ -23,11 +23,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import kyobobook.application.domain.cart.Cart;
 import kyobobook.application.domain.common.ResponseMessage;
-import kyobobook.application.domain.delivery.DeliveryAddress;
 import kyobobook.application.domain.delivery.ForeignDeliveryExpense;
 import kyobobook.application.domain.hybrid.Apibiz0602006;
 import kyobobook.application.domain.hybrid.Apibiz0602067;
+import kyobobook.application.domain.order.Order;
 import kyobobook.application.domain.primitive.NumberType;
+import kyobobook.application.domain.primitive.StringType;
 import kyobobook.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -190,13 +191,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "StringType" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @GetMapping(value = "/api/v1/order/expection/pay/twice")
-    public ResponseMessage getExpectedPayTwice() {
-        return null;
+    public ResponseMessage getExpectedPayTwice(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(StringType.class);
     }
 
     /**
@@ -211,13 +214,15 @@ public class RestOrderController {
         @ApiResponse(code = 200
                 , responseContainer = ""
                 , response = ResponseMessage.class
-                , message = Constants.ApiResponse.MESSAGE_200_PREFIX + "OBJECT_NAME" + Constants.ApiResponse.MESSAGE_200_POSTFIX),
+                , message = Constants.ApiResponse.MESSAGE_200_PREFIX 
+                            + "Order" 
+                            + Constants.ApiResponse.MESSAGE_200_POSTFIX),
         @ApiResponse(code = 404, message = Constants.ApiResponse.MESSAGE_404),
         @ApiResponse(code = 500, message = Constants.ApiResponse.MESSAGE_500)
     })
     @PostMapping(value = "/api/v1/order")
-    public ResponseMessage setOrder() {
-        return null;
+    public ResponseMessage setOrder(@RequestBody Cart cart) {
+        return ResponseMessage.builder().build().setExample(Order.class);
     }
 
 
